@@ -1,0 +1,52 @@
+[
+    {
+        "emisor": "juan.perez@example.com",
+        "receptor": "maria.rodriguez@example.com",
+        "estado": "pendiente"
+    },
+    {
+        "emisor": "carlos.sanchez@example.com",
+        "receptor": "ana.martinez@example.com",
+        "estado": "aceptado"
+    },
+    {
+        "emisor": "luis.gomez@example.com",
+        "receptor": "laura.ruiz@example.com",
+        "estado": "rechazado"
+    },
+    {
+        "emisor": "javier.hernandez@example.com",
+        "receptor": "isabel.ramirez@example.com",
+        "estado": "pendiente"
+    },
+    {
+        "emisor": "miguel.garcia@example.com",
+        "receptor": "sofia.fernandez@example.com",
+        "estado": "aceptado"
+    },
+    {
+        "emisor": "david.lopez@example.com",
+        "receptor": "lucia.martin@example.com",
+        "estado": "rechazado"
+    },
+    {
+        "emisor": "andres.gonzalez@example.com",
+        "receptor": "elena.diaz@example.com",
+        "estado": "pendiente"
+    },
+    {
+        "emisor": "raul.molina@example.com",
+        "receptor": "patricia.castro@example.com",
+        "estado": "aceptado"
+    },
+    {
+        "emisor": "alberto.morales@example.com",
+        "receptor": "veronica.santos@example.com",
+        "estado": "rechazado"
+    },
+    {
+        "emisor": "francisco.ramos@example.com",
+        "receptor": "marta.ortiz@example.com",
+        "estado": "pendiente"
+    }
+]
