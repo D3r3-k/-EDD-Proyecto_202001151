@@ -7,7 +7,7 @@
     {
         "emisor": "carlos.sanchez@example.com",
         "receptor": "ana.martinez@example.com",
-        "estado": "aceptado"
+        "estado": "aceptada"
     },
     {
         "emisor": "luis.gomez@example.com",
@@ -22,7 +22,7 @@
     {
         "emisor": "miguel.garcia@example.com",
         "receptor": "sofia.fernandez@example.com",
-        "estado": "aceptado"
+        "estado": "aceptada"
     },
     {
         "emisor": "david.lopez@example.com",
@@ -37,7 +37,7 @@
     {
         "emisor": "raul.molina@example.com",
         "receptor": "patricia.castro@example.com",
-        "estado": "aceptado"
+        "estado": "aceptada"
     },
     {
         "emisor": "alberto.morales@example.com",

@@ -3,32 +3,35 @@
 
 #include <iostream>
 #include <string>
+#include <stack>
+
+#include "ListaSolicitudes.h"
 
 using namespace std;
 
 namespace ListaUsuarios
 {
-
     struct Usuario
     {
         // Atributos
         int id;
-        std::string nombres;
-        std::string apellidos;
-        std::string fechaNacimiento;
-        std::string correo;
-        std::string contrasena;
-        std::string rol;
-        // ListaEnlazadaSolicitudes solicitudesEnviadas; // Solicitudes enviadas -> Lista Enlazada Simple
-        // std::stack<Solicitud> solicitudesRecibidas; // Solicitudes recibidas -> Pila
+        string nombres;
+        string apellidos;
+        string fechaNacimiento;
+        string correo;
+        string contrasena;
+        string rol;
+        // ListaSolicitudes::<tipo> solicitudesEnviadas; // Solicitudes enviadas -> <tipo de lista>
+        stack<string> solicitudesRecibidas;              // Solicitudes recibidas -> Pila
+
         // Constructor
         Usuario(const int &id,
-                const std::string &nombres,
-                const std::string &apellidos,
-                const std::string &fechaNacimiento,
-                const std::string &correo,
-                const std::string &contrasena,
-                const std::string &rol = "user")
+                const string &nombres,
+                const string &apellidos,
+                const string &fechaNacimiento,
+                const string &correo,
+                const string &contrasena,
+                const string &rol = "user")
             : id(id),
               nombres(nombres),
               apellidos(apellidos),
@@ -40,11 +43,11 @@ namespace ListaUsuarios
         // Métodos
         void mostrarPerfil() const
         {
-            std::cout << "| ID:                  " << id << std::endl;
-            std::cout << "| Nombres:             " << nombres << std::endl;
-            std::cout << "| Apellidos:           " << apellidos << std::endl;
-            std::cout << "| Fecha de Nacimiento: " << fechaNacimiento << std::endl;
-            std::cout << "| Correo:              " << correo << std::endl;
+            cout << "| ID:                  " << id << endl;
+            cout << "| Nombres:             " << nombres << endl;
+            cout << "| Apellidos:           " << apellidos << endl;
+            cout << "| Fecha de Nacimiento: " << fechaNacimiento << endl;
+            cout << "| Correo:              " << correo << endl;
         }
     };
 
@@ -53,19 +56,16 @@ namespace ListaUsuarios
     private:
         struct NodoUsuario
         {
-            // Atributos
             Usuario usuario;
             NodoUsuario *siguiente;
-            // Constructor
             NodoUsuario(const Usuario &u) : usuario(u), siguiente(nullptr) {}
         };
 
         NodoUsuario *cabeza;
 
     public:
-        // Constructor
         ListaEnlazadaSimple() : cabeza(nullptr) {}
-        // Destructor
+
         ~ListaEnlazadaSimple()
         {
             NodoUsuario *aux = cabeza;
@@ -76,7 +76,7 @@ namespace ListaUsuarios
                 delete temp;
             }
         }
-        // Métodos
+
         void agregarUsuario(const Usuario &u)
         {
             NodoUsuario *nuevo = new NodoUsuario(u);
@@ -94,18 +94,19 @@ namespace ListaUsuarios
                 aux->siguiente = nuevo;
             }
         }
+
         void listarUsuarios() const
         {
             NodoUsuario *aux = cabeza;
             while (aux != nullptr)
             {
                 aux->usuario.mostrarPerfil();
-                std::cout << "|======================================================|" << std::endl;
+                cout << "|======================================================|" << endl;
                 aux = aux->siguiente;
             }
         }
 
-        Usuario buscarUsuario(const int &pos)
+        Usuario *buscarUsuario(const int &pos)
         {
             NodoUsuario *temp = cabeza;
             int contador = 1;
@@ -113,40 +114,40 @@ namespace ListaUsuarios
             {
                 if (contador == pos)
                 {
-                    return temp->usuario;
+                    return &(temp->usuario);
                 }
                 temp = temp->siguiente;
                 contador++;
             }
-            return Usuario(-1, "", "", "", "", "", "");
+            return nullptr; // Usuario no encontrado
         }
 
-        Usuario buscarUsuario(const std::string &correo, const std::string &contrasena)
+        Usuario *buscarUsuario(const string &correo, const string &contrasena)
         {
             NodoUsuario *temp = cabeza;
             while (temp)
             {
                 if (temp->usuario.correo == correo && temp->usuario.contrasena == contrasena)
                 {
-                    return temp->usuario;
+                    return &(temp->usuario);
                 }
                 temp = temp->siguiente;
             }
-            return Usuario(-1, "", "", "", "", "", "");
+            return nullptr; // Usuario no encontrado
         }
 
-        Usuario buscarUsuario(const std::string &correo)
+        Usuario *buscarUsuario(const string &correo)
         {
             NodoUsuario *temp = cabeza;
             while (temp)
             {
                 if (temp->usuario.correo == correo)
                 {
-                    return temp->usuario;
+                    return &(temp->usuario);
                 }
                 temp = temp->siguiente;
             }
-            return Usuario(-1, "", "", "", "", "", "");
+            return nullptr; // Usuario no encontrado
         }
 
         int getSize()
@@ -173,7 +174,7 @@ namespace ListaUsuarios
             return id;
         }
 
-        bool existeUsuario(const std::string &correo)
+        bool existeUsuario(const string &correo)
         {
             NodoUsuario *temp = cabeza;
             while (temp)
@@ -189,7 +190,6 @@ namespace ListaUsuarios
 
         void eliminarUsuarios(const Usuario &logeado)
         {
-            // eliminar usuarios excepto el usuario logeado
             NodoUsuario *temp = cabeza;
             NodoUsuario *prev = nullptr;
             while (temp)
@@ -216,4 +216,5 @@ namespace ListaUsuarios
         }
     };
 }
+
 #endif // LISTAUSUARIOS_H

@@ -12,7 +12,7 @@
 ListaUsuarios::ListaEnlazadaSimple lista_usuarios;
 ListaPublicaciones::ListaEnlazadaDoble lista_publicaciones;
 MatrisRelacion::MatrisDispersa matris_relacion;
-ListaUsuarios::Usuario usuario_logeado = ListaUsuarios::Usuario(-1, "", "", "", "", "", "");
+ListaUsuarios::Usuario *usuario_logeado = nullptr;
 
 using namespace std;
 

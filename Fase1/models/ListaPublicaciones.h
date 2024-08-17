@@ -14,23 +14,23 @@ namespace ListaPublicaciones
     {
         // Atributos
         int id;
-        std::string correo_autor;
-        std::string contenido;
-        std::string fecha;
-        std::string hora;
+        string correo_autor;
+        string contenido;
+        string fecha;
+        string hora;
         // Constructor
-        Publicacion(int id, std::string ca, const std::string &c, const std::string &f, const std::string &h)
+        Publicacion(int id, string ca, const string &c, const string &f, const string &h)
             : id(id), correo_autor(ca), contenido(c), fecha(f), hora(h) {}
 
         // Métodos
         void mostrarPublicacion() const
         {
-            std::cout << "|===============[ Publicación ]===============|" << std::endl;
-            std::cout << "| Autor: " << correo_autor << std::endl;
-            std::cout << "| Fecha: " << fecha << std::endl;
-            std::cout << "| Hora: " << hora << std::endl;
-            std::cout << "| Contenido: " << contenido << std::endl;
-            std::cout << "|============================================|" << std::endl;
+            cout << "|===============[ Publicación ]===============|" << endl;
+            cout << "| Autor: " << correo_autor << endl;
+            cout << "| Fecha: " << fecha << endl;
+            cout << "| Hora: " << hora << endl;
+            cout << "| Contenido: " << contenido << endl;
+            cout << "|============================================|" << endl;
         }
     };
 

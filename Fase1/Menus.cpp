@@ -83,9 +83,9 @@ void menuIniciarSesion()
         return;
     }
     usuario_logeado = lista_usuarios.buscarUsuario(mail, password);
-    if (usuario_logeado.id != -1)
+    if (usuario_logeado != nullptr)
     {
-        if (usuario_logeado.rol == "admin")
+        if (usuario_logeado->rol == "admin")
         {
             menuAdministrador();
         }
@@ -214,7 +214,7 @@ void menuAdministrador()
             break;
         case 6:
             // Cerrar sesión
-            usuario_logeado = ListaUsuarios::Usuario(-1, "", "", "", "", "", "");
+            usuario_logeado = nullptr;
             break;
         default:
             cout << "Opcion no valida" << endl;
@@ -262,13 +262,14 @@ void adminGestionarUsuarios()
             system("cls");
             cout << "|================ [ Eliminar Usuarios ] ===============|" << endl;
             cout << "| Eliminando usuarios..." << endl;
-            lista_usuarios.eliminarUsuarios(usuario_logeado);
+            lista_usuarios.eliminarUsuarios(*usuario_logeado);
             cout << "| Usuarios eliminados correctamente" << endl;
             cout << "|======================================================|" << endl;
             system("pause");
             break;
         case 3:
-            break; // Regresar
+            // Regresar
+            break;
         default:
             cout << "Opcion no valida" << endl;
             system("pause");
@@ -277,7 +278,16 @@ void adminGestionarUsuarios()
     }
 }
 
-void adminGestionarReportes() {}
+void adminGestionarReportes()
+{
+    // TODO: Implementar
+    // Usuarios -> grafico de la lista de usuarios
+    // Publicaciones -> grafico de la lista doble enlazada
+    // Relaciones -> grafico de la matriz dispersa
+    // top:
+    //      1. 5 Usuarios con más publicaciones
+    //      2. 5 Usuarios con menos amigos
+}
 
 // TODO: Menú Usuario
 void menuUsuario()
@@ -295,6 +305,15 @@ void menuUsuario()
         cout << "|========== [Menu Usuario] ==========|" << endl;
         cout << "[-] Ingrese una opcion: ";
         cin >> opcion;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore();
+            cout << "Entrada invalida. Por favor, ingrese un número." << endl;
+            system("pause");
+            continue;
+        }
+
         switch (opcion)
         {
         case 1:
@@ -315,10 +334,11 @@ void menuUsuario()
             break;
         case 5:
             // Cerrar sesión
-            usuario_logeado = ListaUsuarios::Usuario(-1, "", "", "", "", "", "");
+            usuario_logeado = nullptr;
             break;
         default:
             cout << "Opcion no valida" << endl;
+            system("pause");
             break;
         }
     }
@@ -354,19 +374,19 @@ void userGestionarPerfil()
             // Perfil
             system("cls");
             cout << "|========================= [ Perfil ] =========================|" << endl;
-            usuario_logeado.mostrarPerfil();
+            usuario_logeado->mostrarPerfil();
             cout << "|==============================================================|" << endl;
             system("pause");
             break;
         case 2:
             // Eliminar Perfil
-            // Func::EliminarMiPerfil(usuario_logeado);
-            system("pause");
+            menuEliminarPerfil();
             break;
         case 3:
             break; // Regresar
         default:
             cout << "Opcion no valida" << endl;
+            system("pause");
             break;
         }
     }
@@ -415,14 +435,67 @@ void userGestionarPublicaciones()
             break; // Regresar
         default:
             cout << "Opcion no valida" << endl;
+            system("pause");
             break;
         }
     }
 }
 
-void userGestionarSolicitudes() {}
+void userGestionarSolicitudes()
+{
+    // TODO: Implementar
+    // ver solicitudes
+    //      1. aceptar/rechazar
+    // enviar solicitud
+}
 
-void userGestionarReportes() {}
+void userGestionarReportes()
+{
+    // TODO: Implementar
+    // Solicitudes enviadas y recibidas: grafico de la lista de solicitudes enviadas y la pila de solicitudes recibidas
+    // Relaciones: grafico de la matriz dispersa
+    // Publicaciones: grafico de la lista circular doble del usuario y de amigos
+    // mis amigos: listado de amigos
+}
+
+void menuEliminarPerfil()
+{
+    int opcionEliminar = 0;
+    while (opcionEliminar != 2)
+    {
+        system("cls");
+        cout << "|========================= [ Eliminar Perfil ] =========================|" << endl;
+        cout << "|              ¿Está seguro que desea eliminar su perfil?               |" << endl;
+        cout << "|                          [1] Si       [2] No                          |" << endl;
+        cout << "|=======================================================================|" << endl;
+        cout << "[+] Ingrese una opcion: ";
+        cin >> opcionEliminar;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore();
+            cout << "Entrada invalida. Por favor, ingrese un número." << endl;
+            system("pause");
+            continue;
+        }
+        switch (opcionEliminar)
+        {
+        case 1:
+            // Eliminar publicaciones del usuario
+            // Eliminar relaciones del usuario
+            // Eliminar usuario
+            // Cerrar sesión
+            opcionEliminar = 2;
+            break;
+        case 2:
+            break; // No
+        default:
+            cout << "Opcion no valida" << endl;
+            system("pause");
+            break;
+        }
+    }
+}
 
 void menuMostrarPublicaciones()
 {
@@ -488,7 +561,7 @@ void menuCrearPublicacion()
     {
         return;
     }
-    Func::crearPublicacion(usuario_logeado, contenido, fecha, hora);
+    Func::crearPublicacion(*usuario_logeado, contenido, fecha, hora);
 }
 
 void menuEliminarPublicacion()

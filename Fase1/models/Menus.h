@@ -16,6 +16,8 @@ void userGestionarPerfil();
 void userGestionarSolicitudes();
 void userGestionarPublicaciones();
 void userGestionarReportes();
+
+void menuEliminarPerfil();
 void menuMostrarPublicaciones();
 void menuCrearPublicacion();
 void menuEliminarPublicacion();

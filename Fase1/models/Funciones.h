@@ -16,7 +16,7 @@ using namespace std;
 
 namespace Func
 {
-    void RegistrarUsuario(std::string names, std::string lastnames, std::string birthday, std::string mail, std::string password)
+    void RegistrarUsuario(string names, string lastnames, string birthday, string mail, string password)
     {
         int newid = lista_usuarios.getUltimoId() + 1;
         if (lista_usuarios.existeUsuario(mail))
@@ -72,7 +72,7 @@ namespace Func
                 string contrasena = usuario["contraseña"].get<string>();
                 string fechaNacimiento = usuario["fecha_de_nacimiento"].get<string>();
 
-                if (lista_usuarios.buscarUsuario(correo).correo == "")
+                if (lista_usuarios.buscarUsuario(correo) == nullptr)
                 {
                     // Crear Usuario
                     int newid = lista_usuarios.getUltimoId() + 1;
@@ -131,22 +131,29 @@ namespace Func
                 string receptor = post["receptor"].get<string>();
                 string estado = post["estado"].get<string>();
 
-                // Usuario _emisor = listaUsuarios.buscarUsuario(emisor);
-                // Usuario _receptor = listaUsuarios.buscarUsuario(receptor);
-
-                // if (_emisor.correo == "")
-                // {
-                //     cerr << "El usuario emisor no existe" << endl;
-                //     continue;
-                // }
-                // else if (_receptor.correo == "")
-                // {
-                //     cerr << "El usuario receptor no existe" << endl;
-                //     continue;
-                // }
-
-                // Crear Solicitud
-                // Solicitud nuevaSolicitud(emisor, receptor, estado);
+                ListaUsuarios::Usuario *usuario_emisor = lista_usuarios.buscarUsuario(emisor);
+                ListaUsuarios::Usuario *usuario_receptor = lista_usuarios.buscarUsuario(receptor);
+                // verificar si los usuarios existen y especificar cual es el emisor y cual es el receptor
+                if (usuario_emisor == nullptr)
+                {
+                    cerr << "El usuario emisor no existe" << endl;
+                    continue;
+                }
+                if (usuario_receptor == nullptr)
+                {
+                    cerr << "El usuario receptor no existe" << endl;
+                    continue;
+                }
+                // si el estado convertido en minusculas es pendiente
+                if (estado == "pendiente")
+                {
+                    // al usuario emisor, en la lista de solicitudes se agregara el correo del usuario receptor
+                    // al usuario receptor, en la pilas de solicitudes se agregara el correo del usuario emisor
+                }
+                else if (estado == "aceptada" || estado == "aceptado")
+                {
+                    // se crea la relacion de amistad entre los dos usuarios en la matriz dispersa
+                }
 
                 contador++;
             }
@@ -156,7 +163,7 @@ namespace Func
             }
         }
         archivo.close();
-        cout << "[+] " << contador << " Publicaciones cargados correctamente" << endl;
+        cout << "[+] " << contador << " Relaciones cargadas correctamente" << endl;
         system("pause");
     }
 
@@ -198,9 +205,9 @@ namespace Func
                 string fecha = post["fecha"].get<string>();
                 string hora = post["hora"].get<string>();
 
-                ListaUsuarios::Usuario autor = lista_usuarios.buscarUsuario(correo);
+                ListaUsuarios::Usuario *autor = lista_usuarios.buscarUsuario(correo);
 
-                if (autor.correo == "")
+                if (autor == nullptr)
                 {
                     cerr << "El usuario no existe" << endl;
                     continue;
@@ -208,7 +215,7 @@ namespace Func
 
                 // Crear Publicacion
                 int newid = lista_publicaciones.obtenerUltimoId() + 1;
-                ListaPublicaciones::Publicacion nuevaPublicacion(newid, autor.correo, contenido, fecha, hora);
+                ListaPublicaciones::Publicacion nuevaPublicacion(newid, autor->correo, contenido, fecha, hora);
                 lista_publicaciones.agregarPublicacion(nuevaPublicacion);
                 contador++;
             }
@@ -222,7 +229,7 @@ namespace Func
         system("pause");
     }
 
-    void crearPublicacion(ListaUsuarios::Usuario usuario, std::string contenido, std::string fecha, std::string hora)
+    void crearPublicacion(ListaUsuarios::Usuario usuario, string contenido, string fecha, string hora)
     {
         int newid = lista_publicaciones.obtenerUltimoId() + 1;
         ListaPublicaciones::Publicacion nuevaPublicacion(newid, usuario.correo, contenido, fecha, hora);
@@ -231,7 +238,7 @@ namespace Func
         system("pause");
     }
 
-    std::string obtenerFecha()
+    string obtenerFecha()
     {
         time_t now = time(0);
         tm *ltm = localtime(&now);
@@ -239,7 +246,7 @@ namespace Func
         return fecha;
     }
 
-    std::string obtenerHora()
+    string obtenerHora()
     {
         time_t now = time(0);
         tm *ltm = localtime(&now);
@@ -254,7 +261,7 @@ namespace Func
         for (int i = 0; i < lista_publicaciones.getLength() + 1; i++)
         {
             ListaPublicaciones::Publicacion publicacion = lista_publicaciones.ObtenerPublicacion(i);
-            if (usuario_logeado.correo == publicacion.correo_autor)
+            if (usuario_logeado->correo == publicacion.correo_autor)
             {
                 lista_temporal.agregarPublicacion(publicacion);
             }

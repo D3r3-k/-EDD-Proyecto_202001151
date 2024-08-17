@@ -6,13 +6,10 @@
 // #include "ListaPublicacionesFeed.h"
 #include "MatrisRelacion.h"
 
-
-extern ListaUsuarios::Usuario usuario_logeado;
+extern ListaUsuarios::Usuario *usuario_logeado;
 
 extern ListaUsuarios::ListaEnlazadaSimple lista_usuarios;
 extern ListaPublicaciones::ListaEnlazadaDoble lista_publicaciones;
-// extern ListaPublicacionesFeed::ListaCircularDoble lista_publicaciones_feed;
 extern MatrisRelacion::MatrisDispersa matris_relacion;
-
 
 #endif // GLOBALES_H
