@@ -79,47 +79,6 @@ namespace ListaPublicaciones
                 cola = nuevoNodo;
             }
         }
-        void listarPublicaciones() const
-        {
-            std::cout << "|               [Lista de Publicaciones]               |" << std::endl;
-            std::cout << "|======================================================|" << std::endl;
-            NodoPublicacion *temp = cabeza;
-            while (temp)
-            {
-                std::cout << "[" << temp->publicacion.id << "]" << std::endl;
-                std::cout << "| Autor: " << temp->publicacion.correo_autor << std::endl;
-                std::cout << "| Fecha: " << temp->publicacion.fecha << ", Hora: " << temp->publicacion.hora << std::endl;
-                std::cout << "| Contenido: " << temp->publicacion.contenido << std::endl;
-                temp = temp->siguiente;
-                std::cout << "----------------------------------------------------------------" << endl;
-            }
-            if (!cabeza)
-            {
-                std::cout << "| No hay publicaciones                                 |" << std::endl;
-            }
-            std::cout << "----------------------------------------------------------------" << endl;
-        }
-        void listarPublicacionesInverso() const
-        {
-            std::cout << "|               [Lista de Publicaciones]               |" << std::endl;
-            std::cout << "|======================================================|" << std::endl;
-            NodoPublicacion *temp = cola;
-            int contador = 1;
-            while (temp)
-            {
-                std::cout << "| " << contador << " |==================================================|" << std::endl;
-                std::cout << "| Publicación de: " << temp->publicacion.correo_autor << std::endl;
-                std::cout << "| Fecha: " << temp->publicacion.fecha << ", Hora: " << temp->publicacion.hora << std::endl;
-                std::cout << "| Contenido: " << temp->publicacion.contenido << std::endl;
-                temp = temp->anterior;
-                contador++;
-            }
-            if (!cola)
-            {
-                std::cout << "| No hay publicaciones                                 |" << std::endl;
-            }
-            std::cout << "|======================================================|" << std::endl;
-        }
         void eliminarPublicaciones(ListaUsuarios::Usuario usuario_logeado)
         {
             NodoPublicacion *temp = cabeza;
@@ -150,56 +109,43 @@ namespace ListaPublicaciones
         }
         void eliminarPublicacion(int id)
         {
-            // Verificar si la lista está vacía
             if (!cabeza)
-            {
                 return;
-            }
-
             NodoPublicacion *temp = cabeza;
-
-            // Recorrer la lista buscando la publicación con el ID especificado
             while (temp)
             {
-                if (temp->publicacion.id == id) // Encontrar el nodo con el ID
+                if (temp->publicacion.id == id)
                 {
-                    // Caso especial: si es el primer nodo
                     if (temp == cabeza)
                     {
-                        cabeza = temp->siguiente; // Mover la cabeza al siguiente nodo
+                        cabeza = temp->siguiente;
                         if (cabeza)
                         {
-                            cabeza->anterior = nullptr; // Desconectar el nuevo primer nodo del anterior
+                            cabeza->anterior = nullptr;
                         }
                     }
                     else
                     {
-                        temp->anterior->siguiente = temp->siguiente; // Saltar el nodo actual
+                        temp->anterior->siguiente = temp->siguiente;
                     }
-
-                    // Caso especial: si es el último nodo
                     if (temp == cola)
                     {
-                        cola = temp->anterior; // Mover la cola al nodo anterior
+                        cola = temp->anterior;
                         if (cola)
                         {
-                            cola->siguiente = nullptr; // Desconectar el nuevo último nodo del siguiente
+                            cola->siguiente = nullptr;
                         }
                     }
                     else
                     {
                         if (temp->siguiente)
                         {
-                            temp->siguiente->anterior = temp->anterior; // Reconectar el nodo siguiente con el anterior
+                            temp->siguiente->anterior = temp->anterior;
                         }
                     }
-
-                    // Eliminar el nodo encontrado
                     delete temp;
                     return;
                 }
-
-                // Avanzar al siguiente nodo
                 temp = temp->siguiente;
             }
         }
@@ -217,13 +163,13 @@ namespace ListaPublicaciones
             }
             return Publicacion(-1, "", "", "", "");
         }
-        Publicacion ObtenerPublicacion(const int &post)
+        Publicacion ObtenerPublicacion(const int &pos)
         {
             NodoPublicacion *temp = cabeza;
             int contador = 1;
             while (temp)
             {
-                if (contador == post)
+                if (contador == pos)
                 {
                     return temp->publicacion;
                 }

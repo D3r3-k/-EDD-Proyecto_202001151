@@ -140,17 +140,15 @@ namespace ListaPublicacionesFeed
                 cout << "|                          No hay publicaciones                           |" << endl;
                 return;
             }
-
-            // si el id tiene 1 digito
             if (actual->publicacion.id < 10)
             {
                 cout << "| [" << actual->publicacion.id << "]                                                                     |" << endl;
             }
             else
             {
-                cout << "| [" << actual->publicacion.id << "]                                                                   |" << endl;
+                cout << "| [" << actual->publicacion.id << "]                                                                    |" << endl;
             }
-            cout << "|                Fecha: " << actual->publicacion.fecha << "          Hora: " << actual->publicacion.hora << "                |" << endl;
+            cout << "|                Fecha: " << actual->publicacion.fecha << "          Hora: " << actual->publicacion.hora << "                 |" << endl;
             cout << "| Autor: " << actual->publicacion.correo_autor << endl;
             cout << "| Contenido: " << endl
                  << "| " << actual->publicacion.contenido << endl;
@@ -158,41 +156,27 @@ namespace ListaPublicacionesFeed
         }
         int obtenerIdActual()
         {
-            // Si no hay publicaciones
             if (!cabeza)
-            {
                 return -1;
-            }
             return actual->publicacion.id;
         }
         void avanzarPublicacion()
         {
             if (!cabeza)
-            {
                 return;
-            }
-
             actual = actual->siguiente;
         }
         void retrocederPublicacion()
         {
             if (!cabeza)
-            {
                 return;
-            }
-
             actual = actual->anterior;
         }
         void vaciarLista()
         {
             if (!cabeza)
-            {
-                return; // La lista ya está vacía
-            }
-
+                return;
             NodoFeed *aux = cabeza;
-
-            // Si la lista tiene solo un nodo
             if (cabeza == cola)
             {
                 delete cabeza;
@@ -201,16 +185,12 @@ namespace ListaPublicacionesFeed
                 actual = nullptr;
                 return;
             }
-
-            // Recorremos la lista y eliminamos todos los nodos
             do
             {
                 NodoFeed *temp = aux;
                 aux = aux->siguiente;
                 delete temp;
             } while (aux != cabeza);
-
-            // Una vez eliminados todos los nodos, establecemos los punteros a nullptr
             cabeza = nullptr;
             cola = nullptr;
             actual = nullptr;

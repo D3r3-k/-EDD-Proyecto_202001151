@@ -5,14 +5,12 @@
 #include "models/Globales.h"
 #include "models/ListaUsuarios.h"
 #include "models/ListaPublicaciones.h"
-#include "models/ListaPublicacionesFeed.h"
 #include "models/MatrisRelacion.h"
 #include "models/Menus.h"
 
 //! Declaración de variables globales
 ListaUsuarios::ListaEnlazadaSimple lista_usuarios;
 ListaPublicaciones::ListaEnlazadaDoble lista_publicaciones;
-// ListaPublicacionesFeed::ListaCircularDoble lista_publicaciones_feed;
 MatrisRelacion::MatrisDispersa matris_relacion;
 ListaUsuarios::Usuario usuario_logeado = ListaUsuarios::Usuario(-1, "", "", "", "", "", "");
 

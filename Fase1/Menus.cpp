@@ -253,15 +253,18 @@ void adminGestionarUsuarios()
         case 1:
             // Listar Usuarios
             system("cls");
+            cout << "|================ [ Lista de Usuarios ] ===============|" << endl;
             lista_usuarios.listarUsuarios();
             system("pause");
             break;
         case 2:
             // Eliminar Usuarios
-            cout << "==========[" << usuario_logeado.correo << "]==========" << endl;
-            cout << "Eliminando usuarios..." << endl;
+            system("cls");
+            cout << "|================ [ Eliminar Usuarios ] ===============|" << endl;
+            cout << "| Eliminando usuarios..." << endl;
             lista_usuarios.eliminarUsuarios(usuario_logeado);
-            cout << "Usuarios eliminados correctamente" << endl;
+            cout << "| Usuarios eliminados correctamente" << endl;
+            cout << "|======================================================|" << endl;
             system("pause");
             break;
         case 3:
@@ -350,9 +353,9 @@ void userGestionarPerfil()
         case 1:
             // Perfil
             system("cls");
-            std::cout << "|===============[ Perfil ]===============|" << std::endl;
+            cout << "|========================= [ Perfil ] =========================|" << endl;
             usuario_logeado.mostrarPerfil();
-            std::cout << "|========================================|" << std::endl;
+            cout << "|==============================================================|" << endl;
             system("pause");
             break;
         case 2:

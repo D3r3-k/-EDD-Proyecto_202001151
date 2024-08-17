@@ -40,12 +40,11 @@ namespace ListaUsuarios
         // Métodos
         void mostrarPerfil() const
         {
-            std::cout << "| ID: " << id << std::endl;
-            std::cout << "| Nombres: " << nombres << std::endl;
-            std::cout << "| Apellidos: " << apellidos << std::endl;
+            std::cout << "| ID:                  " << id << std::endl;
+            std::cout << "| Nombres:             " << nombres << std::endl;
+            std::cout << "| Apellidos:           " << apellidos << std::endl;
             std::cout << "| Fecha de Nacimiento: " << fechaNacimiento << std::endl;
-            std::cout << "| Correo: " << correo << std::endl;
-            std::cout << "| Rol: " << rol << std::endl;
+            std::cout << "| Correo:              " << correo << std::endl;
         }
     };
 
@@ -101,7 +100,7 @@ namespace ListaUsuarios
             while (aux != nullptr)
             {
                 aux->usuario.mostrarPerfil();
-                std::cout << std::endl;
+                std::cout << "|======================================================|" << std::endl;
                 aux = aux->siguiente;
             }
         }
