@@ -1,11 +1,18 @@
 #ifndef GLOBALES_H
 #define GLOBALES_H
 
-#include "ListaEnlazadaSimple.h"
-#include "ListaEnlazadaDoble.h"
+#include "ListaUsuarios.h"
+#include "ListaPublicaciones.h"
+// #include "ListaPublicacionesFeed.h"
+#include "MatrisRelacion.h"
 
-extern ListaEnlazadaUsuarios listaUsuarios;
-extern ListaEnlazadaDoblePublicaciones listaPublicaciones;
-extern Usuario usuario_logeado;
+
+extern ListaUsuarios::Usuario usuario_logeado;
+
+extern ListaUsuarios::ListaEnlazadaSimple lista_usuarios;
+extern ListaPublicaciones::ListaEnlazadaDoble lista_publicaciones;
+// extern ListaPublicacionesFeed::ListaCircularDoble lista_publicaciones_feed;
+extern MatrisRelacion::MatrisDispersa matris_relacion;
+
 
 #endif // GLOBALES_H

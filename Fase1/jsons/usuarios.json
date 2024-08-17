@@ -3,7 +3,7 @@
         "nombres": "Juan",
         "apellidos": "Pérez Gómez",
         "fecha_de_nacimiento": "1990-05-15",
-        "correo": "user",
+        "correo": "juan.perez@example.com",
         "contraseña": "123"
     },
     {

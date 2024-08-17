@@ -6,16 +6,10 @@ CXXFLAGS = -Wall -g -Iincludes -Ilib
 
 # Directorios
 SRC_DIR = .
-LIB_DIR = lib
 
 # Archivos fuente
 SRC = $(SRC_DIR)/main.cpp \
-      $(SRC_DIR)/Funciones.cpp \
-      $(SRC_DIR)/Menus.cpp \
-      $(LIB_DIR)/ListaEnlazadaSimple.cpp \
-      $(LIB_DIR)/ListaEnlazadaSolicitudes.cpp \
-      $(LIB_DIR)/ListaEnlazadaDoble.cpp \
-	  
+	$(SRC_DIR)/menus.cpp
 
 # Nombre del ejecutable
 TARGET = $(SRC_DIR)/output/ejecutable

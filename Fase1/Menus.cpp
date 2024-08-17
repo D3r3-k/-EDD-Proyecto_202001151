@@ -1,33 +1,172 @@
-#include "Funciones.h"
-#include "models/Estructuras.h"
+#include "models/Menus.h"
 #include "models/Globales.h"
+#include "models/ListaUsuarios.h"
+#include "models/ListaPublicacionesFeed.h"
+#include "models/Funciones.h"
 
 #include <iostream>
 #include <string>
-#include <windows.h>
 
 using namespace std;
-//? Funcion para registrar un usuario
-void registrarUsuario(string names, string lastnames, string birthday, string mail, string password)
+
+// TODO: Menú Principal
+void menuPrincipal()
 {
-    if (listaUsuarios.existeUsuario(mail))
+    int opcion = 0;
+    while (opcion != 4)
     {
-        cout << "El usuario ya existe" << endl;
+        system("cls");
+        cout << "|========== [Menu] ==========|" << endl;
+        cout << "| 1. Iniciar Sesión          |" << endl;
+        cout << "| 2. Registrarse             |" << endl;
+        cout << "| 3. Información             |" << endl;
+        cout << "| 4. Salir                   |" << endl;
+        cout << "|========== [Menu] ==========|" << endl;
+        cout << "[-] Ingrese una opcion: ";
+        cin >> opcion;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore();
+            cout << "Entrada invalida. Por favor, ingrese un número." << endl;
+            system("pause");
+            continue;
+        }
+
+        string names, lastnames, birthday, mail, password;
+
+        switch (opcion)
+        {
+        case 1:
+            // Iniciar Sesión
+            menuIniciarSesion();
+            break;
+        case 2:
+            // Registrarse
+            menuRegistrarse();
+            break;
+        case 3:
+            // Información
+            menuMostrarInformacion();
+            break;
+        case 4:
+            // Salir
+            cout << "Saliendo..." << endl;
+            break;
+        default:
+            cout << "Opcion no valida" << endl;
+            system("pause");
+            break;
+        }
+    }
+}
+//? Submenús
+void menuIniciarSesion()
+{
+    string mail, password;
+    system("cls");
+    cout << "|=========== [ Iniciar Sesión ] =========|" << endl;
+    cout << "|               c. Cancelar              |" << endl;
+    cout << "|========================================|" << endl;
+    cout << "|Ingrese su usuario:                     |" << endl;
+    cout << "|+| ";
+    cin >> mail;
+    if (mail == "c")
+    {
+        return;
+    }
+    cout << "|Ingrese su contraseña:                  |" << endl;
+    cout << "|+| ";
+    cin >> password;
+    if (password == "c")
+    {
+        return;
+    }
+    usuario_logeado = lista_usuarios.buscarUsuario(mail, password);
+    if (usuario_logeado.id != -1)
+    {
+        if (usuario_logeado.rol == "admin")
+        {
+            menuAdministrador();
+        }
+        else
+        {
+            menuUsuario();
+        }
     }
     else
     {
-        Usuario user(names, lastnames, birthday, mail, password);
-        listaUsuarios.agregarUsuario(user);
-        cout << "Usuario registrado correctamente" << endl;
+        cout << "Usuario o contraseña incorrectos" << endl;
+        system("pause");
     }
 }
 
+void menuRegistrarse()
+{
+    string names, lastnames, birthday, mail, password;
+    system("cls");
+    cout << "|========== [ Registrarse ] ==========|" << endl;
+    cout << "|            c. Cancelar              |" << endl;
+    cout << "|=====================================|" << endl;
+    cout << "|Ingrese sus nombres:" << endl;
+    cin.ignore();
+    cout << "|+| ";
+    getline(cin, names);
+    if (names == "c")
+    {
+        return;
+    }
+    cout << "|Ingrese sus apellidos:" << endl;
+    cout << "|+| ";
+    getline(cin, lastnames);
+    if (lastnames == "c")
+    {
+        return;
+    }
+    cout << "|Ingrese su fecha de nacimiento:" << endl;
+    cout << "|+| ";
+    getline(cin, birthday);
+    if (birthday == "c")
+    {
+        return;
+    }
+    cout << "|Ingrese su correo:" << endl;
+    cout << "|+| ";
+    getline(cin, mail);
+    if (mail == "c")
+    {
+        return;
+    }
+    cout << "|Ingrese su contraseña:" << endl;
+    cout << "|+| ";
+    getline(cin, password);
+    if (password == "c")
+    {
+        return;
+    }
+    cout << "|=====================================|" << endl;
+
+    Func::RegistrarUsuario(names, lastnames, birthday, mail, password);
+    system("pause");
+}
+
+void menuMostrarInformacion()
+{
+    system("cls");
+    cout << "|========== [ Información ] ==========|" << endl;
+    cout << "| Laboratorio de Estructuras de Datos |" << endl;
+    cout << "| Sección C                           |" << endl;
+    cout << "| Derek Francisco Orellana Ibáñez     |" << endl;
+    cout << "| 202001151                           |" << endl;
+    cout << "|========== [ Información ] ==========|" << endl;
+    system("pause");
+}
 
 // TODO: Menú Administrador
 void menuAdministrador()
 {
     int opcion;
-    do
+    while (opcion != 6)
     {
         system("cls");
         cout << "|========== [Menu Administrador] ==========|" << endl;
@@ -44,25 +183,26 @@ void menuAdministrador()
         // Verificación de errores de entrada
         if (cin.fail())
         {
-            limpiarEntrada();
+            cin.clear();
+            cin.ignore();
             cout << "Entrada invalida. Por favor, ingrese un número." << endl;
             system("pause");
-            continue; // Repite el ciclo si la entrada es inválida
+            continue;
         }
 
         switch (opcion)
         {
         case 1:
             // Carga de usuarios
-            cargarUsuarios();
+            Func::cargarUsuarios();
             break;
         case 2:
             // Carga de relaciones
-            cargarRelaciones();
+            Func::cargarRelaciones();
             break;
         case 3:
             // Carga de publicaciones
-            cargarPublicaciones();
+            Func::cargarPublicaciones();
             break;
         case 4:
             // Gestionar usuarios
@@ -70,28 +210,29 @@ void menuAdministrador()
             break;
         case 5:
             // Reportes (a implementar)
+            adminGestionarReportes();
             break;
         case 6:
             // Cerrar sesión
-            usuario_logeado = Usuario("", "", "", "", "", ""); // Ajustar según implementación
+            usuario_logeado = ListaUsuarios::Usuario(-1, "", "", "", "", "", "");
             break;
         default:
             cout << "Opcion no valida" << endl;
             system("pause");
             break;
         }
-    } while (opcion != 6);
+    }
 }
-//? Submenús Administrador
+//? Submenús
 void adminGestionarUsuarios()
 {
-    int opcionGestion;
-    do
+    int opcionGestion = 0;
+    while (opcionGestion != 3)
     {
         system("cls");
         cout << "|========== [Gestionar Usuarios] ==========|" << endl;
-        cout << "| 1. Eliminar Usuarios                     |" << endl;
-        cout << "| 2. Listar Usuarios                       |" << endl;
+        cout << "| 1. Listar Usuarios                       |" << endl;
+        cout << "| 2. Eliminar Usuarios                     |" << endl;
         cout << "| 3. Regresar                              |" << endl;
         cout << "|========== [Gestionar Usuarios] ==========|" << endl;
         cout << "[-] Ingrese una opcion: ";
@@ -100,29 +241,28 @@ void adminGestionarUsuarios()
         // Verificación de errores de entrada
         if (cin.fail())
         {
-            limpiarEntrada();
+            cin.clear();
+            cin.ignore();
             cout << "Entrada invalida. Por favor, ingrese un número." << endl;
             system("pause");
-            continue; // Repite el ciclo si la entrada es inválida
+            continue;
         }
 
         switch (opcionGestion)
         {
         case 1:
+            // Listar Usuarios
+            system("cls");
+            lista_usuarios.listarUsuarios();
+            system("pause");
+            break;
+        case 2:
             // Eliminar Usuarios
             cout << "==========[" << usuario_logeado.correo << "]==========" << endl;
             cout << "Eliminando usuarios..." << endl;
-            listaUsuarios.eliminarUsuarios(usuario_logeado);
+            lista_usuarios.eliminarUsuarios(usuario_logeado);
             cout << "Usuarios eliminados correctamente" << endl;
             system("pause");
-            break;
-            break;
-        case 2:
-            // Listar Usuarios
-            system("cls");
-            listaUsuarios.listarUsuarios();
-            system("pause");
-            break;
             break;
         case 3:
             break; // Regresar
@@ -131,14 +271,16 @@ void adminGestionarUsuarios()
             system("pause");
             break;
         }
-    } while (opcionGestion != 3);
+    }
 }
+
+void adminGestionarReportes() {}
 
 // TODO: Menú Usuario
 void menuUsuario()
 {
-    int opcion;
-    do
+    int opcion = 0;
+    while (opcion != 5)
     {
         system("cls");
         cout << "|========== [Menu Usuario] ==========|" << endl;
@@ -162,26 +304,27 @@ void menuUsuario()
             break;
         case 3:
             // Publicaciones
-            system("cls");
-            listaPublicaciones.listarPublicaciones();
-            system("pause");
+            userGestionarPublicaciones();
             break;
         case 4:
             // Reportes
+            userGestionarReportes();
             break;
         case 5:
-            usuario_logeado = Usuario("", "", "", "", "", "");
+            // Cerrar sesión
+            usuario_logeado = ListaUsuarios::Usuario(-1, "", "", "", "", "", "");
             break;
         default:
             cout << "Opcion no valida" << endl;
             break;
         }
-    } while (opcion != 5);
+    }
 }
-//? Submenús Usuario
-void userGestionarPerfil(){
-    int opcionPerfil;
-    do
+//? Submenús
+void userGestionarPerfil()
+{
+    int opcionPerfil = 0;
+    while (opcionPerfil != 3)
     {
         system("cls");
         cout << "|========== [Perfil] ==========|" << endl;
@@ -195,10 +338,11 @@ void userGestionarPerfil(){
         // Verificación de errores de entrada
         if (cin.fail())
         {
-            limpiarEntrada();
+            cin.clear();
+            cin.ignore();
             cout << "Entrada invalida. Por favor, ingrese un número." << endl;
             system("pause");
-            continue; // Repite el ciclo si la entrada es inválida
+            continue;
         }
 
         switch (opcionPerfil)
@@ -213,7 +357,7 @@ void userGestionarPerfil(){
             break;
         case 2:
             // Eliminar Perfil
-            
+            // Func::EliminarMiPerfil(usuario_logeado);
             system("pause");
             break;
         case 3:
@@ -222,156 +366,186 @@ void userGestionarPerfil(){
             cout << "Opcion no valida" << endl;
             break;
         }
-    } while (opcionPerfil != 3);
-    
+    }
 }
 
-void userGestionarSolicitudes(){
-    int opcionSolicitud;
-    do
+void userGestionarPublicaciones()
+{
+    int opcionPublicaciones = 0;
+    while (opcionPublicaciones != 4)
     {
         system("cls");
-        cout << "|========== [Solicitudes] ==========|" << endl;
-        cout << "| 1. Ver Solicitudes               |" << endl;
-        cout << "| 2. Enviar Solicitud              |" << endl;
-        cout << "| 3. Regresar                      |" << endl;
-        cout << "|========== [Solicitudes] ==========|" << endl;
+        cout << "|========== [Publicaciones] ==========|" << endl;
+        cout << "| 1. Ver Publicaciones                |" << endl;
+        cout << "| 2. Crear Publicación                |" << endl;
+        cout << "| 3. Eliminar Publicación             |" << endl;
+        cout << "| 4. Regresar                         |" << endl;
+        cout << "|========== [Publicaciones] ==========|" << endl;
         cout << "[-] Ingrese una opcion: ";
-        cin >> opcionSolicitud;
+        cin >> opcionPublicaciones;
 
         // Verificación de errores de entrada
         if (cin.fail())
         {
-            limpiarEntrada();
+            cin.clear();
+            cin.ignore();
             cout << "Entrada invalida. Por favor, ingrese un número." << endl;
             system("pause");
-            continue; // Repite el ciclo si la entrada es inválida
+            continue;
         }
 
-        switch (opcionSolicitud)
+        switch (opcionPublicaciones)
         {
         case 1:
-            // Ver Solicitudes
+            // Ver Publicaciones
+            menuMostrarPublicaciones();
             break;
         case 2:
-            // Enviar Solicitud
+            // Crear Publicación
+            menuCrearPublicacion();
             break;
         case 3:
-            break; // Regresar
-        default:
-            cout << "Opcion no valida" << endl;
-            break;
-        }
-    } while (opcionSolicitud != 3);
-    
-}
-
-// TODO: Menú Principal
-void menuPrincipal(){
-    int opcion;
-    do
-    {
-        system("cls");
-        cout << "|========== [Menu] ==========|" << endl;
-        cout << "| 1. Iniciar Sesión          |" << endl;
-        cout << "| 2. Registrarse             |" << endl;
-        cout << "| 3. Información             |" << endl;
-        cout << "| 4. Salir                   |" << endl;
-        cout << "|========== [Menu] ==========|" << endl;
-        cout << "[-] Ingrese una opcion: ";
-        cin >> opcion;
-
-        // Verificación de errores de entrada
-        if (cin.fail())
-        {
-            limpiarEntrada();
-            cout << "Entrada invalida. Por favor, ingrese un número." << endl;
-            system("pause");
-            continue; // Repite el ciclo si la entrada es inválida
-        }
-
-        string names, lastnames, birthday, mail, password;
-
-        switch (opcion)
-        {
-        case 1:
-            // Iniciar Sesión
-            menuIniciarSesion();
-            break;
-        case 2:
-            // Registrarse
-            menuRegistrarse();
-            break;
-        case 3:
-            // Información
-            menuMostrarInformacion();
+            // Eliminar Publicación
+            menuEliminarPublicacion();
             break;
         case 4:
+            break; // Regresar
+        default:
+            cout << "Opcion no valida" << endl;
             break;
+        }
+    }
+}
+
+void userGestionarSolicitudes() {}
+
+void userGestionarReportes() {}
+
+void menuMostrarPublicaciones()
+{
+    ListaPublicacionesFeed::ListaCircularDoble lista_publicaciones_feed = Func::cargarPublicacionesFeed();
+    int opcionGestion = 0;
+    while (opcionGestion != 3)
+    {
+        system("cls");
+        cout << "|============================== [ Mi Feed ] ==============================|" << endl;
+        cout << "|                  [1] Siguiente [3] Regresar [2] Anterior                |" << endl;
+        cout << "|=========================================================================|" << endl;
+        lista_publicaciones_feed.mostrarPublicacionActual();
+        cout << "[+] Ingrese una opcion: ";
+        cin >> opcionGestion;
+
+        // Verificación de errores de entrada
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore();
+            cout << "Entrada invalida. Por favor, ingrese un número." << endl;
+            system("pause");
+            continue;
+        }
+
+        switch (opcionGestion)
+        {
+        case 1:
+            // Siguiente
+            lista_publicaciones_feed.avanzarPublicacion();
+            break;
+        case 2:
+            // Anterior
+            lista_publicaciones_feed.retrocederPublicacion();
+            break;
+        case 3:
+            lista_publicaciones_feed.vaciarLista();
+            break; // Regresar
         default:
             cout << "Opcion no valida" << endl;
             system("pause");
             break;
         }
-    } while (opcion != 4);
-}
-//? Submenús principal
-void menuIniciarSesion() {
-    string mail, password;
-    system("cls");
-    cout << "|========== [ Iniciar Sesión ] ==========|" << endl;
-    cout << "|Ingrese su usuario:                     |" << endl;
-    cout << "|-| ";
-    cin >> mail;
-    cout << "|Ingrese su contraseña:                  |" << endl;
-    cout << "|-| ";
-    cin >> password;
-    
-    usuario_logeado = listaUsuarios.buscarUsuario(mail, password);
-    if (usuario_logeado.correo != "" && usuario_logeado.rol == "admin") {
-        menuAdministrador();
-    } else if (usuario_logeado.correo != "" && usuario_logeado.rol == "user") {
-        menuUsuario();
-    } else {
-        cout << "Usuario o contraseña incorrectos" << endl;
     }
-    system("pause");
 }
 
-void menuRegistrarse() {
-    string names, lastnames, birthday, mail, password;
-    system("cls");
-    cout << "|========== [ Registrarse ] ==========|" << endl;
-    cout << "|Ingrese sus nombres:" << endl;
-    cin.ignore();
-    cout << "|-| ";
-    getline(cin, names);
-    cout << "|Ingrese sus apellidos:" << endl;
-    cout << "|-| ";
-    getline(cin, lastnames);
-    cout << "|Ingrese su fecha de nacimiento:" << endl;
-    cout << "|-| ";
-    getline(cin, birthday);
-    cout << "|Ingrese su correo:" << endl;
-    cout << "|-| ";
-    getline(cin, mail);
-    cout << "|Ingrese su contraseña:" << endl;
-    cout << "|-| ";
-    getline(cin, password);
-    cout << "|=====================================|" << endl;
-    
-    registrarUsuario(names, lastnames, birthday, mail, password);
-    system("pause");
-}
-
-void menuMostrarInformacion()
+void menuCrearPublicacion()
 {
+    string contenido, fecha, hora;
+    fecha = Func::obtenerFecha();
+    hora = Func::obtenerHora();
     system("cls");
-    cout << "|========== [ Información ] ==========|" << endl;
-    cout << "| Laboratorio de Estructuras de Datos |" << endl;
-    cout << "| Sección C                           |" << endl;
-    cout << "| Derek Francisco Orellana Ibáñez     |" << endl;
-    cout << "| 202001151                           |" << endl;
-    cout << "|========== [ Información ] ==========|" << endl;
-    system("pause");
+    cout << "|========== [ Crear Publicación ] ==========|" << endl;
+    cout << "|    Fecha: " << fecha << "     Hora: " << hora << "    |" << endl;
+    cout << "| Contenido:                                |" << endl;
+    cout << "|===========================================|" << endl;
+    cout << "|                  c. Cancelar              |" << endl;
+    cout << "|===========================================|" << endl;
+    cout << "|+| ";
+    cin.ignore();
+    getline(cin, contenido);
+    if (contenido == "c")
+    {
+        return;
+    }
+    Func::crearPublicacion(usuario_logeado, contenido, fecha, hora);
+}
+
+void menuEliminarPublicacion()
+{
+    ListaPublicacionesFeed::ListaCircularDoble lista_publicaciones_feed = Func::cargarPublicacionesFeed();
+    int opcionGestion = 0;
+    while (opcionGestion != 3)
+    {
+        system("cls");
+        cout << "|========================= [ Mis Publicaciones ] =========================|" << endl;
+        cout << "|                  [1] Siguiente [3] Regresar [2] Anterior                |" << endl;
+        cout << "|                                [0] Eliminar                             |" << endl;
+        cout << "|=========================================================================|" << endl;
+        lista_publicaciones_feed.mostrarPublicacionActual();
+        cout << "[+] Ingrese una opcion: ";
+        cin >> opcionGestion;
+
+        // Verificación de errores de entrada
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore();
+            cout << "Entrada invalida. Por favor, ingrese un número." << endl;
+            system("pause");
+            continue;
+        }
+
+        int id = -1;
+        switch (opcionGestion)
+        {
+        case 0:
+            // Eliminar Publicación
+            id = lista_publicaciones_feed.obtenerIdActual();
+            if (id != -1)
+            {
+                lista_publicaciones.eliminarPublicacion(id);
+                cout << "Publicación eliminada correctamente" << endl;
+            }
+            else
+            {
+                cout << "No hay una publicación para eliminar" << endl;
+                system("pause");
+            }
+            opcionGestion = 3;
+            break;
+        case 1:
+            // Siguiente
+            lista_publicaciones_feed.avanzarPublicacion();
+            break;
+        case 2:
+            // Anterior
+            lista_publicaciones_feed.retrocederPublicacion();
+            break;
+        case 3:
+            lista_publicaciones_feed.vaciarLista();
+            break; // Regresar
+        default:
+            cout << "Opcion no valida" << endl;
+            system("pause");
+            break;
+        }
+    }
 }
