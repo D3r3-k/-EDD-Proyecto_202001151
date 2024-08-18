@@ -536,9 +536,7 @@ void menuEliminarPerfil()
         switch (opcionEliminar)
         {
         case 1:
-            lista_publicaciones.eliminarPublicaciones(usuario_logeado);
-            matriz_relacion.eliminarRelacionesUsuario(usuario_logeado->correo);
-            lista_usuarios.eliminarUsuario(usuario_logeado);
+            Func::eliminarMiPerfil();
             usuario_logeado = nullptr;
             if (Func::verificarSesion())
             {

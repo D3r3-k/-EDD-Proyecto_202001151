@@ -370,6 +370,36 @@ namespace ListaUsuarios
                 cout << "Usuario receptor no encontrado." << endl;
             }
         }
+
+        void eliminarSolicitudes(const string &correo)
+        {
+            NodoUsuario *temp = cabeza;
+            while (temp)
+            {
+                // Eliminar de la lista de solicitudes enviadas
+                temp->usuario.solicitudesEnviadas.eliminarSolicitud(correo);
+
+                // Procesar la pila de solicitudes recibidas
+                stack<string> pilaActual = temp->usuario.solicitudesRecibidas;
+                stack<string> nuevaPila;
+
+                // Recorrer la pila original
+                while (!pilaActual.empty())
+                {
+                    if (pilaActual.top() != correo)
+                    {
+                        nuevaPila.push(pilaActual.top());
+                    }
+                    pilaActual.pop();
+                }
+
+                // Asignar la nueva pila (con las solicitudes filtradas)
+                temp->usuario.solicitudesRecibidas = nuevaPila;
+
+                // Pasar al siguiente usuario
+                temp = temp->siguiente;
+            }
+        }
     };
 }
 

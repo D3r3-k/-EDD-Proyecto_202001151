@@ -350,6 +350,18 @@ namespace Func
         cout << "Solicitud de " << correoEmisor << " rechazada y eliminada." << endl;
     }
 
+    void eliminarMiPerfil()
+    {
+        // Eliminar usuario de las solicitudes de los demás usuarios
+        lista_usuarios.eliminarSolicitudes(usuario_logeado->correo);
+        // Eliminar usuario de las publicaciones
+        lista_publicaciones.eliminarPublicaciones(usuario_logeado);
+
+        // Eliminar usuario de la matriz dispersa
+        matriz_relacion.eliminarRelacionesUsuario(usuario_logeado->correo);
+        // Eliminar usuario de la lista de usuarios
+        lista_usuarios.eliminarUsuario(usuario_logeado);
+    }
 };
 
 #endif // FUNCIONES_H
