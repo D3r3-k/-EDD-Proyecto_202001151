@@ -2,20 +2,20 @@
     {
         "emisor": "juan.perez@example.com",
         "receptor": "maria.rodriguez@example.com",
-        "estado": "pendiente"
+        "estado": "aceptada"
     },
     {
-        "emisor": "carlos.sanchez@example.com",
+        "emisor": "juan.perez@example.com",
         "receptor": "ana.martinez@example.com",
         "estado": "aceptada"
     },
     {
-        "emisor": "luis.gomez@example.com",
+        "emisor": "juan.perez@example.com",
         "receptor": "laura.ruiz@example.com",
-        "estado": "rechazado"
+        "estado": "aceptada"
     },
     {
-        "emisor": "javier.hernandez@example.com",
+        "emisor": "juan.perez@example.com",
         "receptor": "isabel.ramirez@example.com",
         "estado": "pendiente"
     },

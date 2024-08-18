@@ -148,11 +148,14 @@ namespace Func
                 if (estado == "pendiente")
                 {
                     // al usuario emisor, en la lista de solicitudes se agregara el correo del usuario receptor
+                    lista_usuarios.agregarSolicitudEnviada(usuario_emisor->correo, usuario_receptor->correo);
                     // al usuario receptor, en la pilas de solicitudes se agregara el correo del usuario emisor
+                    lista_usuarios.agregarSolicitudRecibida(usuario_emisor->correo, usuario_receptor->correo);
                 }
                 else if (estado == "aceptada" || estado == "aceptado")
                 {
                     // se crea la relacion de amistad entre los dos usuarios en la matriz dispersa
+                    matriz_relacion.agregarRelacion(usuario_emisor, usuario_receptor);
                 }
 
                 contador++;
@@ -267,6 +270,15 @@ namespace Func
             }
         }
         return lista_temporal;
+    }
+
+    bool verificarSesion()
+    {
+        if (usuario_logeado != nullptr)
+        {
+            return false;
+        }
+        return true;
     }
 
 }

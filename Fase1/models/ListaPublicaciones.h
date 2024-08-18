@@ -79,12 +79,12 @@ namespace ListaPublicaciones
                 cola = nuevoNodo;
             }
         }
-        void eliminarPublicaciones(ListaUsuarios::Usuario usuario_logeado)
+        void eliminarPublicaciones(ListaUsuarios::Usuario *usuario_logeado)
         {
             NodoPublicacion *temp = cabeza;
             while (temp)
             {
-                if (temp->publicacion.correo_autor == usuario_logeado.correo)
+                if (temp->publicacion.correo_autor == usuario_logeado->correo)
                 {
                     if (temp->anterior)
                     {

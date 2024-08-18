@@ -26,7 +26,7 @@ namespace ListaPublicacionesFeed
     private:
         NodoFeed *cabeza;
         NodoFeed *cola;
-        NodoFeed *actual; // Puntero adicional
+        NodoFeed *actual;
 
     public:
         // Constructor

@@ -24,6 +24,7 @@ void menuPrincipal()
         cout << "|========== [Menu] ==========|" << endl;
         cout << "[-] Ingrese una opcion: ";
         cin >> opcion;
+        // Verificación de errores de entrada, si no es un número, se limpia el buffer y se ignora la entrada, se muestra un mensaje de error y se reinicia la variable opcion
         if (cin.fail())
         {
             cin.clear();
@@ -32,7 +33,6 @@ void menuPrincipal()
             system("pause");
             continue;
         }
-
         string names, lastnames, birthday, mail, password;
 
         switch (opcion)
@@ -319,6 +319,10 @@ void menuUsuario()
         case 1:
             // Perfil
             userGestionarPerfil();
+            if (Func::verificarSesion())
+            {
+                return;
+            }
             break;
         case 2:
             // Solicitudes
@@ -381,6 +385,10 @@ void userGestionarPerfil()
         case 2:
             // Eliminar Perfil
             menuEliminarPerfil();
+            if (Func::verificarSesion())
+            {
+                return;
+            }
             break;
         case 3:
             break; // Regresar
@@ -392,6 +400,61 @@ void userGestionarPerfil()
     }
 }
 
+void userGestionarSolicitudes()
+{
+    int opcionSolicitudes = 0;
+    while (opcionSolicitudes != 4)
+    {
+        system("cls");
+        cout << "|========== [Solicitudes] ==========|" << endl;
+        cout << "| 1. Ver Solicitudes                |" << endl;
+        cout << "| 2. Ver Solicitudes Enviadas       |" << endl;
+        cout << "| 3. Enviar Solicitudes             |" << endl;
+        cout << "| 4. Regresar                       |" << endl;
+        cout << "|========== [Solicitudes] ==========|" << endl;
+        cout << "[-] Ingrese una opcion: ";
+        cin >> opcionSolicitudes;
+
+        // Verificación de errores de entrada
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore();
+            cout << "Entrada invalida. Por favor, ingrese un número." << endl;
+            system("pause");
+            continue;
+        }
+
+        switch (opcionSolicitudes)
+        {
+        case 1:
+            // Ver Solicitudes
+            system("cls");
+            cout << "|========================= [ Solicitudes Recibidas ] =========================|" << endl;
+            usuario_logeado->mostrarSolicitudesRecibidas();
+            cout << "|===========================================================================|" << endl;
+            system("pause");
+            break;
+        case 2:
+            // Ver Solicitudes Enviadas
+            system("cls");
+            cout << "|========================= [ Solicitudes Enviadas ] ==========================|" << endl;
+            usuario_logeado->mostrarSolicitudesEnviadas();
+            cout << "|===========================================================================|" << endl;
+            system("pause");
+            break;
+        case 3:
+            // Enviar Solicitudes
+            break;
+        case 4:
+            break; // Regresar
+        default:
+            cout << "Opcion no valida" << endl;
+            system("pause");
+            break;
+        }
+    }
+}
 void userGestionarPublicaciones()
 {
     int opcionPublicaciones = 0;
@@ -441,14 +504,6 @@ void userGestionarPublicaciones()
     }
 }
 
-void userGestionarSolicitudes()
-{
-    // TODO: Implementar
-    // ver solicitudes
-    //      1. aceptar/rechazar
-    // enviar solicitud
-}
-
 void userGestionarReportes()
 {
     // TODO: Implementar
@@ -481,11 +536,17 @@ void menuEliminarPerfil()
         switch (opcionEliminar)
         {
         case 1:
-            // Eliminar publicaciones del usuario
-            // Eliminar relaciones del usuario
-            // Eliminar usuario
-            // Cerrar sesión
-            opcionEliminar = 2;
+            lista_publicaciones.eliminarPublicaciones(usuario_logeado);
+            system("cls");
+            matriz_relacion.imprimir();
+            matriz_relacion.eliminarRelacionesUsuario(usuario_logeado->correo);
+            matriz_relacion.imprimir();
+            lista_usuarios.eliminarUsuario(usuario_logeado);
+            usuario_logeado = nullptr;
+            if (Func::verificarSesion())
+            {
+                return;
+            }
             break;
         case 2:
             break; // No

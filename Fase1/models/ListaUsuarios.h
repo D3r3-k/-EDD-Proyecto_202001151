@@ -21,8 +21,8 @@ namespace ListaUsuarios
         string correo;
         string contrasena;
         string rol;
-        // ListaSolicitudes::<tipo> solicitudesEnviadas; // Solicitudes enviadas -> <tipo de lista>
-        stack<string> solicitudesRecibidas;              // Solicitudes recibidas -> Pila
+        ListaSolicitudes::ListaCircularDoble solicitudesEnviadas; // Solicitudes enviadas -> Lista Circular Doble
+        stack<string> solicitudesRecibidas;                       // Solicitudes recibidas -> Pila
 
         // Constructor
         Usuario(const int &id,
@@ -48,6 +48,69 @@ namespace ListaUsuarios
             cout << "| Apellidos:           " << apellidos << endl;
             cout << "| Fecha de Nacimiento: " << fechaNacimiento << endl;
             cout << "| Correo:              " << correo << endl;
+        }
+        // Métodos de la pila
+        bool solicitudRecibidaExiste(const string &correo)
+        {
+            // Usar una copia de la pila para buscar la solicitud
+            stack<string> tempPila = solicitudesRecibidas;
+            while (!tempPila.empty())
+            {
+                if (tempPila.top() == correo)
+                {
+                    return true;
+                }
+                tempPila.pop();
+            }
+            return false;
+        }
+        void agregarSolicitudRecibida(const string &correo)
+        {
+            if (!solicitudRecibidaExiste(correo))
+            {
+                solicitudesRecibidas.push(correo);
+                cout << "Solicitud de " << correo << " agregada exitosamente." << endl;
+            }
+            else
+            {
+                cout << "La solicitud de " << correo << " ya existe." << endl;
+            }
+        }
+        void mostrarSolicitudesRecibidas()
+        {
+            if (solicitudesRecibidas.empty())
+            {
+                cout << "|                          No hay Solicitudes                             |" << endl;
+                return;
+            }
+            stack<string> tempPila = solicitudesRecibidas;
+            while (!tempPila.empty())
+            {
+                cout << "| " << tempPila.top() << endl;
+                tempPila.pop();
+            }
+            cout << "|=========================================================================|" << endl;
+        }
+        // Métodos de la lista circular doble
+        bool solicitudEnviadaExiste(const string &correo)
+        {
+            return solicitudesEnviadas.existeSolicitud(correo);
+        }
+        void agregarSolicitudEnviada(const string &correo)
+        {
+            if (!solicitudEnviadaExiste(correo))
+            {
+                solicitudesEnviadas.agregarSolicitud(correo);
+                cout << "Solicitud a " << correo << " enviada exitosamente." << endl;
+            }
+            else
+            {
+                cout << "La solicitud a " << correo << " ya existe." << endl;
+            }
+        }
+        void mostrarSolicitudesEnviadas()
+        {
+            solicitudesEnviadas.mostrarSolicitudes();
         }
     };
 
@@ -212,6 +275,56 @@ namespace ListaUsuarios
                     prev = temp;
                     temp = temp->siguiente;
                 }
+            }
+        }
+
+        void eliminarUsuario(const Usuario *usuario)
+        {
+            NodoUsuario *temp = cabeza;
+            NodoUsuario *prev = nullptr;
+            while (temp)
+            {
+                if (temp->usuario.correo == usuario->correo)
+                {
+                    if (prev)
+                    {
+                        prev->siguiente = temp->siguiente;
+                    }
+                    else
+                    {
+                        cabeza = temp->siguiente;
+                    }
+                    delete temp;
+                    break;
+                }
+                prev = temp;
+                temp = temp->siguiente;
+            }
+        }
+
+        void agregarSolicitudRecibida(const string &correoEmisor, const string &correoReceptor)
+        {
+            Usuario *receptor = buscarUsuario(correoReceptor);
+            if (receptor != nullptr)
+            {
+                receptor->agregarSolicitudRecibida(correoEmisor);
+            }
+            else
+            {
+                cout << "Usuario receptor no encontrado." << endl;
+            }
+        }
+
+        void agregarSolicitudEnviada(const string &correoEmisor, const string &correoReceptor)
+        {
+            Usuario *emisor = buscarUsuario(correoEmisor);
+            if (emisor != nullptr)
+            {
+                emisor->agregarSolicitudEnviada(correoReceptor);
+            }
+            else
+            {
+                cout << "Usuario emisor no encontrado." << endl;
             }
         }
     };
