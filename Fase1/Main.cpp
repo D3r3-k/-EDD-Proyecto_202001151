@@ -26,10 +26,10 @@ int main()
     ListaUsuarios::Usuario *admin = new ListaUsuarios::Usuario(0, "Administrador", "Local", "2001-09-15", "admin", "123", "admin");
     lista_usuarios.agregarUsuario(*admin);
 
-    // ListaUsuarios::Usuario *user = new ListaUsuarios::Usuario(1, "Derek", "Local", "2000-09-16", "user", "123", "user");
-    // lista_usuarios.agregarUsuario(*user);
-    // ListaUsuarios::Usuario *user2 = new ListaUsuarios::Usuario(2, "Kevin", "Local", "2000-08-07", "user2", "123", "user");
-    // lista_usuarios.agregarUsuario(*user2);
+    ListaUsuarios::Usuario *user = new ListaUsuarios::Usuario(1, "Derek", "Local", "2000-09-16", "kai", "123", "user");
+    lista_usuarios.agregarUsuario(*user);
+    ListaUsuarios::Usuario *user2 = new ListaUsuarios::Usuario(2, "Kevin", "Local", "2000-08-07", "chanko", "123", "user");
+    lista_usuarios.agregarUsuario(*user2);
 
     // matriz_relacion.agregarRelacion(user, user2);
 

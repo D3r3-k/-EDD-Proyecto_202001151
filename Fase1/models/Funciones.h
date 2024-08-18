@@ -257,6 +257,7 @@ namespace Func
         return hora;
     }
 
+    //! falta cargar las publicaciones de los amigos del usuario logeado
     ListaPublicacionesFeed::ListaCircularDoble cargarPublicacionesFeed()
     {
         // crear una lista circular temporal para retornar al final
@@ -281,6 +282,74 @@ namespace Func
         return true;
     }
 
-}
+    void enviarSolicitud(ListaUsuarios::Usuario *usuario)
+    {
+        if (usuario_logeado->solicitudRecibidaExiste(usuario->correo))
+        {
+            cout << "Ya has recibido una solicitud de este usuario" << endl;
+            system("pause");
+            return;
+        }
+        if (usuario_logeado->solicitudEnviadaExiste(usuario->correo))
+        {
+            cout << "Ya has enviado una solicitud a este usuario" << endl;
+            system("pause");
+            return;
+        }
+        // si existe relacion entre los dos usuarios no se puede enviar solicitud
+        if (matriz_relacion.existeRelacion(usuario_logeado->correo, usuario->correo))
+        {
+            cout << "Ya existe una relacion entre los dos usuarios" << endl;
+            system("pause");
+            return;
+        }
+        lista_usuarios.agregarSolicitudEnviada(usuario_logeado->correo, usuario->correo);
+        lista_usuarios.agregarSolicitudRecibida(usuario_logeado->correo, usuario->correo);
+        cout << "Solicitud enviada correctamente" << endl;
+        system("pause");
+    }
+
+    void aceptarSolicitud(ListaUsuarios::Usuario *receptor)
+    {
+        if (receptor->solicitudesRecibidas.empty())
+        {
+            cout << "No tienes solicitudes para aceptar." << endl;
+            return;
+        }
+
+        // Obtener el correo del emisor (el último que envió la solicitud)
+        string correoEmisor = receptor->solicitudesRecibidas.top();
+
+        // Llamar a las funciones para eliminar las solicitudes enviadas y recibidas
+        lista_usuarios.eliminarSolicitudEnviada(correoEmisor, receptor->correo);
+        lista_usuarios.eliminarSolicitudRecibida(correoEmisor, receptor->correo);
+
+        ListaUsuarios::Usuario *emisor = lista_usuarios.buscarUsuario(correoEmisor);
+
+        // Agregar relación en la matriz dispersa
+        matriz_relacion.agregarRelacion(emisor, receptor);
+
+        cout << "Solicitud de " << correoEmisor << " aceptada y relación agregada." << endl;
+    }
+
+    void rechazarSolicitud(ListaUsuarios::Usuario *receptor)
+    {
+        if (receptor->solicitudesRecibidas.empty())
+        {
+            cout << "No tienes solicitudes para rechazar." << endl;
+            return;
+        }
+
+        // Obtener el correo del emisor (el último que envió la solicitud)
+        string correoEmisor = receptor->solicitudesRecibidas.top();
+
+        // Llamar a las funciones para eliminar las solicitudes enviadas y recibidas
+        lista_usuarios.eliminarSolicitudEnviada(correoEmisor, receptor->correo);
+        lista_usuarios.eliminarSolicitudRecibida(correoEmisor, receptor->correo);
+
+        cout << "Solicitud de " << correoEmisor << " rechazada y eliminada." << endl;
+    }
+
+};
 
 #endif // FUNCIONES_H

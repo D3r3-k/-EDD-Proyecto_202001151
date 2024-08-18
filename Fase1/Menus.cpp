@@ -335,6 +335,8 @@ void menuUsuario()
         case 4:
             // Reportes
             userGestionarReportes();
+            matriz_relacion.imprimir();
+            system("pause");
             break;
         case 5:
             // Cerrar sesión
@@ -430,21 +432,19 @@ void userGestionarSolicitudes()
         case 1:
             // Ver Solicitudes
             system("cls");
-            cout << "|========================= [ Solicitudes Recibidas ] =========================|" << endl;
-            usuario_logeado->mostrarSolicitudesRecibidas();
-            cout << "|===========================================================================|" << endl;
-            system("pause");
+            menuSolicitudesRecibidas();
             break;
         case 2:
             // Ver Solicitudes Enviadas
             system("cls");
             cout << "|========================= [ Solicitudes Enviadas ] ==========================|" << endl;
             usuario_logeado->mostrarSolicitudesEnviadas();
-            cout << "|===========================================================================|" << endl;
+            cout << "|=============================================================================|" << endl;
             system("pause");
             break;
         case 3:
             // Enviar Solicitudes
+            menuEnviarSolicitud();
             break;
         case 4:
             break; // Regresar
@@ -537,10 +537,7 @@ void menuEliminarPerfil()
         {
         case 1:
             lista_publicaciones.eliminarPublicaciones(usuario_logeado);
-            system("cls");
-            matriz_relacion.imprimir();
             matriz_relacion.eliminarRelacionesUsuario(usuario_logeado->correo);
-            matriz_relacion.imprimir();
             lista_usuarios.eliminarUsuario(usuario_logeado);
             usuario_logeado = nullptr;
             if (Func::verificarSesion())
@@ -549,7 +546,8 @@ void menuEliminarPerfil()
             }
             break;
         case 2:
-            break; // No
+            // No
+            break;
         default:
             cout << "Opcion no valida" << endl;
             system("pause");
@@ -679,6 +677,89 @@ void menuEliminarPublicacion()
         case 3:
             lista_publicaciones_feed.vaciarLista();
             break; // Regresar
+        default:
+            cout << "Opcion no valida" << endl;
+            system("pause");
+            break;
+        }
+    }
+}
+
+void menuEnviarSolicitud()
+{
+    string correo_destinatario;
+    while (true)
+    {
+        system("cls");
+        cout << "|================ [ Enviar Solicitud ] ================|" << endl;
+        lista_usuarios.listarUsuarios();
+        cout << "|                      [c] Regresar                    |" << endl;
+        cout << "|======================================================|" << endl;
+        cout << "|+| Correo del usuario: ";
+        cin >> correo_destinatario;
+
+        // Verificar si el usuario quiere regresar
+        if (correo_destinatario == "c")
+        {
+            return;
+        }
+
+        // Buscar el usuario por correo
+        ListaUsuarios::Usuario *usuario = lista_usuarios.buscarUsuario(correo_destinatario);
+
+        if (usuario == nullptr)
+        {
+            cout << "Usuario no encontrado" << endl;
+            system("pause");
+            continue;
+        }
+
+        // Verificar si el usuario es el mismo que el que está logueado
+        if (usuario->correo == usuario_logeado->correo)
+        {
+            cout << "No puedes enviarte una solicitud a ti mismo" << endl;
+            system("pause");
+            continue;
+        }
+
+        // Enviar la solicitud
+        Func::enviarSolicitud(usuario);
+    }
+}
+
+void menuSolicitudesRecibidas()
+{
+    int opcion = 0;
+    while (opcion != 3)
+    {
+        system("cls");
+        cout << "|========================= [ Solicitudes Recibidas ] =========================|" << endl;
+        usuario_logeado->mostrarSolicitudRecibida();
+        cout << "|                    [1] Aceptar   [3] Regresar    [2] Rechazar               |" << endl;
+        cout << "|=============================================================================|" << endl;
+        cout << "|+|: ";
+        cin >> opcion;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore();
+            cout << "Entrada invalida. Por favor, ingrese un número." << endl;
+            system("pause");
+            continue;
+        }
+        switch (opcion)
+        {
+        case 1:
+            // Aceptar
+            Func::aceptarSolicitud(usuario_logeado);
+            break;
+        case 2:
+            // Rechazar
+            Func::rechazarSolicitud(usuario_logeado);
+            break;
+        case 3:
+            // Regresar
+            break;
         default:
             cout << "Opcion no valida" << endl;
             system("pause");

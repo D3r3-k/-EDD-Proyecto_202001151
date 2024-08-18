@@ -137,40 +137,69 @@ namespace ListaSolicitudes
             cola = nullptr;
             actual = nullptr;
         }
-        void eliminarSolicitud()
+        void eliminarSolicitud(const string &correo)
         {
             if (!cabeza)
                 return;
 
-            // Si solo hay un nodo
-            if (cabeza == cola)
+            NodoSolicitud *aux = cabeza;
+
+            do
             {
-                delete cabeza;
-                cabeza = nullptr;
-                cola = nullptr;
-                actual = nullptr;
-                return;
-            }
+                if (aux->correo == correo)
+                {
+                    // Caso 1: Si la lista tiene un solo nodo
+                    if (cabeza == cola && aux == cabeza)
+                    {
+                        delete cabeza;
+                        cabeza = nullptr;
+                        cola = nullptr;
+                        actual = nullptr;
+                        return;
+                    }
 
-            // Caso general
-            NodoSolicitud *temp = actual;
-            if (actual == cabeza)
-            {
-                cabeza = actual->siguiente;
-            }
-            if (actual == cola)
-            {
-                cola = actual->anterior;
-            }
+                    // Caso 2: Si se elimina la cabeza
+                    if (aux == cabeza)
+                    {
+                        cabeza = cabeza->siguiente;
+                        cabeza->anterior = cola;
+                        cola->siguiente = cabeza;
+                        if (actual == aux)
+                        {
+                            actual = cabeza;
+                        }
+                        delete aux;
+                        return;
+                    }
 
-            actual->anterior->siguiente = actual->siguiente;
-            actual->siguiente->anterior = actual->anterior;
+                    // Caso 3: Si se elimina la cola
+                    if (aux == cola)
+                    {
+                        cola = cola->anterior;
+                        cola->siguiente = cabeza;
+                        cabeza->anterior = cola;
+                        if (actual == aux)
+                        {
+                            actual = cabeza;
+                        }
+                        delete aux;
+                        return;
+                    }
 
-            // Mover el puntero actual al siguiente nodo
-            actual = actual->siguiente;
-
-            delete temp;
+                    // Caso 4: Si se elimina un nodo intermedio
+                    aux->anterior->siguiente = aux->siguiente;
+                    aux->siguiente->anterior = aux->anterior;
+                    if (actual == aux)
+                    {
+                        actual = aux->siguiente;
+                    }
+                    delete aux;
+                    return;
+                }
+                aux = aux->siguiente;
+            } while (aux != cabeza);
         }
+
         bool existeSolicitud(const string &correo)
         {
             if (!cabeza)
@@ -192,14 +221,13 @@ namespace ListaSolicitudes
         {
             if (!cabeza)
             {
-                cout << "|                          No hay Solicitudes                             |" << endl;
+                cout << "|                          No hay Solicitudes                                 |" << endl;
                 return;
             }
             NodoSolicitud *aux = cabeza;
             do
             {
-                cout << "| " << aux->correo;
-                cout << "|=========================================================================|" << endl;
+                cout << "|+| " << aux->correo << endl;
                 aux = aux->siguiente;
             } while (aux != cabeza);
         }

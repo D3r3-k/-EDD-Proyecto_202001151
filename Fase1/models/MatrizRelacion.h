@@ -231,6 +231,12 @@ namespace MatrizRelacion
 
         void imprimir() const
         {
+            if (!cabeza)
+            {
+                cout << "No hay relaciones para mostrar" << endl;
+                return;
+            }
+
             NodoRelacion *rowHeader = cabeza->abajo;
             cout << setw(10) << " ";
             NodoRelacion *colHeader = cabeza->siguiente;
@@ -270,6 +276,10 @@ namespace MatrizRelacion
 
         void eliminarRelacionesUsuario(string correo_usuario)
         {
+            if (!cabeza)
+            {
+                return;
+            }
             // borrando todas las relaciones que tengan relacion con el correo del usuario tanto en filas como en columnas
             NodoRelacion *fila = cabeza->abajo;
             while (fila)
@@ -316,6 +326,29 @@ namespace MatrizRelacion
                     delete temp;
                 }
             }
+        }
+
+        bool existeRelacion(string correo1, string correo2)
+        {
+            if (!cabeza)
+            {
+                return false;
+            }
+            NodoRelacion *fila = cabeza->abajo;
+            while (fila)
+            {
+                NodoRelacion *current = fila->siguiente;
+                while (current)
+                {
+                    if (current->usuario1->correo == correo1 && current->usuario2->correo == correo2)
+                    {
+                        return true;
+                    }
+                    current = current->siguiente;
+                }
+                fila = fila->abajo;
+            }
+            return false;
         }
     };
 };

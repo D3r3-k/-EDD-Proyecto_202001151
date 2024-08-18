@@ -52,7 +52,6 @@ namespace ListaUsuarios
         // Métodos de la pila
         bool solicitudRecibidaExiste(const string &correo)
         {
-            // Usar una copia de la pila para buscar la solicitud
             stack<string> tempPila = solicitudesRecibidas;
             while (!tempPila.empty())
             {
@@ -80,7 +79,7 @@ namespace ListaUsuarios
         {
             if (solicitudesRecibidas.empty())
             {
-                cout << "|                          No hay Solicitudes                             |" << endl;
+                cout << "|                          No hay Solicitudes                                 |" << endl;
                 return;
             }
             stack<string> tempPila = solicitudesRecibidas;
@@ -89,8 +88,17 @@ namespace ListaUsuarios
                 cout << "| " << tempPila.top() << endl;
                 tempPila.pop();
             }
-            cout << "|=========================================================================|" << endl;
         }
+        void mostrarSolicitudRecibida()
+        {
+            if (solicitudesRecibidas.empty())
+            {
+                cout << "|                          No hay Solicitudes                                 |" << endl;
+                return;
+            }
+            cout << "| " << solicitudesRecibidas.top() << endl;
+        }
+
         // Métodos de la lista circular doble
         bool solicitudEnviadaExiste(const string &correo)
         {
@@ -325,6 +333,41 @@ namespace ListaUsuarios
             else
             {
                 cout << "Usuario emisor no encontrado." << endl;
+            }
+        }
+
+        void eliminarSolicitudEnviada(const string &correoEmisor, const string &correoReceptor)
+        {
+            Usuario *emisor = buscarUsuario(correoEmisor);
+            if (emisor != nullptr)
+            {
+                emisor->solicitudesEnviadas.eliminarSolicitud(correoReceptor);
+            }
+            else
+            {
+                cout << "Usuario emisor no encontrado." << endl;
+            }
+        }
+        void eliminarSolicitudRecibida(const string &correoEmisor, const string &correoReceptor)
+        {
+            Usuario *receptor = buscarUsuario(correoReceptor);
+            if (receptor != nullptr)
+            {
+                stack<string> tempPila = receptor->solicitudesRecibidas;
+                stack<string> auxPila;
+                while (!tempPila.empty())
+                {
+                    if (tempPila.top() != correoEmisor)
+                    {
+                        auxPila.push(tempPila.top());
+                    }
+                    tempPila.pop();
+                }
+                receptor->solicitudesRecibidas = auxPila;
+            }
+            else
+            {
+                cout << "Usuario receptor no encontrado." << endl;
             }
         }
     };

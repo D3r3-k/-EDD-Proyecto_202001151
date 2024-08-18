@@ -16,10 +16,11 @@ void userGestionarPerfil();
 void userGestionarSolicitudes();
 void userGestionarPublicaciones();
 void userGestionarReportes();
+void menuEnviarSolicitud();
 
 void menuEliminarPerfil();
 void menuMostrarPublicaciones();
 void menuCrearPublicacion();
 void menuEliminarPublicacion();
-
+void menuSolicitudesRecibidas();
 #endif // MENUS_H
