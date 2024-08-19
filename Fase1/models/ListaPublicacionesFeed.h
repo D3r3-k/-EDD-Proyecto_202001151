@@ -195,6 +195,47 @@ namespace ListaPublicacionesFeed
             cola = nullptr;
             actual = nullptr;
         }
+
+        void graficarPublicacionesFeed(string nombre, string formato)
+        {
+            string path_render = "renders/" + nombre + "." + formato;
+            string path_dot = "renders/" + nombre + ".dot";
+            ofstream fs(path_dot);
+            if (!fs.is_open())
+            {
+                cout << "Error al abrir el archivo" << endl;
+                return;
+            }
+            fs << "digraph G {" << endl;
+            fs << "rankdir = TB;" << endl;
+            fs << "node [shape=record];" << endl;
+            fs << "label=\"Publicaciones del Feed de" << usuario_logeado->nombres << " \" fontsize = 20 fontname = \"Arial\";" << endl;
+            NodoFeed *temp = cabeza;
+            if (!temp)
+            {
+                fs << "}" << endl;
+                fs.close();
+                string comando = "dot -T" + formato + " " + path_dot + " -o " + path_render;
+                system(comando.c_str());
+                return;
+            }
+            do
+            {
+                fs << "node" << temp->publicacion.id << " [label=\"{ID: " << temp->publicacion.id << " | Autor: " << temp->publicacion.correo_autor << " | Fecha: " << temp->publicacion.fecha << " | Hora: " << temp->publicacion.hora << " | Contenido: " << temp->publicacion.contenido << "}\"];" << endl;
+                temp = temp->siguiente;
+            } while (temp != cabeza);
+            temp = cabeza;
+            do
+            {
+                fs << "node" << temp->publicacion.id << " -> node" << temp->siguiente->publicacion.id << ";" << endl;
+                fs << "node" << temp->siguiente->publicacion.id << " -> node" << temp->publicacion.id << ";" << endl;
+                temp = temp->siguiente;
+            } while (temp != cabeza);
+            fs << "}" << endl;
+            fs.close();
+            string cmd = "dot -T" + formato + " " + path_dot + " -o " + path_render;
+            system(cmd.c_str());
+        }
     };
 
 }

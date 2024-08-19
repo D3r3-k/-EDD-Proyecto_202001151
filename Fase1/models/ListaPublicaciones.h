@@ -200,6 +200,88 @@ namespace ListaPublicaciones
             }
             return contador;
         }
+
+        // Métodos para graficar en Graphviz
+        void graficarPublicaciones(string nombre, string formato)
+        {
+            string path_render = "renders/" + nombre + "." + formato;
+            string path_dot = "renders/" + nombre + ".dot";
+            ofstream fs(path_dot);
+            if (!fs.is_open())
+            {
+                cout << "Error al abrir el archivo" << endl;
+                return;
+            }
+            fs << "digraph G {" << endl;
+            fs << "rankdir = TB;" << endl;
+            fs << "node [shape=record];" << endl;
+            fs << "label=\"Lista de publicaciones\" fontsize = 20 fontname = \"Arial\";" << endl;
+            NodoPublicacion *temp = cabeza;
+            while (temp)
+            {
+                fs << "node" << temp->publicacion.id << " [label=\"{ID: " << temp->publicacion.id << " | Autor: " << temp->publicacion.correo_autor << " | Fecha: " << temp->publicacion.fecha << " | Hora: " << temp->publicacion.hora << " | Contenido: " << temp->publicacion.contenido << "}\"];" << endl;
+                temp = temp->siguiente;
+            }
+            temp = cabeza;
+            while (temp->siguiente)
+            {
+                fs << "node" << temp->publicacion.id << " -> node" << temp->siguiente->publicacion.id << ";" << endl;
+                fs << "node" << temp->siguiente->publicacion.id << " -> node" << temp->publicacion.id << ";" << endl;
+                temp = temp->siguiente;
+            }
+            fs << "}" << endl;
+            fs.close();
+
+            string cmd = "dot -T" + formato + " " + path_dot + " -o " + path_render;
+            system(cmd.c_str());
+        }
+
+        // Top 5 usuarios con mas publicaciones
+        void top5UsuariosConMasPublicaciones()
+        {
+            NodoPublicacion *temp = cabeza;
+            int contador = 0;
+            string usuarios[5];
+            int publicaciones[5];
+            for (int i = 0; i < 5; i++)
+            {
+                usuarios[i] = "";
+                publicaciones[i] = 0;
+            }
+            while (temp)
+            {
+                contador = 0;
+                for (int i = 0; i < 5; i++)
+                {
+                    if (usuarios[i] == temp->publicacion.correo_autor)
+                    {
+                        publicaciones[i]++;
+                        contador++;
+                        break;
+                    }
+                }
+                if (contador == 0)
+                {
+                    for (int i = 0; i < 5; i++)
+                    {
+                        if (usuarios[i] == "")
+                        {
+                            usuarios[i] = temp->publicacion.correo_autor;
+                            publicaciones[i]++;
+                            break;
+                        }
+                    }
+                }
+                temp = temp->siguiente;
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                if (usuarios[i] != "")
+                {
+                    cout << "| " << i + 1 << ". " << usuarios[i] << " con " << publicaciones[i] << " publicaciones" << endl;
+                }
+            }
+        }
     };
 
 }

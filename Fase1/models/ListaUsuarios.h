@@ -6,7 +6,6 @@
 #include <stack>
 #include <fstream>
 
-
 #include "ListaSolicitudes.h"
 
 using namespace std;
@@ -121,6 +120,81 @@ namespace ListaUsuarios
         void mostrarSolicitudesEnviadas()
         {
             solicitudesEnviadas.mostrarSolicitudes();
+        }
+
+        // Métodos para graficar
+        void graficarSolicitudes(string nombre, string formato)
+        {
+            string path_render = "renders/" + nombre + "." + formato;
+            string path_dot = "renders/" + nombre + ".dot";
+            ofstream fs(path_dot);
+            if (fs.is_open())
+            {
+                fs << "digraph G {" << endl;
+                fs << "node [shape=rectangle];" << endl;
+                fs << "rankdir = TB;" << endl;
+                fs << "label=\"Lista de Solicitudes de: " << nombres << "\" fontsize = 20 fontname = \"Arial\";" << endl;
+                // Solicitudes enviadas
+                fs << "subgraph cluster_0 {" << endl;
+                fs << "label=\"Solicitudes Enviadas\";" << endl;
+                for (int i = 0; i < solicitudesEnviadas.getSize() + 1; i++)
+                {
+                    string _correo = solicitudesEnviadas.obtenerSolicitud(i);
+                    if (solicitudesEnviadas.obtenerSolicitudActual() == "")
+                    {
+                        continue;
+                    }
+                    if (i + 1 != solicitudesEnviadas.getSize() + 1)
+                    {
+                        fs << "enviada" << i << "[label=\"" << _correo << "\"];" << endl;
+                    }
+                }
+
+                for (int i = 0; i < solicitudesEnviadas.getSize() + 1; i++)
+                {
+                    if (solicitudesEnviadas.obtenerSolicitudActual() == "")
+                    {
+                        break;
+                    }
+                    if (i + 1 < solicitudesEnviadas.getSize())
+                    {
+                        fs << "enviada" << i << " -> enviada" << i + 1 << " [style=invis];" << endl;
+                    }
+                }
+
+                fs << "}" << endl;
+                // Solicitudes recibidas
+                fs << "subgraph cluster_1 {" << endl;
+                fs << "label=\"Solicitudes Recibidas\";" << endl;
+                stack<string> tempPila = solicitudesRecibidas;
+                int contador = 0;
+                while (!tempPila.empty())
+                {
+                    fs << "recibida" << contador << "[label=\"" << tempPila.top() << "\"];" << endl;
+                    tempPila.pop();
+                    contador++;
+                }
+
+                for (int i = 0; i < contador; i++)
+                {
+                    if (i + 1 < contador)
+                    {
+                        fs << "recibida" << i << " -> recibida" << i + 1 << " [style=invis];" << endl;
+                    }
+                }
+
+                fs << "}" << endl;
+
+                fs << "}" << endl;
+                fs.close();
+                // system("dot -Tpng lista_usuarios.dot -o lista_usuarios.png");
+                string cmd = "dot -T" + formato + " " + path_dot + " -o " + path_render;
+                system(cmd.c_str());
+            }
+            else
+            {
+                cout << "Error al abrir el archivo." << endl;
+            }
         }
     };
 
@@ -404,28 +478,34 @@ namespace ListaUsuarios
         }
 
         // Método para graficar con Graphviz
-        void graficarUsuarios()
+        void graficarUsuarios(string nombre, string formato)
         {
-            ofstream archivo("lista_usuarios.dot");
-            if (archivo.is_open())
+            string path_render = "renders/" + nombre + "." + formato;
+            string path_dot = "renders/" + nombre + ".dot";
+            ofstream fs(path_dot);
+            if (fs.is_open())
             {
-                archivo << "digraph G {" << endl;
-                archivo << "node [shape=record];" << endl;
+                fs << "digraph G {" << endl;
+                fs << "node [shape=record];" << endl;
+                fs << "rankdir = TB;" << endl;
+                fs << "label=\"Lista de Usuarios\" fontsize = 20 fontname = \"Arial\";" << endl;
                 NodoUsuario *temp = cabeza;
                 while (temp)
                 {
-                    archivo << "nodo" << temp->usuario.id << " [label=\"{ID: " << temp->usuario.id << " | Nombres: " << temp->usuario.nombres << " | Apellidos: " << temp->usuario.apellidos << " | Fecha de Nacimiento: " << temp->usuario.fechaNacimiento << " | Correo: " << temp->usuario.correo << "}\"];" << endl;
+                    fs << "nodo" << temp->usuario.id << " [label=\"{ID: " << temp->usuario.id << " | Nombres: " << temp->usuario.nombres << " | Apellidos: " << temp->usuario.apellidos << " | Fecha de Nacimiento: " << temp->usuario.fechaNacimiento << " | Correo: " << temp->usuario.correo << "}\"];" << endl;
                     temp = temp->siguiente;
                 }
                 temp = cabeza;
                 while (temp->siguiente)
                 {
-                    archivo << "nodo" << temp->usuario.id << " -> nodo" << temp->siguiente->usuario.id << ";" << endl;
+                    fs << "nodo" << temp->usuario.id << " -> nodo" << temp->siguiente->usuario.id << ";" << endl;
                     temp = temp->siguiente;
                 }
-                archivo << "}" << endl;
-                archivo.close();
-                system("dot -Tpng lista_usuarios.dot -o lista_usuarios.png");
+                fs << "}" << endl;
+                fs.close();
+                // system("dot -Tpng lista_usuarios.dot -o lista_usuarios.png");
+                string cmd = "dot -T" + formato + " " + path_dot + " -o " + path_render;
+                system(cmd.c_str());
             }
             else
             {

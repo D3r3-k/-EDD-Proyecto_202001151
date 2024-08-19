@@ -382,7 +382,57 @@ namespace MatrizRelacion
             return amigos;
         }
 
-        void graficarMatrizRelaciones()
+        void top5UsuariosConMenosAmigos()
+        {
+            // obtener los 5 usuarios con menos amigos, se recorre la matriz y se cuenta la cantidad de amigos que tiene cada usuario
+            // se almacenara en arreglos string e int de tamaño 5, los 5 usuarios con menos amigos
+            string usuarios[5];
+            int cantidad[5];
+            for (int i = 0; i < 5; i++)
+            {
+                cantidad[i] = 999999;
+            }
+            if (!cabeza)
+            {
+                cout << "No hay relaciones para mostrar" << endl;
+                return;
+            }
+            NodoRelacion *fila = cabeza->abajo;
+            while (fila)
+            {
+                int amigos = 0;
+                NodoRelacion *current = fila->siguiente;
+                while (current)
+                {
+                    if (current->usuario2)
+                    {
+                        amigos++;
+                    }
+                    current = current->siguiente;
+                }
+                for (int i = 0; i < 5; i++)
+                {
+                    if (amigos < cantidad[i])
+                    {
+                        for (int j = 4; j > i; j--)
+                        {
+                            cantidad[j] = cantidad[j - 1];
+                            usuarios[j] = usuarios[j - 1];
+                        }
+                        cantidad[i] = amigos;
+                        usuarios[i] = fila->usuario1->nombres;
+                        break;
+                    }
+                }
+                fila = fila->abajo;
+            }
+            for (int i = 0; i < 5; i++)
+            {
+                cout << "| " << i + 1 << ". " << usuarios[i] << " con " << cantidad[i] << " amigos" << endl;
+            }
+        }
+
+        void graficarMatrizRelaciones(string nombre, string formato)
         {
             // Ver si la matriz tiene elementos
             if (!cabeza)
@@ -392,59 +442,62 @@ namespace MatrizRelacion
             }
 
             // Crear el archivo .dot
-            ofstream archivo("matriz_relaciones.dot");
+            string path_render = "renders/" + nombre + "." + formato;
+            string path_dot = "renders/" + nombre + ".dot";
+            ofstream fs(path_dot);
 
             // Escribir el encabezado del archivo
-            archivo << "digraph G {" << endl;
-            archivo << "node [shape=box];" << endl;
-            archivo << "rankdir=TB;" << endl;
+            fs << "digraph G {" << endl;
+            fs << "node [shape=box];" << endl;
+            fs << "rankdir=TB;" << endl;
+            fs << "label=\"Matriz de Relaciones de Usuarios\" fontsize = 20 fontname = \"Arial\";" << endl;
 
             // Definir encabezados de filas
-            archivo << "// Definir encabezados de filas" << endl;
+            fs << "// Definir encabezados de filas" << endl;
             NodoRelacion *fila = cabeza->abajo;
             while (fila)
             {
-                archivo << "fila" << fila->usuario1->id << " [label=\"" << fila->usuario1->nombres << "\", group=1];" << endl;
+                fs << "fila" << fila->usuario1->id << " [label=\"" << fila->usuario1->nombres << "\", group=1];" << endl;
                 fila = fila->abajo;
             }
 
             // Definir encabezados de columnas
-            archivo << "// Definir encabezados de columnas" << endl;
+            fs << "// Definir encabezados de columnas" << endl;
             NodoRelacion *columna = cabeza->siguiente;
             while (columna)
             {
-                archivo << "col" << columna->usuario2->id << " [label=\"" << columna->usuario2->nombres << "\", group=" << columna->usuario2->id + 1 << "];" << endl;
+                fs << "col" << columna->usuario2->id << " [label=\"" << columna->usuario2->nombres << "\", group=" << columna->usuario2->id + 1 << "];" << endl;
                 columna = columna->siguiente;
             }
 
             // Mantener los encabezados de las columnas en el mismo rango horizontal
-            archivo << "{ rank=same;";
+            fs << "{ rank=same;";
             columna = cabeza->siguiente;
             while (columna)
             {
-                archivo << " col" << columna->usuario2->id << ";";
+                fs << " col" << columna->usuario2->id << ";";
                 columna = columna->siguiente;
             }
-            archivo << " }" << endl;
+            fs << " }" << endl;
 
             // Definir nodos en las coordenadas especificadas
-            archivo << "// Definir nodos en las coordenadas especificadas" << endl;
+            fs << "// Definir nodos en las coordenadas especificadas" << endl;
             fila = cabeza->abajo;
             while (fila)
             {
                 NodoRelacion *current = fila->siguiente;
                 while (current)
                 {
-                    archivo << "nodo" << current->usuario1->id << "_" << current->usuario2->id
-                            << " [label=\"(" << current->usuario1->id << "," << current->usuario2->id
-                            << ")\", group=" << current->usuario2->id + 1 << "];" << endl;
+                    fs << "nodo" << current->usuario1->id << "_" << current->usuario2->id
+                       << " [label=\"(" << current->usuario1->id << "," << current->usuario2->id
+                       << ")\", group=" << current->usuario2->id + 1 << "];" << endl;
                     current = current->siguiente;
                 }
                 fila = fila->abajo;
             }
 
             // Conectar encabezados de filas con nodos y los nodos entre ellos horizontalmente
-            archivo << "// Conectar encabezados de filas con nodos y los nodos entre ellos horizontalmente" << endl;
+            fs << "// Conectar encabezados de filas con nodos y los nodos entre ellos horizontalmente" << endl;
             fila = cabeza->abajo;
             while (fila)
             {
@@ -453,17 +506,17 @@ namespace MatrizRelacion
                 if (current)
                 {
                     // Conectar el encabezado de la fila con el primer nodo de la fila
-                    archivo << "fila" << fila->usuario1->id << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
-                            << " [dir=none];" << endl;
+                    fs << "fila" << fila->usuario1->id << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
+                       << " [dir=none];" << endl;
 
                     // Conectar los nodos horizontalmente
                     prev = current;
                     current = current->siguiente;
                     while (current)
                     {
-                        archivo << "nodo" << prev->usuario1->id << "_" << prev->usuario2->id
-                                << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
-                                << " [dir=none];" << endl;
+                        fs << "nodo" << prev->usuario1->id << "_" << prev->usuario2->id
+                           << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
+                           << " [dir=none];" << endl;
                         prev = current;
                         current = current->siguiente;
                     }
@@ -472,7 +525,7 @@ namespace MatrizRelacion
             }
 
             // Conectar encabezados de columnas con nodos y los nodos entre ellos verticalmente
-            archivo << "// Conectar encabezados de columnas con nodos y los nodos entre ellos verticalmente" << endl;
+            fs << "// Conectar encabezados de columnas con nodos y los nodos entre ellos verticalmente" << endl;
             columna = cabeza->siguiente;
             while (columna)
             {
@@ -481,17 +534,17 @@ namespace MatrizRelacion
                 if (current)
                 {
                     // Conectar el encabezado de la columna con el primer nodo de la columna
-                    archivo << "col" << columna->usuario2->id << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
-                            << " [dir=none];" << endl;
+                    fs << "col" << columna->usuario2->id << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
+                       << " [dir=none];" << endl;
 
                     // Conectar los nodos verticalmente
                     prev = current;
                     current = current->abajo;
                     while (current)
                     {
-                        archivo << "nodo" << prev->usuario1->id << "_" << prev->usuario2->id
-                                << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
-                                << " [dir=none];" << endl;
+                        fs << "nodo" << prev->usuario1->id << "_" << prev->usuario2->id
+                           << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
+                           << " [dir=none];" << endl;
                         prev = current;
                         current = current->abajo;
                     }
@@ -500,46 +553,47 @@ namespace MatrizRelacion
             }
 
             // Mantener los encabezados de filas alineados verticalmente
-            archivo << "// Mantener los encabezados de filas alineados verticalmente" << endl;
+            fs << "// Mantener los encabezados de filas alineados verticalmente" << endl;
             fila = cabeza->abajo;
             while (fila && fila->abajo)
             {
-                archivo << "fila" << fila->usuario1->id << " -> fila" << fila->abajo->usuario1->id
-                        << " [style=invis];" << endl;
+                fs << "fila" << fila->usuario1->id << " -> fila" << fila->abajo->usuario1->id
+                   << " [style=invis];" << endl;
                 fila = fila->abajo;
             }
 
             // Mantener los nodos de la misma fila en el mismo rango horizontal
-            archivo << "// Mantener los nodos de la misma fila en el mismo rango horizontal" << endl;
+            fs << "// Mantener los nodos de la misma fila en el mismo rango horizontal" << endl;
             fila = cabeza->abajo;
             while (fila)
             {
                 NodoRelacion *current = fila->siguiente;
                 while (current)
                 {
-                    archivo << "{ rank=same; fila" << fila->usuario1->id << "; nodo" << current->usuario1->id
-                            << "_" << current->usuario2->id << " }" << endl;
+                    fs << "{ rank=same; fila" << fila->usuario1->id << "; nodo" << current->usuario1->id
+                       << "_" << current->usuario2->id << " }" << endl;
                     current = current->siguiente;
                 }
                 fila = fila->abajo;
             }
 
             // Conectar las columnas entre sí de forma invisible para mantener el orden
-            archivo << "// Conectar las columnas entre sí de forma invisible para mantener el orden" << endl;
+            fs << "// Conectar las columnas entre sí de forma invisible para mantener el orden" << endl;
             columna = cabeza->siguiente;
             while (columna && columna->siguiente)
             {
-                archivo << "col" << columna->usuario2->id << " -> col" << columna->siguiente->usuario2->id
-                        << " [style=invis];" << endl;
+                fs << "col" << columna->usuario2->id << " -> col" << columna->siguiente->usuario2->id
+                   << " [style=invis];" << endl;
                 columna = columna->siguiente;
             }
 
             // Cerrar el archivo
-            archivo << "}" << endl;
-            archivo.close();
+            fs << "}" << endl;
+            fs.close();
 
             // Generar la imagen con el comando dot
-            system("dot -Tpng matriz_relaciones.dot -o matriz_relaciones.png");
+            string cmd = "dot -T" + formato + " " + path_dot + " -o " + path_render;
+            system(cmd.c_str());
         }
     };
 };

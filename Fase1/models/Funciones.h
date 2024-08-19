@@ -257,7 +257,6 @@ namespace Func
         return hora;
     }
 
-    //! falta cargar las publicaciones de los amigos del usuario logeado
     ListaPublicacionesFeed::ListaCircularDoble cargarPublicacionesFeed()
     {
         // crear una lista circular temporal para retornar al final
@@ -384,7 +383,13 @@ namespace Func
         ListaUsuarios::ListaEnlazadaSimple amigos = matriz_relacion.obtenerAmigos(usuario_logeado->correo);
         amigos.listarUsuarios();
     }
-    
+
+    void graficarMiFeed()
+    {
+        ListaPublicacionesFeed::ListaCircularDoble lista_publicaciones_feed = Func::cargarPublicacionesFeed();
+        lista_publicaciones_feed.graficarPublicacionesFeed("publicaciones_feed_user", "pdf");
+    }
+
 };
 
 #endif // FUNCIONES_H

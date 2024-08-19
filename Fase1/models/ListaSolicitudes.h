@@ -102,6 +102,25 @@ namespace ListaSolicitudes
             }
             return actual->correo;
         }
+        string obtenerSolicitud(int pos)
+        {
+            if (!cabeza)
+            {
+                return "";
+            }
+            NodoSolicitud *aux = cabeza;
+            int i = 0;
+            do
+            {
+                if (i == pos)
+                {
+                    return aux->correo;
+                }
+                aux = aux->siguiente;
+                i++;
+            } while (aux != cabeza);
+            return "";
+        }
         void avanzarSolicitud()
         {
             if (!cabeza)

@@ -280,12 +280,6 @@ void adminGestionarUsuarios()
 
 void adminGestionarReportes()
 {
-    //  Usuarios: Gráfico de la lista de usuarios ✓
-    //  Relaciones de Amistad: Gráfico de la matriz dispersa ✓
-    //  Publicaciones: Gráfico de la lista doblemente enlazada
-    //  Top:
-    //      - 5 usuarios con más publicaciones.
-    //      - 5 usuarios con menos amigos.
     int opcionReportes = 0;
     while (opcionReportes != 5)
     {
@@ -315,21 +309,31 @@ void adminGestionarReportes()
         case 1:
             // Usuarios
             system("cls");
-            cout << "|================ [ Reporte de Usuarios ] ===============|" << endl;
-            lista_usuarios.graficarUsuarios();
+            cout << "|================== [ Reporte de Usuarios ] ==================|" << endl;
+            cout << "| Generando reporte de usuarios...                            |" << endl;
+            lista_usuarios.graficarUsuarios("lista_usuarios_admin", "pdf");
+            cout << "| Reporte generado correctamente                              |" << endl;
+            cout << "|=============================================================|" << endl;
             system("pause");
             break;
         case 2:
             // Relaciones
             system("cls");
-            cout << "|================ [ Reporte de Relaciones ] ===============|" << endl;
-            matriz_relacion.graficarMatrizRelaciones();
+            cout << "|================ [ Reporte de Relaciones ] ==================|" << endl;
+            cout << "| Generando reporte de relaciones...                          |" << endl;
+            matriz_relacion.graficarMatrizRelaciones("matriz_relacion_admin", "pdf");
+            cout << "| Reporte generado correctamente                              |" << endl;
+            cout << "|=============================================================|" << endl;
             system("pause");
             break;
         case 3:
             // Publicaciones
             system("cls");
             cout << "|================ [ Reporte de Publicaciones ] ===============|" << endl;
+            cout << "| Generando reporte de publicaciones...                       |" << endl;
+            lista_publicaciones.graficarPublicaciones("lista_publicaciones_admin", "pdf");
+            cout << "| Reporte generado correctamente                              |" << endl;
+            cout << "|=============================================================|" << endl;
             system("pause");
             break;
         case 4:
@@ -374,15 +378,17 @@ void adminGestionarTop()
         switch (opcionTop)
         {
         case 1:
-            // Top 5 Usuarios
-            system("cls");
-            cout << "|================ [ Top 5 Usuarios ] ===============|" << endl;
-            system("pause");
-            break;
-        case 2:
             // Top 5 Publicaciones
             system("cls");
             cout << "|================ [ Top 5 Publicaciones ] ===============|" << endl;
+            lista_publicaciones.top5UsuariosConMasPublicaciones();
+            system("pause");
+            break;
+        case 2:
+            // Top 5 Amigos
+            system("cls");
+            cout << "|================ [ Top 5 Usuarios ] ===============|" << endl;
+            matriz_relacion.top5UsuariosConMenosAmigos();
             system("pause");
             break;
         case 3:
@@ -647,6 +653,7 @@ void userGestionarReportes()
             // Solicitudes
             system("cls");
             cout << "|================ [ Reporte de Solicitudes ] ===============|" << endl;
+            usuario_logeado->graficarSolicitudes("solicitudes_user", "pdf");
             system("pause");
             break;
         case 2:
@@ -659,6 +666,7 @@ void userGestionarReportes()
             // Publicaciones
             system("cls");
             cout << "|================ [ Reporte de Publicaciones ] ===============|" << endl;
+            Func::graficarMiFeed();
             system("pause");
             break;
         case 4:
