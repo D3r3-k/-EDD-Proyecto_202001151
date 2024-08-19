@@ -163,7 +163,7 @@ namespace ListaPublicaciones
             }
             return Publicacion(-1, "", "", "", "");
         }
-        Publicacion ObtenerPublicacion(const int &pos)
+        Publicacion obtenerPublicacion(const int &pos)
         {
             NodoPublicacion *temp = cabeza;
             int contador = 1;

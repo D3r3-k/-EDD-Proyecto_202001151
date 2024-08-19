@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <iomanip>
+
+#include "Globales.h"
 #include "ListaUsuarios.h"
 
 using namespace std;
@@ -349,6 +351,55 @@ namespace MatrizRelacion
                 fila = fila->abajo;
             }
             return false;
+        }
+
+        ListaUsuarios::ListaEnlazadaSimple obtenerAmigos(string correo)
+        {
+            ListaUsuarios::ListaEnlazadaSimple amigos;
+            if (!cabeza)
+            {
+                return amigos;
+            }
+
+            // Buscar amigos en las filas (usuario como usuario1)
+            NodoRelacion *fila = cabeza->abajo;
+            while (fila)
+            {
+                if (fila->usuario1->correo == correo)
+                {
+                    NodoRelacion *current = fila->siguiente;
+                    while (current)
+                    {
+                        if (!amigos.existeUsuario(current->usuario2->correo)) // Verificar si ya está en la lista
+                        {
+                            amigos.agregarUsuario(*current->usuario2);
+                        }
+                        current = current->siguiente;
+                    }
+                }
+                fila = fila->abajo;
+            }
+
+            // Buscar amigos en las columnas (usuario como usuario2)
+            NodoRelacion *columna = cabeza->siguiente;
+            while (columna)
+            {
+                if (columna->usuario2->correo == correo)
+                {
+                    NodoRelacion *current = columna->abajo;
+                    while (current)
+                    {
+                        if (!amigos.existeUsuario(current->usuario1->correo)) // Verificar si ya está en la lista
+                        {
+                            amigos.agregarUsuario(*current->usuario1);
+                        }
+                        current = current->abajo;
+                    }
+                }
+                columna = columna->siguiente;
+            }
+
+            return amigos;
         }
     };
 };

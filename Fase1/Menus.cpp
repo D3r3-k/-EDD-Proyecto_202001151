@@ -455,6 +455,7 @@ void userGestionarSolicitudes()
         }
     }
 }
+
 void userGestionarPublicaciones()
 {
     int opcionPublicaciones = 0;

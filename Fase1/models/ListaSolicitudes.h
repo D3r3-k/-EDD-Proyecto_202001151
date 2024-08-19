@@ -199,7 +199,19 @@ namespace ListaSolicitudes
                 aux = aux->siguiente;
             } while (aux != cabeza);
         }
-
+        int getSize()
+        {
+            if (!cabeza)
+                return 0;
+            int size = 0;
+            NodoSolicitud *aux = cabeza;
+            do
+            {
+                size++;
+                aux = aux->siguiente;
+            } while (aux != cabeza);
+            return size;
+        }
         bool existeSolicitud(const string &correo)
         {
             if (!cabeza)

@@ -262,12 +262,28 @@ namespace Func
     {
         // crear una lista circular temporal para retornar al final
         ListaPublicacionesFeed::ListaCircularDoble lista_temporal;
+        // obteer la lista de amigos del usuario logeado
+        ListaUsuarios::ListaEnlazadaSimple amigos = matriz_relacion.obtenerAmigos(usuario_logeado->correo);
+        // recorrer la lista de amigos
         for (int i = 0; i < lista_publicaciones.getLength() + 1; i++)
         {
-            ListaPublicaciones::Publicacion publicacion = lista_publicaciones.ObtenerPublicacion(i);
-            if (usuario_logeado->correo == publicacion.correo_autor)
+            ListaPublicaciones::Publicacion publicacion = lista_publicaciones.obtenerPublicacion(i);
+            for (int i = 0; i < amigos.getSize() + 1; i++)
             {
-                lista_temporal.agregarPublicacion(publicacion);
+                // obtener el usuario amigo
+                ListaUsuarios::Usuario *amigo = amigos.buscarUsuario(i);
+                if (amigo == nullptr)
+                {
+                    continue;
+                }
+                else
+                {
+                    if (usuario_logeado->correo == publicacion.correo_autor || amigo->correo == publicacion.correo_autor)
+                    {
+                        lista_temporal.agregarPublicacion(publicacion);
+                        break;
+                    }
+                }
             }
         }
         return lista_temporal;
