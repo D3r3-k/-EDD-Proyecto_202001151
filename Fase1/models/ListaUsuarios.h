@@ -4,6 +4,8 @@
 #include <iostream>
 #include <string>
 #include <stack>
+#include <fstream>
+
 
 #include "ListaSolicitudes.h"
 
@@ -398,6 +400,36 @@ namespace ListaUsuarios
 
                 // Pasar al siguiente usuario
                 temp = temp->siguiente;
+            }
+        }
+
+        // Método para graficar con Graphviz
+        void graficarUsuarios()
+        {
+            ofstream archivo("lista_usuarios.dot");
+            if (archivo.is_open())
+            {
+                archivo << "digraph G {" << endl;
+                archivo << "node [shape=record];" << endl;
+                NodoUsuario *temp = cabeza;
+                while (temp)
+                {
+                    archivo << "nodo" << temp->usuario.id << " [label=\"{ID: " << temp->usuario.id << " | Nombres: " << temp->usuario.nombres << " | Apellidos: " << temp->usuario.apellidos << " | Fecha de Nacimiento: " << temp->usuario.fechaNacimiento << " | Correo: " << temp->usuario.correo << "}\"];" << endl;
+                    temp = temp->siguiente;
+                }
+                temp = cabeza;
+                while (temp->siguiente)
+                {
+                    archivo << "nodo" << temp->usuario.id << " -> nodo" << temp->siguiente->usuario.id << ";" << endl;
+                    temp = temp->siguiente;
+                }
+                archivo << "}" << endl;
+                archivo.close();
+                system("dot -Tpng lista_usuarios.dot -o lista_usuarios.png");
+            }
+            else
+            {
+                cout << "Error al abrir el archivo." << endl;
             }
         }
     };

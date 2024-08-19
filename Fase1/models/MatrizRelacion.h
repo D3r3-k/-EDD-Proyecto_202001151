@@ -352,16 +352,15 @@ namespace MatrizRelacion
             }
             return false;
         }
-
         ListaUsuarios::ListaEnlazadaSimple obtenerAmigos(string correo)
         {
+            // obtener una lista simple de los amigos del usuario con el correo dado, siendo una matriz, se recorre la fila del usuario y se obtienen los amigos de este
+            // y quitando cualquier nulo, repetido o usuario que no sea amigo
             ListaUsuarios::ListaEnlazadaSimple amigos;
             if (!cabeza)
             {
                 return amigos;
             }
-
-            // Buscar amigos en las filas (usuario como usuario1)
             NodoRelacion *fila = cabeza->abajo;
             while (fila)
             {
@@ -370,36 +369,177 @@ namespace MatrizRelacion
                     NodoRelacion *current = fila->siguiente;
                     while (current)
                     {
-                        if (!amigos.existeUsuario(current->usuario2->correo)) // Verificar si ya está en la lista
+                        if (current->usuario2 && current->usuario2->correo != correo && !amigos.existeUsuario(current->usuario2->correo))
                         {
                             amigos.agregarUsuario(*current->usuario2);
                         }
+                        current = current->siguiente;
+                    }
+                    break;
+                }
+                fila = fila->abajo;
+            }
+            return amigos;
+        }
+
+        void graficarMatrizRelaciones()
+        {
+            // Ver si la matriz tiene elementos
+            if (!cabeza)
+            {
+                cout << "No hay relaciones para graficar" << endl;
+                return;
+            }
+
+            // Crear el archivo .dot
+            ofstream archivo("matriz_relaciones.dot");
+
+            // Escribir el encabezado del archivo
+            archivo << "digraph G {" << endl;
+            archivo << "node [shape=box];" << endl;
+            archivo << "rankdir=TB;" << endl;
+
+            // Definir encabezados de filas
+            archivo << "// Definir encabezados de filas" << endl;
+            NodoRelacion *fila = cabeza->abajo;
+            while (fila)
+            {
+                archivo << "fila" << fila->usuario1->id << " [label=\"" << fila->usuario1->nombres << "\", group=1];" << endl;
+                fila = fila->abajo;
+            }
+
+            // Definir encabezados de columnas
+            archivo << "// Definir encabezados de columnas" << endl;
+            NodoRelacion *columna = cabeza->siguiente;
+            while (columna)
+            {
+                archivo << "col" << columna->usuario2->id << " [label=\"" << columna->usuario2->nombres << "\", group=" << columna->usuario2->id + 1 << "];" << endl;
+                columna = columna->siguiente;
+            }
+
+            // Mantener los encabezados de las columnas en el mismo rango horizontal
+            archivo << "{ rank=same;";
+            columna = cabeza->siguiente;
+            while (columna)
+            {
+                archivo << " col" << columna->usuario2->id << ";";
+                columna = columna->siguiente;
+            }
+            archivo << " }" << endl;
+
+            // Definir nodos en las coordenadas especificadas
+            archivo << "// Definir nodos en las coordenadas especificadas" << endl;
+            fila = cabeza->abajo;
+            while (fila)
+            {
+                NodoRelacion *current = fila->siguiente;
+                while (current)
+                {
+                    archivo << "nodo" << current->usuario1->id << "_" << current->usuario2->id
+                            << " [label=\"(" << current->usuario1->id << "," << current->usuario2->id
+                            << ")\", group=" << current->usuario2->id + 1 << "];" << endl;
+                    current = current->siguiente;
+                }
+                fila = fila->abajo;
+            }
+
+            // Conectar encabezados de filas con nodos y los nodos entre ellos horizontalmente
+            archivo << "// Conectar encabezados de filas con nodos y los nodos entre ellos horizontalmente" << endl;
+            fila = cabeza->abajo;
+            while (fila)
+            {
+                NodoRelacion *current = fila->siguiente;
+                NodoRelacion *prev = nullptr;
+                if (current)
+                {
+                    // Conectar el encabezado de la fila con el primer nodo de la fila
+                    archivo << "fila" << fila->usuario1->id << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
+                            << " [dir=none];" << endl;
+
+                    // Conectar los nodos horizontalmente
+                    prev = current;
+                    current = current->siguiente;
+                    while (current)
+                    {
+                        archivo << "nodo" << prev->usuario1->id << "_" << prev->usuario2->id
+                                << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
+                                << " [dir=none];" << endl;
+                        prev = current;
                         current = current->siguiente;
                     }
                 }
                 fila = fila->abajo;
             }
 
-            // Buscar amigos en las columnas (usuario como usuario2)
-            NodoRelacion *columna = cabeza->siguiente;
+            // Conectar encabezados de columnas con nodos y los nodos entre ellos verticalmente
+            archivo << "// Conectar encabezados de columnas con nodos y los nodos entre ellos verticalmente" << endl;
+            columna = cabeza->siguiente;
             while (columna)
             {
-                if (columna->usuario2->correo == correo)
+                NodoRelacion *current = columna->abajo;
+                NodoRelacion *prev = nullptr;
+                if (current)
                 {
-                    NodoRelacion *current = columna->abajo;
+                    // Conectar el encabezado de la columna con el primer nodo de la columna
+                    archivo << "col" << columna->usuario2->id << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
+                            << " [dir=none];" << endl;
+
+                    // Conectar los nodos verticalmente
+                    prev = current;
+                    current = current->abajo;
                     while (current)
                     {
-                        if (!amigos.existeUsuario(current->usuario1->correo)) // Verificar si ya está en la lista
-                        {
-                            amigos.agregarUsuario(*current->usuario1);
-                        }
+                        archivo << "nodo" << prev->usuario1->id << "_" << prev->usuario2->id
+                                << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
+                                << " [dir=none];" << endl;
+                        prev = current;
                         current = current->abajo;
                     }
                 }
                 columna = columna->siguiente;
             }
 
-            return amigos;
+            // Mantener los encabezados de filas alineados verticalmente
+            archivo << "// Mantener los encabezados de filas alineados verticalmente" << endl;
+            fila = cabeza->abajo;
+            while (fila && fila->abajo)
+            {
+                archivo << "fila" << fila->usuario1->id << " -> fila" << fila->abajo->usuario1->id
+                        << " [style=invis];" << endl;
+                fila = fila->abajo;
+            }
+
+            // Mantener los nodos de la misma fila en el mismo rango horizontal
+            archivo << "// Mantener los nodos de la misma fila en el mismo rango horizontal" << endl;
+            fila = cabeza->abajo;
+            while (fila)
+            {
+                NodoRelacion *current = fila->siguiente;
+                while (current)
+                {
+                    archivo << "{ rank=same; fila" << fila->usuario1->id << "; nodo" << current->usuario1->id
+                            << "_" << current->usuario2->id << " }" << endl;
+                    current = current->siguiente;
+                }
+                fila = fila->abajo;
+            }
+
+            // Conectar las columnas entre sí de forma invisible para mantener el orden
+            archivo << "// Conectar las columnas entre sí de forma invisible para mantener el orden" << endl;
+            columna = cabeza->siguiente;
+            while (columna && columna->siguiente)
+            {
+                archivo << "col" << columna->usuario2->id << " -> col" << columna->siguiente->usuario2->id
+                        << " [style=invis];" << endl;
+                columna = columna->siguiente;
+            }
+
+            // Cerrar el archivo
+            archivo << "}" << endl;
+            archivo.close();
+
+            // Generar la imagen con el comando dot
+            system("dot -Tpng matriz_relaciones.dot -o matriz_relaciones.png");
         }
     };
 };

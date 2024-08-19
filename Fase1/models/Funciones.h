@@ -378,6 +378,13 @@ namespace Func
         // Eliminar usuario de la lista de usuarios
         lista_usuarios.eliminarUsuario(usuario_logeado);
     }
+
+    void mostrarAmigos()
+    {
+        ListaUsuarios::ListaEnlazadaSimple amigos = matriz_relacion.obtenerAmigos(usuario_logeado->correo);
+        amigos.listarUsuarios();
+    }
+    
 };
 
 #endif // FUNCIONES_H

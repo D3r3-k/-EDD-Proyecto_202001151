@@ -10,6 +10,7 @@ void menuMostrarInformacion();
 void menuAdministrador();
 void adminGestionarUsuarios();
 void adminGestionarReportes();
+void adminGestionarTop();
 
 void menuUsuario();
 void userGestionarPerfil();

@@ -280,13 +280,120 @@ void adminGestionarUsuarios()
 
 void adminGestionarReportes()
 {
-    // TODO: Implementar
-    // Usuarios -> grafico de la lista de usuarios
-    // Publicaciones -> grafico de la lista doble enlazada
-    // Relaciones -> grafico de la matriz dispersa
-    // top:
-    //      1. 5 Usuarios con más publicaciones
-    //      2. 5 Usuarios con menos amigos
+    //  Usuarios: Gráfico de la lista de usuarios ✓
+    //  Relaciones de Amistad: Gráfico de la matriz dispersa ✓
+    //  Publicaciones: Gráfico de la lista doblemente enlazada
+    //  Top:
+    //      - 5 usuarios con más publicaciones.
+    //      - 5 usuarios con menos amigos.
+    int opcionReportes = 0;
+    while (opcionReportes != 5)
+    {
+        system("cls");
+        cout << "|========== [Reportes] ==========|" << endl;
+        cout << "| 1. Usuarios                    |" << endl;
+        cout << "| 2. Relaciones de Amistad       |" << endl;
+        cout << "| 3. Publicaciones               |" << endl;
+        cout << "| 4. Top                         |" << endl;
+        cout << "| 5. Regresar                    |" << endl;
+        cout << "|========== [Reportes] ==========|" << endl;
+        cout << "[-] Ingrese una opcion: ";
+        cin >> opcionReportes;
+
+        // Verificación de errores de entrada
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore();
+            cout << "Entrada invalida. Por favor, ingrese un número." << endl;
+            system("pause");
+            continue;
+        }
+
+        switch (opcionReportes)
+        {
+        case 1:
+            // Usuarios
+            system("cls");
+            cout << "|================ [ Reporte de Usuarios ] ===============|" << endl;
+            lista_usuarios.graficarUsuarios();
+            system("pause");
+            break;
+        case 2:
+            // Relaciones
+            system("cls");
+            cout << "|================ [ Reporte de Relaciones ] ===============|" << endl;
+            matriz_relacion.graficarMatrizRelaciones();
+            system("pause");
+            break;
+        case 3:
+            // Publicaciones
+            system("cls");
+            cout << "|================ [ Reporte de Publicaciones ] ===============|" << endl;
+            system("pause");
+            break;
+        case 4:
+            // Top
+            adminGestionarTop();
+            break;
+        case 5:
+            // Regresar
+            break;
+        default:
+            cout << "Opcion no valida" << endl;
+            system("pause");
+            break;
+        }
+    }
+}
+
+void adminGestionarTop()
+{
+    int opcionTop = 0;
+    while (opcionTop != 3)
+    {
+        system("cls");
+        cout << "|==================== [Top 5] ====================|" << endl;
+        cout << "| 1. Usuarios con mas publicaciones               |" << endl;
+        cout << "| 2. Usuarios con menos amigos                    |" << endl;
+        cout << "| 3. Regresar                                     |" << endl;
+        cout << "|=================================================|" << endl;
+        cout << "[-] Ingrese una opcion: ";
+        cin >> opcionTop;
+
+        // Verificación de errores de entrada
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore();
+            cout << "Entrada invalida. Por favor, ingrese un número." << endl;
+            system("pause");
+            continue;
+        }
+
+        switch (opcionTop)
+        {
+        case 1:
+            // Top 5 Usuarios
+            system("cls");
+            cout << "|================ [ Top 5 Usuarios ] ===============|" << endl;
+            system("pause");
+            break;
+        case 2:
+            // Top 5 Publicaciones
+            system("cls");
+            cout << "|================ [ Top 5 Publicaciones ] ===============|" << endl;
+            system("pause");
+            break;
+        case 3:
+            // Regresar
+            break;
+        default:
+            cout << "Opcion no valida" << endl;
+            system("pause");
+            break;
+        }
+    }
 }
 
 // TODO: Menú Usuario
@@ -335,8 +442,6 @@ void menuUsuario()
         case 4:
             // Reportes
             userGestionarReportes();
-            matriz_relacion.imprimir();
-            system("pause");
             break;
         case 5:
             // Cerrar sesión
@@ -507,11 +612,71 @@ void userGestionarPublicaciones()
 
 void userGestionarReportes()
 {
-    // TODO: Implementar
-    // Solicitudes enviadas y recibidas: grafico de la lista de solicitudes enviadas y la pila de solicitudes recibidas
-    // Relaciones: grafico de la matriz dispersa
-    // Publicaciones: grafico de la lista circular doble del usuario y de amigos
-    // mis amigos: listado de amigos
+    // Solicitudes Enviadas y Recibidas: Gráfico de la lista de solicitudes enviadas y de
+    // la pila de solicitudes recibidas
+    // Relaciones de Amistad: Gráfico de la matriz dispersa
+    // Publicaciones: Gráfico de la lista circular de publicaciones del usuario y de amigos
+    // Mis Amigos: Listado de amigos
+    int opcionReportes = 0;
+    while (opcionReportes != 5)
+    {
+        system("cls");
+        cout << "|==================== [Reportes] ====================|" << endl;
+        cout << "| 1. Solicitudes enviadas y recibidas                |" << endl;
+        cout << "| 2. Relaciones de Amistad                           |" << endl;
+        cout << "| 3. Publicaciones                                   |" << endl;
+        cout << "| 4. Mis Amigos                                      |" << endl;
+        cout << "| 5. Regresar                                        |" << endl;
+        cout << "|====================================================|" << endl;
+        cout << "[-] Ingrese una opcion: ";
+        cin >> opcionReportes;
+
+        // Verificación de errores de entrada
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore();
+            cout << "Entrada invalida. Por favor, ingrese un número." << endl;
+            system("pause");
+            continue;
+        }
+
+        switch (opcionReportes)
+        {
+        case 1:
+            // Solicitudes
+            system("cls");
+            cout << "|================ [ Reporte de Solicitudes ] ===============|" << endl;
+            system("pause");
+            break;
+        case 2:
+            // Relaciones
+            system("cls");
+            cout << "|================ [ Reporte de Relaciones ] ===============|" << endl;
+            system("pause");
+            break;
+        case 3:
+            // Publicaciones
+            system("cls");
+            cout << "|================ [ Reporte de Publicaciones ] ===============|" << endl;
+            system("pause");
+            break;
+        case 4:
+            // Mis Amigos
+            system("cls");
+            cout << "|==================== [ Mis Amigos ] ==================|" << endl;
+            Func::mostrarAmigos();
+            system("pause");
+            break;
+        case 5:
+            // Regresar
+            break;
+        default:
+            cout << "Opcion no valida" << endl;
+            system("pause");
+            break;
+        }
+    }
 }
 
 void menuEliminarPerfil()

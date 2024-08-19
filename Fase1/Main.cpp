@@ -31,7 +31,8 @@ int main()
     ListaUsuarios::Usuario *user2 = new ListaUsuarios::Usuario(2, "Kevin", "Local", "2000-08-07", "chanko", "123", "user");
     lista_usuarios.agregarUsuario(*user2);
 
-    // matriz_relacion.agregarRelacion(user, user2);
+    matriz_relacion.agregarRelacion(user, user2);
+    
 
     menuPrincipal();
 
