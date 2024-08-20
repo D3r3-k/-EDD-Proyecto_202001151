@@ -660,6 +660,7 @@ void userGestionarReportes()
             // Relaciones
             system("cls");
             cout << "|================ [ Reporte de Relaciones ] ===============|" << endl;
+            Func::graficarMiRelacion();
             system("pause");
             break;
         case 3:

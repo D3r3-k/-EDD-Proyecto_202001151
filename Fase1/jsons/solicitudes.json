@@ -2,17 +2,17 @@
     {
         "emisor": "juan.perez@example.com",
         "receptor": "maria.rodriguez@example.com",
-        "estado": "pendiente"
+        "estado": "aceptada"
     },
     {
         "emisor": "juan.perez@example.com",
         "receptor": "ana.martinez@example.com",
-        "estado": "pendiente"
+        "estado": "aceptada"
     },
     {
         "emisor": "juan.perez@example.com",
         "receptor": "laura.ruiz@example.com",
-        "estado": "pendiente"
+        "estado": "aceptada"
     },
     {
         "emisor": "javier.hernandez@example.com",

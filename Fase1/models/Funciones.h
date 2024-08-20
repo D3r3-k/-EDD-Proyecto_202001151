@@ -389,6 +389,25 @@ namespace Func
         ListaPublicacionesFeed::ListaCircularDoble lista_publicaciones_feed = Func::cargarPublicacionesFeed();
         lista_publicaciones_feed.graficarPublicacionesFeed("publicaciones_feed_user", "pdf");
     }
+    void graficarMiRelacion()
+    {
+        ListaUsuarios::ListaEnlazadaSimple amigos = matriz_relacion.obtenerAmigos(usuario_logeado->correo);
+        MatrizRelacion::MatrizDispersa _matriz_temp;
+        for (int i = 0; i < amigos.getSize()+1; i++)
+        {
+            ListaUsuarios::Usuario *amigo = amigos.buscarUsuario(i);
+            if (amigo == nullptr)
+            {
+                continue;
+            }
+            else
+            {
+                _matriz_temp.agregarRelacion(usuario_logeado, amigo);
+            }
+        }
+        _matriz_temp.graficarMatrizRelaciones("relacion_user", "pdf");
+        
+    }
 
 };
 
