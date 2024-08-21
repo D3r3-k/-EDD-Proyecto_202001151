@@ -68,7 +68,7 @@ void menuIniciarSesion()
     cout << "|=========== [ Iniciar Sesión ] =========|" << endl;
     cout << "|               c. Cancelar              |" << endl;
     cout << "|========================================|" << endl;
-    cout << "|Ingrese su usuario:                     |" << endl;
+    cout << "|Ingrese su correo:                      |" << endl;
     cout << "|+| ";
     cin >> mail;
     if (mail == "c")
@@ -262,6 +262,7 @@ void adminGestionarUsuarios()
             system("cls");
             cout << "|================ [ Eliminar Usuarios ] ===============|" << endl;
             cout << "| Eliminando usuarios..." << endl;
+            Func::eliminarUsuarios();
             lista_usuarios.eliminarUsuarios(*usuario_logeado);
             cout << "| Usuarios eliminados correctamente" << endl;
             cout << "|======================================================|" << endl;

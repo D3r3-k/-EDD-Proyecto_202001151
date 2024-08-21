@@ -107,6 +107,34 @@ namespace ListaPublicaciones
                 temp = temp->siguiente;
             }
         }
+        void eliminarPublicaciones(string correo)
+        {
+            NodoPublicacion *temp = cabeza;
+            while (temp)
+            {
+                if (temp->publicacion.correo_autor == correo)
+                {
+                    if (temp->anterior)
+                    {
+                        temp->anterior->siguiente = temp->siguiente;
+                    }
+                    if (temp->siguiente)
+                    {
+                        temp->siguiente->anterior = temp->anterior;
+                    }
+                    if (temp == cabeza)
+                    {
+                        cabeza = temp->siguiente;
+                    }
+                    if (temp == cola)
+                    {
+                        cola = temp->anterior;
+                    }
+                    delete temp;
+                }
+                temp = temp->siguiente;
+            }
+        }
         void eliminarPublicacion(int id)
         {
             if (!cabeza)
@@ -204,6 +232,12 @@ namespace ListaPublicaciones
         // Métodos para graficar en Graphviz
         void graficarPublicaciones(string nombre, string formato)
         {
+            if (!cabeza)
+            {
+                cout << "No hay publicaciones para graficar" << endl;
+                return;
+            }
+
             string path_render = "renders/" + nombre + "." + formato;
             string path_dot = "renders/" + nombre + ".dot";
             ofstream fs(path_dot);

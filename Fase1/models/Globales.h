@@ -6,7 +6,6 @@
 #include "MatrizRelacion.h"
 
 extern ListaUsuarios::Usuario *usuario_logeado;
-
 extern ListaUsuarios::ListaEnlazadaSimple lista_usuarios;
 extern ListaPublicaciones::ListaEnlazadaDoble lista_publicaciones;
 extern MatrizRelacion::MatrizDispersa matriz_relacion;

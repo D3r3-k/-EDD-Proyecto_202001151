@@ -489,8 +489,7 @@ namespace MatrizRelacion
                 while (current)
                 {
                     fs << "nodo" << current->usuario1->id << "_" << current->usuario2->id
-                       << " [label=\"(" << current->usuario1->id << "," << current->usuario2->id
-                       << ")\", group=" << current->usuario2->id + 1 << "];" << endl;
+                       << " [label=\"\", color=green, style=filled, group=" << current->usuario2->id + 1 << "];" << endl;
                     current = current->siguiente;
                 }
                 fila = fila->abajo;
@@ -507,7 +506,7 @@ namespace MatrizRelacion
                 {
                     // Conectar el encabezado de la fila con el primer nodo de la fila
                     fs << "fila" << fila->usuario1->id << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
-                       << " [dir=none];" << endl;
+                       << " [dir=both, minlen=2];" << endl;
 
                     // Conectar los nodos horizontalmente
                     prev = current;
@@ -516,7 +515,7 @@ namespace MatrizRelacion
                     {
                         fs << "nodo" << prev->usuario1->id << "_" << prev->usuario2->id
                            << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
-                           << " [dir=none];" << endl;
+                           << " [dir=both, minlen=2];" << endl;
                         prev = current;
                         current = current->siguiente;
                     }
@@ -535,7 +534,7 @@ namespace MatrizRelacion
                 {
                     // Conectar el encabezado de la columna con el primer nodo de la columna
                     fs << "col" << columna->usuario2->id << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
-                       << " [dir=none];" << endl;
+                       << " [dir=both, minlen=2];" << endl;
 
                     // Conectar los nodos verticalmente
                     prev = current;
@@ -544,7 +543,7 @@ namespace MatrizRelacion
                     {
                         fs << "nodo" << prev->usuario1->id << "_" << prev->usuario2->id
                            << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
-                           << " [dir=none];" << endl;
+                           << " [dir=both, minlen=2];" << endl;
                         prev = current;
                         current = current->abajo;
                     }

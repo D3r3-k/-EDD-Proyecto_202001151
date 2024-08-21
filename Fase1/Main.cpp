@@ -23,18 +23,8 @@ int main()
     SetConsoleOutputCP(CP_UTF8);
 
     // Crear un usuario y añadirlo a la lista
-    ListaUsuarios::Usuario *admin = new ListaUsuarios::Usuario(0, "Administrador", "Local", "2001-09-15", "admin", "123", "admin");
+    ListaUsuarios::Usuario *admin = new ListaUsuarios::Usuario(0, "Administrador", "Lab EDD", "2001-09-15", "admin@gmail.com", "EDD2S2024", "admin");
     lista_usuarios.agregarUsuario(*admin);
-
-    ListaUsuarios::Usuario *user = new ListaUsuarios::Usuario(1, "Derek", "Local", "2000-09-16", "kai", "123", "user");
-    lista_usuarios.agregarUsuario(*user);
-    ListaUsuarios::Usuario *user2 = new ListaUsuarios::Usuario(2, "Kevin", "Local", "2000-08-07", "chanko", "123", "user");
-    lista_usuarios.agregarUsuario(*user2);
-
-    matriz_relacion.agregarRelacion(user, user2);
-    
-
     menuPrincipal();
-
     return 0;
 }

@@ -39,10 +39,16 @@ namespace Func
         string directorio;
         cout << "|========== [Carga de Usuarios] ==========|" << endl;
         cout << "|      Directorio del archivo Json        |" << endl;
+        cout << "|               c. Regresar               |" << endl;
         cout << "|=========================================|" << endl;
         cin.ignore();
         cout << "[-] ";
         getline(cin, directorio);
+
+        if (directorio == "c")
+        {
+            return;
+        }
 
         // Abrir el archivo JSON
         ifstream archivo(directorio);
@@ -102,10 +108,16 @@ namespace Func
         string directorio;
         cout << "|========== [Carga de Relaciones] ==========|" << endl;
         cout << "|       Directorio del archivo Json         |" << endl;
+        cout << "|               c. Regresar                 |" << endl;
         cout << "|===========================================|" << endl;
         cin.ignore();
         cout << "[-] ";
         getline(cin, directorio);
+
+        if (directorio == "c")
+        {
+            return;
+        }
 
         // Abrir el archivo JSON
         ifstream archivo(directorio);
@@ -177,10 +189,16 @@ namespace Func
         string directorio;
         cout << "|========== [Carga de Publicaciones] ==========|" << endl;
         cout << "|          Directorio del archivo Json         |" << endl;
+        cout << "|                  c. Regresar                 |" << endl;
         cout << "|==============================================|" << endl;
         cin.ignore();
         cout << "[-] ";
         getline(cin, directorio);
+
+        if (directorio == "c")
+        {
+            return;
+        }
 
         // Abrir el archivo JSON
         ifstream archivo(directorio);
@@ -378,6 +396,30 @@ namespace Func
         lista_usuarios.eliminarUsuario(usuario_logeado);
     }
 
+    void eliminarUsuarios()
+    {
+        for (int i = 0; i < lista_usuarios.getSize() + 1; i++)
+        {
+            ListaUsuarios::Usuario *usuario = lista_usuarios.buscarUsuario(i);
+            if (usuario == nullptr)
+            {
+                continue;
+            }
+            else
+            {
+                if (usuario->correo != usuario_logeado->correo)
+                {
+                    // Eliminar usuario de las solicitudes de los demás usuarios
+                    lista_usuarios.eliminarSolicitudes(usuario->correo);
+                    // Eliminar usuario de las publicaciones
+                    lista_publicaciones.eliminarPublicaciones(usuario);
+                    // Eliminar usuario de la matriz dispersa
+                    matriz_relacion.eliminarRelacionesUsuario(usuario->correo);
+                }
+            }
+        }
+    }
+
     void mostrarAmigos()
     {
         ListaUsuarios::ListaEnlazadaSimple amigos = matriz_relacion.obtenerAmigos(usuario_logeado->correo);
@@ -393,7 +435,7 @@ namespace Func
     {
         ListaUsuarios::ListaEnlazadaSimple amigos = matriz_relacion.obtenerAmigos(usuario_logeado->correo);
         MatrizRelacion::MatrizDispersa _matriz_temp;
-        for (int i = 0; i < amigos.getSize()+1; i++)
+        for (int i = 0; i < amigos.getSize() + 1; i++)
         {
             ListaUsuarios::Usuario *amigo = amigos.buscarUsuario(i);
             if (amigo == nullptr)
@@ -406,7 +448,6 @@ namespace Func
             }
         }
         _matriz_temp.graficarMatrizRelaciones("relacion_user", "pdf");
-        
     }
 
 };

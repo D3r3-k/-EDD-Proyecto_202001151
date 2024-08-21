@@ -7,12 +7,12 @@
     {
         "emisor": "juan.perez@example.com",
         "receptor": "ana.martinez@example.com",
-        "estado": "aceptada"
+        "estado": "pendiente"
     },
     {
         "emisor": "juan.perez@example.com",
         "receptor": "laura.ruiz@example.com",
-        "estado": "aceptada"
+        "estado": "pendiente"
     },
     {
         "emisor": "javier.hernandez@example.com",
@@ -22,7 +22,7 @@
     {
         "emisor": "javier.hernandez@example.com",
         "receptor": "sofia.fernandez@example.com",
-        "estado": "aceptada"
+        "estado": "pendiente"
     },
     {
         "emisor": "david.lopez@example.com",
@@ -32,7 +32,7 @@
     {
         "emisor": "andres.gonzalez@example.com",
         "receptor": "elena.diaz@example.com",
-        "estado": "aceptada"
+        "estado": "pendiente"
     },
     {
         "emisor": "raul.molina@example.com",
