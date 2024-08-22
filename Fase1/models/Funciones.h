@@ -142,6 +142,7 @@ namespace Func
                 string emisor = post["emisor"].get<string>();
                 string receptor = post["receptor"].get<string>();
                 string estado = post["estado"].get<string>();
+                transform(estado.begin(), estado.end(), estado.begin(), ::tolower);
 
                 ListaUsuarios::Usuario *usuario_emisor = lista_usuarios.buscarUsuario(emisor);
                 ListaUsuarios::Usuario *usuario_receptor = lista_usuarios.buscarUsuario(receptor);
