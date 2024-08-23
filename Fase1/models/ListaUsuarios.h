@@ -3,10 +3,10 @@
 
 #include <iostream>
 #include <string>
-#include <stack>
 #include <fstream>
 
 #include "ListaSolicitudes.h"
+#include "Pila.h"
 
 using namespace std;
 
@@ -23,7 +23,7 @@ namespace ListaUsuarios
         string contrasena;
         string rol;
         ListaSolicitudes::ListaCircularDoble solicitudesEnviadas; // Solicitudes enviadas -> Lista Circular Doble
-        stack<string> solicitudesRecibidas;                       // Solicitudes recibidas -> Pila
+        PilaSolicitudes::Pila solicitudesRecibidas;               // Solicitudes recibidas -> Pila
 
         // Constructor
         Usuario(const int &id,
@@ -53,7 +53,7 @@ namespace ListaUsuarios
         // Métodos de la pila
         bool solicitudRecibidaExiste(const string &correo)
         {
-            stack<string> tempPila = solicitudesRecibidas;
+            PilaSolicitudes::Pila tempPila = solicitudesRecibidas;
             while (!tempPila.empty())
             {
                 if (tempPila.top() == correo)
@@ -83,7 +83,7 @@ namespace ListaUsuarios
                 cout << "|                          No hay Solicitudes                                 |" << endl;
                 return;
             }
-            stack<string> tempPila = solicitudesRecibidas;
+            PilaSolicitudes::Pila tempPila = solicitudesRecibidas;
             while (!tempPila.empty())
             {
                 cout << "| " << tempPila.top() << endl;
@@ -166,7 +166,7 @@ namespace ListaUsuarios
                 // Solicitudes recibidas
                 fs << "subgraph cluster_1 {" << endl;
                 fs << "label=\"Solicitudes Recibidas\";" << endl;
-                stack<string> tempPila = solicitudesRecibidas;
+                PilaSolicitudes::Pila tempPila = solicitudesRecibidas;
                 int contador = 0;
                 while (!tempPila.empty())
                 {
@@ -429,8 +429,8 @@ namespace ListaUsuarios
             Usuario *receptor = buscarUsuario(correoReceptor);
             if (receptor != nullptr)
             {
-                stack<string> tempPila = receptor->solicitudesRecibidas;
-                stack<string> auxPila;
+                PilaSolicitudes::Pila tempPila = receptor->solicitudesRecibidas;
+                PilaSolicitudes::Pila auxPila;
                 while (!tempPila.empty())
                 {
                     if (tempPila.top() != correoEmisor)
@@ -456,8 +456,8 @@ namespace ListaUsuarios
                 temp->usuario.solicitudesEnviadas.eliminarSolicitud(correo);
 
                 // Procesar la pila de solicitudes recibidas
-                stack<string> pilaActual = temp->usuario.solicitudesRecibidas;
-                stack<string> nuevaPila;
+                PilaSolicitudes::Pila pilaActual = temp->usuario.solicitudesRecibidas;
+                PilaSolicitudes::Pila nuevaPila;
 
                 // Recorrer la pila original
                 while (!pilaActual.empty())
