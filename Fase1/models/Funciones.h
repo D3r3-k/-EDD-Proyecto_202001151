@@ -103,84 +103,91 @@ namespace Func
 
     void cargarRelaciones()
     {
-        system("cls");
-        int contador = 0;
-        string directorio;
-        cout << "|========== [Carga de Relaciones] ==========|" << endl;
-        cout << "|       Directorio del archivo Json         |" << endl;
-        cout << "|               c. Regresar                 |" << endl;
-        cout << "|===========================================|" << endl;
-        cin.ignore();
-        cout << "[-] ";
-        getline(cin, directorio);
-
-        if (directorio == "c")
+        try
         {
-            return;
-        }
+            system("cls");
+            int contador = 0;
+            string directorio;
+            cout << "|========== [Carga de Relaciones] ==========|" << endl;
+            cout << "|       Directorio del archivo Json         |" << endl;
+            cout << "|               c. Regresar                 |" << endl;
+            cout << "|===========================================|" << endl;
+            cin.ignore();
+            cout << "[-] ";
+            getline(cin, directorio);
 
-        // Abrir el archivo JSON
-        ifstream archivo(directorio);
-        if (!archivo.is_open())
-        {
-            cerr << "No se pudo abrir el archivo: " << directorio << endl;
+            if (directorio == "c")
+            {
+                return;
+            }
+
+            // Abrir el archivo JSON
+            ifstream archivo(directorio);
+            if (!archivo.is_open())
+            {
+                cerr << "No se pudo abrir el archivo: " << directorio << endl;
+                system("pause");
+                return;
+            }
+
+            // Parsear el archivo JSON
+            json post;
+            archivo >> post;
+
+            // Recorrer el JSON
+            for (const auto &post : post)
+            {
+                // Verificar si las claves existen
+                if (post.contains("emisor") && post.contains("receptor") && post.contains("estado"))
+                {
+
+                    string emisor = post["emisor"].get<string>();
+                    string receptor = post["receptor"].get<string>();
+                    string estado = post["estado"].get<string>();
+                    transform(estado.begin(), estado.end(), estado.begin(), ::tolower);
+
+                    ListaUsuarios::Usuario *usuario_emisor = lista_usuarios.buscarUsuario(emisor);
+                    ListaUsuarios::Usuario *usuario_receptor = lista_usuarios.buscarUsuario(receptor);
+                    // verificar si los usuarios existen y especificar cual es el emisor y cual es el receptor
+                    if (usuario_emisor == nullptr)
+                    {
+                        cerr << "El usuario emisor no existe" << endl;
+                        continue;
+                    }
+                    if (usuario_receptor == nullptr)
+                    {
+                        cerr << "El usuario receptor no existe" << endl;
+                        continue;
+                    }
+                    // si el estado convertido en minusculas es pendiente
+                    if (estado == "pendiente")
+                    {
+                        // al usuario emisor, en la lista de solicitudes se agregara el correo del usuario receptor
+                        lista_usuarios.agregarSolicitudEnviada(usuario_emisor->correo, usuario_receptor->correo);
+                        // al usuario receptor, en la pilas de solicitudes se agregara el correo del usuario emisor
+                        lista_usuarios.agregarSolicitudRecibida(usuario_emisor->correo, usuario_receptor->correo);
+                    }
+                    else if (estado == "aceptada" || estado == "aceptado")
+                    {
+                        // se crea la relacion de amistad entre los dos usuarios en la matriz dispersa
+                        matriz_relacion.agregarRelacion(usuario_emisor, usuario_receptor);
+                    }
+
+                    contador++;
+                }
+                else
+                {
+                    cerr << "Faltan campos en el JSON" << endl;
+                }
+            }
+            archivo.close();
+            cout << "[+] " << contador << " Relaciones cargadas correctamente" << endl;
             system("pause");
-            return;
         }
-
-        // Parsear el archivo JSON
-        json post;
-        archivo >> post;
-
-        // Recorrer el JSON
-        for (const auto &post : post)
+        catch (const std::exception &e)
         {
-            // Verificar si las claves existen
-            if (post.contains("emisor") && post.contains("receptor") && post.contains("estado"))
-            {
-
-                string emisor = post["emisor"].get<string>();
-                string receptor = post["receptor"].get<string>();
-                string estado = post["estado"].get<string>();
-                transform(estado.begin(), estado.end(), estado.begin(), ::tolower);
-
-                ListaUsuarios::Usuario *usuario_emisor = lista_usuarios.buscarUsuario(emisor);
-                ListaUsuarios::Usuario *usuario_receptor = lista_usuarios.buscarUsuario(receptor);
-                // verificar si los usuarios existen y especificar cual es el emisor y cual es el receptor
-                if (usuario_emisor == nullptr)
-                {
-                    cerr << "El usuario emisor no existe" << endl;
-                    continue;
-                }
-                if (usuario_receptor == nullptr)
-                {
-                    cerr << "El usuario receptor no existe" << endl;
-                    continue;
-                }
-                // si el estado convertido en minusculas es pendiente
-                if (estado == "pendiente")
-                {
-                    // al usuario emisor, en la lista de solicitudes se agregara el correo del usuario receptor
-                    lista_usuarios.agregarSolicitudEnviada(usuario_emisor->correo, usuario_receptor->correo);
-                    // al usuario receptor, en la pilas de solicitudes se agregara el correo del usuario emisor
-                    lista_usuarios.agregarSolicitudRecibida(usuario_emisor->correo, usuario_receptor->correo);
-                }
-                else if (estado == "aceptada" || estado == "aceptado")
-                {
-                    // se crea la relacion de amistad entre los dos usuarios en la matriz dispersa
-                    matriz_relacion.agregarRelacion(usuario_emisor, usuario_receptor);
-                }
-
-                contador++;
-            }
-            else
-            {
-                cerr << "Faltan campos en el JSON" << endl;
-            }
+            std::cerr << e.what() << '\n';
         }
-        archivo.close();
-        cout << "[+] " << contador << " Relaciones cargadas correctamente" << endl;
-        system("pause");
     }
 
     void cargarPublicaciones()
@@ -432,6 +439,7 @@ namespace Func
         ListaPublicacionesFeed::ListaCircularDoble lista_publicaciones_feed = Func::cargarPublicacionesFeed();
         lista_publicaciones_feed.graficarPublicacionesFeed("publicaciones_feed_user", "pdf");
     }
+
     void graficarMiRelacion()
     {
         ListaUsuarios::ListaEnlazadaSimple amigos = matriz_relacion.obtenerAmigos(usuario_logeado->correo);

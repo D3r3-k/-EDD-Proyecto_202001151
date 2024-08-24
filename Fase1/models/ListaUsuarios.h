@@ -53,16 +53,7 @@ namespace ListaUsuarios
         // Métodos de la pila
         bool solicitudRecibidaExiste(const string &correo)
         {
-            PilaSolicitudes::Pila tempPila = solicitudesRecibidas;
-            while (!tempPila.empty())
-            {
-                if (tempPila.top() == correo)
-                {
-                    return true;
-                }
-                tempPila.pop();
-            }
-            return false;
+            return solicitudesRecibidas.existeCorreo(correo);
         }
         void agregarSolicitudRecibida(const string &correo)
         {

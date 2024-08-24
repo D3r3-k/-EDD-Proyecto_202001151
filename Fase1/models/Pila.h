@@ -110,6 +110,25 @@ namespace PilaSolicitudes
                 aux = aux->siguiente;
             }
         }
+        // verificar si existe un correo en la pila
+        bool existeCorreo(string correo)
+        {
+            // nodo auxiliar
+            Nodo *aux = cima;
+            // recorrer la pila
+            while (aux != NULL)
+            {
+                // si el correo es igual al correo del nodo
+                if (aux->solicitud == correo)
+                {
+                    return true;
+                }
+                // avanzar al siguiente nodo
+                aux = aux->siguiente;
+            }
+            return false;
+        }
+        
     };
 }
 
