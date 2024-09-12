@@ -352,6 +352,7 @@ namespace MatrizRelacion
             }
             return false;
         }
+        
         ListaUsuarios::ListaEnlazadaSimple obtenerAmigos(string correo)
         {
             // obtener una lista simple de los amigos del usuario con el correo dado, siendo una matriz, se recorre la fila del usuario y se obtienen los amigos de este
