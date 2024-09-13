@@ -42,6 +42,7 @@ public:
     void imprimir();
     void graficar();
     ListaEnlazada::ListaEnlazada<Structs::Usuario> obtenerAmigos(string correo);
+    bool estaVacio();
 };
 
 #endif // MATRIZRELACION_H

@@ -1,0 +1,79 @@
+[
+  {
+      "nombres": "Carlos",
+      "apellidos": "Gomez",
+      "fecha_de_nacimiento": "1990/05/12",
+      "correo": "carlos.gomez@example.com",
+      "contraseña": "1234"
+  },
+  {
+      "nombres": "Maria",
+      "apellidos": "Lopez",
+      "fecha_de_nacimiento": "1985/08/23",
+      "correo": "maria.lopez@example.com",
+      "contraseña": "abcd"
+  },
+  {
+      "nombres": "Juan",
+      "apellidos": "Martinez",
+      "fecha_de_nacimiento": "1992/02/17",
+      "correo": "juan.martinez@example.com",
+      "contraseña": "5678"
+  },
+  {
+      "nombres": "Ana",
+      "apellidos": "Hernandez",
+      "fecha_de_nacimiento": "1995/11/30",
+      "correo": "ana.hernandez@example.com",
+      "contraseña": "efgh"
+  },
+  {
+      "nombres": "Luis",
+      "apellidos": "Perez",
+      "fecha_de_nacimiento": "1988/04/09",
+      "correo": "luis.perez@example.com",
+      "contraseña": "91011"
+  },
+  {
+      "nombres": "Laura",
+      "apellidos": "Ramirez",
+      "fecha_de_nacimiento": "1993/09/05",
+      "correo": "laura.ramirez@example.com",
+      "contraseña": "ijkl"
+  },
+  {
+      "nombres": "Jose",
+      "apellidos": "Garcia",
+      "fecha_de_nacimiento": "1991/07/14",
+      "correo": "jose.garcia@example.com",
+      "contraseña": "1213"
+  },
+  {
+      "nombres": "Elena",
+      "apellidos": "Torres",
+      "fecha_de_nacimiento": "1987/12/22",
+      "correo": "elena.torres@example.com",
+      "contraseña": "mnop"
+  },
+  {
+      "nombres": "Miguel",
+      "apellidos": "Rodriguez",
+      "fecha_de_nacimiento": "1989/03/11",
+      "correo": "miguel.rodriguez@example.com",
+      "contraseña": "1415"
+  },
+  {
+      "nombres": "Sofia",
+      "apellidos": "Gonzalez",
+      "fecha_de_nacimiento": "1994/06/28",
+      "correo": "sofia.gonzalez@example.com",
+      "contraseña": "qrst"
+  },
+  {
+      "nombres": "Calificacion",
+      "apellidos": "Fase1",
+      "fecha_de_nacimiento": "2000/01/01",
+      "correo": "calificacion.fase1@example.com",
+      "contraseña": "123"
+  }
+]

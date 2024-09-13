@@ -40,6 +40,8 @@ private slots:
 
     void on_btn_generar_reporte_clicked();
 
+    void on_btnEliminarCuenta_clicked();
+
 private:
     Ui::UserWindow *ui;
 };

@@ -16,7 +16,7 @@ extern QTableWidget* userTablaRecibidas;
 // TODO: Metodos Login
 void IniciarSesion(string email, string password);
 // TODO: Metodos Admin
-void ActualizarTabla(QTableWidget* table, ListaEnlazada::ListaEnlazada<Structs::Usuario>& lista);
+void ActualizarTablaUsuariosAdmin(QTableWidget* table,ListaEnlazada::ListaEnlazada<Structs::Usuario> &lista);
 void CargarUsuarios(string directorio);
 void CargarSolicitudes(string directorio);
 void CargarPublicaciones(string directorio);
@@ -24,12 +24,14 @@ void CargarPublicaciones(string directorio);
 void ActualizarTablaUsuarios(QTableWidget* table);
 void ActualizarTablaRecibidos(QTableWidget* table);
 void ActualizarTablaEnviados(QTableWidget* table);
+void EliminarMiCuenta();
+void EliminarCuenta(string correo);
 
 
 // TODO: Metodos extras
-void enviarSolicitud(Structs::Usuario *emisor, Structs::Usuario *receptor);
 ListaEnlazada::ListaEnlazada<Structs::Usuario> obtenerListaUsuariosLogeado();
 void ActualizarTablas();
+void ActualizarTablaAdmin(int opcion);
 }
 
 

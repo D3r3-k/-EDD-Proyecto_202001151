@@ -16,6 +16,8 @@ AdminWindow::AdminWindow(QWidget *parent)
     , ui(new Ui::AdminWindow)
 {
     ui->setupUi(this);
+    Func::adminTablaUsuarios = ui->tableUsuarios;
+
     // MenuBar
     QString user = QString::fromStdString(usuario_logeado->nombres);
     ui->menuBienvenido->setTitle("Bienvenido: "+user);
@@ -31,8 +33,7 @@ AdminWindow::AdminWindow(QWidget *parent)
     ui->tableUsuarios->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     ui->tableUsuarios->verticalHeader()->setStretchLastSection(false);
     ui->menubar->setStyleSheet("QMenu { min-width: 120px; }");
-    ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.InOrder();
-    Func::ActualizarTabla(ui->tableUsuarios,temp);
+    Func::ActualizarTablaAdmin(0);
 }
 
 AdminWindow::~AdminWindow()
@@ -80,8 +81,7 @@ void AdminWindow::on_btnSubirUsuarios_clicked()
         // Utiliza el path del archivo seleccionado
         Func::CargarUsuarios(archivoPath.toStdString());
         // Aquí puedes agregar el código para procesar el archivo .json
-        ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.InOrder();
-        Func::ActualizarTabla(ui->tableUsuarios,temp);
+        Func::ActualizarTablaAdmin(0);
     }
 }
 
@@ -108,14 +108,11 @@ void AdminWindow::on_btnOrdenar_clicked()
     ui->inputBuscar->setText("");
     int ordenarPor= ui->comboBoxOrdenar->currentIndex();
     if (ordenarPor == 0) {
-        ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.InOrder();
-        Func::ActualizarTabla(ui->tableUsuarios,temp);
+        Func::ActualizarTablaAdmin(0);
     }else if (ordenarPor==1) {
-        ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.PreOrder();
-        Func::ActualizarTabla(ui->tableUsuarios,temp);
+        Func::ActualizarTablaAdmin(1);
     }else if (ordenarPor==2) {
-        ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.PostOrder();
-        Func::ActualizarTabla(ui->tableUsuarios,temp);
+        Func::ActualizarTablaAdmin(2);
     }
 }
 
@@ -145,11 +142,18 @@ void AdminWindow::on_inputBuscar_returnPressed()
 void AdminWindow::on_btnBuscar_clicked()
 {
     QString correo = ui->inputBuscar->text();
-    Structs::Usuario *tempUser = lista_usuarios.buscar(correo.toStdString());
-    if (tempUser) {
-        ListaEnlazada::ListaEnlazada<Structs::Usuario> temp;
-        temp.insertar(*tempUser);
-        Func::ActualizarTabla(ui->tableUsuarios,temp);
+    if (correo.isEmpty()) {
+        on_btnOrdenar_clicked();
+    }else{
+        Structs::Usuario *tempUser = lista_usuarios.buscar(correo.toStdString());
+        if (tempUser) {
+            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp;
+            temp.insertar(*tempUser);
+            Func::ActualizarTablaUsuariosAdmin(ui->tableUsuarios,temp);
+        }else{
+            ui->tableUsuarios->setRowCount(0);
+            ui->tableUsuarios->clear();
+        }
     }
 }
 

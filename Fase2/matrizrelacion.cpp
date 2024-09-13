@@ -326,6 +326,12 @@ bool MatrizRelacion::verificarRelacion(string correo1, string correo2)
 
 void MatrizRelacion::graficar()
 {
+    // Ver si la matriz tiene elementos
+    if (!cabeza)
+    {
+        QMessageBox::warning(nullptr,"Graficar Relacion","No hay ninguna relacion actualmente.");
+        return;
+    }
     std::string dotPath = "matriz_relacion.dot";
     std::string imagePath = "matriz_relacion.png";
 

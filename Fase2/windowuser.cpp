@@ -176,3 +176,12 @@ void UserWindow::on_btn_generar_reporte_clicked()
     relaciones_amistad.graficar();
 }
 
+
+void UserWindow::on_btnEliminarCuenta_clicked()
+{
+    Func::EliminarMiCuenta();
+    MainWindow *login = new MainWindow;
+    login->show();
+    this->close();
+}
+

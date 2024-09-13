@@ -50,6 +50,30 @@ bool ArbolAVL::modificar(const std::string &correo, std::string nombres, std::st
     }
     return false;
 }
+
+// Método para eliminar todas las solicitudes de amistad de un usuario, tanto enviadas como recibidas
+bool ArbolAVL::eliminarSolicitudes(const std::string &correo)
+{
+    Nodo *nodo = buscarNodo(raiz, correo);
+    if (nodo != nullptr)
+    {
+        ListaEnlazada::ListaEnlazada<Structs::Usuario> solicitudesEnviadas = nodo->usuario.solicitudesEnviadas;
+        ListaEnlazada::ListaEnlazada<Structs::Usuario> solicitudesRecibidas = nodo->usuario.solicitudesRecibidas;
+        for (int i = 0; i < solicitudesEnviadas.size(); ++i)
+        {
+            Structs::Usuario *usuario = solicitudesEnviadas.obtener(i);
+            cancelarSolicitud(correo, usuario->correo);
+        }
+        for (int i = 0; i < solicitudesRecibidas.size(); ++i)
+        {
+            Structs::Usuario *usuario = solicitudesRecibidas.obtener(i);
+            rechazarSolicitud(correo, usuario->correo);
+        }
+        return true;
+    }
+    return false;
+}
+
 // Método para enviar una solicitud de amistad
 bool ArbolAVL::enviarSolicitud(const std::string &correoEmisor, const std::string &correoReceptor)
 {
@@ -90,6 +114,7 @@ bool ArbolAVL::rechazarSolicitud(const std::string &correoEmisor, const std::str
     }
     return false;
 }
+
 // Método para aceptar una solicitud de amistad
 bool ArbolAVL::aceptarSolicitud(const std::string &correoEmisor, const std::string &correoReceptor)
 {
@@ -104,7 +129,6 @@ bool ArbolAVL::aceptarSolicitud(const std::string &correoEmisor, const std::stri
     }
     return false;
 }
-
 
 // Método para buscar un usuario en el árbol AVL
 Structs::Usuario *ArbolAVL::buscar(const std::string &correo)
@@ -459,6 +483,7 @@ void ArbolAVL::graficarNodo(Nodo *nodo, std::ofstream &archivoDot)
 {
     if (nodo == nullptr)
     {
+        QMessageBox::warning(nullptr,"Graficar ArbolAVL","No hay usuarios.");
         return;
     }
 

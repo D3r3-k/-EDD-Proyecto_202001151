@@ -13,12 +13,11 @@
 
 namespace Func
 {
-// globales
-QTableWidget* adminTablaUsuarios = nullptr;
-QTableWidget* userTablaUsuarios = nullptr;
-QTableWidget* userTablaEnviadas = nullptr;
-QTableWidget* userTablaRecibidas = nullptr;
-
+    // globales
+    QTableWidget *adminTablaUsuarios = nullptr;
+    QTableWidget *userTablaUsuarios = nullptr;
+    QTableWidget *userTablaEnviadas = nullptr;
+    QTableWidget *userTablaRecibidas = nullptr;
 
     // TODO: metodos carga masiva
     void CargarUsuarios(string directorio)
@@ -33,6 +32,7 @@ QTableWidget* userTablaRecibidas = nullptr;
             }
 
             // Parsear el archivo JSON
+            int contador = 0;
             int repetidos = 0;
             int conerror = 0;
             nlohmann::json usuarios;
@@ -58,6 +58,7 @@ QTableWidget* userTablaRecibidas = nullptr;
                         int id = lista_usuarios.obtenerId() + 1;
                         Structs::Usuario nuevoUsuario(id, nombres, apellidos, fechaNacimiento, correo, contrasena);
                         lista_usuarios.insertar(nuevoUsuario);
+                        contador++;
                     }
                     else
                     {
@@ -71,9 +72,10 @@ QTableWidget* userTablaRecibidas = nullptr;
             }
             archivo.close();
 
+            QString stdcontador = QString::number(contador);
             QString stdrepetidos = QString::number(repetidos);
             QString stderrores = QString::number(conerror);
-            QMessageBox::information(nullptr, "Información", "Usuarios repetidos: " + stdrepetidos + "\nErrores: " + stderrores);
+            QMessageBox::information(nullptr, "Información", "Usuarios agregados: "+ stdcontador + "\nUsuarios repetidos: " + stdrepetidos + "\nErrores: " + stderrores);
         }
         catch (const ifstream::failure &e)
         {
@@ -141,7 +143,7 @@ QTableWidget* userTablaRecibidas = nullptr;
                     if (estado == "pendiente")
                     {
                         // Al usuario emisor, en la lista de solicitudes se agregará el correo del usuario receptor
-                        lista_usuarios.enviarSolicitud(emisor,receptor);
+                        lista_usuarios.enviarSolicitud(emisor, receptor);
                     }
                     else if (estado == "aceptada" || estado == "aceptado")
                     {
@@ -196,7 +198,7 @@ QTableWidget* userTablaRecibidas = nullptr;
     }
 
     // TODO: Metodos Admin
-    void ActualizarTabla(QTableWidget *table, ListaEnlazada::ListaEnlazada<Structs::Usuario> &lista)
+    void ActualizarTablaUsuariosAdmin(QTableWidget *table, ListaEnlazada::ListaEnlazada<Structs::Usuario> &lista)
     {
         // Limpiar la tabla antes de agregar nuevos elementos
         table->clearContents();
@@ -231,11 +233,15 @@ QTableWidget* userTablaRecibidas = nullptr;
                 QObject::connect(modificarButton, &QPushButton::clicked, [correo, row]()
                                  { qDebug() << "Modificar fila:" << row << " con Correo: " << correo; });
 
-                QObject::connect(eliminarButton, &QPushButton::clicked, [correo, row, table]()
-                                 {
-                lista_usuarios.eliminar(correo);
-                ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.InOrder();
-                ActualizarTabla(table,temp); });
+                QObject::connect(eliminarButton, &QPushButton::clicked, [correo, row, table](){
+                    if (usuario_logeado->correo == correo) {
+                        QMessageBox::warning(nullptr,"Eliminar usuario","No se puede eliminar el usuario logeado.");
+                        return;
+                    }else{
+                        Func::EliminarCuenta(correo);
+                        Func::ActualizarTablaAdmin(0);
+                    }
+                });
 
                 // Crear contenedores de botones separados para cada columna
                 QWidget *modifyButtonContainer = new QWidget();
@@ -296,10 +302,10 @@ QTableWidget* userTablaRecibidas = nullptr;
                 QPushButton *enviarButton = new QPushButton("Enviar Solicitud");
 
                 // Conectar los botones a sus slots
-                QObject::connect(enviarButton, &QPushButton::clicked, [correo, row, table](){
+                QObject::connect(enviarButton, &QPushButton::clicked, [correo, row, table]()
+                                 {
                     lista_usuarios.enviarSolicitud(usuario_logeado->correo,correo);
-                    Func::ActualizarTablas();
-                });
+                    Func::ActualizarTablas(); });
 
                 // Crear contenedores de botones separados para cada columna
                 QWidget *sendButtonContainer = new QWidget();
@@ -348,16 +354,16 @@ QTableWidget* userTablaRecibidas = nullptr;
                 QPushButton *declineButton = new QPushButton("Rechazar");
 
                 // Conectar el botón aceptar a su slot con el correo y la fila capturados
-                QObject::connect(aceptarButton, &QPushButton::clicked, [correo, row](){
+                QObject::connect(aceptarButton, &QPushButton::clicked, [correo, row]()
+                                 {
                     lista_usuarios.aceptarSolicitud(usuario_logeado->correo, correo);
-                    Func::ActualizarTablas();
-                });
+                    Func::ActualizarTablas(); });
 
                 // Conectar el botón rechazar a su slot con el correo y la fila capturados
-                QObject::connect(declineButton, &QPushButton::clicked, [correo, row](){
+                QObject::connect(declineButton, &QPushButton::clicked, [correo, row]()
+                                 {
                     lista_usuarios.rechazarSolicitud(usuario_logeado->correo,correo);
-                    Func::ActualizarTablas();
-                });
+                    Func::ActualizarTablas(); });
 
                 // Crear contenedores de botones para colocarlos en la tabla
                 QWidget *acceptButtonContainer = new QWidget();
@@ -414,11 +420,10 @@ QTableWidget* userTablaRecibidas = nullptr;
                 QPushButton *cancelButton = new QPushButton("Cancelar");
 
                 // Conectar el botón aceptar a su slot con el correo y la fila capturados
-                QObject::connect(cancelButton, &QPushButton::clicked, [correo, row,table]()
-                {
+                QObject::connect(cancelButton, &QPushButton::clicked, [correo, row, table]()
+                                 {
                     lista_usuarios.cancelarSolicitud(usuario_logeado->correo,correo);
-                    Func::ActualizarTablas();
-                });
+                    Func::ActualizarTablas(); });
 
                 // Crear contenedores de botones para colocarlos en la tabla
                 QWidget *cancelButtonContainer = new QWidget();
@@ -437,6 +442,26 @@ QTableWidget* userTablaRecibidas = nullptr;
         }
     }
 
+    void EliminarMiCuenta()
+    {
+        // Eliminar todas las relaciones de amistad del usuario logueado
+        relaciones_amistad.eliminarRelacionesUsuario(usuario_logeado->correo);
+        // Eliminar las solicitudes enviadas y recibidas del usuario logueado
+        lista_usuarios.eliminarSolicitudes(usuario_logeado->correo);
+        // Eliminar al usuario logueado de la lista de usuarios
+        lista_usuarios.eliminar(usuario_logeado->correo);
+        // Desloguear al usuario
+        usuario_logeado = nullptr;
+    }
+    void EliminarCuenta(string correo)
+    {
+        // Eliminar todas las relaciones de amistad del usuario
+        relaciones_amistad.eliminarRelacionesUsuario(correo);
+        // Eliminar las solicitudes enviadas y recibidas del usuario
+        lista_usuarios.eliminarSolicitudes(correo);
+        // Eliminar al usuario de la lista de usuarios
+        lista_usuarios.eliminar(correo);
+    }
     // TODO: Metodos Extras
 
     ListaEnlazada::ListaEnlazada<Structs::Usuario> obtenerListaUsuariosLogeado()
@@ -455,7 +480,7 @@ QTableWidget* userTablaRecibidas = nullptr;
                 if (u->correo == usuario_logeado->correo)
                 {
                     lista.eliminar(i);
-                    --i;  // Ajustar el índice después de la eliminación
+                    --i; // Ajustar el índice después de la eliminación
                     continue;
                 }
 
@@ -474,7 +499,7 @@ QTableWidget* userTablaRecibidas = nullptr;
                 if (esAmigo)
                 {
                     lista.eliminar(i);
-                    --i;  // Ajustar el índice después de la eliminación
+                    --i; // Ajustar el índice después de la eliminación
                     continue;
                 }
 
@@ -493,7 +518,7 @@ QTableWidget* userTablaRecibidas = nullptr;
                 if (solicitudEnviada)
                 {
                     lista.eliminar(i);
-                    --i;  // Ajustar el índice después de la eliminación
+                    --i; // Ajustar el índice después de la eliminación
                     continue;
                 }
 
@@ -512,16 +537,31 @@ QTableWidget* userTablaRecibidas = nullptr;
                 if (solicitudRecibida)
                 {
                     lista.eliminar(i);
-                    --i;  // Ajustar el índice después de la eliminación
+                    --i; // Ajustar el índice después de la eliminación
                 }
             }
         }
 
         return lista;
     }
-    void ActualizarTablas(){
+    
+    void ActualizarTablas()
+    {
         Func::ActualizarTablaUsuarios(userTablaUsuarios);
         Func::ActualizarTablaEnviados(userTablaEnviadas);
         Func::ActualizarTablaRecibidos(userTablaRecibidas);
+    }
+
+    void ActualizarTablaAdmin(int opcion){
+        if (opcion == 0) {
+            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.InOrder();
+            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios,temp);
+        }else if (opcion==1) {
+            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.PreOrder();
+            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios,temp);
+        }else if (opcion==2) {
+            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.PostOrder();
+            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios,temp);
+        }
     }
 }
