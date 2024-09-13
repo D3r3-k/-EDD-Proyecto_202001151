@@ -1,7 +1,10 @@
 #include "matrizrelacion.h"
 #include <QDebug>
 #include <QString>
+#include <QMessageBox>
 #include <iomanip>
+#include <fstream>
+#include <cstdlib> // Para system()
 
 // Destructor
 MatrizRelacion::~MatrizRelacion() {
@@ -320,6 +323,170 @@ bool MatrizRelacion::verificarRelacion(string correo1, string correo2)
     }
     return false;
 }
+
+void MatrizRelacion::graficar()
+{
+    std::string dotPath = "matriz_relacion.dot";
+    std::string imagePath = "matriz_relacion.png";
+
+    // Crear el archivo .dot
+    std::ofstream archivoDot(dotPath);
+
+    if (!archivoDot.is_open())
+    {
+        QMessageBox::information(nullptr, "Error", "No se pudo abrir el archivo para escribir.");
+        return;
+    }
+
+    // Escribir el encabezado del archivo
+    archivoDot << "digraph G {" << std::endl;
+    archivoDot << "node [shape=box];" << std::endl;
+    archivoDot << "rankdir=TB;" << std::endl;
+    archivoDot << "label=\"Matriz de Relaciones de Usuarios\" fontsize=20 fontname=\"Arial\";" << std::endl;
+
+    // Definir encabezados de filas
+    archivoDot << "// Definir encabezados de filas" << std::endl;
+    Nodo *fila = cabeza->abajo;
+    while (fila)
+    {
+        archivoDot << "fila" << fila->usuario1->id << " [label=\"" << fila->usuario1->nombres << "\", group=1];" << std::endl;
+        fila = fila->abajo;
+    }
+
+    // Definir encabezados de columnas
+    archivoDot << "// Definir encabezados de columnas" << std::endl;
+    Nodo *columna = cabeza->siguiente;
+    while (columna)
+    {
+        archivoDot << "col" << columna->usuario2->id << " [label=\"" << columna->usuario2->nombres << "\", group=" << columna->usuario2->id + 1 << "];" << std::endl;
+        columna = columna->siguiente;
+    }
+
+    // Mantener los encabezados de las columnas en el mismo rango horizontal
+    archivoDot << "{ rank=same;";
+    columna = cabeza->siguiente;
+    while (columna)
+    {
+        archivoDot << " col" << columna->usuario2->id << ";";
+        columna = columna->siguiente;
+    }
+    archivoDot << " }" << std::endl;
+
+    // Definir nodos en las coordenadas especificadas
+    archivoDot << "// Definir nodos en las coordenadas especificadas" << std::endl;
+    fila = cabeza->abajo;
+    while (fila)
+    {
+        Nodo *current = fila->siguiente;
+        while (current)
+        {
+            archivoDot << "nodo" << current->usuario1->id << "_" << current->usuario2->id
+                       << " [label=\"\", color=green, style=filled, group=" << current->usuario2->id + 1 << "];" << std::endl;
+            current = current->siguiente;
+        }
+        fila = fila->abajo;
+    }
+
+    // Conectar encabezados de filas con nodos y los nodos entre ellos horizontalmente
+    archivoDot << "// Conectar encabezados de filas con nodos y los nodos entre ellos horizontalmente" << std::endl;
+    fila = cabeza->abajo;
+    while (fila)
+    {
+        Nodo *current = fila->siguiente;
+        Nodo *prev = nullptr;
+        if (current)
+        {
+            // Conectar el encabezado de la fila con el primer nodo de la fila
+            archivoDot << "fila" << fila->usuario1->id << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
+                       << " [dir=both, minlen=2];" << std::endl;
+
+            // Conectar los nodos horizontalmente
+            prev = current;
+            current = current->siguiente;
+            while (current)
+            {
+                archivoDot << "nodo" << prev->usuario1->id << "_" << prev->usuario2->id
+                           << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
+                           << " [dir=both, minlen=2];" << std::endl;
+                prev = current;
+                current = current->siguiente;
+            }
+        }
+        fila = fila->abajo;
+    }
+
+    // Conectar encabezados de columnas con nodos y los nodos entre ellos verticalmente
+    archivoDot << "// Conectar encabezados de columnas con nodos y los nodos entre ellos verticalmente" << std::endl;
+    columna = cabeza->siguiente;
+    while (columna)
+    {
+        Nodo *current = columna->abajo;
+        Nodo *prev = nullptr;
+        if (current)
+        {
+            // Conectar el encabezado de la columna con el primer nodo de la columna
+            archivoDot << "col" << columna->usuario2->id << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
+                       << " [dir=both, minlen=2];" << std::endl;
+
+            // Conectar los nodos verticalmente
+            prev = current;
+            current = current->abajo;
+            while (current)
+            {
+                archivoDot << "nodo" << prev->usuario1->id << "_" << prev->usuario2->id
+                           << " -> nodo" << current->usuario1->id << "_" << current->usuario2->id
+                           << " [dir=both, minlen=2];" << std::endl;
+                prev = current;
+                current = current->abajo;
+            }
+        }
+        columna = columna->siguiente;
+    }
+
+    // Mantener los encabezados de filas alineados verticalmente
+    archivoDot << "// Mantener los encabezados de filas alineados verticalmente" << std::endl;
+    fila = cabeza->abajo;
+    while (fila && fila->abajo)
+    {
+        archivoDot << "fila" << fila->usuario1->id << " -> fila" << fila->abajo->usuario1->id
+                   << " [style=invis];" << std::endl;
+        fila = fila->abajo;
+    }
+
+    // Mantener los nodos de la misma fila en el mismo rango horizontal
+    archivoDot << "// Mantener los nodos de la misma fila en el mismo rango horizontal" << std::endl;
+    fila = cabeza->abajo;
+    while (fila)
+    {
+        Nodo *current = fila->siguiente;
+        while (current)
+        {
+            archivoDot << "{ rank=same; fila" << fila->usuario1->id << "; nodo" << current->usuario1->id
+                       << "_" << current->usuario2->id << " }" << std::endl;
+            current = current->siguiente;
+        }
+        fila = fila->abajo;
+    }
+
+    // Conectar las columnas entre sí de forma invisible para mantener el orden
+    archivoDot << "// Conectar las columnas entre sí de forma invisible para mantener el orden" << std::endl;
+    columna = cabeza->siguiente;
+    while (columna && columna->siguiente)
+    {
+        archivoDot << "col" << columna->usuario2->id << " -> col" << columna->siguiente->usuario2->id
+                   << " [style=invis];" << std::endl;
+        columna = columna->siguiente;
+    }
+
+    // Cerrar el archivo
+    archivoDot << "}" << std::endl;
+    archivoDot.close();
+
+    // Generar la imagen con el comando dot
+    std::string cmd = "dot -Tpng " + dotPath + " -o " + imagePath;
+    system(cmd.c_str());
+}
+
 
 // Función para obtener la lista de amigos de un usuario
 ListaEnlazada::ListaEnlazada<Structs::Usuario> MatrizRelacion::obtenerAmigos(string correo)

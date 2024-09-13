@@ -1,4 +1,5 @@
 #include "windowuser.h"
+#include "funciones.h"
 #include "globales.h"
 #include "windowadmin.h"
 #include "windowmain.h"
@@ -10,6 +11,10 @@ UserWindow::UserWindow(QWidget *parent)
     , ui(new Ui::UserWindow)
 {
     ui->setupUi(this);
+    Func::userTablaUsuarios = ui->tableUsuarios;
+    Func::userTablaEnviadas = ui->tableSolicitudesEnv;
+    Func::userTablaRecibidas = ui->tableSolicitudesRec;
+
     // MenuBar
     ui->menubar->setStyleSheet("QMenu { min-width: 120px; }");
     if(usuario_logeado->rol=="user"){
@@ -24,6 +29,7 @@ UserWindow::UserWindow(QWidget *parent)
     ui->tableUsuarios->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableSolicitudesRec->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableSolicitudesEnv->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    Func::ActualizarTablas();
 
     // Tab Perfil
     ui->nombresLogLineEdit->setText(QString::fromStdString(usuario_logeado->nombres));
@@ -60,6 +66,10 @@ void UserWindow::on_btnBuscar_clicked()
         ui->fechaDeNacimientoLineEdit->setText(QString::fromStdString(temp->fechaNacimiento));
     }else{
         QMessageBox::information(nullptr, "Busqueda", "Usuario no encontrado");
+        ui->nombresLineEdit->setText("");
+        ui->apellidosLineEdit->setText("");
+        ui->correoLineEdit->setText("");
+        ui->fechaDeNacimientoLineEdit->setText("");
     }
 
 }
@@ -154,5 +164,15 @@ void UserWindow::on_fechaDeNacimientoLogLineEdit_returnPressed()
 void UserWindow::on_contrasenaLogLineEdit_returnPressed()
 {
     on_guardarModificacionButton_clicked();
+}
+
+
+void ActualizarTablas(){
+
+}
+
+void UserWindow::on_btn_generar_reporte_clicked()
+{
+    relaciones_amistad.graficar();
 }
 

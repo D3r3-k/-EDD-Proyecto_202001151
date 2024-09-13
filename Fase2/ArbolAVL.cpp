@@ -50,6 +50,61 @@ bool ArbolAVL::modificar(const std::string &correo, std::string nombres, std::st
     }
     return false;
 }
+// Método para enviar una solicitud de amistad
+bool ArbolAVL::enviarSolicitud(const std::string &correoEmisor, const std::string &correoReceptor)
+{
+    Nodo *nodoEmisor = buscarNodo(raiz, correoEmisor);
+    Nodo *nodoReceptor = buscarNodo(raiz, correoReceptor);
+    if (nodoEmisor != nullptr && nodoReceptor != nullptr)
+    {
+        nodoEmisor->usuario.enviarSolicitud(nodoReceptor->usuario);
+        nodoReceptor->usuario.recibirSolicitud(nodoEmisor->usuario);
+        return true;
+    }
+    return false;
+}
+
+// Método para cancelar una solicitud de amistad
+bool ArbolAVL::cancelarSolicitud(const std::string &correoEmisor, const std::string &correoReceptor)
+{
+    Nodo *nodoEmisor = buscarNodo(raiz, correoEmisor);
+    Nodo *nodoReceptor = buscarNodo(raiz, correoReceptor);
+    if (nodoEmisor != nullptr && nodoReceptor != nullptr)
+    {
+        nodoEmisor->usuario.cancelarSolicitud(nodoReceptor->usuario.correo);
+        nodoReceptor->usuario.rechazarSolicitud(nodoEmisor->usuario.correo);
+        return true;
+    }
+    return false;
+}
+// Método para rechazar una solicitud de amistad
+bool ArbolAVL::rechazarSolicitud(const std::string &correoEmisor, const std::string &correoReceptor)
+{
+    Nodo *nodoEmisor = buscarNodo(raiz, correoEmisor);
+    Nodo *nodoReceptor = buscarNodo(raiz, correoReceptor);
+    if (nodoEmisor != nullptr && nodoReceptor != nullptr)
+    {
+        nodoEmisor->usuario.rechazarSolicitud(nodoReceptor->usuario.correo);
+        nodoReceptor->usuario.cancelarSolicitud(nodoEmisor->usuario.correo);
+        return true;
+    }
+    return false;
+}
+// Método para aceptar una solicitud de amistad
+bool ArbolAVL::aceptarSolicitud(const std::string &correoEmisor, const std::string &correoReceptor)
+{
+    Nodo *nodoEmisor = buscarNodo(raiz, correoEmisor);
+    Nodo *nodoReceptor = buscarNodo(raiz, correoReceptor);
+    if (nodoEmisor != nullptr && nodoReceptor != nullptr)
+    {
+        nodoEmisor->usuario.aceptarSolicitudRec(nodoReceptor->usuario.correo);
+        nodoReceptor->usuario.aceptarSolicitudEnv(nodoEmisor->usuario.correo);
+        relaciones_amistad.agregarRelacion(&nodoEmisor->usuario, &nodoReceptor->usuario);
+        return true;
+    }
+    return false;
+}
+
 
 // Método para buscar un usuario en el árbol AVL
 Structs::Usuario *ArbolAVL::buscar(const std::string &correo)
@@ -85,7 +140,6 @@ ListaEnlazada::ListaEnlazada<Structs::Usuario> ArbolAVL::PostOrder()
     postOrdenRecursivo(raiz, listaUsuarios);
     return listaUsuarios;
 }
-
 
 // Método para graficar el árbol en formato Graphviz
 string ArbolAVL::graficar()
@@ -126,121 +180,6 @@ int ArbolAVL::obtenerId()
 {
     Structs::Usuario usuarioConMayorID = obtenerUsuarioConMayorID();
     return usuarioConMayorID.id;
-}
-
-// Método para eliminar las solicitudes envidas y recibidas del usuario logeado, de la lista de solicitudes de amistad de los usuarios
-bool ArbolAVL::eliminarSolicitudes(const std::string &correo)
-{
-    // obtenemos la lista de solicitudes del usuario
-    Structs::Usuario *usuario = buscar(correo);
-    if (usuario == nullptr)
-    {
-        return false;
-    }
-    ListaEnlazada::ListaEnlazada<Structs::Usuario> solicitudesEnviadas = usuario->solicitudesEnviadas;
-    ListaEnlazada::ListaEnlazada<Structs::Usuario> solicitudesRecibidas = usuario->solicitudesRecibidas;
-    // recorremos la lista de solicitudes enviadas y eliminamos la solicitud del usuario logeado
-    for (int i = 0; i < solicitudesEnviadas.size(); ++i)
-    {
-        Structs::Usuario *usuarioSolicitud = solicitudesEnviadas.obtener(i);
-        Structs::Usuario *usuarioSolicitudEnviada = buscar(usuarioSolicitud->correo);
-        if (usuarioSolicitudEnviada != nullptr)
-        {
-            // eliminamos la solicitud del usuario logeado, recorrinedo la lista de solicitudes recibidas del usuario que envio la solicitud
-            ListaEnlazada::ListaEnlazada<Structs::Usuario> solicitudesRecibidas = usuarioSolicitudEnviada->solicitudesRecibidas;
-            for (int j = 0; j < solicitudesRecibidas.size(); ++j)
-            {
-                Structs::Usuario *usuarioSolicitudRecibida = solicitudesRecibidas.obtener(j);
-                if (usuarioSolicitudRecibida->correo == correo)
-                {
-                    solicitudesRecibidas.eliminar(j);
-                    break;
-                }
-            }
-        }
-    }
-    // recorremos la lista de solicitudes recibidas y eliminamos la solicitud del usuario logeado
-    for (int i = 0; i < solicitudesRecibidas.size(); ++i)
-    {
-        Structs::Usuario *usuarioSolicitud = solicitudesRecibidas.obtener(i);
-        Structs::Usuario *usuarioSolicitudRecibida = buscar(usuarioSolicitud->correo);
-        if (usuarioSolicitudRecibida != nullptr)
-        {
-            // eliminamos la solicitud del usuario logeado, recorrinedo la lista de solicitudes enviadas del usuario que envio la solicitud
-            ListaEnlazada::ListaEnlazada<Structs::Usuario> solicitudesEnviadas = usuarioSolicitudRecibida->solicitudesEnviadas;
-            for (int j = 0; j < solicitudesEnviadas.size(); ++j)
-            {
-                Structs::Usuario *usuarioSolicitudEnviada = solicitudesEnviadas.obtener(j);
-                if (usuarioSolicitudEnviada->correo == correo)
-                {
-                    solicitudesEnviadas.eliminar(j);
-                    break;
-                }
-            }
-        }
-    }
-    return true;
-}
-
-// Método para enviar una solicitud de amistad, si el usuario no ha enviado una solicitud previamente
-bool ArbolAVL::enviarSolicitud(const std::string &correo1, const std::string &correo2)
-{
-    // verificamos que no sean el mismo usuario
-    if (correo1 == correo2)
-    {
-        return false;
-    }
-    // verificamos si el usuario 1 y el usuario 2 existen
-    Structs::Usuario *usuario1 = buscar(correo1);
-    Structs::Usuario *usuario2 = buscar(correo2);
-    if (usuario1 == nullptr || usuario2 == nullptr)
-    {
-        return false;
-    }
-    // verificamos que no sean amigos
-    ListaEnlazada::ListaEnlazada<Structs::Usuario> amigos = relaciones_amistad.obtenerAmigos(correo1);
-    for (int i = 0; i < amigos.size(); ++i)
-    {
-        Structs::Usuario *amigo = amigos.obtener(i);
-        if (amigo->correo == correo2)
-        {
-            return false;
-        }
-    }
-
-    // verificamos si el usuario 1 ya envio una solicitud al usuario 2
-    ListaEnlazada::ListaEnlazada<Structs::Usuario> solicitudesEnviadas = usuario1->solicitudesEnviadas;
-    // recorremos la lista de solicitudes enviadas del usuario 1
-    for (int i = 0; i < solicitudesEnviadas.size(); i++)
-    {
-        // obtenemos el usuario de la solicitud
-        Structs::Usuario *usuarioSolicitud = solicitudesEnviadas.obtener(i);
-        // verificamos si el usuario de la solicitud es igual al usuario 2
-        if (usuarioSolicitud->correo == correo2)
-        {
-            return false;
-        }
-    }
-    // verificamos si el usuario 2 ya envio una solicitud al usuario 1
-    ListaEnlazada::ListaEnlazada<Structs::Usuario> solicitudesRecibidas = usuario2->solicitudesRecibidas;
-    // recorremos la lista de solicitudes recibidas del usuario 2
-    for (int i = 0; i < solicitudesRecibidas.size(); i++)
-    {
-        // obtenemos el usuario de la solicitud
-        Structs::Usuario *usuarioSolicitud = solicitudesRecibidas.obtener(i);
-        // verificamos si el usuario de la solicitud es igual al usuario 1
-        if (usuarioSolicitud->correo == correo1)
-        {
-            return false;
-        }
-    }
-
-    // si no se ha enviado la solicitud previamente, se envia la solicitud
-    usuario1->solicitudesEnviadas.insertar(*usuario2);
-    usuario2->solicitudesRecibidas.insertar(*usuario1);
-
-    return true;   
-    
 }
 
 

@@ -1,10 +1,7 @@
 #ifndef LISTAENLAZADA_H
 #define LISTAENLAZADA_H
 
-#include <iostream>
-#include <string>
-
-using namespace std;
+#include <stdexcept> // Para manejar excepciones
 
 namespace ListaEnlazada
 {
@@ -20,9 +17,24 @@ private:
     };
     Nodo *cabeza;
 
+    // Método auxiliar para clonar nodos
+    Nodo* clonarLista(Nodo* otraCabeza) {
+        if (!otraCabeza) return nullptr;
+        Nodo* nuevaCabeza = new Nodo(otraCabeza->data);
+        Nodo* actual = nuevaCabeza;
+        Nodo* temp = otraCabeza->next;
+        while (temp) {
+            actual->next = new Nodo(temp->data);
+            actual = actual->next;
+            temp = temp->next;
+        }
+        return nuevaCabeza;
+    }
+
 public:
     // Constructor de la lista simple
     ListaEnlazada() : cabeza(nullptr) {}
+
     // Destructor de la lista simple
     ~ListaEnlazada()
     {
@@ -34,7 +46,26 @@ public:
         }
     }
 
-    // TODO: METODOS
+    // Constructor de copia
+    ListaEnlazada(const ListaEnlazada& otra) : cabeza(clonarLista(otra.cabeza)) {}
+
+    // Operador de asignación
+    ListaEnlazada& operator=(const ListaEnlazada& otra)
+    {
+        if (this != &otra) {
+            // Primero limpiar la lista actual
+            while (cabeza)
+            {
+                Nodo *temp = cabeza;
+                cabeza = cabeza->next;
+                delete temp;
+            }
+            // Clonar la lista de la otra instancia
+            cabeza = clonarLista(otra.cabeza);
+        }
+        return *this;
+    }
+
     // Insertar un nuevo nodo al final de la lista
     void insertar(const T &data)
     {
@@ -53,6 +84,7 @@ public:
             temp->next = nuevo;
         }
     }
+
     // Insertar un nuevo nodo al inicio de la lista
     void insertarInicio(const T &data)
     {
@@ -60,68 +92,108 @@ public:
         nuevo->next = cabeza;
         cabeza = nuevo;
     }
+
     // Eliminar el primer nodo de la lista
     void eliminarInicio()
     {
-        if (cabeza)
+        if (estaVacia()) // Validación
+        {
+            throw std::out_of_range("La lista está vacía, no se puede eliminar.");
+        }
+        Nodo *temp = cabeza;
+        cabeza = cabeza->next;
+        delete temp;
+    }
+
+    // Eliminar el último nodo de la lista
+    void eliminarFinal()
+    {
+        if (estaVacia()) // Validación
+        {
+            throw std::out_of_range("La lista está vacía, no se puede eliminar.");
+        }
+
+        if (!cabeza->next)
+        {
+            delete cabeza;
+            cabeza = nullptr;
+        }
+        else
+        {
+            Nodo *temp = cabeza;
+            while (temp->next && temp->next->next)
+            {
+                temp = temp->next;
+            }
+            delete temp->next;
+            temp->next = nullptr;
+        }
+    }
+
+    // Eliminar un nodo según su posición
+    void eliminar(int pos)
+    {
+        if (estaVacia()) // Validación
+        {
+            throw std::out_of_range("La lista está vacía.");
+        }
+
+        if (pos < 0 || pos >= size()) // Validación de rango
+        {
+            throw std::out_of_range("Posición fuera de rango.");
+        }
+
+        if (pos == 0)
         {
             Nodo *temp = cabeza;
             cabeza = cabeza->next;
             delete temp;
         }
-    }
-    // Eliminar el último nodo de la lista
-    void eliminarFinal()
-    {
-        if (cabeza)
+        else
         {
-            if (!cabeza->next)
+            Nodo *temp = cabeza;
+            for (int i = 0; i < pos - 1 && temp->next; i++)
             {
-                delete cabeza;
-                cabeza = nullptr;
+                temp = temp->next;
             }
-            else
+            Nodo *temp2 = temp->next;
+            temp->next = temp->next->next;
+            delete temp2;
+        }
+    }
+
+    // Eliminar un nodo según su contenido (data)
+    void eliminar(const T &data)
+    {
+        if (estaVacia()) // Validación
+        {
+            throw std::out_of_range("La lista está vacía.");
+        }
+
+        if (cabeza->data == data)
+        {
+            Nodo *temp = cabeza;
+            cabeza = cabeza->next;
+            delete temp;
+        }
+        else
+        {
+            Nodo *temp = cabeza;
+            while (temp->next && temp->next->data != data)
             {
-                Nodo *temp = cabeza;
-                while (temp->next && temp->next->next)
-                {
-                    temp = temp->next;
-                }
-                delete temp->next;
-                temp->next = nullptr;
+                temp = temp->next;
+            }
+            if (temp->next)
+            {
+                Nodo *temp2 = temp->next;
+                temp->next = temp->next->next;
+                delete temp2;
             }
         }
     }
-    // Eliminar un nodo según su posición
-    void eliminar(int pos)
-    {
-        if (cabeza)
-        {
-            if (pos == 0)
-            {
-                Nodo *temp = cabeza;
-                cabeza = cabeza->next;
-                delete temp;
-            }
-            else
-            {
-                Nodo *temp = cabeza;
-                for (int i = 0; i < pos - 1 && temp->next; i++)
-                {
-                    temp = temp->next;
-                }
-                if (temp->next)
-                {
-                    Nodo *temp2 = temp->next;
-                    temp->next = temp->next->next;
-                    delete temp2;
-                }
-            }
-        }
-    }
-    
+
     // Obtener el tamaño de la lista
-    int size()
+    int size() const
     {
         int size = 0;
         Nodo *temp = cabeza;
@@ -136,48 +208,56 @@ public:
     // Obtener el nodo según su posición
     T *obtener(int pos)
     {
-        if (cabeza)
+        if (estaVacia()) // Validación
         {
-            Nodo *temp = cabeza;
-            for (int i = 0; i < pos && temp; i++)
-            {
-                temp = temp->next;
-            }
-            if (temp)
-            {
-                return &temp->data; // Retorna un puntero al dato del nodo
-            }
+            throw std::out_of_range("La lista está vacía.");
         }
-        return nullptr; // Si no se encuentra la posición, devuelve nullptr
+
+        if (pos < 0 || pos >= size()) // Validación de rango
+        {
+            throw std::out_of_range("Posición fuera de rango.");
+        }
+
+        Nodo *temp = cabeza;
+        for (int i = 0; i < pos && temp; i++)
+        {
+            temp = temp->next;
+        }
+
+        return &temp->data; // Retorna un puntero al dato del nodo
     }
-    T* getHead() const {
-        return cabeza;
-    }
+
     // Verificar si la lista está vacía
-    bool estaVacia()
+    bool estaVacia() const
     {
         return cabeza == nullptr;
     }
 
-    // TODO: METODOS DE PILA
-    // Insertar un nuevo nodo al inicio de la lista
+    // MÉTODOS DE PILA
+    // Insertar un nuevo nodo al inicio de la lista (PUSH)
     void push(const T &data)
     {
         insertarInicio(data);
     }
-    // Eliminar el primer nodo de la lista
+
+    // Eliminar el primer nodo de la lista (POP)
     void pop()
     {
-        eliminarFinal();
-    }
-    // Obtener el último nodo de la lista (tope de la pila)
-    T top()
-    {
-        if (!estaVacia())
+        if (estaVacia()) // Validación
         {
-            return cabeza->data;
+            throw std::out_of_range("La pila está vacía, no se puede eliminar.");
         }
-        throw std::out_of_range("La pila está vacía");
+        eliminarInicio();
+    }
+
+    // Obtener el valor del primer nodo (TOPE de la pila)
+    T top() const
+    {
+        if (estaVacia()) // Validación
+        {
+            throw std::out_of_range("La pila está vacía.");
+        }
+        return cabeza->data;
     }
 };
 }

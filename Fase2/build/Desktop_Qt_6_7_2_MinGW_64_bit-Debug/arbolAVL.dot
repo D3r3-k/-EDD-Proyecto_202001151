@@ -1,45 +1,40 @@
-digraph ArbolAVL {
-"juan.perez@example.com" [label="juan.perez@example.com"];
-"juan.perez@example.com" -> "carlos.sanchez@example.com";
-"carlos.sanchez@example.com" [label="carlos.sanchez@example.com"];
-"carlos.sanchez@example.com" -> "ana.martinez@example.com";
-"ana.martinez@example.com" [label="ana.martinez@example.com"];
-"ana.martinez@example.com" -> "admin@gmail.com";
-"admin@gmail.com" [label="admin@gmail.com"];
-"admin@gmail.com" -> "alberto.morales@example.com";
-"alberto.morales@example.com" [label="alberto.morales@example.com"];
-"ana.martinez@example.com" -> "andres.gonzalez@example.com";
-"andres.gonzalez@example.com" [label="andres.gonzalez@example.com"];
-"carlos.sanchez@example.com" -> "isabel.ramirez@example.com";
-"isabel.ramirez@example.com" [label="isabel.ramirez@example.com"];
-"isabel.ramirez@example.com" -> "elena.diaz@example.com";
-"elena.diaz@example.com" [label="elena.diaz@example.com"];
-"elena.diaz@example.com" -> "david.lopez@example.com";
-"david.lopez@example.com" [label="david.lopez@example.com"];
-"elena.diaz@example.com" -> "francisco.ramos@example.com";
-"francisco.ramos@example.com" [label="francisco.ramos@example.com"];
-"isabel.ramirez@example.com" -> "javier.hernandez@example.com";
-"javier.hernandez@example.com" [label="javier.hernandez@example.com"];
-"juan.perez@example.com" -> "patricia.castro@example.com";
-"patricia.castro@example.com" [label="patricia.castro@example.com"];
-"patricia.castro@example.com" -> "maria.rodriguez@example.com";
-"maria.rodriguez@example.com" [label="maria.rodriguez@example.com"];
-"maria.rodriguez@example.com" -> "lucia.martin@example.com";
-"lucia.martin@example.com" [label="lucia.martin@example.com"];
-"lucia.martin@example.com" -> "laura.ruiz@example.com";
-"laura.ruiz@example.com" [label="laura.ruiz@example.com"];
-"lucia.martin@example.com" -> "luis.gomez@example.com";
-"luis.gomez@example.com" [label="luis.gomez@example.com"];
-"maria.rodriguez@example.com" -> "miguel.garcia@example.com";
-"miguel.garcia@example.com" [label="miguel.garcia@example.com"];
-"miguel.garcia@example.com" -> "marta.ortiz@example.com";
-"marta.ortiz@example.com" [label="marta.ortiz@example.com"];
-"patricia.castro@example.com" -> "sofia.fernandez@example.com";
-"sofia.fernandez@example.com" [label="sofia.fernandez@example.com"];
-"sofia.fernandez@example.com" -> "raul.molina@example.com";
-"raul.molina@example.com" [label="raul.molina@example.com"];
-"sofia.fernandez@example.com" -> "user@gmail.com";
-"user@gmail.com" [label="user@gmail.com"];
-"user@gmail.com" -> "veronica.santos@example.com";
-"veronica.santos@example.com" [label="veronica.santos@example.com"];
+digraph G {
+node [shape=box];
+rankdir=TB;
+label="Matriz de Relaciones de Usuarios" fontsize=20 fontname="Arial";
+// Definir encabezados de filas
+fila0 [label="Administrador", group=1];
+fila1 [label="Usuario", group=1];
+fila2 [label="Usuario2", group=1];
+// Definir encabezados de columnas
+col0 [label="Administrador", group=1];
+col1 [label="Usuario", group=2];
+col2 [label="Usuario2", group=3];
+{ rank=same; col0; col1; col2; }
+// Definir nodos en las coordenadas especificadas
+nodo0_1 [label="", color=green, style=filled, group=2];
+nodo1_0 [label="", color=green, style=filled, group=1];
+nodo1_2 [label="", color=green, style=filled, group=3];
+nodo2_1 [label="", color=green, style=filled, group=2];
+// Conectar encabezados de filas con nodos y los nodos entre ellos horizontalmente
+fila0 -> nodo0_1 [dir=both, minlen=2];
+fila1 -> nodo1_0 [dir=both, minlen=2];
+nodo1_0 -> nodo1_2 [dir=both, minlen=2];
+fila2 -> nodo2_1 [dir=both, minlen=2];
+// Conectar encabezados de columnas con nodos y los nodos entre ellos verticalmente
+col0 -> nodo1_0 [dir=both, minlen=2];
+col1 -> nodo0_1 [dir=both, minlen=2];
+nodo0_1 -> nodo2_1 [dir=both, minlen=2];
+col2 -> nodo1_2 [dir=both, minlen=2];
+// Mantener los encabezados de filas alineados verticalmente
+fila0 -> fila1 [style=invis];
+fila1 -> fila2 [style=invis];
+// Mantener los nodos de la misma fila en el mismo rango horizontal
+{ rank=same; fila0; nodo0_1 }
+{ rank=same; fila1; nodo1_0 }
+{ rank=same; fila1; nodo1_2 }
+{ rank=same; fila2; nodo2_1 }
+// Conectar las columnas entre sí de forma invisible para mantener el orden
+col0 -> col1 [style=invis];
+col1 -> col2 [style=invis];
 }

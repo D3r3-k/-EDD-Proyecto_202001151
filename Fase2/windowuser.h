@@ -38,6 +38,8 @@ private slots:
 
     void on_contrasenaLogLineEdit_returnPressed();
 
+    void on_btn_generar_reporte_clicked();
+
 private:
     Ui::UserWindow *ui;
 };

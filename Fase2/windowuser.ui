@@ -30,7 +30,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab_buscar">
      <attribute name="title">
@@ -731,7 +731,7 @@
                <number>10</number>
               </property>
               <item row="0" column="0">
-               <widget class="QTableWidget" name="tableSolicitudesRecibidas_2">
+               <widget class="QTableWidget" name="tableRepoPublicaciones">
                 <property name="maximumSize">
                  <size>
                   <width>981</width>
@@ -809,7 +809,7 @@
                <number>10</number>
               </property>
               <item row="0" column="0">
-               <widget class="QTableWidget" name="tableSolicitudesEnviadas_2">
+               <widget class="QTableWidget" name="tableRepoComentarios">
                 <property name="maximumSize">
                  <size>
                   <width>981</width>

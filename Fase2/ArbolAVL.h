@@ -67,9 +67,9 @@ public:
     bool eliminarSolicitudes(const std::string &correo);
     // Definir futuros métodos (sin implementación)
     bool enviarSolicitud(const std::string &correoEmisor, const std::string &correoReceptor);
-    bool aceptarSolicitud(const std::string &correoEmisor, const std::string &correoReceptor);
+    bool cancelarSolicitud(const std::string &correoEmisor, const std::string &correoReceptor);
     bool rechazarSolicitud(const std::string &correoEmisor, const std::string &correoReceptor);
-    bool cancelarEnvio(const std::string &correoEmisor, const std::string &correoReceptor);
+    bool aceptarSolicitud(const std::string &correoEmisor, const std::string &correoReceptor);
 
 };
 

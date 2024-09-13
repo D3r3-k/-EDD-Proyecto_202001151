@@ -40,6 +40,7 @@ public:
     void eliminarRelacionesUsuario(string correo_usuario);
     bool verificarRelacion(string correo1, string correo2);
     void imprimir();
+    void graficar();
     ListaEnlazada::ListaEnlazada<Structs::Usuario> obtenerAmigos(string correo);
 };
 
