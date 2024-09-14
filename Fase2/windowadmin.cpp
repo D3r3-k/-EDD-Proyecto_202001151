@@ -68,19 +68,9 @@ void AdminWindow::on_btnGenerarReportes_clicked()
 
 void AdminWindow::on_btnSubirUsuarios_clicked()
 {
-    // Abrir un cuadro de diálogo para seleccionar un archivo .json
-    QString archivoPath = QFileDialog::getOpenFileName(
-        this,
-        tr("Seleccionar archivo JSON"),      // Título de la ventana
-        "",                                  // Directorio inicial (puedes especificar uno si lo deseas)
-        tr("Archivos JSON (*.json)")         // Filtro para mostrar solo archivos .json
-        );
-
-    // Verifica si se ha seleccionado un archivo
+    QString archivoPath = QFileDialog::getOpenFileName(this,tr("Seleccionar archivo JSON"),"",tr("Archivos JSON (*.json)"));
     if (!archivoPath.isEmpty()) {
-        // Utiliza el path del archivo seleccionado
         Func::CargarUsuarios(archivoPath.toStdString());
-        // Aquí puedes agregar el código para procesar el archivo .json
         Func::ActualizarTablaAdmin(0);
     }
 }
@@ -88,21 +78,19 @@ void AdminWindow::on_btnSubirUsuarios_clicked()
 
 void AdminWindow::on_btnSubirSolicitudes_clicked()
 {
-    // Abrir un cuadro de diálogo para seleccionar un archivo .json
-    QString archivoPath = QFileDialog::getOpenFileName(
-        this,
-        tr("Seleccionar archivo JSON"),      // Título de la ventana
-        "",                                  // Directorio inicial (puedes especificar uno si lo deseas)
-        tr("Archivos JSON (*.json)")         // Filtro para mostrar solo archivos .json
-        );
-
-    // Verifica si se ha seleccionado un archivo
+    QString archivoPath = QFileDialog::getOpenFileName(this,tr("Seleccionar archivo JSON"),"",tr("Archivos JSON (*.json)"));
     if (!archivoPath.isEmpty()) {
-        // Utiliza el path del archivo seleccionado
         Func::CargarSolicitudes(archivoPath.toStdString());
     }
 }
 
+void AdminWindow::on_btnSubirPublicaciones_clicked()
+{
+    QString archivoPath = QFileDialog::getOpenFileName(this,tr("Seleccionar archivo JSON"),"",tr("Archivos JSON (*.json)"));
+    if (!archivoPath.isEmpty()) {
+        Func::CargarPublicaciones(archivoPath.toStdString());
+    }
+}
 void AdminWindow::on_btnOrdenar_clicked()
 {
     ui->inputBuscar->setText("");
@@ -131,6 +119,8 @@ void AdminWindow::on_btn_abrir_imgUsuarios_clicked()
         QMessageBox::warning(this, "Error", "No se pudo abrir la imagen.");
     }
 }
+
+
 
 
 void AdminWindow::on_inputBuscar_returnPressed()

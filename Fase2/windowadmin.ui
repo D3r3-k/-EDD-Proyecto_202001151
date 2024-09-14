@@ -30,7 +30,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab_buscar">
      <attribute name="title">
@@ -265,9 +265,6 @@
            </rect>
           </property>
           <layout class="QVBoxLayout" name="verticalLayout">
-           <property name="spacing">
-            <number>30</number>
-           </property>
            <property name="leftMargin">
             <number>20</number>
            </property>
@@ -275,21 +272,15 @@
             <number>20</number>
            </property>
            <item>
-            <widget class="QToolButton" name="btnSubirUsuarios">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+            <widget class="QPushButton" name="btnSubirUsuarios">
+             <property name="layoutDirection">
+              <enum>Qt::LayoutDirection::RightToLeft</enum>
              </property>
              <property name="text">
-              <string>File</string>
+              <string>Cargar Usuarios </string>
              </property>
              <property name="icon">
-              <iconset theme="QIcon::ThemeIcon::DocumentNew"/>
-             </property>
-             <property name="autoExclusive">
-              <bool>false</bool>
+              <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
              </property>
             </widget>
            </item>
@@ -322,18 +313,15 @@
             <number>20</number>
            </property>
            <item>
-            <widget class="QToolButton" name="btnSubirSolicitudes">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+            <widget class="QPushButton" name="btnSubirSolicitudes">
+             <property name="layoutDirection">
+              <enum>Qt::LayoutDirection::RightToLeft</enum>
              </property>
              <property name="text">
-              <string>Subir archivo...</string>
+              <string>Cargar Solicitudes</string>
              </property>
              <property name="icon">
-              <iconset theme="QIcon::ThemeIcon::DocumentNew"/>
+              <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
              </property>
             </widget>
            </item>
@@ -366,18 +354,15 @@
             <number>20</number>
            </property>
            <item>
-            <widget class="QToolButton" name="btnSubirPublicaciones">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
+            <widget class="QPushButton" name="btnSubirPublicaciones">
+             <property name="layoutDirection">
+              <enum>Qt::LayoutDirection::RightToLeft</enum>
              </property>
              <property name="text">
-              <string>Subir archivo...</string>
+              <string>Cargar Publicaciones</string>
              </property>
              <property name="icon">
-              <iconset theme="QIcon::ThemeIcon::DocumentNew"/>
+              <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
              </property>
             </widget>
            </item>

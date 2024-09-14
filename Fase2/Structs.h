@@ -54,6 +54,14 @@ namespace Structs
             this->fechaNacimiento = fecha;
             this->contrasena = contrasena;
         }
+        void modificar(string nombres, string apellidos, string fecha, string contrasena, string rol)
+        {
+            this->nombres = nombres;
+            this->apellidos = apellidos;
+            this->fechaNacimiento = fecha;
+            this->contrasena = contrasena;
+            this->rol = rol;
+        }
 
         // Enviar Solicitud
         void enviarSolicitud(const Usuario& u){
@@ -120,10 +128,11 @@ namespace Structs
         string contenido;
         string fecha;
         string hora;
-        // ArbolB5::ArbolB5 comentarios; // Lista de comentarios -> Arbol B5
+        string imagen;
+        // ArbolB5::ArbolB5 comentarios; // Lista de comentarios -> Arbol B de orden 5
         // Constructor
-        Publicacion(int id, string ca, const string &c, const string &f, const string &h)
-            : id(id), correo_autor(ca), contenido(c), fecha(f), hora(h) {}
+        Publicacion(int id, string correo_autor, const string &contenido, const string &fecha, const string &hora, const string imagen="default.jpg")
+            : id(id), correo_autor(correo_autor), contenido(contenido), fecha(fecha), hora(hora), imagen(imagen) {}
 
         // Destructor
         ~Publicacion() {}
@@ -131,7 +140,8 @@ namespace Structs
         // TODO: Metodos
         void mostrarPublicacion() const
         {
-            cout << "|===============[ Publicación ]===============|" << endl;
+            cout << "|===============[ Publicacion ]===============|" << endl;
+            cout << "| id: " << id << endl;
             cout << "| Autor: " << correo_autor << endl;
             cout << "| Fecha: " << fecha << endl;
             cout << "| Hora: " << hora << endl;

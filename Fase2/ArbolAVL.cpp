@@ -50,6 +50,16 @@ bool ArbolAVL::modificar(const std::string &correo, std::string nombres, std::st
     }
     return false;
 }
+bool ArbolAVL::modificar(const std::string &correo, std::string nombres, std::string apellidos, std::string fecha, std::string contrasena, std::string rol)
+{
+    Nodo *nodo = buscarNodo(raiz, correo);
+    if (nodo != nullptr)
+    {
+        nodo->usuario.modificar(nombres,apellidos,fecha,contrasena,rol);
+        return true;
+    }
+    return false;
+}
 
 // Método para eliminar todas las solicitudes de amistad de un usuario, tanto enviadas como recibidas
 bool ArbolAVL::eliminarSolicitudes(const std::string &correo)

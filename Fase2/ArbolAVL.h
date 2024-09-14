@@ -23,7 +23,7 @@ private:
     Nodo *raiz;
     // Metodo para el destructor
     void destruirArbolRecursivo(Nodo *nodo);
-    // Métodos privados (helper)
+    // Métodos privados
     int obtenerAltura(Nodo *nodo);
     int obtenerBalance(Nodo *nodo);
     Nodo *insertarNodo(Nodo *nodo, const Structs::Usuario &usuario);
@@ -52,6 +52,7 @@ public:
     bool insertar(const Structs::Usuario &usuario);
     bool eliminar(const string &correo);
     bool modificar(const std::string &correo, std::string nombres, std::string apellidos, std::string fecha, std::string contrasena);
+    bool modificar(const std::string &correo, std::string nombres, std::string apellidos, std::string fecha, std::string contrasena, std::string rol);
     Structs::Usuario *buscar(const string &correo);
     int obtenerId();
 

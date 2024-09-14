@@ -1,12 +1,16 @@
 #include "funciones.h"
+#include "arbolabb.h"
 #include "globales.h"
 #include "Structs.h"
 #include "nlohmann/json.hpp"
+#include "dialogmodificar.h"
+#include "widgetpost.h"
 
 #include <QMessageBox>
 #include <QTableWidget>
 #include <QPushButton>
 #include <qboxlayout.h>
+#include <QScrollArea>
 
 #include <fstream>
 #include <cstdlib> // Para system()
@@ -18,6 +22,7 @@ namespace Func
     QTableWidget *userTablaUsuarios = nullptr;
     QTableWidget *userTablaEnviadas = nullptr;
     QTableWidget *userTablaRecibidas = nullptr;
+    QScrollArea *userPostFeed = nullptr;
 
     // TODO: metodos carga masiva
     void CargarUsuarios(string directorio)
@@ -75,7 +80,7 @@ namespace Func
             QString stdcontador = QString::number(contador);
             QString stdrepetidos = QString::number(repetidos);
             QString stderrores = QString::number(conerror);
-            QMessageBox::information(nullptr, "Información", "Usuarios agregados: "+ stdcontador + "\nUsuarios repetidos: " + stdrepetidos + "\nErrores: " + stderrores);
+            QMessageBox::information(nullptr, "Información", "Usuarios agregados: " + stdcontador + "\nUsuarios repetidos: " + stdrepetidos + "\nErrores: " + stderrores);
         }
         catch (const ifstream::failure &e)
         {
@@ -183,6 +188,79 @@ namespace Func
         }
     }
 
+    void CargarPublicaciones(string directorio) {
+        try {
+            // Abrir el archivo JSON
+            ifstream archivo(directorio);
+            if (!archivo.is_open()) {
+                throw runtime_error("No se pudo abrir el archivo para leer.");
+            }
+
+            // Parsear el archivo JSON
+            int contador = 0;
+            int conerror = 0;
+            int noexisten = 0;
+            nlohmann::json post;
+            archivo >> post;
+
+            // Recorrer el JSON
+            for (const auto& p : post) {
+                // Verificar si las claves existen
+                if (p.contains("correo") && p.contains("contenido") &&
+                    p.contains("fecha") && p.contains("hora")) {
+
+                    string correo = p["correo"].get<string>();
+                    string contenido = p["contenido"].get<string>();
+                    string _fecha = p["fecha"].get<string>();
+                    string hora = p["hora"].get<string>();
+
+                    Structs::Usuario* autor = lista_usuarios.buscar(correo);
+
+                    if (autor == nullptr) {
+                        noexisten++;
+                        continue;
+                    }
+
+                    // Convertir la fecha
+                    string fechaConvertida;
+                    try {
+                        fechaConvertida = convertirFecha(_fecha);
+                    } catch (const std::runtime_error& e) {
+                        conerror++;
+                        continue;
+                    }
+
+                    // Crear Publicacion
+                    int newid = Func::obtenerIdPublicaciones() + 1;
+                    Structs::Publicacion nuevaPublicacion(newid, autor->correo, contenido, fechaConvertida, hora);
+                    lista_publicaciones.insertar(nuevaPublicacion);
+                    contador++;
+                } else {
+                    conerror++;
+                }
+            }
+            archivo.close();
+
+            QString stdagregados = QString::number(contador);
+            QString stderrores = QString::number(conerror);
+            QString stdnoexisten = QString::number(noexisten);
+            QMessageBox::information(nullptr, "Información", "Publicaciones agregadas: " + stdagregados + "\nErrores: " + stderrores + "\nNo Existen autores: " + stdnoexisten);
+        }
+        catch (const ifstream::failure& e) {
+            QMessageBox::information(nullptr, "Error", "Error de archivo: " + QString::fromStdString(e.what()));
+        }
+        catch (const nlohmann::json::exception& e) {
+            QMessageBox::information(nullptr, "Error", "Error de JSON: " + QString::fromStdString(e.what()));
+        }
+        catch (const std::exception& e) {
+            QMessageBox::information(nullptr, "Error", "Error inesperado: " + QString::fromStdString(e.what()));
+        }
+        catch (...) {
+            QMessageBox::information(nullptr, "Error", "Error desconocido.");
+        }
+    }
+
+
     // TODO: Metodos Login
     void IniciarSesion(std::string email, std::string password)
     {
@@ -231,17 +309,20 @@ namespace Func
 
                 // Conectar los botones a sus slots
                 QObject::connect(modificarButton, &QPushButton::clicked, [correo, row]()
-                                 { qDebug() << "Modificar fila:" << row << " con Correo: " << correo; });
+                                 {
+                                     DialogModificar dialog(correo);
+                                     dialog.exec();
+                                     Func::ActualizarTablaAdmin(0); });
 
-                QObject::connect(eliminarButton, &QPushButton::clicked, [correo, row, table](){
+                QObject::connect(eliminarButton, &QPushButton::clicked, [correo, row, table]()
+                                 {
                     if (usuario_logeado->correo == correo) {
                         QMessageBox::warning(nullptr,"Eliminar usuario","No se puede eliminar el usuario logeado.");
                         return;
                     }else{
                         Func::EliminarCuenta(correo);
                         Func::ActualizarTablaAdmin(0);
-                    }
-                });
+                    } });
 
                 // Crear contenedores de botones separados para cada columna
                 QWidget *modifyButtonContainer = new QWidget();
@@ -544,7 +625,7 @@ namespace Func
 
         return lista;
     }
-    
+
     void ActualizarTablas()
     {
         Func::ActualizarTablaUsuarios(userTablaUsuarios);
@@ -552,16 +633,110 @@ namespace Func
         Func::ActualizarTablaRecibidos(userTablaRecibidas);
     }
 
-    void ActualizarTablaAdmin(int opcion){
-        if (opcion == 0) {
+    void ActualizarTablaAdmin(int opcion)
+    {
+        if (opcion == 0)
+        {
             ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.InOrder();
-            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios,temp);
-        }else if (opcion==1) {
-            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.PreOrder();
-            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios,temp);
-        }else if (opcion==2) {
-            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.PostOrder();
-            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios,temp);
+            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios, temp);
         }
+        else if (opcion == 1)
+        {
+            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.PreOrder();
+            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios, temp);
+        }
+        else if (opcion == 2)
+        {
+            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.PostOrder();
+            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios, temp);
+        }
+    }
+
+    int obtenerIdPublicaciones()
+    {
+        if (lista_publicaciones.size() == 0)
+        {
+            return -1;
+        }
+        int id_mas_grande = -1;
+        for (int i = 0; i < lista_publicaciones.size(); i++)
+        {
+            Structs::Publicacion *p = lista_publicaciones.obtener(i);
+            if (p && p->id > id_mas_grande)
+            {
+                id_mas_grande = p->id;
+            }
+        }
+        return id_mas_grande;
+    }
+
+    void eliminarPublicacion(int id){
+        for (int i = 0; i < lista_publicaciones.size(); ++i) {
+            Structs::Publicacion *p = lista_publicaciones.obtener(i);
+            if (p) {
+                if (p->id == id) {
+                    lista_publicaciones.eliminarPosicion(i);
+                }
+            }
+        }
+    }
+
+    Structs::Publicacion *buscarPost(int id){
+        for (int i = 0; i < lista_publicaciones.size(); ++i) {
+            Structs::Publicacion *p = lista_publicaciones.obtener(i);
+            if (p) {
+                if (p->id == id) {
+                    return p;
+                }
+            }
+        }
+        return nullptr;
+    }
+
+    void ActualizarFeed() {
+        QWidget *contentWidget = userPostFeed->widget();
+        QVBoxLayout *layout = qobject_cast<QVBoxLayout*>(contentWidget->layout());
+        if (!layout) {
+            layout = new QVBoxLayout(contentWidget);
+            contentWidget->setLayout(layout);
+        }
+        while (QLayoutItem *item = layout->takeAt(0)) {
+            if (item->widget()) {
+                item->widget()->deleteLater();
+            }
+            delete item;
+        }
+        ArbolABB arbolabb;
+        for (int i = 0; i < lista_publicaciones.size(); ++i) {
+            Structs::Publicacion *p = lista_publicaciones.obtener(i);
+            if (p) {
+                p->mostrarPublicacion();
+                std::tm fecha = {};
+                std::istringstream ss(p->fecha);
+                ss >> std::get_time(&fecha, "%d-%m-%Y %H:%M:%S");
+                if (ss.fail()) {
+                    throw std::runtime_error("Error al parsear la fecha.");
+                }
+                arbolabb.insertar(fecha, *p);
+
+                WidgetPost *newPost = new WidgetPost(p->id);
+                layout->addWidget(newPost);
+            }
+        }
+        std::string path_grafica = arbolabb.graficar();
+        qInfo()<<"Graficado en: "+path_grafica;
+    }
+
+    string convertirFecha(const std::string& fechaOriginal) {
+        std::tm fecha = {};
+        std::istringstream ss(fechaOriginal);
+        ss >> std::get_time(&fecha, "%Y-%m-%d"); // Formato de entrada: aaaa-mm-dd
+        if (ss.fail()) {
+            throw std::runtime_error("Error al parsear la fecha.");
+        }
+
+        std::ostringstream oss;
+        oss << std::put_time(&fecha, "%d-%m-%Y"); // Formato de salida: dd-mm-aaaa
+        return oss.str();
     }
 }

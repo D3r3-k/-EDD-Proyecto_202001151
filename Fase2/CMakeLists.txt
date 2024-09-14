@@ -34,6 +34,11 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ArbolAVL.h ArbolAVL.cpp
         windowregister.h windowregister.cpp windowregister.ui
         matrizrelacion.h matrizrelacion.cpp
+        dialogmodificar.h dialogmodificar.cpp dialogmodificar.ui
+        dialognuevopost.h dialognuevopost.cpp dialognuevopost.ui
+        ListaDoble.h
+        widgetpost.h widgetpost.cpp widgetpost.ui
+        arbolabb.h arbolabb.cpp
 
 
 

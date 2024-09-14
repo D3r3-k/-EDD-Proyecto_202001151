@@ -141,7 +141,10 @@ Fase2_autogen/timestamp: \
 	C:/Qt/6.7.2/mingw_64/include/QtGui/qtransform.h \
 	C:/Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs.h \
 	C:/Qt/6.7.2/mingw_64/include/QtGui/qwindowdefs_win.h \
+	C:/Qt/6.7.2/mingw_64/include/QtWidgets/QDialog \
 	C:/Qt/6.7.2/mingw_64/include/QtWidgets/QMainWindow \
+	C:/Qt/6.7.2/mingw_64/include/QtWidgets/QWidget \
+	C:/Qt/6.7.2/mingw_64/include/QtWidgets/qdialog.h \
 	C:/Qt/6.7.2/mingw_64/include/QtWidgets/qmainwindow.h \
 	C:/Qt/6.7.2/mingw_64/include/QtWidgets/qsizepolicy.h \
 	C:/Qt/6.7.2/mingw_64/include/QtWidgets/qtabwidget.h \
@@ -284,94 +287,31 @@ Fase2_autogen/timestamp: \
 	C:/Qt/6.7.2/mingw_64/lib/cmake/Qt6ZlibPrivate/Qt6ZlibPrivateConfigVersionImpl.cmake \
 	C:/Qt/6.7.2/mingw_64/lib/cmake/Qt6ZlibPrivate/Qt6ZlibPrivateTargets.cmake \
 	C:/Qt/6.7.2/mingw_64/lib/cmake/Qt6ZlibPrivate/Qt6ZlibPrivateVersionlessTargets.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeCXXCompiler.cmake.in \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeCXXInformation.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeCheckCompilerFlagCommonPatterns.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeCommonLanguageInclude.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeCompilerIdDetection.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCXXCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCompileFeatures.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCompilerABI.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineCompilerId.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineRCCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeDetermineSystem.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeFindBinUtils.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeFindDependencyMacro.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeGenericSystem.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeInitializeConfigs.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeLanguageInformation.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeNinjaFindMake.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeParseImplicitIncludeInfo.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeParseImplicitLinkInfo.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeParseLibraryArchitecture.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeRCCompiler.cmake.in \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeRCInformation.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeSystem.cmake.in \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeSystemSpecificInformation.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeSystemSpecificInitialize.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeTestCXXCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeTestCompilerCommon.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeTestRCCompiler.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CheckCXXCompilerFlag.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CheckCXXSourceCompiles.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CheckIncludeFileCXX.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CheckLibraryExists.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/ADSP-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/ARMCC-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/ARMClang-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/AppleClang-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/Borland-DetermineCompiler.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/CMakeCommonCompilerMacros.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/Clang-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/Clang-DetermineCompilerInternal.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/Compaq-CXX-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/Cray-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/CrayClang-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/Embarcadero-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/Fujitsu-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/FujitsuClang-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/GHS-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/GNU-CXX-DetermineCompiler.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/GNU-CXX.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/GNU-FindBinUtils.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/GNU.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/HP-CXX-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/IAR-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/IBMCPP-CXX-DetermineVersionInternal.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/IBMClang-CXX-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/Intel-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/IntelLLVM-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/LCC-CXX-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/MSVC-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/NVHPC-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/NVIDIA-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/OpenWatcom-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/OrangeC-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/PGI-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/PathScale-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/SCO-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/SunPro-CXX-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/TI-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/TIClang-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/Tasking-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/VisualAge-CXX-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/Watcom-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/XL-CXX-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/XLClang-CXX-DetermineCompiler.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Compiler/zOS-CXX-DetermineCompiler.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/FindPackageHandleStandardArgs.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/FindPackageMessage.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/FindThreads.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/FindVulkan.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/GNUInstallDirs.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Internal/CMakeDetermineLinkerId.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Internal/CheckCompilerFlag.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Internal/CheckFlagCommonConfig.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Internal/CheckSourceCompiles.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Internal/FeatureTesting.cmake \
-	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Platform/Windows-Determine-CXX.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Platform/Windows-GNU-CXX-ABI.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Platform/Windows-GNU-CXX.cmake \
 	C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/Platform/Windows-GNU.cmake \
@@ -579,8 +519,11 @@ Fase2_autogen/timestamp: \
 	C:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/vadefs.h \
 	C:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include/wchar.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/CMakeLists.txt \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/ListaDoble.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/ListaEnlazada.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/Structs.h \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/arbolabb.cpp \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/arbolabb.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/arbolavl.cpp \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/arbolavl.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake \
@@ -588,6 +531,10 @@ Fase2_autogen/timestamp: \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/3.29.3/CMakeRCCompiler.cmake \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/3.29.3/CMakeSystem.cmake \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase2_autogen/moc_predefs.h \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialogmodificar.cpp \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialogmodificar.h \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialognuevopost.cpp \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialognuevopost.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/funciones.cpp \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/funciones.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/globales.cpp \
@@ -595,6 +542,8 @@ Fase2_autogen/timestamp: \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/main.cpp \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/matrizrelacion.cpp \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/matrizrelacion.h \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/widgetpost.cpp \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/widgetpost.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/windowadmin.cpp \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/windowadmin.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/windowmain.cpp \
@@ -603,6 +552,9 @@ Fase2_autogen/timestamp: \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/windowregister.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/windowuser.cpp \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/windowuser.h \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialogmodificar.ui \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialognuevopost.ui \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/widgetpost.ui \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/windowadmin.ui \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/windowmain.ui \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/windowregister.ui \

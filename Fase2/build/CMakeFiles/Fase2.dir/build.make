@@ -225,6 +225,66 @@ CMakeFiles/Fase2.dir/matrizrelacion.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Fase2.dir/matrizrelacion.cpp.s"
 	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\matrizrelacion.cpp" -o CMakeFiles\Fase2.dir\matrizrelacion.cpp.s
 
+CMakeFiles/Fase2.dir/dialogmodificar.cpp.obj: CMakeFiles/Fase2.dir/flags.make
+CMakeFiles/Fase2.dir/dialogmodificar.cpp.obj: CMakeFiles/Fase2.dir/includes_CXX.rsp
+CMakeFiles/Fase2.dir/dialogmodificar.cpp.obj: C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialogmodificar.cpp
+CMakeFiles/Fase2.dir/dialogmodificar.cpp.obj: CMakeFiles/Fase2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object CMakeFiles/Fase2.dir/dialogmodificar.cpp.obj"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Fase2.dir/dialogmodificar.cpp.obj -MF CMakeFiles\Fase2.dir\dialogmodificar.cpp.obj.d -o CMakeFiles\Fase2.dir\dialogmodificar.cpp.obj -c "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\dialogmodificar.cpp"
+
+CMakeFiles/Fase2.dir/dialogmodificar.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Fase2.dir/dialogmodificar.cpp.i"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\dialogmodificar.cpp" > CMakeFiles\Fase2.dir\dialogmodificar.cpp.i
+
+CMakeFiles/Fase2.dir/dialogmodificar.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Fase2.dir/dialogmodificar.cpp.s"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\dialogmodificar.cpp" -o CMakeFiles\Fase2.dir\dialogmodificar.cpp.s
+
+CMakeFiles/Fase2.dir/dialognuevopost.cpp.obj: CMakeFiles/Fase2.dir/flags.make
+CMakeFiles/Fase2.dir/dialognuevopost.cpp.obj: CMakeFiles/Fase2.dir/includes_CXX.rsp
+CMakeFiles/Fase2.dir/dialognuevopost.cpp.obj: C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialognuevopost.cpp
+CMakeFiles/Fase2.dir/dialognuevopost.cpp.obj: CMakeFiles/Fase2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object CMakeFiles/Fase2.dir/dialognuevopost.cpp.obj"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Fase2.dir/dialognuevopost.cpp.obj -MF CMakeFiles\Fase2.dir\dialognuevopost.cpp.obj.d -o CMakeFiles\Fase2.dir\dialognuevopost.cpp.obj -c "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\dialognuevopost.cpp"
+
+CMakeFiles/Fase2.dir/dialognuevopost.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Fase2.dir/dialognuevopost.cpp.i"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\dialognuevopost.cpp" > CMakeFiles\Fase2.dir\dialognuevopost.cpp.i
+
+CMakeFiles/Fase2.dir/dialognuevopost.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Fase2.dir/dialognuevopost.cpp.s"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\dialognuevopost.cpp" -o CMakeFiles\Fase2.dir\dialognuevopost.cpp.s
+
+CMakeFiles/Fase2.dir/widgetpost.cpp.obj: CMakeFiles/Fase2.dir/flags.make
+CMakeFiles/Fase2.dir/widgetpost.cpp.obj: CMakeFiles/Fase2.dir/includes_CXX.rsp
+CMakeFiles/Fase2.dir/widgetpost.cpp.obj: C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/widgetpost.cpp
+CMakeFiles/Fase2.dir/widgetpost.cpp.obj: CMakeFiles/Fase2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object CMakeFiles/Fase2.dir/widgetpost.cpp.obj"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Fase2.dir/widgetpost.cpp.obj -MF CMakeFiles\Fase2.dir\widgetpost.cpp.obj.d -o CMakeFiles\Fase2.dir\widgetpost.cpp.obj -c "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\widgetpost.cpp"
+
+CMakeFiles/Fase2.dir/widgetpost.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Fase2.dir/widgetpost.cpp.i"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\widgetpost.cpp" > CMakeFiles\Fase2.dir\widgetpost.cpp.i
+
+CMakeFiles/Fase2.dir/widgetpost.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Fase2.dir/widgetpost.cpp.s"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\widgetpost.cpp" -o CMakeFiles\Fase2.dir\widgetpost.cpp.s
+
+CMakeFiles/Fase2.dir/arbolabb.cpp.obj: CMakeFiles/Fase2.dir/flags.make
+CMakeFiles/Fase2.dir/arbolabb.cpp.obj: CMakeFiles/Fase2.dir/includes_CXX.rsp
+CMakeFiles/Fase2.dir/arbolabb.cpp.obj: C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/arbolabb.cpp
+CMakeFiles/Fase2.dir/arbolabb.cpp.obj: CMakeFiles/Fase2.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object CMakeFiles/Fase2.dir/arbolabb.cpp.obj"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Fase2.dir/arbolabb.cpp.obj -MF CMakeFiles\Fase2.dir\arbolabb.cpp.obj.d -o CMakeFiles\Fase2.dir\arbolabb.cpp.obj -c "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\arbolabb.cpp"
+
+CMakeFiles/Fase2.dir/arbolabb.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Fase2.dir/arbolabb.cpp.i"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\arbolabb.cpp" > CMakeFiles\Fase2.dir\arbolabb.cpp.i
+
+CMakeFiles/Fase2.dir/arbolabb.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Fase2.dir/arbolabb.cpp.s"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\arbolabb.cpp" -o CMakeFiles\Fase2.dir\arbolabb.cpp.s
+
 # Object files for target Fase2
 Fase2_OBJECTS = \
 "CMakeFiles/Fase2.dir/Fase2_autogen/mocs_compilation.cpp.obj" \
@@ -236,7 +296,11 @@ Fase2_OBJECTS = \
 "CMakeFiles/Fase2.dir/globales.cpp.obj" \
 "CMakeFiles/Fase2.dir/arbolavl.cpp.obj" \
 "CMakeFiles/Fase2.dir/windowregister.cpp.obj" \
-"CMakeFiles/Fase2.dir/matrizrelacion.cpp.obj"
+"CMakeFiles/Fase2.dir/matrizrelacion.cpp.obj" \
+"CMakeFiles/Fase2.dir/dialogmodificar.cpp.obj" \
+"CMakeFiles/Fase2.dir/dialognuevopost.cpp.obj" \
+"CMakeFiles/Fase2.dir/widgetpost.cpp.obj" \
+"CMakeFiles/Fase2.dir/arbolabb.cpp.obj"
 
 # External object files for target Fase2
 Fase2_EXTERNAL_OBJECTS =
@@ -251,6 +315,10 @@ Fase2.exe: CMakeFiles/Fase2.dir/globales.cpp.obj
 Fase2.exe: CMakeFiles/Fase2.dir/arbolavl.cpp.obj
 Fase2.exe: CMakeFiles/Fase2.dir/windowregister.cpp.obj
 Fase2.exe: CMakeFiles/Fase2.dir/matrizrelacion.cpp.obj
+Fase2.exe: CMakeFiles/Fase2.dir/dialogmodificar.cpp.obj
+Fase2.exe: CMakeFiles/Fase2.dir/dialognuevopost.cpp.obj
+Fase2.exe: CMakeFiles/Fase2.dir/widgetpost.cpp.obj
+Fase2.exe: CMakeFiles/Fase2.dir/arbolabb.cpp.obj
 Fase2.exe: CMakeFiles/Fase2.dir/build.make
 Fase2.exe: C:/Qt/6.7.2/mingw_64/lib/libQt6Widgets.a
 Fase2.exe: C:/Qt/6.7.2/mingw_64/lib/libQt6Gui.a
@@ -259,7 +327,7 @@ Fase2.exe: C:/Qt/6.7.2/mingw_64/lib/libQt6EntryPoint.a
 Fase2.exe: CMakeFiles/Fase2.dir/linkLibs.rsp
 Fase2.exe: CMakeFiles/Fase2.dir/objects1.rsp
 Fase2.exe: CMakeFiles/Fase2.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_12) "Linking CXX executable Fase2.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_16) "Linking CXX executable Fase2.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Fase2.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

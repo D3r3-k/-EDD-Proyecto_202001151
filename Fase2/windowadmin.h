@@ -35,6 +35,8 @@ private slots:
 
     void on_btnSubirSolicitudes_clicked();
 
+    void on_btnSubirPublicaciones_clicked();
+
 private:
     Ui::AdminWindow *ui;
 };

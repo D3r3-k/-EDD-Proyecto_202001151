@@ -42,6 +42,10 @@ private slots:
 
     void on_btnEliminarCuenta_clicked();
 
+    void on_btn_nuevo_post_clicked();
+
+    void on_btn_post_fecha_clicked();
+
 private:
     Ui::UserWindow *ui;
 };

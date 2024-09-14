@@ -3,6 +3,7 @@
 
 #include "Structs.h"
 #include <QTableWidget>
+#include <QScrollArea>
 #include <string>
 
 using namespace std;
@@ -12,7 +13,7 @@ extern QTableWidget* adminTablaUsuarios;
 extern QTableWidget* userTablaUsuarios;
 extern QTableWidget* userTablaEnviadas;
 extern QTableWidget* userTablaRecibidas;
-
+extern QScrollArea* userPostFeed;
 // TODO: Metodos Login
 void IniciarSesion(string email, string password);
 // TODO: Metodos Admin
@@ -32,6 +33,11 @@ void EliminarCuenta(string correo);
 ListaEnlazada::ListaEnlazada<Structs::Usuario> obtenerListaUsuariosLogeado();
 void ActualizarTablas();
 void ActualizarTablaAdmin(int opcion);
+int obtenerIdPublicaciones();
+void eliminarPublicacion(int id);
+Structs::Publicacion *buscarPost(int id);
+void ActualizarFeed();
+string convertirFecha(const std::string& fechaOriginal);
 }
 
 

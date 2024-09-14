@@ -1,4 +1,5 @@
 #include "windowuser.h"
+#include "dialognuevopost.h"
 #include "funciones.h"
 #include "globales.h"
 #include "windowadmin.h"
@@ -14,6 +15,7 @@ UserWindow::UserWindow(QWidget *parent)
     Func::userTablaUsuarios = ui->tableUsuarios;
     Func::userTablaEnviadas = ui->tableSolicitudesEnv;
     Func::userTablaRecibidas = ui->tableSolicitudesRec;
+    Func::userPostFeed = ui->scrollAreaPost;
 
     // MenuBar
     ui->menubar->setStyleSheet("QMenu { min-width: 120px; }");
@@ -25,12 +27,14 @@ UserWindow::UserWindow(QWidget *parent)
     // MenuBar
     QString user = QString::fromStdString(usuario_logeado->nombres);
     ui->menuBienvenido->setTitle("Bienvenido: "+user);
+
+    // Tab Publicaciones
+    Func::ActualizarFeed();
     // Tab Solicitudes
     ui->tableUsuarios->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableSolicitudesRec->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableSolicitudesEnv->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     Func::ActualizarTablas();
-
     // Tab Perfil
     ui->nombresLogLineEdit->setText(QString::fromStdString(usuario_logeado->nombres));
     ui->apellidosLogLineEdit->setText(QString::fromStdString(usuario_logeado->apellidos));
@@ -179,9 +183,30 @@ void UserWindow::on_btn_generar_reporte_clicked()
 
 void UserWindow::on_btnEliminarCuenta_clicked()
 {
-    Func::EliminarMiCuenta();
-    MainWindow *login = new MainWindow;
-    login->show();
-    this->close();
+    if (QMessageBox::question(nullptr, "Confirmación","¿Quieres eliminar tu cuenta?",QMessageBox::Yes|QMessageBox::No) == QMessageBox::Yes) {
+        Func::EliminarMiCuenta();
+        MainWindow *login = new MainWindow;
+        login->show();
+        this->close();
+    }
+}
+
+
+void UserWindow::on_btn_nuevo_post_clicked()
+{
+    // Abre el diálogo para crear un nuevo post
+    DialogNuevoPost dialog;
+    if (dialog.exec() == QDialog::Accepted) {
+        Func::ActualizarFeed();
+    }
+}
+
+
+
+
+
+void UserWindow::on_btn_post_fecha_clicked()
+{
+
 }
 

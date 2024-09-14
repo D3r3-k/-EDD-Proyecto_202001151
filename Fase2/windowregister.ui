@@ -114,7 +114,11 @@
         </widget>
        </item>
        <item row="0" column="1">
-        <widget class="QLineEdit" name="nombresLineEdit"/>
+        <widget class="QLineEdit" name="nombresLineEdit">
+         <property name="placeholderText">
+          <string>Nombres</string>
+         </property>
+        </widget>
        </item>
        <item row="1" column="0">
         <widget class="QLabel" name="apellidosLabel">
@@ -124,7 +128,11 @@
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="apellidosLineEdit"/>
+        <widget class="QLineEdit" name="apellidosLineEdit">
+         <property name="placeholderText">
+          <string>Apellidos</string>
+         </property>
+        </widget>
        </item>
        <item row="2" column="0">
         <widget class="QLabel" name="correoLabel">
@@ -134,7 +142,11 @@
         </widget>
        </item>
        <item row="2" column="1">
-        <widget class="QLineEdit" name="correoLineEdit"/>
+        <widget class="QLineEdit" name="correoLineEdit">
+         <property name="placeholderText">
+          <string>correo@gmail.com</string>
+         </property>
+        </widget>
        </item>
        <item row="3" column="0">
         <widget class="QLabel" name="fechaDeNacimientoLabel">
@@ -144,7 +156,11 @@
         </widget>
        </item>
        <item row="3" column="1">
-        <widget class="QDateEdit" name="fechaDeNacimientoDateEdit"/>
+        <widget class="QDateEdit" name="fechaDeNacimientoDateEdit">
+         <property name="displayFormat">
+          <string>dd/M/yyyy</string>
+         </property>
+        </widget>
        </item>
        <item row="4" column="0">
         <widget class="QLabel" name="contrasenaLabel">
@@ -157,6 +173,9 @@
         <widget class="QLineEdit" name="contrasenaLineEdit">
          <property name="echoMode">
           <enum>QLineEdit::EchoMode::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>*******</string>
          </property>
         </widget>
        </item>
@@ -171,6 +190,9 @@
         <widget class="QLineEdit" name="confirmarContrasenaLineEdit">
          <property name="echoMode">
           <enum>QLineEdit::EchoMode::Password</enum>
+         </property>
+         <property name="placeholderText">
+          <string>*******</string>
          </property>
         </widget>
        </item>

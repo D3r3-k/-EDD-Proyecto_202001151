@@ -256,6 +256,12 @@
 	"HEADERS" : 
 	[
 		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/ListaDoble.h",
+			"MU",
+			"EWIEGA46WW/moc_ListaDoble.cpp",
+			null
+		],
+		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/ListaEnlazada.h",
 			"MU",
 			"EWIEGA46WW/moc_ListaEnlazada.cpp",
@@ -268,9 +274,27 @@
 			null
 		],
 		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/arbolabb.h",
+			"MU",
+			"EWIEGA46WW/moc_arbolabb.cpp",
+			null
+		],
+		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/arbolavl.h",
 			"MU",
 			"EWIEGA46WW/moc_arbolavl.cpp",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/dialogmodificar.h",
+			"MU",
+			"EWIEGA46WW/moc_dialogmodificar.cpp",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/dialognuevopost.h",
+			"MU",
+			"EWIEGA46WW/moc_dialognuevopost.cpp",
 			null
 		],
 		[
@@ -289,6 +313,12 @@
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/matrizrelacion.h",
 			"MU",
 			"EWIEGA46WW/moc_matrizrelacion.cpp",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/widgetpost.h",
+			"MU",
+			"EWIEGA46WW/moc_widgetpost.cpp",
 			null
 		],
 		[
@@ -388,7 +418,22 @@
 	"SOURCES" : 
 	[
 		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/arbolabb.cpp",
+			"MU",
+			null
+		],
+		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/arbolavl.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/dialogmodificar.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/dialognuevopost.cpp",
 			"MU",
 			null
 		],
@@ -409,6 +454,11 @@
 		],
 		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/matrizrelacion.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/widgetpost.cpp",
 			"MU",
 			null
 		],
