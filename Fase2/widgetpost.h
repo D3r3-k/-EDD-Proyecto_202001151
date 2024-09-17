@@ -15,12 +15,18 @@ public:
     explicit WidgetPost(const int id, QWidget *parent = nullptr);
     ~WidgetPost();
     void setID(const int id);
-     int getID() const;
+    int getID() const;
 
 private slots:
     void on_pushButton_comentar_clicked();
 
     void on_eliminarButton_clicked();
+
+    void on_editarButton_clicked();
+
+    void on_pushButton_comentarios_clicked();
+
+    void on_pushButton_arbol_clicked();
 
 private:
     Ui::WidgetPost *ui;

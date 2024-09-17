@@ -53,9 +53,34 @@ ArbolABB::Nodo* ArbolABB::buscar(Nodo* nodo, const std::tm& fecha) const {
     return nodo;
 }
 
+// Funcion recursiva para obtener las publicaciones de un nodo
+ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::obtenerPublicaciones(Nodo* nodo, const std::tm& fecha) const {
+    if (nodo == nullptr) {
+        return ListaEnlazada::ListaEnlazada<Structs::Publicacion>();
+    }
+    if (mktime(const_cast<std::tm*>(&fecha)) < mktime(&nodo->fecha)) {
+        return obtenerPublicaciones(nodo->izq, fecha);
+    } else if (mktime(const_cast<std::tm*>(&fecha)) > mktime(&nodo->fecha)) {
+        return obtenerPublicaciones(nodo->der, fecha);
+    }
+    return nodo->publicaciones;
+}
+
+// Funcion recursiva para obtener las fechas de los nodos
+ListaEnlazada::ListaEnlazada<std::tm> ArbolABB::obtenerFechas(Nodo* nodo) const {
+    ListaEnlazada::ListaEnlazada<std::tm> lista;
+    if (nodo != nullptr) {
+        lista.insertar(nodo->fecha);
+        ListaEnlazada::ListaEnlazada<std::tm> izq = obtenerFechas(nodo->izq);
+        ListaEnlazada::ListaEnlazada<std::tm> der = obtenerFechas(nodo->der);
+        lista.concatenar(izq);
+        lista.concatenar(der);
+    }
+    return lista;
+}
+
 
 // TODO: Metodos publicos
-
 // Función para buscar un nodo en el árbol
 ArbolABB::Nodo* ArbolABB::buscar(const std::tm& fecha) const {
     return buscar(raiz, fecha);
@@ -121,4 +146,20 @@ void ArbolABB::generarDot(Nodo* nodo, std::ostream& out) const {
         out << "    \"" << id.str() << "\" -> \"" << idDer.str() << "\";\n";
         generarDot(nodo->der, out);
     }
+}
+
+// Método para limpiar el árbol
+void ArbolABB::limpiar() {
+    destruirArbol(raiz);
+    raiz = nullptr;
+}
+
+// Metodo para obtener las publicaciones de un nodo según la fecha
+ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::obtenerPublicaciones(const std::tm& fecha) const {
+    return obtenerPublicaciones(raiz, fecha);
+}
+
+// Método para obtener la lista de fechas
+ListaEnlazada::ListaEnlazada<std::tm> ArbolABB::obtenerFechas() const {
+    return obtenerFechas(raiz);
 }

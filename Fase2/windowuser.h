@@ -46,6 +46,16 @@ private slots:
 
     void on_btn_post_fecha_clicked();
 
+    void on_btn_post_recorrido_clicked();
+
+    void on_btn_generar_bst_clicked();
+
+    void on_ordenComboBox_currentIndexChanged(int index);
+
+    void on_cantidadSpinBox_valueChanged(int arg1);
+
+    void on_comboBox_post_fecha_currentTextChanged(const QString &arg1);
+
 private:
     Ui::UserWindow *ui;
 };

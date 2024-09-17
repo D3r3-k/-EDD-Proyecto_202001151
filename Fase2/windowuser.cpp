@@ -16,6 +16,10 @@ UserWindow::UserWindow(QWidget *parent)
     Func::userTablaEnviadas = ui->tableSolicitudesEnv;
     Func::userTablaRecibidas = ui->tableSolicitudesRec;
     Func::userPostFeed = ui->scrollAreaPost;
+    // inicializando los datos del posts
+    Func::selectedDate = ui->comboBox_post_fecha;
+    Func::selectedOrder = ui->ordenComboBox;
+    Func::countPost = ui->cantidadSpinBox;
 
     // MenuBar
     ui->menubar->setStyleSheet("QMenu { min-width: 120px; }");
@@ -27,7 +31,6 @@ UserWindow::UserWindow(QWidget *parent)
     // MenuBar
     QString user = QString::fromStdString(usuario_logeado->nombres);
     ui->menuBienvenido->setTitle("Bienvenido: "+user);
-
     // Tab Publicaciones
     Func::ActualizarFeed();
     // Tab Solicitudes
@@ -59,6 +62,52 @@ void UserWindow::on_actionCerrar_Sesion_triggered()
 }
 
 
+void UserWindow::on_inputBuscar_returnPressed()
+{
+    on_btnBuscar_clicked();
+}
+
+
+void UserWindow::on_actionPanel_Administrador_triggered()
+{
+    AdminWindow *admin = new AdminWindow;
+    admin->show();
+    this->close();
+}
+
+
+void UserWindow::on_nombresLogLineEdit_returnPressed()
+{
+    on_guardarModificacionButton_clicked();
+}
+
+
+void UserWindow::on_apellidosLogLineEdit_returnPressed()
+{
+    on_guardarModificacionButton_clicked();
+}
+
+
+void UserWindow::on_correoLogLineEdit_returnPressed()
+{
+    on_guardarModificacionButton_clicked();
+}
+
+
+void UserWindow::on_fechaDeNacimientoLogLineEdit_returnPressed()
+{
+    on_guardarModificacionButton_clicked();
+}
+
+
+void UserWindow::on_contrasenaLogLineEdit_returnPressed()
+{
+    on_guardarModificacionButton_clicked();
+}
+
+
+// METODOS PARA BUSQUEDAS
+
 void UserWindow::on_btnBuscar_clicked()
 {
     QString correo = ui->inputBuscar->text();
@@ -78,20 +127,45 @@ void UserWindow::on_btnBuscar_clicked()
 
 }
 
-
-void UserWindow::on_inputBuscar_returnPressed()
+// METODOS PARA LOS REPORTES
+void UserWindow::on_btn_generar_reporte_clicked()
 {
-    on_btnBuscar_clicked();
+    relaciones_amistad.graficar();
 }
 
 
-void UserWindow::on_actionPanel_Administrador_triggered()
+void UserWindow::on_btn_generar_bst_clicked()
 {
-    AdminWindow *admin = new AdminWindow;
-    admin->show();
-    this->close();
+
 }
 
+
+// METODOS PARA PUBLICACIONES
+
+void UserWindow::on_btn_nuevo_post_clicked()
+{
+    // Abre el diálogo para crear un nuevo post
+    DialogNuevoPost dialog;
+    if (dialog.exec() == QDialog::Accepted) {
+        Func::ActualizarFeed();
+    }
+}
+
+
+void UserWindow::on_btn_post_fecha_clicked()
+{
+    Func::ActualizarFeed();
+}
+
+
+void UserWindow::on_btn_post_recorrido_clicked()
+{
+    Func::ActualizarFeed();
+}
+
+
+
+// METODOS PARA EL PERFIL
 
 void UserWindow::on_btnModificarDatos_clicked()
 {
@@ -141,46 +215,6 @@ void UserWindow::on_guardarModificacionButton_clicked()
 }
 
 
-void UserWindow::on_nombresLogLineEdit_returnPressed()
-{
-    on_guardarModificacionButton_clicked();
-}
-
-
-void UserWindow::on_apellidosLogLineEdit_returnPressed()
-{
-    on_guardarModificacionButton_clicked();
-}
-
-
-void UserWindow::on_correoLogLineEdit_returnPressed()
-{
-    on_guardarModificacionButton_clicked();
-}
-
-
-void UserWindow::on_fechaDeNacimientoLogLineEdit_returnPressed()
-{
-    on_guardarModificacionButton_clicked();
-}
-
-
-void UserWindow::on_contrasenaLogLineEdit_returnPressed()
-{
-    on_guardarModificacionButton_clicked();
-}
-
-
-void ActualizarTablas(){
-
-}
-
-void UserWindow::on_btn_generar_reporte_clicked()
-{
-    relaciones_amistad.graficar();
-}
-
-
 void UserWindow::on_btnEliminarCuenta_clicked()
 {
     if (QMessageBox::question(nullptr, "Confirmación","¿Quieres eliminar tu cuenta?",QMessageBox::Yes|QMessageBox::No) == QMessageBox::Yes) {
@@ -192,21 +226,20 @@ void UserWindow::on_btnEliminarCuenta_clicked()
 }
 
 
-void UserWindow::on_btn_nuevo_post_clicked()
+void UserWindow::on_ordenComboBox_currentIndexChanged(int index)
 {
-    // Abre el diálogo para crear un nuevo post
-    DialogNuevoPost dialog;
-    if (dialog.exec() == QDialog::Accepted) {
-        Func::ActualizarFeed();
-    }
+    qInfo() << "Se cambio el orden a: " << QString::number(Func::selectedOrder->currentIndex());
 }
 
 
-
-
-
-void UserWindow::on_btn_post_fecha_clicked()
+void UserWindow::on_cantidadSpinBox_valueChanged(int arg1)
 {
+    qInfo() << "Se cambio la cantidad a: " << QString::number(Func::countPost->value());
+}
 
+
+void UserWindow::on_comboBox_post_fecha_currentTextChanged(const QString &arg1)
+{
+    qInfo() << "Se cambio la fecha a: " << Func::selectedDate->currentText();
 }
 

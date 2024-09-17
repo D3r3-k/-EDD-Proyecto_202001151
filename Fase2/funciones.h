@@ -5,15 +5,26 @@
 #include <QTableWidget>
 #include <QScrollArea>
 #include <string>
+#include <QComboBox>
+#include <QSpinBox>
 
 using namespace std;
 
 namespace Func {
+// GLOBAL PARA ADMIN
 extern QTableWidget* adminTablaUsuarios;
+// GLOBAL PARA SOLICITUDES - USER
 extern QTableWidget* userTablaUsuarios;
 extern QTableWidget* userTablaEnviadas;
 extern QTableWidget* userTablaRecibidas;
+// GLOBAL PARA PUBLICACIONES - USER
 extern QScrollArea* userPostFeed;
+extern QComboBox* selectedDate;
+extern QComboBox* selectedOrder;
+extern QSpinBox* countPost;
+
+
+
 // TODO: Metodos Login
 void IniciarSesion(string email, string password);
 // TODO: Metodos Admin
@@ -33,11 +44,13 @@ void EliminarCuenta(string correo);
 ListaEnlazada::ListaEnlazada<Structs::Usuario> obtenerListaUsuariosLogeado();
 void ActualizarTablas();
 void ActualizarTablaAdmin(int opcion);
-int obtenerIdPublicaciones();
+int obtenerPostID();
 void eliminarPublicacion(int id);
 Structs::Publicacion *buscarPost(int id);
 void ActualizarFeed();
 string convertirFecha(const std::string& fechaOriginal);
+string convertirFecha(const std::tm &fecha);
+tm convertirFechaTm(const std::string& fechaOriginal);
 }
 
 

@@ -13,13 +13,21 @@ class DialogNuevoPost : public QDialog
 
 public:
     explicit DialogNuevoPost(QWidget *parent = nullptr);
+    explicit DialogNuevoPost(const int id, QWidget *parent = nullptr);
     ~DialogNuevoPost();
+    void setID(const int id);
+    int getID() const;
+    std::string getPathImg();
+    void setPathImg(const std::string path);
 
 private slots:
     void on_buttonBox_accepted();
 
 private:
     Ui::DialogNuevoPost *ui;
+    int postID = -1;
+    std::string pathImg;
+    void llenarDatos(const int id);
 };
 
 #endif // DIALOGNUEVOPOST_H

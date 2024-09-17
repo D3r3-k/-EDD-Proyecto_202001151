@@ -198,7 +198,7 @@ namespace ListaEnlazada
                 temp = temp->next;
             }
 
-            return &temp->data; // Retorna un puntero al dato del nodo
+            return &temp->data;
         }
 
         // Verificar si la lista está vacía
@@ -207,7 +207,21 @@ namespace ListaEnlazada
             return cabeza == nullptr;
         }
 
-        // MÉTODOS DE PILA
+        // Metodo para concatenar dos listas
+        void concatenar(const ListaEnlazada &otra)
+        {
+            if (otra.estaVacia())
+                return;
+
+            Nodo *temp = cabeza;
+            while (temp->next)
+            {
+                temp = temp->next;
+            }
+            temp->next = clonar(otra.cabeza);
+        }
+
+        // TODO: MÉTODOS DE PILA
         // Insertar un nuevo nodo al inicio de la lista (PUSH)
         void push(const T &data)
         {

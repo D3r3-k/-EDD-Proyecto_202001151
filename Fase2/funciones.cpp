@@ -4,7 +4,6 @@
 #include "Structs.h"
 #include "nlohmann/json.hpp"
 #include "dialogmodificar.h"
-#include "widgetpost.h"
 
 #include <QMessageBox>
 #include <QTableWidget>
@@ -23,6 +22,9 @@ namespace Func
     QTableWidget *userTablaEnviadas = nullptr;
     QTableWidget *userTablaRecibidas = nullptr;
     QScrollArea *userPostFeed = nullptr;
+    QComboBox *selectedDate = nullptr;
+    QComboBox *selectedOrder = nullptr;
+    QSpinBox *countPost = nullptr;
 
     // TODO: metodos carga masiva
     void CargarUsuarios(string directorio)
@@ -188,11 +190,14 @@ namespace Func
         }
     }
 
-    void CargarPublicaciones(string directorio) {
-        try {
+    void CargarPublicaciones(string directorio)
+    {
+        try
+        {
             // Abrir el archivo JSON
             ifstream archivo(directorio);
-            if (!archivo.is_open()) {
+            if (!archivo.is_open())
+            {
                 throw runtime_error("No se pudo abrir el archivo para leer.");
             }
 
@@ -204,38 +209,46 @@ namespace Func
             archivo >> post;
 
             // Recorrer el JSON
-            for (const auto& p : post) {
+            for (const auto &p : post)
+            {
                 // Verificar si las claves existen
                 if (p.contains("correo") && p.contains("contenido") &&
-                    p.contains("fecha") && p.contains("hora")) {
+                    p.contains("fecha") && p.contains("hora"))
+                {
 
                     string correo = p["correo"].get<string>();
                     string contenido = p["contenido"].get<string>();
                     string _fecha = p["fecha"].get<string>();
                     string hora = p["hora"].get<string>();
 
-                    Structs::Usuario* autor = lista_usuarios.buscar(correo);
+                    Structs::Usuario *autor = lista_usuarios.buscar(correo);
 
-                    if (autor == nullptr) {
+                    if (autor == nullptr)
+                    {
                         noexisten++;
                         continue;
                     }
 
                     // Convertir la fecha
                     string fechaConvertida;
-                    try {
+                    try
+                    {
                         fechaConvertida = convertirFecha(_fecha);
-                    } catch (const std::runtime_error& e) {
+                    }
+                    catch (const std::runtime_error &e)
+                    {
                         conerror++;
                         continue;
                     }
 
                     // Crear Publicacion
-                    int newid = Func::obtenerIdPublicaciones() + 1;
+                    int newid = Func::obtenerPostID() + 1;
                     Structs::Publicacion nuevaPublicacion(newid, autor->correo, contenido, fechaConvertida, hora);
                     lista_publicaciones.insertar(nuevaPublicacion);
                     contador++;
-                } else {
+                }
+                else
+                {
                     conerror++;
                 }
             }
@@ -246,20 +259,23 @@ namespace Func
             QString stdnoexisten = QString::number(noexisten);
             QMessageBox::information(nullptr, "Información", "Publicaciones agregadas: " + stdagregados + "\nErrores: " + stderrores + "\nNo Existen autores: " + stdnoexisten);
         }
-        catch (const ifstream::failure& e) {
+        catch (const ifstream::failure &e)
+        {
             QMessageBox::information(nullptr, "Error", "Error de archivo: " + QString::fromStdString(e.what()));
         }
-        catch (const nlohmann::json::exception& e) {
+        catch (const nlohmann::json::exception &e)
+        {
             QMessageBox::information(nullptr, "Error", "Error de JSON: " + QString::fromStdString(e.what()));
         }
-        catch (const std::exception& e) {
+        catch (const std::exception &e)
+        {
             QMessageBox::information(nullptr, "Error", "Error inesperado: " + QString::fromStdString(e.what()));
         }
-        catch (...) {
+        catch (...)
+        {
             QMessageBox::information(nullptr, "Error", "Error desconocido.");
         }
     }
-
 
     // TODO: Metodos Login
     void IniciarSesion(std::string email, std::string password)
@@ -557,15 +573,13 @@ namespace Func
             Structs::Usuario *u = lista.obtener(i);
             if (u)
             {
-                // Eliminar si es el usuario logueado
                 if (u->correo == usuario_logeado->correo)
                 {
                     lista.eliminar(i);
-                    --i; // Ajustar el índice después de la eliminación
+                    --i;
                     continue;
                 }
 
-                // Eliminar si ya es amigo del usuario logueado
                 bool esAmigo = false;
                 for (int j = 0; j < amigos.size(); ++j)
                 {
@@ -580,11 +594,10 @@ namespace Func
                 if (esAmigo)
                 {
                     lista.eliminar(i);
-                    --i; // Ajustar el índice después de la eliminación
+                    --i;
                     continue;
                 }
 
-                // Eliminar si ya se le ha enviado una solicitud
                 bool solicitudEnviada = false;
                 for (int k = 0; k < enviadas.size(); ++k)
                 {
@@ -599,11 +612,10 @@ namespace Func
                 if (solicitudEnviada)
                 {
                     lista.eliminar(i);
-                    --i; // Ajustar el índice después de la eliminación
+                    --i;
                     continue;
                 }
 
-                // Eliminar si ya ha enviado una solicitud al usuario logueado
                 bool solicitudRecibida = false;
                 for (int l = 0; l < recibidas.size(); ++l)
                 {
@@ -618,7 +630,7 @@ namespace Func
                 if (solicitudRecibida)
                 {
                     lista.eliminar(i);
-                    --i; // Ajustar el índice después de la eliminación
+                    --i;
                 }
             }
         }
@@ -652,40 +664,41 @@ namespace Func
         }
     }
 
-    int obtenerIdPublicaciones()
+    int obtenerPostID()
     {
-        if (lista_publicaciones.size() == 0)
-        {
-            return -1;
+        int id = -1;
+        Structs::Publicacion *p = lista_publicaciones.obtener(lista_publicaciones.size()-1);
+        if (p) {
+            id = p->id;
         }
-        int id_mas_grande = -1;
-        for (int i = 0; i < lista_publicaciones.size(); i++)
-        {
-            Structs::Publicacion *p = lista_publicaciones.obtener(i);
-            if (p && p->id > id_mas_grande)
-            {
-                id_mas_grande = p->id;
-            }
-        }
-        return id_mas_grande;
+        return id;
     }
 
-    void eliminarPublicacion(int id){
-        for (int i = 0; i < lista_publicaciones.size(); ++i) {
+    void eliminarPublicacion(int id)
+    {
+        for (int i = 0; i < lista_publicaciones.size(); ++i)
+        {
             Structs::Publicacion *p = lista_publicaciones.obtener(i);
-            if (p) {
-                if (p->id == id) {
+            if (p)
+            {
+                if (p->id == id)
+                {
                     lista_publicaciones.eliminarPosicion(i);
+                    break;
                 }
             }
         }
     }
 
-    Structs::Publicacion *buscarPost(int id){
-        for (int i = 0; i < lista_publicaciones.size(); ++i) {
+    Structs::Publicacion *buscarPost(int id)
+    {
+        for (int i = 0; i < lista_publicaciones.size(); ++i)
+        {
             Structs::Publicacion *p = lista_publicaciones.obtener(i);
-            if (p) {
-                if (p->id == id) {
+            if (p)
+            {
+                if (p->id == id)
+                {
                     return p;
                 }
             }
@@ -693,50 +706,135 @@ namespace Func
         return nullptr;
     }
 
-    void ActualizarFeed() {
+    void ActualizarFeed()
+    {
         QWidget *contentWidget = userPostFeed->widget();
-        QVBoxLayout *layout = qobject_cast<QVBoxLayout*>(contentWidget->layout());
-        if (!layout) {
+        QVBoxLayout *layout = qobject_cast<QVBoxLayout *>(contentWidget->layout());
+        if (!layout)
+        {
             layout = new QVBoxLayout(contentWidget);
             contentWidget->setLayout(layout);
         }
-        while (QLayoutItem *item = layout->takeAt(0)) {
-            if (item->widget()) {
+        while (QLayoutItem *item = layout->takeAt(0))
+        {
+            if (item->widget())
+            {
                 item->widget()->deleteLater();
             }
             delete item;
         }
-        ArbolABB arbolabb;
-        for (int i = 0; i < lista_publicaciones.size(); ++i) {
-            Structs::Publicacion *p = lista_publicaciones.obtener(i);
-            if (p) {
-                p->mostrarPublicacion();
-                std::tm fecha = {};
-                std::istringstream ss(p->fecha);
-                ss >> std::get_time(&fecha, "%d-%m-%Y %H:%M:%S");
-                if (ss.fail()) {
-                    throw std::runtime_error("Error al parsear la fecha.");
-                }
-                arbolabb.insertar(fecha, *p);
 
-                WidgetPost *newPost = new WidgetPost(p->id);
-                layout->addWidget(newPost);
+        // ACTUALIZAR EL FEED CON LA LISTA DE PUBLICACIONES
+        std::tm fecha;
+        if (selectedDate->currentText().contains("Todos")) {
+            fecha = convertirFechaTm("01-01-0001");
+        }else{
+            fecha = convertirFechaTm(selectedDate->currentText().toStdString());
+        }
+
+        ArbolABB posts;
+
+        ListaEnlazada::ListaEnlazada<Structs::Usuario> amigos = relaciones_amistad.obtenerAmigos(usuario_logeado->correo);
+        for (int i = 0; i < lista_publicaciones.size(); i++)
+        {
+            Structs::Publicacion *publicacion = lista_publicaciones.obtener(i);
+            std::tm _fecha = convertirFechaTm(publicacion->fecha);
+            if (amigos.size() == 0) {
+                // Verifica solo las publicaciones del usuario logueado
+                if (usuario_logeado->correo == publicacion->correo_autor) {
+                    posts.insertar(_fecha, *publicacion);
+                }
+            } else {
+                // Proceder a recorrer la lista de amigos como antes
+                for (int i = 0; i < amigos.size(); i++) {
+                    Structs::Usuario *amigo = amigos.obtener(i);
+                    if (amigo == nullptr) {
+                        continue;
+                    }
+                    if (usuario_logeado->correo == publicacion->correo_autor || amigo->correo == publicacion->correo_autor) {
+                        posts.insertar(_fecha, *publicacion);
+                        break;
+                    }
+                }
             }
         }
-        std::string path_grafica = arbolabb.graficar();
-        qInfo()<<"Graficado en: "+path_grafica;
-    }
 
-    string convertirFecha(const std::string& fechaOriginal) {
-        std::tm fecha = {};
-        std::istringstream ss(fechaOriginal);
-        ss >> std::get_time(&fecha, "%Y-%m-%d"); // Formato de entrada: aaaa-mm-dd
-        if (ss.fail()) {
-            throw std::runtime_error("Error al parsear la fecha.");
+        ListaEnlazada::ListaEnlazada<std::tm> fechas = posts.obtenerFechas();
+        selectedDate->clear();
+        selectedDate->addItem("Todos");
+        for (int i = 0; i < fechas.size(); ++i) {
+            std::tm *f = fechas.obtener(i);
+            if (f) {
+                QString fecha = QString::fromStdString(convertirFecha(*f));
+                qInfo() << ">>> " << fecha << "Cantidad: " << QString::number(posts.obtenerPublicaciones(*f).size());
+                selectedDate->addItem(fecha);
+            }
         }
 
+
+
+    }
+
+    std::string convertirFecha(const std::string &fechaOriginal)
+    {
+        std::tm fecha = {};
+        std::vector<std::string> formatos = {
+            "%d-%m-%Y", // dd-mm-aaaa
+            "%Y-%m-%d", // aaaa-mm-dd
+            "%m/%d/%Y", // mm/dd/aaaa
+            "%d/%m/%Y"  // dd/mm/aaaa
+        };
+
+        for (const auto &formato : formatos)
+        {
+            std::istringstream ss(fechaOriginal);
+            ss >> std::get_time(&fecha, formato.c_str());
+            if (!ss.fail())
+            {
+                std::ostringstream oss;
+                oss << std::put_time(&fecha, "%d-%m-%Y");
+                return oss.str();
+            }
+        }
+
+        throw std::runtime_error("Error al parsear la fecha.");
+    }
+
+    std::string convertirFecha(const std::tm &fecha) {
+        // Crear un stringstream para construir la fecha en el formato deseado
         std::ostringstream oss;
-        oss << std::put_time(&fecha, "%d-%m-%Y"); // Formato de salida: dd-mm-aaaa
+
+        // Convertir el std::tm a string en el formato "dd-mm-yyyy"
+        oss << std::put_time(&fecha, "%d-%m-%Y");
+
+        // Devolver la cadena formateada
         return oss.str();
     }
+
+    std::tm convertirFechaTm(const std::string &fechaOriginal)
+    {
+        std::tm fecha = {};
+        std::vector<std::string> formatos = {
+            "%d-%m-%Y", // dd-mm-aaaa
+            "%Y-%m-%d", // aaaa-mm-dd
+            "%m/%d/%Y", // mm/dd/aaaa
+            "%d/%m/%Y"  // dd/mm/aaaa
+        };
+
+        for (const auto &formato : formatos)
+        {
+            std::istringstream ss(fechaOriginal);
+            ss >> std::get_time(&fecha, "%d-%m-%Y");
+            if (!ss.fail())
+            {
+                return fecha;
+            }
+        }
+
+        throw std::runtime_error("Error al parsear la fecha.");
+    }
+
+
+
+
 }
