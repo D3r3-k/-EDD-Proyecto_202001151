@@ -79,6 +79,74 @@ ListaEnlazada::ListaEnlazada<std::tm> ArbolABB::obtenerFechas(Nodo* nodo) const 
     return lista;
 }
 
+// Función recursiva auxiliar para generar el archivo .dot
+void ArbolABB::generarDot(Nodo* nodo, std::ostream& out) const {
+    if (nodo == nullptr) {
+        return;
+    }
+
+    // Crear un identificador único basado en la fecha
+    std::ostringstream id;
+    id << "nodo_" << nodo->fecha.tm_year + 1900 << "_" << nodo->fecha.tm_mon + 1 << "_" << nodo->fecha.tm_mday;
+    
+    // Escribir el nodo actual
+    out << "    \"" << id.str() << "\" [label=\"" << nodo->fecha.tm_mday << "/" << nodo->fecha.tm_mon + 1 << "/" << (nodo->fecha.tm_year + 1900) << "\"];\n";
+    
+    // Llamar a la función recursivamente para los hijos
+    if (nodo->izq != nullptr) {
+        std::ostringstream idIzq;
+        idIzq << "nodo_" << nodo->izq->fecha.tm_year + 1900 << "_" << nodo->izq->fecha.tm_mon + 1 << "_" << nodo->izq->fecha.tm_mday;
+        out << "    \"" << id.str() << "\" -> \"" << idIzq.str() << "\";\n";
+        generarDot(nodo->izq, out);
+    }
+    if (nodo->der != nullptr) {
+        std::ostringstream idDer;
+        idDer << "nodo_" << nodo->der->fecha.tm_year + 1900 << "_" << nodo->der->fecha.tm_mon + 1 << "_" << nodo->der->fecha.tm_mday;
+        out << "    \"" << id.str() << "\" -> \"" << idDer.str() << "\";\n";
+        generarDot(nodo->der, out);
+    }
+}
+
+// Método para recorrer el árbol in-order
+void ArbolABB::inOrdenRecursivo(Nodo* nodo, ListaEnlazada::ListaEnlazada<Structs::Publicacion>& lista) {
+    if (nodo != nullptr) {
+        inOrdenRecursivo(nodo->izq, lista);
+        for (int i = 0; i < nodo->publicaciones.size(); ++i) {
+            Structs::Publicacion *p = nodo->publicaciones.obtener(i);
+            if (p) {
+                lista.insertar(*p);
+            }
+        }
+        inOrdenRecursivo(nodo->der, lista);
+    }
+}
+
+void ArbolABB::preOrdenRecursivo(Nodo* nodo, ListaEnlazada::ListaEnlazada<Structs::Publicacion>& lista) {
+    if (nodo != nullptr) {
+        for (int i = 0; i < nodo->publicaciones.size(); ++i) {
+            Structs::Publicacion *p = nodo->publicaciones.obtener(i);
+            if (p) {
+                lista.insertar(*p);
+            }
+        }
+        preOrdenRecursivo(nodo->izq, lista);
+        preOrdenRecursivo(nodo->der, lista);
+    }
+}
+
+void ArbolABB::postOrdenRecursivo(Nodo* nodo, ListaEnlazada::ListaEnlazada<Structs::Publicacion>& lista) {
+    if (nodo != nullptr) {
+        postOrdenRecursivo(nodo->izq, lista);
+        postOrdenRecursivo(nodo->der, lista);
+        for (int i = 0; i < nodo->publicaciones.size(); ++i) {
+            Structs::Publicacion *p = nodo->publicaciones.obtener(i);
+            if (p) {
+                lista.insertar(*p);
+            }
+        }
+    }
+}
+
 
 // TODO: Metodos publicos
 // Función para buscar un nodo en el árbol
@@ -120,34 +188,6 @@ std::string ArbolABB::graficar() {
     return "arbolABB.png";
 }
 
-// Función recursiva auxiliar para generar el archivo .dot
-void ArbolABB::generarDot(Nodo* nodo, std::ostream& out) const {
-    if (nodo == nullptr) {
-        return;
-    }
-
-    // Crear un identificador único basado en la fecha
-    std::ostringstream id;
-    id << "nodo_" << nodo->fecha.tm_year + 1900 << "_" << nodo->fecha.tm_mon + 1 << "_" << nodo->fecha.tm_mday;
-    
-    // Escribir el nodo actual
-    out << "    \"" << id.str() << "\" [label=\"" << nodo->fecha.tm_mday << "/" << nodo->fecha.tm_mon + 1 << "/" << (nodo->fecha.tm_year + 1900) << "\"];\n";
-    
-    // Llamar a la función recursivamente para los hijos
-    if (nodo->izq != nullptr) {
-        std::ostringstream idIzq;
-        idIzq << "nodo_" << nodo->izq->fecha.tm_year + 1900 << "_" << nodo->izq->fecha.tm_mon + 1 << "_" << nodo->izq->fecha.tm_mday;
-        out << "    \"" << id.str() << "\" -> \"" << idIzq.str() << "\";\n";
-        generarDot(nodo->izq, out);
-    }
-    if (nodo->der != nullptr) {
-        std::ostringstream idDer;
-        idDer << "nodo_" << nodo->der->fecha.tm_year + 1900 << "_" << nodo->der->fecha.tm_mon + 1 << "_" << nodo->der->fecha.tm_mday;
-        out << "    \"" << id.str() << "\" -> \"" << idDer.str() << "\";\n";
-        generarDot(nodo->der, out);
-    }
-}
-
 // Método para limpiar el árbol
 void ArbolABB::limpiar() {
     destruirArbol(raiz);
@@ -163,3 +203,24 @@ ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::obtenerPublicacione
 ListaEnlazada::ListaEnlazada<std::tm> ArbolABB::obtenerFechas() const {
     return obtenerFechas(raiz);
 }
+
+// Método para obtener una lista enlazada de publicaciones en orden in-order
+ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::inorder() {
+    ListaEnlazada::ListaEnlazada<Structs::Publicacion> lista;
+    inOrdenRecursivo(raiz, lista);
+    return lista;
+}
+
+ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::preorder() {
+    ListaEnlazada::ListaEnlazada<Structs::Publicacion> lista;
+    preOrdenRecursivo(raiz, lista);
+    return lista;
+}
+
+ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::postorder() {
+    ListaEnlazada::ListaEnlazada<Structs::Publicacion> lista;
+    postOrdenRecursivo(raiz, lista);
+    return lista;
+}
+
+// Método para obtener la lista de publicaciones de un nodo según la fecha, orden y cantidad

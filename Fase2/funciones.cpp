@@ -4,6 +4,7 @@
 #include "Structs.h"
 #include "nlohmann/json.hpp"
 #include "dialogmodificar.h"
+#include "widgetpost.h"
 
 #include <QMessageBox>
 #include <QTableWidget>
@@ -667,8 +668,9 @@ namespace Func
     int obtenerPostID()
     {
         int id = -1;
-        Structs::Publicacion *p = lista_publicaciones.obtener(lista_publicaciones.size()-1);
-        if (p) {
+        Structs::Publicacion *p = lista_publicaciones.obtener(lista_publicaciones.size() - 1);
+        if (p)
+        {
             id = p->id;
         }
         return id;
@@ -726,32 +728,41 @@ namespace Func
 
         // ACTUALIZAR EL FEED CON LA LISTA DE PUBLICACIONES
         std::tm fecha;
-        if (selectedDate->currentText().contains("Todos")) {
+        if (selectedDate->currentText().contains("Todos"))
+        {
             fecha = convertirFechaTm("01-01-0001");
-        }else{
+        }
+        else
+        {
             fecha = convertirFechaTm(selectedDate->currentText().toStdString());
         }
 
         ArbolABB posts;
-
         ListaEnlazada::ListaEnlazada<Structs::Usuario> amigos = relaciones_amistad.obtenerAmigos(usuario_logeado->correo);
         for (int i = 0; i < lista_publicaciones.size(); i++)
         {
             Structs::Publicacion *publicacion = lista_publicaciones.obtener(i);
             std::tm _fecha = convertirFechaTm(publicacion->fecha);
-            if (amigos.size() == 0) {
+            if (amigos.size() == 0)
+            {
                 // Verifica solo las publicaciones del usuario logueado
-                if (usuario_logeado->correo == publicacion->correo_autor) {
+                if (usuario_logeado->correo == publicacion->correo_autor)
+                {
                     posts.insertar(_fecha, *publicacion);
                 }
-            } else {
+            }
+            else
+            {
                 // Proceder a recorrer la lista de amigos como antes
-                for (int i = 0; i < amigos.size(); i++) {
+                for (int i = 0; i < amigos.size(); i++)
+                {
                     Structs::Usuario *amigo = amigos.obtener(i);
-                    if (amigo == nullptr) {
+                    if (amigo == nullptr)
+                    {
                         continue;
                     }
-                    if (usuario_logeado->correo == publicacion->correo_autor || amigo->correo == publicacion->correo_autor) {
+                    if (usuario_logeado->correo == publicacion->correo_autor || amigo->correo == publicacion->correo_autor)
+                    {
                         posts.insertar(_fecha, *publicacion);
                         break;
                     }
@@ -762,18 +773,51 @@ namespace Func
         ListaEnlazada::ListaEnlazada<std::tm> fechas = posts.obtenerFechas();
         selectedDate->clear();
         selectedDate->addItem("Todos");
-        for (int i = 0; i < fechas.size(); ++i) {
+        int index = -1;
+        for (int i = 0; i < fechas.size(); ++i)
+        {
             std::tm *f = fechas.obtener(i);
-            if (f) {
+            if (f)
+            {
+                if (f->tm_year == fecha.tm_year && f->tm_mon == fecha.tm_mon && f->tm_mday == fecha.tm_mday)
+                {
+                    index = i;
+                }
                 QString fecha = QString::fromStdString(convertirFecha(*f));
                 qInfo() << ">>> " << fecha << "Cantidad: " << QString::number(posts.obtenerPublicaciones(*f).size());
                 selectedDate->addItem(fecha);
             }
         }
+        selectedDate->setCurrentIndex(index + 1);
+
+        int orden = selectedOrder->currentIndex();
+        int cantidad = countPost->value();
+        ListaEnlazada::ListaEnlazada<Structs::Publicacion> posts_feed;
+
+        // si la fecha es 01-01-0001, se obtienen todas las publicaciones
+        std::string _f = convertirFecha(fecha);
+        if (_f == "01-01-0001")
+        {
+            posts_feed = posts.inorder();
+        }
+        else
+        {
+            posts_feed = posts.obtenerPublicaciones(fecha);
+        }
 
 
-
+        for (int i = 0; i < posts_feed.size(); ++i)
+        {
+            Structs::Publicacion *p = posts_feed.obtener(i);
+            if (p)
+            {
+                WidgetPost *newPost = new WidgetPost(p->id);
+                layout->addWidget(newPost);
+            }
+        }
     }
+
+    // SEPARAR LAS FUNCIONES PARA OBTENER FECHAS - OBTENER PUBLICACIONES - ACTUALIZAR TABLA
 
     std::string convertirFecha(const std::string &fechaOriginal)
     {
@@ -800,7 +844,8 @@ namespace Func
         throw std::runtime_error("Error al parsear la fecha.");
     }
 
-    std::string convertirFecha(const std::tm &fecha) {
+    std::string convertirFecha(const std::tm &fecha)
+    {
         // Crear un stringstream para construir la fecha en el formato deseado
         std::ostringstream oss;
 
@@ -833,8 +878,5 @@ namespace Func
 
         throw std::runtime_error("Error al parsear la fecha.");
     }
-
-
-
 
 }

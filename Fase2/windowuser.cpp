@@ -225,21 +225,3 @@ void UserWindow::on_btnEliminarCuenta_clicked()
     }
 }
 
-
-void UserWindow::on_ordenComboBox_currentIndexChanged(int index)
-{
-    qInfo() << "Se cambio el orden a: " << QString::number(Func::selectedOrder->currentIndex());
-}
-
-
-void UserWindow::on_cantidadSpinBox_valueChanged(int arg1)
-{
-    qInfo() << "Se cambio la cantidad a: " << QString::number(Func::countPost->value());
-}
-
-
-void UserWindow::on_comboBox_post_fecha_currentTextChanged(const QString &arg1)
-{
-    qInfo() << "Se cambio la fecha a: " << Func::selectedDate->currentText();
-}
-
