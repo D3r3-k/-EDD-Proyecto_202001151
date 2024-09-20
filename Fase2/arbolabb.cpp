@@ -205,22 +205,58 @@ ListaEnlazada::ListaEnlazada<std::tm> ArbolABB::obtenerFechas() const {
 }
 
 // Método para obtener una lista enlazada de publicaciones en orden in-order
-ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::inorder() {
+ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::inorder(const int cantidad) {
     ListaEnlazada::ListaEnlazada<Structs::Publicacion> lista;
     inOrdenRecursivo(raiz, lista);
+    // dejar solo la cantidad de publicaciones en la lista
+    for (int i = lista.size(); i > cantidad; --i) {
+        lista.eliminarFinal();
+    }
     return lista;
 }
 
-ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::preorder() {
+ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::preorder(const int cantidad) {
     ListaEnlazada::ListaEnlazada<Structs::Publicacion> lista;
     preOrdenRecursivo(raiz, lista);
+    // dejar solo la cantidad de publicaciones en la lista
+    for (int i = lista.size(); i > cantidad; --i) {
+        lista.eliminarFinal();
+    }
     return lista;
 }
 
-ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::postorder() {
+ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::postorder(const int cantidad) {
     ListaEnlazada::ListaEnlazada<Structs::Publicacion> lista;
     postOrdenRecursivo(raiz, lista);
+    // dejar solo la cantidad de publicaciones en la lista
+    for (int i = lista.size(); i > cantidad; --i) {
+        lista.eliminarFinal();
+    }
     return lista;
 }
 
 // Método para obtener la lista de publicaciones de un nodo según la fecha, orden y cantidad
+ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::obtenerPublicaciones(const std::tm &fecha, const int orden, int cantidad) {
+    ListaEnlazada::ListaEnlazada<Structs::Publicacion> lista;
+    if (orden == 0)
+    {
+        inOrdenRecursivo(raiz, lista);
+    }
+    else if (orden == 1)
+    {
+        preOrdenRecursivo(raiz, lista);
+    }
+    else if (orden == 2)
+    {
+        postOrdenRecursivo(raiz, lista);
+    }
+
+    // dejar solo la cantidad de publicaciones en la lista
+    for (int i = lista.size(); i > cantidad; --i) {
+        lista.eliminarFinal();
+    }
+
+
+    return lista;
+}
+

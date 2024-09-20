@@ -39,7 +39,6 @@ public:
     void agregarRelacion(Structs::Usuario *user1, Structs::Usuario *user2);
     void eliminarRelacionesUsuario(string correo_usuario);
     bool verificarRelacion(string correo1, string correo2);
-    void imprimir();
     std::string graficar();
     ListaEnlazada::ListaEnlazada<Structs::Usuario> obtenerAmigos(string correo);
     bool estaVacio();

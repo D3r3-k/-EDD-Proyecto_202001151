@@ -206,7 +206,7 @@ void AdminWindow::on_pushButton_reportes_generar_clicked()
     QString ruta_imagen_friends = QString::fromStdString(path_friends);
     QPixmap imagen3(ruta_imagen_friends);
     QPixmap imagenEscalada3 = imagen3.scaled(ui->img_amistades->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    ui->img_publicaciones->setPixmap(imagenEscalada3);
+    ui->img_amistades->setPixmap(imagenEscalada3);
     img_amistades = path_friends;
 }
 

@@ -19,41 +19,48 @@ extern QTableWidget* userTablaEnviadas;
 extern QTableWidget* userTablaRecibidas;
 // GLOBAL PARA PUBLICACIONES - USER
 extern QScrollArea* userPostFeed;
+extern QScrollArea* userFriends;
 extern QComboBox* selectedDate;
 extern QComboBox* selectedOrder;
 extern QSpinBox* countPost;
 
-
-
 // TODO: Metodos Login
 void IniciarSesion(string email, string password);
+void CerrarSesion();
 // TODO: Metodos Admin
 void ActualizarTablaUsuariosAdmin(QTableWidget* table,ListaEnlazada::ListaEnlazada<Structs::Usuario> &lista);
 void CargarUsuarios(string directorio);
 void CargarSolicitudes(string directorio);
 void CargarPublicaciones(string directorio);
-// TODO: Metodos Usuario
+void EliminarCuenta(string correo);
+void ActualizarTablaAdmin(int opcion);
+string graficarPublicaciones();
+// TODO: Metodos usuario / Publicaciones
+int obtenerPostID();
+void eliminarPublicacion(int id);
+Structs::Publicacion *buscarPost(int id);
+void modificarPublicacion(int id, std::string contenido, std::string pathImg);
+void ComentarPublicacion(int id, StructsComment::Comentario comentario);
+void actualizarListaFechas();
+void actualizarArbolPost();
+void ActualizarFeed();
+
+// TODO: Metodos Usuario / Solicitudes
 void ActualizarTablaUsuarios(QTableWidget* table);
 void ActualizarTablaRecibidos(QTableWidget* table);
 void ActualizarTablaEnviados(QTableWidget* table);
-void EliminarMiCuenta();
-void EliminarCuenta(string correo);
+void ActualizarTablas();
 
+// TODO: Metodos usuario / reportes
+ListaEnlazada::ListaEnlazada<Structs::ReportePosts> obtenerReporteFechasPost();
+
+// TODO: metodos Usuario / Perfil
+void EliminarMiCuenta();
+void ActualizarListaAmigos();
 
 // TODO: Metodos extras
 ListaEnlazada::ListaEnlazada<Structs::Usuario> obtenerListaUsuariosLogeado();
-void ActualizarTablaAdmin(int opcion);
-void ActualizarTablas();
-// Publicaciones
-Structs::Publicacion *buscarPost(int id);
-void modificarPublicacion(int id, std::string contenido, std::string pathImg);
-void eliminarPublicacion(int id);
 void eliminarPublicacionUsuario(std::string correo);
-int obtenerPostID();
-string graficarPublicaciones();
-void ComentarPublicacion(int id, StructsComment::Comentario comentario);
-
-void ActualizarFeed();
 string convertirFecha(const std::string& fechaOriginal);
 string convertirFecha(const std::tm &fecha);
 tm convertirFechaTm(const std::string& fechaOriginal);

@@ -4,6 +4,7 @@
 #include "Structs.h"
 #include "nlohmann/json.hpp"
 #include "dialogmodificar.h"
+#include "widgetfriend.h"
 #include "widgetpost.h"
 
 #include <QMessageBox>
@@ -23,11 +24,104 @@ namespace Func
     QTableWidget *userTablaEnviadas = nullptr;
     QTableWidget *userTablaRecibidas = nullptr;
     QScrollArea *userPostFeed = nullptr;
+    QScrollArea *userFriends = nullptr;
     QComboBox *selectedDate = nullptr;
     QComboBox *selectedOrder = nullptr;
     QSpinBox *countPost = nullptr;
+    // Para las publicaciones
+    ArbolABB posts;
+    tm fecha;
 
-    // TODO: metodos carga masiva
+
+
+    // TODO: Metodos Login
+    void IniciarSesion(std::string email, std::string password)
+    {
+        Structs::Usuario *user = lista_usuarios.buscar(email);
+        if (user != nullptr && user->contrasena == password)
+        {
+            usuario_logeado = user;
+        }
+        else
+        {
+            QMessageBox::information(nullptr, "Iniciar Sesión", "Credenciales no válidas.");
+        }
+    }
+
+    // TODO: Metodos Admin
+    void ActualizarTablaUsuariosAdmin(QTableWidget *table, ListaEnlazada::ListaEnlazada<Structs::Usuario> &lista)
+    {
+        // Limpiar la tabla antes de agregar nuevos elementos
+        table->clearContents();
+        table->setRowCount(lista.size()); // Ajustar el número de filas según el tamaño de la lista
+
+        int row = 0;
+        // Recorremos la lista para agregar los elementos a la tabla
+        for (int i = 0; i < lista.size(); ++i)
+        {
+            Structs::Usuario *temp = lista.obtener(i);
+            if (temp)
+            {
+                QTableWidgetItem *nombreItem = new QTableWidgetItem(QString::fromStdString(temp->nombres));
+                QTableWidgetItem *apellidoItem = new QTableWidgetItem(QString::fromStdString(temp->apellidos));
+                QTableWidgetItem *emailItem = new QTableWidgetItem(QString::fromStdString(temp->correo));
+                QTableWidgetItem *fechaItem = new QTableWidgetItem(QString::fromStdString(temp->fechaNacimiento));
+
+                // Agregamos los datos a la tabla
+                table->setItem(row, 0, nombreItem);
+                table->setItem(row, 1, apellidoItem);
+                table->setItem(row, 2, emailItem);
+                table->setItem(row, 3, fechaItem);
+
+                // Capturar el id por valor en las lambdas
+                string correo = temp->correo;
+
+                // Crear botones de modificar y eliminar
+                QPushButton *modificarButton = new QPushButton("Modificar");
+                QPushButton *eliminarButton = new QPushButton("Eliminar");
+
+                // Conectar los botones a sus slots
+                QObject::connect(modificarButton, &QPushButton::clicked, [correo, row]()
+                                 {
+                                     DialogModificar dialog(correo);
+                                     dialog.exec();
+                                     Func::ActualizarTablaAdmin(0); });
+
+                QObject::connect(eliminarButton, &QPushButton::clicked, [correo, row, table]()
+                                 {
+                                     if (usuario_logeado->correo == correo) {
+                                         QMessageBox::warning(nullptr,"Eliminar usuario","No se puede eliminar el usuario logeado.");
+                                         return;
+                                     }else{
+                                         Func::EliminarCuenta(correo);
+                                         Func::ActualizarTablaAdmin(0);
+                                     } });
+
+                // Crear contenedores de botones separados para cada columna
+                QWidget *modifyButtonContainer = new QWidget();
+                QHBoxLayout *modifyButtonLayout = new QHBoxLayout();
+                modifyButtonLayout->addWidget(modificarButton);
+                modifyButtonLayout->setAlignment(Qt::AlignCenter);
+                modifyButtonLayout->setContentsMargins(0, 0, 0, 0); // Eliminar márgenes
+                modifyButtonContainer->setLayout(modifyButtonLayout);
+                modifyButtonContainer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding); // Expandir para llenar la celda
+
+                QWidget *deleteButtonContainer = new QWidget();
+                QHBoxLayout *deleteButtonLayout = new QHBoxLayout();
+                deleteButtonLayout->addWidget(eliminarButton);
+                deleteButtonLayout->setAlignment(Qt::AlignCenter);
+                deleteButtonLayout->setContentsMargins(0, 0, 0, 0); // Eliminar márgenes
+                deleteButtonContainer->setLayout(deleteButtonLayout);
+                deleteButtonContainer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding); // Expandir para llenar la celda
+
+                // Agregar los contenedores de botones a la tabla
+                table->setCellWidget(row, 4, modifyButtonContainer); // Botón de modificar en columna 5
+                table->setCellWidget(row, 5, deleteButtonContainer); // Botón de eliminar en columna 6
+
+                row++; // Avanzamos a la siguiente fila
+            }
+        }
+    }
     void CargarUsuarios(string directorio)
     {
         try
@@ -102,7 +196,6 @@ namespace Func
             QMessageBox::information(nullptr, "Error", "Error desconocido.");
         }
     }
-
     void CargarSolicitudes(string directorio)
     {
         try
@@ -190,7 +283,6 @@ namespace Func
             QMessageBox::information(nullptr, "Error", "Error desconocido.");
         }
     }
-
     void CargarPublicaciones(string directorio)
     {
         try
@@ -245,6 +337,49 @@ namespace Func
                     // Crear Publicacion
                     int newid = Func::obtenerPostID() + 1;
                     Structs::Publicacion nuevaPublicacion(newid, autor->correo, contenido, fechaConvertida, hora);
+
+                    // Verifica si 'comentarios' es un array
+                    if (p.contains("comentarios") && p["comentarios"].is_array())
+                    {
+                        nlohmann::json comentariosJson = p["comentarios"]; // Aquí solo asignamos el array
+                        for (const auto &comentario : comentariosJson)
+                        {
+                            if (comentario.contains("correo") && comentario.contains("comentario") &&
+                                comentario.contains("fecha") && comentario.contains("hora"))
+                            {
+                                string correoComentario = comentario["correo"].get<string>();
+                                string contenidoComentario = comentario["comentario"].get<string>();
+                                string fechaComentario = comentario["fecha"].get<string>();
+                                string horaComentario = comentario["hora"].get<string>();
+
+                                // Convertir la fecha
+                                string fechaConvertidaComentario;
+                                try
+                                {
+                                    fechaConvertidaComentario = convertirFechayHora(fechaComentario + " " + horaComentario);
+                                }
+                                catch (const std::runtime_error &e)
+                                {
+                                    conerror++;
+                                    continue;
+                                }
+
+                                StructsComment::Comentario nuevoComentario(fechaConvertidaComentario, correoComentario, contenidoComentario);
+                                nuevaPublicacion.comentarios->insertar(nuevoComentario);
+                            }
+                            else
+                            {
+                                conerror++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        conerror++; // Maneja el caso en que no hay comentarios o no es un array
+                    }
+
+
+
                     lista_publicaciones.insertar(nuevaPublicacion);
                     contador++;
                 }
@@ -277,97 +412,271 @@ namespace Func
             QMessageBox::information(nullptr, "Error", "Error desconocido.");
         }
     }
-
-    // TODO: Metodos Login
-    void IniciarSesion(std::string email, std::string password)
+    void EliminarCuenta(string correo)
     {
-        Structs::Usuario *user = lista_usuarios.buscar(email);
-        if (user != nullptr && user->contrasena == password)
+        // Eliminar las publicaciones del usuario
+        eliminarPublicacionUsuario(correo);
+        // Eliminar todas las relaciones de amistad del usuario
+        relaciones_amistad.eliminarRelacionesUsuario(correo);
+        // Eliminar las solicitudes enviadas y recibidas del usuario
+        lista_usuarios.eliminarSolicitudes(correo);
+        // Eliminar al usuario de la lista de usuarios
+        lista_usuarios.eliminar(correo);
+    }
+    void ActualizarTablaAdmin(int opcion)
+    {
+        if (opcion == 0)
         {
-            usuario_logeado = user;
+            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.InOrder();
+            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios, temp);
+        }
+        else if (opcion == 1)
+        {
+            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.PreOrder();
+            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios, temp);
+        }
+        else if (opcion == 2)
+        {
+            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.PostOrder();
+            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios, temp);
+        }
+    }
+    std::string graficarPublicaciones()
+    {
+        std::string dotPath = "publicaciones.dot";
+        std::string imgPath = "publicaciones.png";
+
+        std::ofstream file(dotPath);
+
+        if (file.is_open())
+        {
+            file << "digraph G {\n";
+            file << "rankdir = TB;\n";
+            file << "node [shape=record];\n";
+            file << "label=\"Lista de publicaciones\" fontsize = 20 fontname = \"Arial\";";
+
+            for (int i = 0; i < lista_publicaciones.size(); ++i)
+            {
+                Structs::Publicacion *p = lista_publicaciones.obtener(i);
+                if (p)
+                {
+                    file << "node" << i << " [label=\"{ID: " << p->id << " | Autor: " << p->correo_autor << " | Fecha: " << p->fecha << " | Hora: " << p->hora << " | Contenido: " << p->contenido << "}\"];\n";
+                }
+            }
+
+            for (int i = 0; i < lista_publicaciones.size(); ++i)
+            {
+                Structs::Publicacion *p = lista_publicaciones.obtener(i);
+                if (p)
+                {
+                    if (i + 1 < lista_publicaciones.size())
+                    {
+                        file << "node" << i << " -> node" << i + 1 << ";\n";
+                        file << "node" << i +1 << " -> node" << i << ";\n";
+                    }
+                }
+            }
+
+            file << "}";
+            file.close();
+
+            std::string command = "dot -Tpng " + dotPath + " -o " + imgPath;
+            system(command.c_str());
+        }
+        return imgPath;
+    }
+
+
+    // TODO: Metodos usuario / Publicaciones
+    void ActualizarFeed()
+    {
+        actualizarListaFechas();
+        actualizarArbolPost();
+
+        QWidget *contentWidget = userPostFeed->widget();
+        QVBoxLayout *layout = qobject_cast<QVBoxLayout *>(contentWidget->layout());
+        if (!layout)
+        {
+            layout = new QVBoxLayout(contentWidget);
+            contentWidget->setLayout(layout);
+        }
+        while (QLayoutItem *item = layout->takeAt(0))
+        {
+            if (item->widget())
+            {
+                item->widget()->deleteLater();
+            }
+            delete item;
+        }
+        // obtenemos amigos e insertamos las publicaciones
+        int orden = selectedOrder->currentIndex();
+        int cantidad = countPost->value();
+        ListaEnlazada::ListaEnlazada<Structs::Publicacion> posts_feed;
+
+        // si la fecha es 01-01-0001, se obtienen todas las publicaciones
+        std::string _f = convertirFecha(fecha);
+        if (_f == "01-01-0001")
+        {
+            if (orden == 0)
+            {
+                posts_feed = posts.inorder(cantidad);
+            }
+            else if (orden == 1)
+            {
+                posts_feed = posts.preorder(cantidad);
+            }
+            else if (orden == 2)
+            {
+                posts_feed = posts.postorder(cantidad);
+            }
         }
         else
         {
-            QMessageBox::information(nullptr, "Iniciar Sesión", "Credenciales no válidas.");
+            posts_feed = posts.obtenerPublicaciones(fecha,orden,cantidad);
+        }
+
+        for (int i = 0; i < posts_feed.size(); ++i)
+        {
+            Structs::Publicacion *p = posts_feed.obtener(i);
+            if (p)
+            {
+                int postid = p->id;
+                WidgetPost *newPost = new WidgetPost(postid);
+                layout->addWidget(newPost);
+            }
         }
     }
-
-    // TODO: Metodos Admin
-    void ActualizarTablaUsuariosAdmin(QTableWidget *table, ListaEnlazada::ListaEnlazada<Structs::Usuario> &lista)
-    {
-        // Limpiar la tabla antes de agregar nuevos elementos
-        table->clearContents();
-        table->setRowCount(lista.size()); // Ajustar el número de filas según el tamaño de la lista
-
-        int row = 0;
-        // Recorremos la lista para agregar los elementos a la tabla
-        for (int i = 0; i < lista.size(); ++i)
+    void actualizarListaFechas(){
+        // ACTUALIZAR EL FEED CON LA LISTA DE PUBLICACIONES
+        if (selectedDate->currentText().contains("Todos"))
         {
-            Structs::Usuario *temp = lista.obtener(i);
-            if (temp)
+            fecha = convertirFechaTm("01-01-0001");
+        }
+        else
+        {
+            fecha = convertirFechaTm(selectedDate->currentText().toStdString());
+        }
+        ListaEnlazada::ListaEnlazada<std::tm> fechas = posts.obtenerFechas();
+        selectedDate->clear();
+        selectedDate->addItem("Todos");
+        int index = -1;
+        for (int i = 0; i < fechas.size(); ++i)
+        {
+            std::tm *f = fechas.obtener(i);
+            if (f)
             {
-                QTableWidgetItem *nombreItem = new QTableWidgetItem(QString::fromStdString(temp->nombres));
-                QTableWidgetItem *apellidoItem = new QTableWidgetItem(QString::fromStdString(temp->apellidos));
-                QTableWidgetItem *emailItem = new QTableWidgetItem(QString::fromStdString(temp->correo));
-                QTableWidgetItem *fechaItem = new QTableWidgetItem(QString::fromStdString(temp->fechaNacimiento));
-
-                // Agregamos los datos a la tabla
-                table->setItem(row, 0, nombreItem);
-                table->setItem(row, 1, apellidoItem);
-                table->setItem(row, 2, emailItem);
-                table->setItem(row, 3, fechaItem);
-
-                // Capturar el id por valor en las lambdas
-                string correo = temp->correo;
-
-                // Crear botones de modificar y eliminar
-                QPushButton *modificarButton = new QPushButton("Modificar");
-                QPushButton *eliminarButton = new QPushButton("Eliminar");
-
-                // Conectar los botones a sus slots
-                QObject::connect(modificarButton, &QPushButton::clicked, [correo, row]()
-                                 {
-                                     DialogModificar dialog(correo);
-                                     dialog.exec();
-                                     Func::ActualizarTablaAdmin(0); });
-
-                QObject::connect(eliminarButton, &QPushButton::clicked, [correo, row, table]()
-                                 {
-                    if (usuario_logeado->correo == correo) {
-                        QMessageBox::warning(nullptr,"Eliminar usuario","No se puede eliminar el usuario logeado.");
-                        return;
-                    }else{
-                        Func::EliminarCuenta(correo);
-                        Func::ActualizarTablaAdmin(0);
-                    } });
-
-                // Crear contenedores de botones separados para cada columna
-                QWidget *modifyButtonContainer = new QWidget();
-                QHBoxLayout *modifyButtonLayout = new QHBoxLayout();
-                modifyButtonLayout->addWidget(modificarButton);
-                modifyButtonLayout->setAlignment(Qt::AlignCenter);
-                modifyButtonLayout->setContentsMargins(0, 0, 0, 0); // Eliminar márgenes
-                modifyButtonContainer->setLayout(modifyButtonLayout);
-                modifyButtonContainer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding); // Expandir para llenar la celda
-
-                QWidget *deleteButtonContainer = new QWidget();
-                QHBoxLayout *deleteButtonLayout = new QHBoxLayout();
-                deleteButtonLayout->addWidget(eliminarButton);
-                deleteButtonLayout->setAlignment(Qt::AlignCenter);
-                deleteButtonLayout->setContentsMargins(0, 0, 0, 0); // Eliminar márgenes
-                deleteButtonContainer->setLayout(deleteButtonLayout);
-                deleteButtonContainer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding); // Expandir para llenar la celda
-
-                // Agregar los contenedores de botones a la tabla
-                table->setCellWidget(row, 4, modifyButtonContainer); // Botón de modificar en columna 5
-                table->setCellWidget(row, 5, deleteButtonContainer); // Botón de eliminar en columna 6
-
-                row++; // Avanzamos a la siguiente fila
+                if (f->tm_year == fecha.tm_year && f->tm_mon == fecha.tm_mon && f->tm_mday == fecha.tm_mday)
+                {
+                    index = i;
+                }
+                QString fecha = QString::fromStdString(convertirFecha(*f));
+                selectedDate->addItem(fecha);
+            }
+        }
+        selectedDate->setCurrentIndex(index + 1);
+    }
+    void actualizarArbolPost(){
+        posts.limpiar();
+        ListaEnlazada::ListaEnlazada<Structs::Usuario> amigos = relaciones_amistad.obtenerAmigos(usuario_logeado->correo);
+        for (int i = 0; i < lista_publicaciones.size(); i++)
+        {
+            Structs::Publicacion *publicacion = lista_publicaciones.obtener(i);
+            std::tm _fecha = convertirFechaTm(publicacion->fecha);
+            if (amigos.size() == 0)
+            {
+                if (usuario_logeado->correo == publicacion->correo_autor)
+                {
+                    posts.insertar(_fecha, *publicacion);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < amigos.size(); i++)
+                {
+                    Structs::Usuario *amigo = amigos.obtener(i);
+                    if (amigo == nullptr)
+                    {
+                        continue;
+                    }
+                    if (usuario_logeado->correo == publicacion->correo_autor || amigo->correo == publicacion->correo_autor)
+                    {
+                        posts.insertar(_fecha, *publicacion);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    int obtenerPostID()
+    {
+        int id = -1;
+        int ultimoId = lista_publicaciones.size() - 1;
+        Structs::Publicacion *p = lista_publicaciones.obtener(ultimoId);
+        if (p)
+        {
+            id = p->id;
+        }
+        return id;
+    }
+    void eliminarPublicacion(int id)
+    {
+        for (int i = 0; i < lista_publicaciones.size(); ++i)
+        {
+            Structs::Publicacion *p = lista_publicaciones.obtener(i);
+            if (p)
+            {
+                if (p->id == id)
+                {
+                    lista_publicaciones.eliminarPosicion(i);
+                    break;
+                }
+            }
+        }
+    }
+    Structs::Publicacion *buscarPost(int id)
+    {
+        for (int i = 0; i < lista_publicaciones.size(); ++i)
+        {
+            Structs::Publicacion *p = lista_publicaciones.obtener(i);
+            if (p)
+            {
+                if (p->id == id)
+                {
+                    return p;
+                }
+            }
+        }
+        return nullptr;
+    }
+    void modificarPublicacion(int id, std::string contenido, std::string pathImg)
+    {
+        for (int i = 0; i < lista_publicaciones.size(); ++i)
+        {
+            Structs::Publicacion *p = lista_publicaciones.obtener(i);
+            if (p)
+            {
+                if (p->id == id)
+                {
+                    p->contenido = contenido;
+                    p->imagen = pathImg;
+                    break;
+                }
+            }
+        }
+    }
+    void ComentarPublicacion(int id, StructsComment::Comentario comentario){
+        for (int i = 0; i < lista_publicaciones.size(); ++i) {
+            Structs::Publicacion *p = lista_publicaciones.obtener(i);
+            if (p) {
+                if (p->id == id) {
+                    p->comentarios->insertar(comentario);
+                    break;
+                }
             }
         }
     }
 
-    // TODO: Metodos User
+    // TODO: Metodos Usuario / Solicitudes
     void ActualizarTablaUsuarios(QTableWidget *table)
     {
         // Limpiar la tabla antes de agregar nuevos elementos
@@ -539,7 +848,37 @@ namespace Func
             }
         }
     }
+    void ActualizarTablas()
+    {
+        Func::ActualizarTablaUsuarios(userTablaUsuarios);
+        Func::ActualizarTablaEnviados(userTablaEnviadas);
+        Func::ActualizarTablaRecibidos(userTablaRecibidas);
+    }
 
+    // TODO: Metodos usuario / reportes
+    ListaEnlazada::ListaEnlazada<Structs::ReportePosts> obtenerReporteFechasPost(){
+        ArbolABB misPost;
+        for (int i = 0; i < lista_publicaciones.size(); i++)
+        {
+            Structs::Publicacion *publicacion = lista_publicaciones.obtener(i);
+            std::tm _fecha = convertirFechaTm(publicacion->fecha);
+            if (publicacion && publicacion->correo_autor == usuario_logeado->correo) {
+                misPost.insertar(_fecha,*publicacion);
+            }
+        }
+        ListaEnlazada::ListaEnlazada<std::tm> fechas = misPost.obtenerFechas();
+        ListaEnlazada::ListaEnlazada<Structs::ReportePosts> reportes;
+        for (int i = 0; i < fechas.size(); ++i) {
+            std::string _fecha = convertirFecha(*fechas.obtener(i));
+            ListaEnlazada::ListaEnlazada<Structs::Publicacion> posts = misPost.obtenerPublicaciones(*fechas.obtener(i));
+            Structs::ReportePosts reporte(_fecha,posts);
+            reportes.insertar(reporte);
+        }
+        return reportes;
+
+    }
+
+    // TODO: Metodos usuario / perfil
     void EliminarMiCuenta()
     {
         // Eliminar las publicaciones del usuario
@@ -553,17 +892,35 @@ namespace Func
         // Desloguear al usuario
         usuario_logeado = nullptr;
     }
-    void EliminarCuenta(string correo)
+    void ActualizarListaAmigos()
     {
-        // Eliminar todas las relaciones de amistad del usuario
-        relaciones_amistad.eliminarRelacionesUsuario(correo);
-        // Eliminar las solicitudes enviadas y recibidas del usuario
-        lista_usuarios.eliminarSolicitudes(correo);
-        // Eliminar al usuario de la lista de usuarios
-        lista_usuarios.eliminar(correo);
+        QWidget *contentWidget = userFriends->widget();
+        QVBoxLayout *layout = qobject_cast<QVBoxLayout *>(contentWidget->layout());
+        if (!layout)
+        {
+            layout = new QVBoxLayout(contentWidget);
+            contentWidget->setLayout(layout);
+        }
+        while (QLayoutItem *item = layout->takeAt(0))
+        {
+            if (item->widget())
+            {
+                item->widget()->deleteLater();
+            }
+            delete item;
+        }
+        ListaEnlazada::ListaEnlazada<Structs::Usuario> amigos = relaciones_amistad.obtenerAmigos(usuario_logeado->correo);
+        for (int i = 0; i < amigos.size(); ++i)
+        {
+            Structs::Usuario *u = amigos.obtener(i);
+            if (u) {
+                WidgetFriend *newWidget = new WidgetFriend(*u);
+                layout->addWidget(newWidget);
+            }
+        }
     }
-    // TODO: Metodos Extras
 
+    // TODO: Metodos Extras
     ListaEnlazada::ListaEnlazada<Structs::Usuario> obtenerListaUsuariosLogeado()
     {
         ListaEnlazada::ListaEnlazada<Structs::Usuario> lista = lista_usuarios.InOrder();
@@ -640,61 +997,6 @@ namespace Func
 
         return lista;
     }
-
-    void ActualizarTablas()
-    {
-        Func::ActualizarTablaUsuarios(userTablaUsuarios);
-        Func::ActualizarTablaEnviados(userTablaEnviadas);
-        Func::ActualizarTablaRecibidos(userTablaRecibidas);
-    }
-
-    void ActualizarTablaAdmin(int opcion)
-    {
-        if (opcion == 0)
-        {
-            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.InOrder();
-            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios, temp);
-        }
-        else if (opcion == 1)
-        {
-            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.PreOrder();
-            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios, temp);
-        }
-        else if (opcion == 2)
-        {
-            ListaEnlazada::ListaEnlazada<Structs::Usuario> temp = lista_usuarios.PostOrder();
-            Func::ActualizarTablaUsuariosAdmin(adminTablaUsuarios, temp);
-        }
-    }
-
-    int obtenerPostID()
-    {
-        int id = -1;
-        int ultimoId = lista_publicaciones.size() - 1;
-        Structs::Publicacion *p = lista_publicaciones.obtener(ultimoId);
-        if (p)
-        {
-            id = p->id;
-        }
-        return id;
-    }
-
-    void eliminarPublicacion(int id)
-    {
-        for (int i = 0; i < lista_publicaciones.size(); ++i)
-        {
-            Structs::Publicacion *p = lista_publicaciones.obtener(i);
-            if (p)
-            {
-                if (p->id == id)
-                {
-                    lista_publicaciones.eliminarPosicion(i);
-                    break;
-                }
-            }
-        }
-    }
-
     void eliminarPublicacionUsuario(string correo){
         for (int i = 0; i < lista_publicaciones.size(); ++i) {
             Structs::Publicacion *p = lista_publicaciones.obtener(i);
@@ -705,217 +1007,6 @@ namespace Func
             }
         }
     }
-
-    Structs::Publicacion *buscarPost(int id)
-    {
-        for (int i = 0; i < lista_publicaciones.size(); ++i)
-        {
-            Structs::Publicacion *p = lista_publicaciones.obtener(i);
-            if (p)
-            {
-                if (p->id == id)
-                {
-                    return p;
-                }
-            }
-        }
-        return nullptr;
-    }
-
-    void modificarPublicacion(int id, std::string contenido, std::string pathImg)
-    {
-        for (int i = 0; i < lista_publicaciones.size(); ++i)
-        {
-            Structs::Publicacion *p = lista_publicaciones.obtener(i);
-            if (p)
-            {
-                if (p->id == id)
-                {
-                    p->contenido = contenido;
-                    p->imagen = pathImg;
-                    break;
-                }
-            }
-        }
-    }
-
-    std::string graficarPublicaciones()
-    {
-        std::string dotPath = "publicaciones.dot";
-        std::string imgPath = "publicaciones.png";
-
-        std::ofstream file(dotPath);
-
-        if (file.is_open())
-        {
-            file << "digraph G {\n";
-            file << "rankdir = TB;\n";
-            file << "node [shape=record];\n";
-            file << "label=\"Lista de publicaciones\" fontsize = 20 fontname = \"Arial\";";
-
-            for (int i = 0; i < lista_publicaciones.size(); ++i)
-            {
-                Structs::Publicacion *p = lista_publicaciones.obtener(i);
-                if (p)
-                {
-                    file << "node" << i << " [label=\"{ID: " << p->id << " | Autor: " << p->correo_autor << " | Fecha: " << p->fecha << " | Hora: " << p->hora << " | Contenido: " << p->contenido << "}\"];\n";
-                }
-            }
-
-            for (int i = 0; i < lista_publicaciones.size(); ++i)
-            {
-                Structs::Publicacion *p = lista_publicaciones.obtener(i);
-                if (p)
-                {
-                    if (i + 1 < lista_publicaciones.size())
-                    {
-                        file << "node" << i << " -> node" << i + 1 << ";\n";
-                        file << "node" << i +1 << " -> node" << i << ";\n";
-                    }
-                }
-            }
-
-            file << "}";
-            file.close();
-
-            std::string command = "dot -Tpng " + dotPath + " -o " + imgPath;
-            system(command.c_str());
-        }
-        return imgPath;
-    }
-
-    void ComentarPublicacion(int id, StructsComment::Comentario comentario){
-        for (int i = 0; i < lista_publicaciones.size(); ++i) {
-            Structs::Publicacion *p = lista_publicaciones.obtener(i);
-            if (p) {
-                if (p->id == id) {
-                    p->comentarios->insertar(comentario);
-                    break;
-                }
-            }
-        }
-    }
-
-    void ActualizarFeed()
-    {
-        QWidget *contentWidget = userPostFeed->widget();
-        QVBoxLayout *layout = qobject_cast<QVBoxLayout *>(contentWidget->layout());
-        if (!layout)
-        {
-            layout = new QVBoxLayout(contentWidget);
-            contentWidget->setLayout(layout);
-        }
-        while (QLayoutItem *item = layout->takeAt(0))
-        {
-            if (item->widget())
-            {
-                item->widget()->deleteLater();
-            }
-            delete item;
-        }
-
-        // ACTUALIZAR EL FEED CON LA LISTA DE PUBLICACIONES
-        std::tm fecha;
-        if (selectedDate->currentText().contains("Todos"))
-        {
-            fecha = convertirFechaTm("01-01-0001");
-        }
-        else
-        {
-            fecha = convertirFechaTm(selectedDate->currentText().toStdString());
-        }
-
-        ArbolABB posts;
-        ListaEnlazada::ListaEnlazada<Structs::Usuario> amigos = relaciones_amistad.obtenerAmigos(usuario_logeado->correo);
-        for (int i = 0; i < lista_publicaciones.size(); i++)
-        {
-            Structs::Publicacion *publicacion = lista_publicaciones.obtener(i);
-            std::tm _fecha = convertirFechaTm(publicacion->fecha);
-            if (amigos.size() == 0)
-            {
-                // Verifica solo las publicaciones del usuario logueado
-                if (usuario_logeado->correo == publicacion->correo_autor)
-                {
-                    posts.insertar(_fecha, *publicacion);
-                }
-            }
-            else
-            {
-                // Proceder a recorrer la lista de amigos como antes
-                for (int i = 0; i < amigos.size(); i++)
-                {
-                    Structs::Usuario *amigo = amigos.obtener(i);
-                    if (amigo == nullptr)
-                    {
-                        continue;
-                    }
-                    if (usuario_logeado->correo == publicacion->correo_autor || amigo->correo == publicacion->correo_autor)
-                    {
-                        posts.insertar(_fecha, *publicacion);
-                        break;
-                    }
-                }
-            }
-        }
-
-        ListaEnlazada::ListaEnlazada<std::tm> fechas = posts.obtenerFechas();
-        selectedDate->clear();
-        selectedDate->addItem("Todos");
-        int index = -1;
-        for (int i = 0; i < fechas.size(); ++i)
-        {
-            std::tm *f = fechas.obtener(i);
-            if (f)
-            {
-                if (f->tm_year == fecha.tm_year && f->tm_mon == fecha.tm_mon && f->tm_mday == fecha.tm_mday)
-                {
-                    index = i;
-                }
-                QString fecha = QString::fromStdString(convertirFecha(*f));
-                selectedDate->addItem(fecha);
-            }
-        }
-        selectedDate->setCurrentIndex(index + 1);
-
-        int orden = selectedOrder->currentIndex();
-        int cantidad = countPost->value();
-        ListaEnlazada::ListaEnlazada<Structs::Publicacion> posts_feed;
-
-        // si la fecha es 01-01-0001, se obtienen todas las publicaciones
-        std::string _f = convertirFecha(fecha);
-        if (_f == "01-01-0001")
-        {
-            if (orden == 0)
-            {
-                posts_feed = posts.inorder();
-            }
-            else if (orden == 1)
-            {
-                posts_feed = posts.preorder();
-            }
-            else if (orden == 2)
-            {
-                posts_feed = posts.postorder();
-            }
-        }
-        else
-        {
-            posts_feed = posts.obtenerPublicaciones(fecha);
-        }
-
-        for (int i = 0; i < posts_feed.size(); ++i)
-        {
-            Structs::Publicacion *p = posts_feed.obtener(i);
-            if (p)
-            {
-                int postid = p->id;
-                WidgetPost *newPost = new WidgetPost(postid);
-                layout->addWidget(newPost);
-            }
-        }
-    }
-
-    // SEPARAR LAS FUNCIONES PARA OBTENER FECHAS - OBTENER PUBLICACIONES - ACTUALIZAR TABLA
 
     std::string convertirFecha(const std::string &fechaOriginal)
     {
@@ -1025,8 +1116,6 @@ namespace Func
 
         throw std::runtime_error("Error al parsear la fecha.");
     }
-
-
 
     std::string convertirFechayHora(const std::tm &fecha)
     {

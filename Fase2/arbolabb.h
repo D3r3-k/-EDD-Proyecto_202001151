@@ -58,12 +58,13 @@ public:
     ListaEnlazada::ListaEnlazada<Structs::Publicacion> obtenerPublicaciones(const std::tm &fecha) const;
 
     // Método para obtener la lista de publicaciones de un nodo según la fecha, orden y cantidad
-    ListaEnlazada::ListaEnlazada<Structs::Publicacion> obtenerPublicaciones(const std::tm &fecha, const int orden, int cantidad) const;
+    // Método para obtener la lista de publicaciones de un nodo según la fecha, orden y cantidad
+    ListaEnlazada::ListaEnlazada<Structs::Publicacion> obtenerPublicaciones(const std::tm &fecha, const int orden, int cantidad);
 
     // Métodos para retornar una lista de publicaciones (inorder, preorder, postorder)
-    ListaEnlazada::ListaEnlazada<Structs::Publicacion> inorder();
-    ListaEnlazada::ListaEnlazada<Structs::Publicacion> preorder();
-    ListaEnlazada::ListaEnlazada<Structs::Publicacion> postorder();
+    ListaEnlazada::ListaEnlazada<Structs::Publicacion> inorder(const int cantidad);
+    ListaEnlazada::ListaEnlazada<Structs::Publicacion> preorder(const int cantidad);
+    ListaEnlazada::ListaEnlazada<Structs::Publicacion> postorder(const int cantidad);
 
     // Método para obtener una lista de nodos ordenadas por cantidad de publicaciones
     ListaEnlazada::ListaEnlazada<Nodo *> obtenerNodosOrdenados() const;

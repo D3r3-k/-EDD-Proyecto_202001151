@@ -13,7 +13,6 @@ DialogPost::DialogPost(const int id, QWidget *parent)
     , ui(new Ui::DialogPost)
 {
     ui->setupUi(this);
-    qInfo() << id;
     setID(id);
 }
 
@@ -36,6 +35,8 @@ void DialogPost::llenarDatos(const int id){
     if (post) {
         ui->label_user->setText(QString::fromStdString(post->correo_autor));
         ui->label_date->setText(QString::fromStdString(post->fecha));
+        ui->label_time->setText(QString::fromStdString(post->hora));
+        ui->label_contenido->setText(QString::fromStdString(post->contenido));
         if (usuario_logeado->correo != post->correo_autor) {
             ui->pushButton_editar->setEnabled(false);
             ui->pushButton_editar->setVisible(false);

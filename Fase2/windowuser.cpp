@@ -16,6 +16,7 @@ UserWindow::UserWindow(QWidget *parent)
     Func::userTablaEnviadas = ui->tableSolicitudesEnv;
     Func::userTablaRecibidas = ui->tableSolicitudesRec;
     Func::userPostFeed = ui->scrollAreaPost;
+    Func::userFriends = ui->scrollArea_amigos;
     // inicializando los datos del posts
     Func::selectedDate = ui->comboBox_post_fecha;
     Func::selectedOrder = ui->ordenComboBox;
@@ -32,15 +33,17 @@ UserWindow::UserWindow(QWidget *parent)
     QString user = QString::fromStdString(usuario_logeado->nombres);
     ui->menuBienvenido->setTitle("Bienvenido: "+user);
     // Tab Publicaciones
-    qInfo() << "ACTUALIZANDO FEED";
     Func::ActualizarFeed();
     // Tab Solicitudes
     ui->tableUsuarios->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableSolicitudesRec->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableSolicitudesEnv->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-    qInfo() << "ACTUALIZAR TABLA SOLICITUDES";
     Func::ActualizarTablas();
+    // Tab Reportes
+    ui->tableRepoComentarios->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableRepoPublicaciones->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     // Tab Perfil
+    Func::ActualizarListaAmigos();
     ui->nombresLogLineEdit->setText(QString::fromStdString(usuario_logeado->nombres));
     ui->apellidosLogLineEdit->setText(QString::fromStdString(usuario_logeado->apellidos));
     ui->correoLogLineEdit->setText(QString::fromStdString(usuario_logeado->correo));
@@ -130,17 +133,41 @@ void UserWindow::on_btnBuscar_clicked()
 }
 
 // METODOS PARA LOS REPORTES
-void UserWindow::on_btn_generar_reporte_clicked()
+void UserWindow::on_pushButton_generar_reportes_clicked()
 {
-    relaciones_amistad.graficar();
+    // fechas con mas publicaciones
+    ListaEnlazada::ListaEnlazada<Structs::ReportePosts> post_date = Func::obtenerReporteFechasPost();
+    ui->tableRepoPublicaciones->clearContents();
+    ui->tableRepoPublicaciones->setRowCount(post_date.size());
+    int row = 0;
+    for (int i = 0; i < post_date.size(); ++i)
+    {
+        Structs::ReportePosts *temp = post_date.obtener(i);
+        if (temp)
+        {
+            QTableWidgetItem *fecha = new QTableWidgetItem(QString::fromStdString(temp->fecha));
+            QTableWidgetItem *cantidad = new QTableWidgetItem(QString::number(temp->publicaciones.size()));
+            // Agregamos los datos a la tabla
+            ui->tableRepoPublicaciones->setItem(row, 0, fecha);
+            ui->tableRepoPublicaciones->setItem(row, 1, cantidad);
+            row++; // Avanzamos a la siguiente fila
+        }
+    }
+    // publicaciones con mas comentarios
+
+}
+
+void UserWindow::on_pushButton_reporte_generar_bst_clicked()
+{
+    // reporte bst
+
 }
 
 
-void UserWindow::on_btn_generar_bst_clicked()
+void UserWindow::on_pushButton_reporte_abrir_bst_clicked()
 {
-
+    // abrir bst
 }
-
 
 // METODOS PARA PUBLICACIONES
 
@@ -153,19 +180,10 @@ void UserWindow::on_btn_nuevo_post_clicked()
     }
 }
 
-
-void UserWindow::on_btn_post_fecha_clicked()
+void UserWindow::on_btn_post_filtrar_clicked()
 {
     Func::ActualizarFeed();
 }
-
-
-void UserWindow::on_btn_post_recorrido_clicked()
-{
-    Func::ActualizarFeed();
-}
-
-
 
 // METODOS PARA EL PERFIL
 
@@ -226,4 +244,6 @@ void UserWindow::on_btnEliminarCuenta_clicked()
         this->close();
     }
 }
+
+
 

@@ -3,6 +3,7 @@
 #include "EWIEGA46WW/moc_dialognuevopost.cpp"
 #include "EWIEGA46WW/moc_dialogpost.cpp"
 #include "EWIEGA46WW/moc_widgetcomment.cpp"
+#include "EWIEGA46WW/moc_widgetfriend.cpp"
 #include "EWIEGA46WW/moc_widgetpost.cpp"
 #include "EWIEGA46WW/moc_windowadmin.cpp"
 #include "EWIEGA46WW/moc_windowmain.cpp"

@@ -21,7 +21,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="tab_buscar">
        <attribute name="title">
@@ -209,7 +209,7 @@
            <item>
             <widget class="QGroupBox" name="groupBox_post_fecha">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -220,14 +220,8 @@
                <height>0</height>
               </size>
              </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>110</height>
-              </size>
-             </property>
              <property name="title">
-              <string>Fecha</string>
+              <string>Filtrar</string>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout">
               <item>
@@ -240,7 +234,71 @@
                </widget>
               </item>
               <item>
-               <widget class="QPushButton" name="btn_post_fecha">
+               <widget class="QWidget" name="gridWidget" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <layout class="QGridLayout" name="gridLayout_2">
+                 <item row="0" column="1">
+                  <widget class="QComboBox" name="ordenComboBox">
+                   <item>
+                    <property name="text">
+                     <string>InOrden</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>PreOrden</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>PostOrden</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="ordenLabel">
+                   <property name="text">
+                    <string>Orden</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="cantidadLabel">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>Cantidad</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QSpinBox" name="cantidadSpinBox">
+                   <property name="minimum">
+                    <number>1</number>
+                   </property>
+                   <property name="maximum">
+                    <number>50</number>
+                   </property>
+                   <property name="value">
+                    <number>5</number>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btn_post_filtrar">
                 <property name="text">
                  <string>Aplicar</string>
                 </property>
@@ -250,72 +308,17 @@
             </widget>
            </item>
            <item>
-            <widget class="QGroupBox" name="groupBox_post_recorrido">
-             <property name="maximumSize">
+            <spacer name="verticalSpacer">
+             <property name="orientation">
+              <enum>Qt::Orientation::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
               <size>
-               <width>16777215</width>
-               <height>145</height>
+               <width>20</width>
+               <height>40</height>
               </size>
              </property>
-             <property name="title">
-              <string>Recorrido Limitado</string>
-             </property>
-             <layout class="QGridLayout" name="gridLayout">
-              <item row="0" column="0">
-               <widget class="QLabel" name="ordenLabel">
-                <property name="text">
-                 <string>Orden</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QComboBox" name="ordenComboBox">
-                <item>
-                 <property name="text">
-                  <string>InOrden</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>PreOrden</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>PostOrden</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QSpinBox" name="cantidadSpinBox">
-                <property name="minimum">
-                 <number>5</number>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QPushButton" name="btn_post_recorrido">
-                <property name="text">
-                 <string>Aplicar</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="cantidadLabel">
-                <property name="sizePolicy">
-                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                  <horstretch>0</horstretch>
-                  <verstretch>0</verstretch>
-                 </sizepolicy>
-                </property>
-                <property name="text">
-                 <string>Cantidad</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </widget>
+            </spacer>
            </item>
           </layout>
          </widget>
@@ -358,7 +361,7 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>710</width>
+                <width>692</width>
                 <height>441</height>
                </rect>
               </property>
@@ -552,6 +555,9 @@
                   <height>341</height>
                  </size>
                 </property>
+                <property name="editTriggers">
+                 <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+                </property>
                 <property name="sortingEnabled">
                  <bool>true</bool>
                 </property>
@@ -607,6 +613,9 @@
                   <width>981</width>
                   <height>200</height>
                  </size>
+                </property>
+                <property name="editTriggers">
+                 <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
                 </property>
                 <property name="sortingEnabled">
                  <bool>true</bool>
@@ -733,15 +742,15 @@
        <attribute name="title">
         <string>Perfil</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_14">
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
         <item>
          <widget class="QGroupBox" name="groupBox_perfil">
           <property name="title">
            <string>Perfil</string>
           </property>
-          <layout class="QVBoxLayout" name="verticalLayout_5">
+          <layout class="QVBoxLayout" name="verticalLayout_14">
            <item>
-            <widget class="QWidget" name="formWidget_2" native="true">
+            <widget class="QWidget" name="formWidget_datos" native="true">
              <property name="autoFillBackground">
               <bool>false</bool>
              </property>
@@ -846,55 +855,85 @@
                 </property>
                </widget>
               </item>
+              <item row="5" column="1">
+               <widget class="QPushButton" name="guardarModificacionButton">
+                <property name="text">
+                 <string>Guardar</string>
+                </property>
+               </widget>
+              </item>
              </layout>
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="guardarModificacionButton">
-             <property name="text">
-              <string>Guardar</string>
+            <widget class="QWidget" name="horizontalWidget_btns" native="true">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
              </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>50</height>
+              </size>
+             </property>
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <property name="spacing">
+               <number>30</number>
+              </property>
+              <property name="leftMargin">
+               <number>50</number>
+              </property>
+              <property name="rightMargin">
+               <number>50</number>
+              </property>
+              <item>
+               <widget class="QPushButton" name="btnModificarDatos">
+                <property name="text">
+                 <string>Modificar Datos</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="btnEliminarCuenta">
+                <property name="text">
+                 <string>Eliminar Cuenta</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>
          </widget>
         </item>
         <item>
-         <widget class="QWidget" name="horizontalWidget_2" native="true">
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Amigos</string>
           </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>50</height>
-           </size>
-          </property>
-          <layout class="QHBoxLayout" name="horizontalLayout">
-           <property name="spacing">
-            <number>30</number>
-           </property>
-           <property name="leftMargin">
-            <number>50</number>
-           </property>
-           <property name="rightMargin">
-            <number>50</number>
-           </property>
+          <layout class="QVBoxLayout" name="verticalLayout_18">
            <item>
-            <widget class="QPushButton" name="btnModificarDatos">
-             <property name="text">
-              <string>Modificar Datos</string>
+            <widget class="QScrollArea" name="scrollArea_amigos">
+             <property name="sizeAdjustPolicy">
+              <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
              </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="btnEliminarCuenta">
-             <property name="text">
-              <string>Eliminar Cuenta</string>
+             <property name="widgetResizable">
+              <bool>true</bool>
              </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_2">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>451</width>
+                <height>468</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_5"/>
+             </widget>
             </widget>
            </item>
           </layout>

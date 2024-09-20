@@ -2,7 +2,6 @@
 #include <QDebug>
 #include <QString>
 #include <QMessageBox>
-#include <iomanip>
 #include <fstream>
 #include <cstdlib> // Para system()
 
@@ -94,7 +93,6 @@ MatrizRelacion::Nodo*MatrizRelacion::buscarColumna(Structs::Usuario *u2)
     }
     return nullptr;
 }
-
 
 bool MatrizRelacion::NodoRelacionExiste(Nodo*fila, Structs::Usuario *u2)
 {
@@ -204,102 +202,129 @@ void MatrizRelacion::insertarEnColumna(Nodo*nuevo, Nodo*columnaCabecera)
     nuevo->arriba = current;
 }
 
-
-// Función auxiliar para imprimir con formato
-QString formatWithWidth(const std::string& str, int width) {
-    std::stringstream ss;
-    ss << std::setw(width) << str;
-    return QString::fromStdString(ss.str());
-}
-
-// Función para imprimir la matriz con formato
-void MatrizRelacion::imprimir(){
-    // Verificar si la matriz tiene elementos
-    if (!cabeza) {
-        qDebug() << "La matriz de relaciones está vacía.";
-        return;
-    }
-
-    qDebug() << "Imprimiendo la matriz de relaciones:";
-
-    // Imprimir encabezado de columnas
-    QString header = formatWithWidth(" ", 10); // Espacio para encabezado de fila
-    Nodo *columna = cabeza->siguiente;
-    while (columna) {
-        header += formatWithWidth(QString::fromStdString(columna->usuario2->nombres).toStdString(), 10);
-        columna = columna->siguiente;
-    }
-    qDebug() << header;
-
-    // Imprimir filas
-    Nodo *fila = cabeza->abajo;
-    while (fila) {
-        QString row = formatWithWidth(QString::fromStdString(fila->usuario1->nombres).toStdString(), 10);
-
-        Nodo *current = fila->siguiente;
-        while (current) {
-            // Aquí podrías colocar un carácter específico si hay una relación o un espacio si no
-            row += formatWithWidth("\tX\t", 10); // Usamos "X" como ejemplo para indicar una relación
-            current = current->siguiente;
-        }
-        qDebug() << row;
-        fila = fila->abajo;
-    }
-}
-
 void MatrizRelacion::eliminarRelacionesUsuario(string correo_usuario)
 {
     if (!cabeza)
     {
         return;
     }
-    // borrando todas las relaciones que tengan relacion con el correo del usuario tanto en filas como en columnas
+
+    // Eliminando relaciones en las filas (usuario como usuario1)
     Nodo *fila = cabeza->abajo;
     while (fila)
     {
-        Nodo *temp = fila;
-        fila = fila->abajo;
-        if (temp->usuario1->correo == correo_usuario)
+        Nodo *current = fila->siguiente;
+        while (current)
         {
-            if (temp->arriba)
+            if (current->usuario2->correo == correo_usuario)
             {
-                temp->arriba->abajo = temp->abajo;
+                // Borrando el nodo actual (relación)
+                Nodo *toDelete = current;
+                if (toDelete->anterior)
+                {
+                    toDelete->anterior->siguiente = toDelete->siguiente;
+                }
+                if (toDelete->siguiente)
+                {
+                    toDelete->siguiente->anterior = toDelete->anterior;
+                }
+                current = current->siguiente; // avanzar al siguiente antes de borrar
+                delete toDelete;
             }
-            if (temp->abajo)
+            else
             {
-                temp->abajo->arriba = temp->arriba;
+                current = current->siguiente;
             }
-            if (temp == cabeza->abajo)
-            {
-                cabeza->abajo = temp->abajo;
-            }
-            delete temp;
         }
+        fila = fila->abajo;
     }
 
+    // Eliminando relaciones en las columnas (usuario como usuario2)
     Nodo *columna = cabeza->siguiente;
     while (columna)
     {
-        Nodo *temp = columna;
-        columna = columna->siguiente;
-        if (temp->usuario2->correo == correo_usuario)
+        Nodo *current = columna->abajo;
+        while (current)
         {
-            if (temp->anterior)
+            if (current->usuario1->correo == correo_usuario)
             {
-                temp->anterior->siguiente = temp->siguiente;
+                // Borrando el nodo actual (relación)
+                Nodo *toDelete = current;
+                if (toDelete->arriba)
+                {
+                    toDelete->arriba->abajo = toDelete->abajo;
+                }
+                if (toDelete->abajo)
+                {
+                    toDelete->abajo->arriba = toDelete->arriba;
+                }
+                current = current->abajo; // avanzar al siguiente antes de borrar
+                delete toDelete;
             }
-            if (temp->siguiente)
+            else
             {
-                temp->siguiente->anterior = temp->anterior;
+                current = current->abajo;
             }
-            if (temp == cabeza->siguiente)
+        }
+        columna = columna->siguiente;
+    }
+
+    // Finalmente, eliminando las cabeceras de fila y columna correspondientes al usuario
+    fila = cabeza->abajo;
+    while (fila)
+    {
+        if (fila->usuario1->correo == correo_usuario)
+        {
+            Nodo *toDelete = fila;
+            if (toDelete->arriba)
             {
-                cabeza->siguiente = temp->siguiente;
+                toDelete->arriba->abajo = toDelete->abajo;
             }
-            delete temp;
+            if (toDelete->abajo)
+            {
+                toDelete->abajo->arriba = toDelete->arriba;
+            }
+            if (toDelete == cabeza->abajo)
+            {
+                cabeza->abajo = toDelete->abajo;
+            }
+            fila = fila->abajo; // avanzar al siguiente antes de borrar
+            delete toDelete;
+        }
+        else
+        {
+            fila = fila->abajo;
+        }
+    }
+
+    columna = cabeza->siguiente;
+    while (columna)
+    {
+        if (columna->usuario2->correo == correo_usuario)
+        {
+            Nodo *toDelete = columna;
+            if (toDelete->anterior)
+            {
+                toDelete->anterior->siguiente = toDelete->siguiente;
+            }
+            if (toDelete->siguiente)
+            {
+                toDelete->siguiente->anterior = toDelete->anterior;
+            }
+            if (toDelete == cabeza->siguiente)
+            {
+                cabeza->siguiente = toDelete->siguiente;
+            }
+            columna = columna->siguiente; // avanzar al siguiente antes de borrar
+            delete toDelete;
+        }
+        else
+        {
+            columna = columna->siguiente;
         }
     }
 }
+
 
 bool MatrizRelacion::verificarRelacion(string correo1, string correo2)
 {
@@ -330,7 +355,7 @@ std::string MatrizRelacion::graficar()
     if (!cabeza)
     {
         QMessageBox::warning(nullptr,"Graficar Relacion","No hay ninguna relacion actualmente.");
-        return;
+        return "";
     }
     std::string dotPath = "matriz_relacion.dot";
     std::string imagePath = "matriz_relacion.png";
@@ -341,7 +366,7 @@ std::string MatrizRelacion::graficar()
     if (!archivoDot.is_open())
     {
         QMessageBox::information(nullptr, "Error", "No se pudo abrir el archivo para escribir.");
-        return;
+        return "";
     }
 
     // Escribir el encabezado del archivo
@@ -493,7 +518,6 @@ std::string MatrizRelacion::graficar()
     system(cmd.c_str());
     return imagePath;
 }
-
 
 // Función para obtener la lista de amigos de un usuario
 ListaEnlazada::ListaEnlazada<Structs::Usuario> MatrizRelacion::obtenerAmigos(string correo)

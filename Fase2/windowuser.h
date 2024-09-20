@@ -38,17 +38,18 @@ private slots:
 
     void on_contrasenaLogLineEdit_returnPressed();
 
-    void on_btn_generar_reporte_clicked();
+    void on_pushButton_generar_reportes_clicked();
+
+    void on_pushButton_reporte_generar_bst_clicked();
+
+    void on_pushButton_reporte_abrir_bst_clicked();
 
     void on_btnEliminarCuenta_clicked();
 
     void on_btn_nuevo_post_clicked();
 
-    void on_btn_post_fecha_clicked();
+    void on_btn_post_filtrar_clicked();
 
-    void on_btn_post_recorrido_clicked();
-
-    void on_btn_generar_bst_clicked();
 
 private:
     Ui::UserWindow *ui;

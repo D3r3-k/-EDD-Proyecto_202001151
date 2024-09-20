@@ -115,7 +115,7 @@
             </widget>
            </item>
            <item row="2" column="3">
-            <widget class="QLabel" name="label_hora">
+            <widget class="QLabel" name="label_time">
              <property name="text">
               <string>17:00</string>
              </property>
@@ -207,11 +207,17 @@
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
       <widget class="QScrollArea" name="scrollArea_comentarios">
+       <property name="horizontalScrollBarPolicy">
+        <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+       </property>
+       <property name="sizeAdjustPolicy">
+        <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
+       </property>
        <property name="widgetResizable">
         <bool>true</bool>
        </property>
        <property name="alignment">
-        <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+        <set>Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft</set>
        </property>
        <widget class="QWidget" name="scrollAreaWidgetContents">
         <property name="geometry">

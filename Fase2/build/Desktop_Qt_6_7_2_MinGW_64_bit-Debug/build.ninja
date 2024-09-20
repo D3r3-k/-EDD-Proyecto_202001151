@@ -185,6 +185,14 @@ build CMakeFiles/Fase2.dir/dialogpost.cpp.obj: CXX_COMPILER__Fase2_unscanned_Deb
   OBJECT_DIR = CMakeFiles\Fase2.dir
   OBJECT_FILE_DIR = CMakeFiles\Fase2.dir
 
+build CMakeFiles/Fase2.dir/widgetfriend.cpp.obj: CXX_COMPILER__Fase2_unscanned_Debug C$:/Users/D3r3k/OneDrive/Uni$ -$ Virtual/Estructuras$ de$ Datos/-EDD-Proyecto_202001151/Fase2/widgetfriend.cpp || cmake_object_order_depends_target_Fase2
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\Fase2.dir\widgetfriend.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -I"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase2_autogen/include" -isystem C:/Qt/6.7.2/mingw_64/include/QtCore -isystem C:/Qt/6.7.2/mingw_64/include -isystem C:/Qt/6.7.2/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.7.2/mingw_64/include/QtWidgets -isystem C:/Qt/6.7.2/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\Fase2.dir
+  OBJECT_FILE_DIR = CMakeFiles\Fase2.dir
+
 build CMakeFiles/Fase2.dir/Fase2_autogen/EWIEGA46WW/qrc_resource.cpp.obj: CXX_COMPILER__Fase2_unscanned_Debug C$:/Users/D3r3k/OneDrive/Uni$ -$ Virtual/Estructuras$ de$ Datos/-EDD-Proyecto_202001151/Fase2/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase2_autogen/EWIEGA46WW/qrc_resource.cpp || cmake_object_order_depends_target_Fase2
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
   DEP_FILE = CMakeFiles\Fase2.dir\Fase2_autogen\EWIEGA46WW\qrc_resource.cpp.obj.d
@@ -201,7 +209,7 @@ build CMakeFiles/Fase2.dir/Fase2_autogen/EWIEGA46WW/qrc_resource.cpp.obj: CXX_CO
 #############################################
 # Link the executable Fase2.exe
 
-build Fase2.exe: CXX_EXECUTABLE_LINKER__Fase2_Debug CMakeFiles/Fase2.dir/Fase2_autogen/mocs_compilation.cpp.obj CMakeFiles/Fase2.dir/main.cpp.obj CMakeFiles/Fase2.dir/windowmain.cpp.obj CMakeFiles/Fase2.dir/windowadmin.cpp.obj CMakeFiles/Fase2.dir/windowuser.cpp.obj CMakeFiles/Fase2.dir/funciones.cpp.obj CMakeFiles/Fase2.dir/globales.cpp.obj CMakeFiles/Fase2.dir/arbolavl.cpp.obj CMakeFiles/Fase2.dir/windowregister.cpp.obj CMakeFiles/Fase2.dir/matrizrelacion.cpp.obj CMakeFiles/Fase2.dir/dialogmodificar.cpp.obj CMakeFiles/Fase2.dir/dialognuevopost.cpp.obj CMakeFiles/Fase2.dir/widgetpost.cpp.obj CMakeFiles/Fase2.dir/arbolabb.cpp.obj CMakeFiles/Fase2.dir/widgetcomment.cpp.obj CMakeFiles/Fase2.dir/arbolb5.cpp.obj CMakeFiles/Fase2.dir/dialogpost.cpp.obj CMakeFiles/Fase2.dir/Fase2_autogen/EWIEGA46WW/qrc_resource.cpp.obj | C$:/Qt/6.7.2/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.7.2/mingw_64/lib/libQt6Gui.a C$:/Qt/6.7.2/mingw_64/lib/libQt6Core.a C$:/Qt/6.7.2/mingw_64/lib/libQt6EntryPoint.a || Fase2_autogen Fase2_autogen_timestamp_deps
+build Fase2.exe: CXX_EXECUTABLE_LINKER__Fase2_Debug CMakeFiles/Fase2.dir/Fase2_autogen/mocs_compilation.cpp.obj CMakeFiles/Fase2.dir/main.cpp.obj CMakeFiles/Fase2.dir/windowmain.cpp.obj CMakeFiles/Fase2.dir/windowadmin.cpp.obj CMakeFiles/Fase2.dir/windowuser.cpp.obj CMakeFiles/Fase2.dir/funciones.cpp.obj CMakeFiles/Fase2.dir/globales.cpp.obj CMakeFiles/Fase2.dir/arbolavl.cpp.obj CMakeFiles/Fase2.dir/windowregister.cpp.obj CMakeFiles/Fase2.dir/matrizrelacion.cpp.obj CMakeFiles/Fase2.dir/dialogmodificar.cpp.obj CMakeFiles/Fase2.dir/dialognuevopost.cpp.obj CMakeFiles/Fase2.dir/widgetpost.cpp.obj CMakeFiles/Fase2.dir/arbolabb.cpp.obj CMakeFiles/Fase2.dir/widgetcomment.cpp.obj CMakeFiles/Fase2.dir/arbolb5.cpp.obj CMakeFiles/Fase2.dir/dialogpost.cpp.obj CMakeFiles/Fase2.dir/widgetfriend.cpp.obj CMakeFiles/Fase2.dir/Fase2_autogen/EWIEGA46WW/qrc_resource.cpp.obj | C$:/Qt/6.7.2/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.7.2/mingw_64/lib/libQt6Gui.a C$:/Qt/6.7.2/mingw_64/lib/libQt6Core.a C$:/Qt/6.7.2/mingw_64/lib/libQt6EntryPoint.a || Fase2_autogen Fase2_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_FLAGS = -mwindows
   LINK_LIBRARIES = C:/Qt/6.7.2/mingw_64/lib/libQt6Widgets.a  C:/Qt/6.7.2/mingw_64/lib/libQt6Gui.a  C:/Qt/6.7.2/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -lmingw32  C:/Qt/6.7.2/mingw_64/lib/libQt6EntryPoint.a  -lshell32  -ld3d11  -ldxgi  -ldxguid  -ld3d12  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -288,7 +296,7 @@ build Fase2_autogen_timestamp_deps: phony
 #############################################
 # Utility command for Fase2_autogen
 
-build Fase2_autogen: phony CMakeFiles/Fase2_autogen Fase2_autogen/include/ui_windowmain.h Fase2_autogen/include/ui_windowadmin.h Fase2_autogen/include/ui_windowuser.h Fase2_autogen/include/ui_windowregister.h Fase2_autogen/include/ui_dialogmodificar.h Fase2_autogen/include/ui_dialognuevopost.h Fase2_autogen/include/ui_widgetpost.h Fase2_autogen/include/ui_widgetcomment.h Fase2_autogen/include/ui_dialogpost.h Fase2_autogen/timestamp Fase2_autogen/mocs_compilation.cpp Fase2_autogen_timestamp_deps
+build Fase2_autogen: phony CMakeFiles/Fase2_autogen Fase2_autogen/include/ui_windowmain.h Fase2_autogen/include/ui_windowadmin.h Fase2_autogen/include/ui_windowuser.h Fase2_autogen/include/ui_windowregister.h Fase2_autogen/include/ui_dialogmodificar.h Fase2_autogen/include/ui_dialognuevopost.h Fase2_autogen/include/ui_widgetpost.h Fase2_autogen/include/ui_widgetcomment.h Fase2_autogen/include/ui_dialogpost.h Fase2_autogen/include/ui_widgetfriend.h Fase2_autogen/timestamp Fase2_autogen/mocs_compilation.cpp Fase2_autogen_timestamp_deps
 
 
 #############################################
@@ -305,7 +313,7 @@ build Fase2_autogen/timestamp Fase2_autogen/mocs_compilation.cpp | ${cmake_ninja
 #############################################
 # Custom command for Fase2_autogen\EWIEGA46WW\qrc_resource.cpp
 
-build Fase2_autogen/EWIEGA46WW/qrc_resource.cpp | ${cmake_ninja_workdir}Fase2_autogen/EWIEGA46WW/qrc_resource.cpp: CUSTOM_COMMAND C$:/Users/D3r3k/OneDrive/Uni$ -$ Virtual/Estructuras$ de$ Datos/-EDD-Proyecto_202001151/Fase2/resource.qrc CMakeFiles/Fase2_autogen.dir/AutoRcc_resource_EWIEGA46WW_Info.json C$:/Users/D3r3k/OneDrive/Uni$ -$ Virtual/Estructuras$ de$ Datos/-EDD-Proyecto_202001151/Fase2/images/default.jpg C$:/Qt/6.7.2/mingw_64/./bin/rcc.exe C$:/Qt/6.7.2/mingw_64/./bin/rcc.exe || Fase2_autogen Fase2_autogen_timestamp_deps
+build Fase2_autogen/EWIEGA46WW/qrc_resource.cpp | ${cmake_ninja_workdir}Fase2_autogen/EWIEGA46WW/qrc_resource.cpp: CUSTOM_COMMAND C$:/Users/D3r3k/OneDrive/Uni$ -$ Virtual/Estructuras$ de$ Datos/-EDD-Proyecto_202001151/Fase2/resource.qrc CMakeFiles/Fase2_autogen.dir/AutoRcc_resource_EWIEGA46WW_Info.json C$:/Users/D3r3k/OneDrive/Uni$ -$ Virtual/Estructuras$ de$ Datos/-EDD-Proyecto_202001151/Fase2/images/default.jpg C$:/Users/D3r3k/OneDrive/Uni$ -$ Virtual/Estructuras$ de$ Datos/-EDD-Proyecto_202001151/Fase2/images/user.png C$:/Qt/6.7.2/mingw_64/./bin/rcc.exe C$:/Qt/6.7.2/mingw_64/./bin/rcc.exe || Fase2_autogen Fase2_autogen_timestamp_deps
   COMMAND = C:\Windows\system32\cmd.exe /C "cd /D "C:\Users\D3r3k\OneDrive\Uni - Virtual\Estructuras de Datos\-EDD-Proyecto_202001151\Fase2\build\Desktop_Qt_6_7_2_MinGW_64_bit-Debug" && C:\Qt\Tools\CMake_64\bin\cmake.exe -E cmake_autorcc "C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/Fase2_autogen.dir/AutoRcc_resource_EWIEGA46WW_Info.json" Debug"
   DESC = Automatic RCC for resource.qrc
   restat = 1
@@ -314,7 +322,7 @@ build Fase2_autogen/EWIEGA46WW/qrc_resource.cpp | ${cmake_ninja_workdir}Fase2_au
 #############################################
 # Phony custom command for CMakeFiles\Fase2_autogen
 
-build CMakeFiles/Fase2_autogen Fase2_autogen/include/ui_windowmain.h Fase2_autogen/include/ui_windowadmin.h Fase2_autogen/include/ui_windowuser.h Fase2_autogen/include/ui_windowregister.h Fase2_autogen/include/ui_dialogmodificar.h Fase2_autogen/include/ui_dialognuevopost.h Fase2_autogen/include/ui_widgetpost.h Fase2_autogen/include/ui_widgetcomment.h Fase2_autogen/include/ui_dialogpost.h | ${cmake_ninja_workdir}CMakeFiles/Fase2_autogen ${cmake_ninja_workdir}Fase2_autogen/include/ui_windowmain.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_windowadmin.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_windowuser.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_windowregister.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_dialogmodificar.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_dialognuevopost.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_widgetpost.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_widgetcomment.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_dialogpost.h: phony Fase2_autogen/timestamp || Fase2_autogen_timestamp_deps
+build CMakeFiles/Fase2_autogen Fase2_autogen/include/ui_windowmain.h Fase2_autogen/include/ui_windowadmin.h Fase2_autogen/include/ui_windowuser.h Fase2_autogen/include/ui_windowregister.h Fase2_autogen/include/ui_dialogmodificar.h Fase2_autogen/include/ui_dialognuevopost.h Fase2_autogen/include/ui_widgetpost.h Fase2_autogen/include/ui_widgetcomment.h Fase2_autogen/include/ui_dialogpost.h Fase2_autogen/include/ui_widgetfriend.h | ${cmake_ninja_workdir}CMakeFiles/Fase2_autogen ${cmake_ninja_workdir}Fase2_autogen/include/ui_windowmain.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_windowadmin.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_windowuser.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_windowregister.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_dialogmodificar.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_dialognuevopost.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_widgetpost.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_widgetcomment.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_dialogpost.h ${cmake_ninja_workdir}Fase2_autogen/include/ui_widgetfriend.h: phony Fase2_autogen/timestamp || Fase2_autogen_timestamp_deps
 
 # =============================================================================
 # Target aliases.

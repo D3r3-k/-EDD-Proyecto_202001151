@@ -6,7 +6,7 @@ WidgetComment::WidgetComment(const StructsComment::Comentario &c, QWidget *paren
     : QWidget(parent), c(c), ui(new Ui::WidgetComment)
 {
     ui->setupUi(this);
-    llenarDatos(c);
+    setComment(c);
 }
 
 WidgetComment::~WidgetComment()

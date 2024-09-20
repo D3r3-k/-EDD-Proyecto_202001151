@@ -156,5 +156,17 @@ namespace Structs
         ~Publicacion() {}
     };
 
+    struct ReportePosts
+    {
+        string fecha;
+        ListaEnlazada::ListaEnlazada<Structs::Publicacion> publicaciones;
+
+        // Constructor
+        ReportePosts(string fecha,ListaEnlazada::ListaEnlazada<Structs::Publicacion> publicaciones) : fecha(fecha), publicaciones(publicaciones) {}
+
+        // Destructor
+        ~ReportePosts() {}
+    };
+
 }
 #endif // STRUCTS_H

@@ -342,6 +342,12 @@
 			null
 		],
 		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/widgetfriend.h",
+			"MU",
+			"EWIEGA46WW/moc_widgetfriend.cpp",
+			null
+		],
+		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/widgetpost.h",
 			"MU",
 			"EWIEGA46WW/moc_widgetpost.cpp",
@@ -495,6 +501,11 @@
 		],
 		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/widgetcomment.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/widgetfriend.cpp",
 			"MU",
 			null
 		],

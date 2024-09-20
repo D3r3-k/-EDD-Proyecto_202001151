@@ -26,6 +26,7 @@ void WidgetPost::llenarDatos(const int id){
     if (post) {
         ui->label_user->setText(QString::fromStdString(post->correo_autor));
         ui->label_date->setText(QString::fromStdString(post->fecha));
+        ui->label_comentarios->setText(QString::number(post->comentarios->size()));
         if (usuario_logeado->correo != post->correo_autor) {
             ui->eliminarButton->setEnabled(false);
             ui->eliminarButton->setVisible(false);
@@ -78,5 +79,7 @@ void WidgetPost::on_pushButton_ver_clicked()
 {
     int id = getID();
     DialogPost dp(id);
-    dp.exec();
+    if (dp.exec() == QDialog::Rejected) {
+        Func::ActualizarFeed();
+    }
 }
