@@ -4,6 +4,8 @@
 #include "globales.h"
 #include "ui_widgetpost.h"
 #include "Structs.h"
+#include "dialogpost.h"
+#include <qdatetime.h>
 #include <qmessagebox.h>
 
 WidgetPost::WidgetPost(const int id, QWidget *parent)
@@ -11,7 +13,7 @@ WidgetPost::WidgetPost(const int id, QWidget *parent)
     , ui(new Ui::WidgetPost)
 {
     ui->setupUi(this);
-    llenarDatos(id);
+    setID(id);
 }
 
 WidgetPost::~WidgetPost()
@@ -24,12 +26,22 @@ void WidgetPost::llenarDatos(const int id){
     if (post) {
         ui->label_user->setText(QString::fromStdString(post->correo_autor));
         ui->label_date->setText(QString::fromStdString(post->fecha));
-        ui->label_contenido->setText(QString::fromStdString(post->contenido));
         if (usuario_logeado->correo != post->correo_autor) {
             ui->eliminarButton->setEnabled(false);
             ui->eliminarButton->setVisible(false);
             ui->editarButton->setEnabled(false);
             ui->editarButton->setVisible(false);
+        }
+        if (post->imagen != "default.jpg") {
+            QPixmap pix(QString::fromStdString(post->imagen));
+            QPixmap scaledPix = pix.scaled(300,300, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            ui->label_img->setPixmap(scaledPix);
+            ui->label_img->setAlignment(Qt::AlignCenter);
+        }else{
+            QPixmap pix(":/images/default.jpg");
+            QPixmap scaledPix = pix.scaled(300,300, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            ui->label_img->setPixmap(scaledPix);
+            ui->label_img->setAlignment(Qt::AlignCenter);
         }
     }
 }
@@ -62,19 +74,9 @@ void WidgetPost::on_eliminarButton_clicked()
 }
 
 
-void WidgetPost::on_pushButton_comentar_clicked()
+void WidgetPost::on_pushButton_ver_clicked()
 {
-    QMessageBox::information(nullptr,"Comentarios", "Comentando el post con ID: "+QString::number(getID()));
+    int id = getID();
+    DialogPost dp(id);
+    dp.exec();
 }
-
-void WidgetPost::on_pushButton_comentarios_clicked()
-{
-
-}
-
-
-void WidgetPost::on_pushButton_arbol_clicked()
-{
-
-}
-

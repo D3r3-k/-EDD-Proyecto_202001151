@@ -42,15 +42,24 @@ void EliminarCuenta(string correo);
 
 // TODO: Metodos extras
 ListaEnlazada::ListaEnlazada<Structs::Usuario> obtenerListaUsuariosLogeado();
-void ActualizarTablas();
 void ActualizarTablaAdmin(int opcion);
-int obtenerPostID();
-void eliminarPublicacion(int id);
+void ActualizarTablas();
+// Publicaciones
 Structs::Publicacion *buscarPost(int id);
+void modificarPublicacion(int id, std::string contenido, std::string pathImg);
+void eliminarPublicacion(int id);
+void eliminarPublicacionUsuario(std::string correo);
+int obtenerPostID();
+string graficarPublicaciones();
+void ComentarPublicacion(int id, StructsComment::Comentario comentario);
+
 void ActualizarFeed();
 string convertirFecha(const std::string& fechaOriginal);
 string convertirFecha(const std::tm &fecha);
 tm convertirFechaTm(const std::string& fechaOriginal);
+string convertirFechayHora(const std::string& fechaOriginal);
+string convertirFechayHora(const std::tm &fecha);
+tm convertirFechayHoraTm(const std::string& fechaOriginal);
 }
 
 

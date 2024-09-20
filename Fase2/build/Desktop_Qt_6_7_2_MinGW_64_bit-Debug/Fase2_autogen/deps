@@ -522,10 +522,13 @@ Fase2_autogen/timestamp: \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/ListaDoble.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/ListaEnlazada.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/Structs.h \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/StructsComment.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/arbolabb.cpp \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/arbolabb.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/arbolavl.cpp \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/arbolavl.h \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/arbolb5.cpp \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/arbolb5.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/3.29.3/CMakeCXXCompiler.cmake \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/3.29.3/CMakeRCCompiler.cmake \
@@ -535,6 +538,8 @@ Fase2_autogen/timestamp: \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialogmodificar.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialognuevopost.cpp \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialognuevopost.h \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialogpost.cpp \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialogpost.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/funciones.cpp \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/funciones.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/globales.cpp \
@@ -542,6 +547,9 @@ Fase2_autogen/timestamp: \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/main.cpp \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/matrizrelacion.cpp \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/matrizrelacion.h \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/resource.qrc \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/widgetcomment.cpp \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/widgetcomment.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/widgetpost.cpp \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/widgetpost.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/windowadmin.cpp \
@@ -554,6 +562,8 @@ Fase2_autogen/timestamp: \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/windowuser.h \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialogmodificar.ui \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialognuevopost.ui \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/dialogpost.ui \
+	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/widgetcomment.ui \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/widgetpost.ui \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/windowadmin.ui \
 	C:/Users/D3r3k/OneDrive/Uni\ -\ Virtual/Estructuras\ de\ Datos/-EDD-Proyecto_202001151/Fase2/windowmain.ui \

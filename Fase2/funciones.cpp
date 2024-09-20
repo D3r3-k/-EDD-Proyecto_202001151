@@ -542,6 +542,8 @@ namespace Func
 
     void EliminarMiCuenta()
     {
+        // Eliminar las publicaciones del usuario
+        eliminarPublicacionUsuario(usuario_logeado->correo);
         // Eliminar todas las relaciones de amistad del usuario logueado
         relaciones_amistad.eliminarRelacionesUsuario(usuario_logeado->correo);
         // Eliminar las solicitudes enviadas y recibidas del usuario logueado
@@ -668,7 +670,8 @@ namespace Func
     int obtenerPostID()
     {
         int id = -1;
-        Structs::Publicacion *p = lista_publicaciones.obtener(lista_publicaciones.size() - 1);
+        int ultimoId = lista_publicaciones.size() - 1;
+        Structs::Publicacion *p = lista_publicaciones.obtener(ultimoId);
         if (p)
         {
             id = p->id;
@@ -692,6 +695,17 @@ namespace Func
         }
     }
 
+    void eliminarPublicacionUsuario(string correo){
+        for (int i = 0; i < lista_publicaciones.size(); ++i) {
+            Structs::Publicacion *p = lista_publicaciones.obtener(i);
+            if (p) {
+                if (p->correo_autor == correo) {
+                    lista_publicaciones.eliminarPosicion(i);
+                }
+            }
+        }
+    }
+
     Structs::Publicacion *buscarPost(int id)
     {
         for (int i = 0; i < lista_publicaciones.size(); ++i)
@@ -706,6 +720,80 @@ namespace Func
             }
         }
         return nullptr;
+    }
+
+    void modificarPublicacion(int id, std::string contenido, std::string pathImg)
+    {
+        for (int i = 0; i < lista_publicaciones.size(); ++i)
+        {
+            Structs::Publicacion *p = lista_publicaciones.obtener(i);
+            if (p)
+            {
+                if (p->id == id)
+                {
+                    p->contenido = contenido;
+                    p->imagen = pathImg;
+                    break;
+                }
+            }
+        }
+    }
+
+    std::string graficarPublicaciones()
+    {
+        std::string dotPath = "publicaciones.dot";
+        std::string imgPath = "publicaciones.png";
+
+        std::ofstream file(dotPath);
+
+        if (file.is_open())
+        {
+            file << "digraph G {\n";
+            file << "rankdir = TB;\n";
+            file << "node [shape=record];\n";
+            file << "label=\"Lista de publicaciones\" fontsize = 20 fontname = \"Arial\";";
+
+            for (int i = 0; i < lista_publicaciones.size(); ++i)
+            {
+                Structs::Publicacion *p = lista_publicaciones.obtener(i);
+                if (p)
+                {
+                    file << "node" << i << " [label=\"{ID: " << p->id << " | Autor: " << p->correo_autor << " | Fecha: " << p->fecha << " | Hora: " << p->hora << " | Contenido: " << p->contenido << "}\"];\n";
+                }
+            }
+
+            for (int i = 0; i < lista_publicaciones.size(); ++i)
+            {
+                Structs::Publicacion *p = lista_publicaciones.obtener(i);
+                if (p)
+                {
+                    if (i + 1 < lista_publicaciones.size())
+                    {
+                        file << "node" << i << " -> node" << i + 1 << ";\n";
+                        file << "node" << i +1 << " -> node" << i << ";\n";
+                    }
+                }
+            }
+
+            file << "}";
+            file.close();
+
+            std::string command = "dot -Tpng " + dotPath + " -o " + imgPath;
+            system(command.c_str());
+        }
+        return imgPath;
+    }
+
+    void ComentarPublicacion(int id, StructsComment::Comentario comentario){
+        for (int i = 0; i < lista_publicaciones.size(); ++i) {
+            Structs::Publicacion *p = lista_publicaciones.obtener(i);
+            if (p) {
+                if (p->id == id) {
+                    p->comentarios->insertar(comentario);
+                    break;
+                }
+            }
+        }
     }
 
     void ActualizarFeed()
@@ -784,7 +872,6 @@ namespace Func
                     index = i;
                 }
                 QString fecha = QString::fromStdString(convertirFecha(*f));
-                qInfo() << ">>> " << fecha << "Cantidad: " << QString::number(posts.obtenerPublicaciones(*f).size());
                 selectedDate->addItem(fecha);
             }
         }
@@ -798,20 +885,31 @@ namespace Func
         std::string _f = convertirFecha(fecha);
         if (_f == "01-01-0001")
         {
-            posts_feed = posts.inorder();
+            if (orden == 0)
+            {
+                posts_feed = posts.inorder();
+            }
+            else if (orden == 1)
+            {
+                posts_feed = posts.preorder();
+            }
+            else if (orden == 2)
+            {
+                posts_feed = posts.postorder();
+            }
         }
         else
         {
             posts_feed = posts.obtenerPublicaciones(fecha);
         }
 
-
         for (int i = 0; i < posts_feed.size(); ++i)
         {
             Structs::Publicacion *p = posts_feed.obtener(i);
             if (p)
             {
-                WidgetPost *newPost = new WidgetPost(p->id);
+                int postid = p->id;
+                WidgetPost *newPost = new WidgetPost(postid);
                 layout->addWidget(newPost);
             }
         }
@@ -877,6 +975,69 @@ namespace Func
         }
 
         throw std::runtime_error("Error al parsear la fecha.");
+    }
+
+    string convertirFechayHora(const std::string& fechaOriginal)
+    {
+        std::tm fecha = {};
+        std::vector<std::string> formatos = {
+            "%d-%m-%Y %H:%M", // dd-mm-aaaa hh:mm
+            "%Y-%m-%d %H:%M", // aaaa-mm-dd hh:mm
+            "%m/%d/%Y %H:%M", // mm/dd/aaaa hh:mm
+            "%d/%m/%Y %H:%M"  // dd/mm/aaaa hh:mm
+        };
+
+        for (const auto &formato : formatos)
+        {
+            std::istringstream ss(fechaOriginal);
+            ss >> std::get_time(&fecha, formato.c_str());
+            if (!ss.fail())
+            {
+                std::ostringstream oss;
+                oss << std::put_time(&fecha, "%d-%m-%Y %H:%M");
+                return oss.str();
+            }
+        }
+
+        throw std::runtime_error("Error al parsear la fecha.");
+    }
+
+    std::tm convertirFechayHoraTm(const std::string &fechaOriginal)
+    {
+        std::tm fecha = {};
+        std::vector<std::string> formatos = {
+            "%d-%m-%Y %H:%M", // dd-mm-aaaa hh:mm
+            "%Y-%m-%d %H:%M", // aaaa-mm-dd hh:mm
+            "%m/%d/%Y %H:%M", // mm/dd/aaaa hh:mm
+            "%d/%m/%Y %H:%M"  // dd/mm/aaaa hh:mm
+        };
+
+        for (const auto &formato : formatos)
+        {
+            std::istringstream ss(fechaOriginal);
+            ss >> std::get_time(&fecha, formato.c_str());
+            if (!ss.fail())
+            {
+                // Si parsea correctamente, retornamos el std::tm
+                return fecha;
+            }
+        }
+
+        throw std::runtime_error("Error al parsear la fecha.");
+    }
+
+
+
+    std::string convertirFechayHora(const std::tm &fecha)
+    {
+        // Crear un stringstream para construir la fecha en el formato deseado
+        std::ostringstream oss;
+
+        // Convertir el std::tm a string en el formato "dd-mm-yyyy hh:mm"
+        oss << std::put_time(&fecha, "%d-%m-%Y %H:%M");
+
+        // Devolver la cadena formateada
+        return oss.str();
     }
 
 }

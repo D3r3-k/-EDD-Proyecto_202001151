@@ -1,3 +1,23 @@
 digraph ArbolAVL {
+"lp@example.com" [label="lp@example.com"];
+"lp@example.com" -> "cg@example.com";
+"cg@example.com" [label="cg@example.com"];
+"cg@example.com" -> "admin@gmail.com";
 "admin@gmail.com" [label="admin@gmail.com"];
+"admin@gmail.com" -> "ah@example.com";
+"ah@example.com" [label="ah@example.com"];
+"cg@example.com" -> "jg@example.com";
+"jg@example.com" [label="jg@example.com"];
+"jg@example.com" -> "et@example.com";
+"et@example.com" [label="et@example.com"];
+"jg@example.com" -> "jm@example.com";
+"jm@example.com" [label="jm@example.com"];
+"lp@example.com" -> "ml@example.com";
+"ml@example.com" [label="ml@example.com"];
+"ml@example.com" -> "lr@example.com";
+"lr@example.com" [label="lr@example.com"];
+"ml@example.com" -> "mr@example.com";
+"mr@example.com" [label="mr@example.com"];
+"mr@example.com" -> "sg@example.com";
+"sg@example.com" [label="sg@example.com"];
 }

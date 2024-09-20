@@ -1,62 +1,106 @@
 [
-    {
-        "correo": "juan.perez@example.com",
-        "contenido": "¡Hola a todos! Estoy emocionado por comenzar este nuevo proyecto.",
-        "fecha": "2024-07-10",
-        "hora": "09:00:15"
-    },
-    {
-        "correo": "maria.rodriguez@example.com",
-        "contenido": "Hoy he comenzado un nuevo curso de programación. ¡Deseadme suerte!",
-        "fecha": "2024-08-11",
-        "hora": "10:30:45"
-    },
-    {
-        "correo": "carlos.sanchez@example.com",
-        "contenido": "¡Acabo de terminar de leer un libro fascinante sobre C++!",
-        "fecha": "2024-09-12",
-        "hora": "14:45:16"
-    },
-    {
-        "correo": "ana.martinez@example.com",
-        "contenido": "¿Alguien tiene recomendaciones para mejorar mis habilidades en diseño de UI?",
-        "fecha": "2024-07-13",
-        "hora": "11:00:15"
-    },
-    {
-        "correo": "luis.gomez@example.com",
-        "contenido": "Estoy organizando un hackathon el próximo mes. ¡Espero verlos allí!",
-        "fecha": "2024-07-14",
-        "hora": "15:20:37"
-    },
-    {
-        "correo": "laura.ruiz@example.com",
-        "contenido": "He encontrado una herramienta genial para gestión de proyectos. La recomiendo.",
-        "fecha": "2024-08-15",
-        "hora": "16:10:30"
-    },
-    {
-        "correo": "javier.hernandez@example.com",
-        "contenido": "¿Alguien sabe cómo optimizar el rendimiento en aplicaciones web?",
-        "fecha": "2024-09-16",
-        "hora": "12:00:15"
-    },
-    {
-        "correo": "isabel.ramirez@example.com",
-        "contenido": "Estoy pensando en cambiar de carrera. ¿Alguien ha hecho algo similar?",
-        "fecha": "2024-10-17",
-        "hora": "18:30:45"
-    },
-    {
-        "correo": "miguel.garcia@example.com",
-        "contenido": "¡Mis habilidades en Python están mejorando! Acabo de completar un proyecto.",
-        "fecha": "2024-11-18",
-        "hora": "13:50:16"
-    },
-    {
-        "correo": "sofia.fernandez@example.com",
-        "contenido": "Me estoy preparando para una presentación importante la próxima semana. Nerviosa pero emocionada.",
-        "fecha": "2024-11-19",
-        "hora": "08:45:16"
-    }
+  {
+      "correo": "cg@example.com",
+      "contenido": "Disfrutando de un día soleado en la playa, la vida es mejor con arena y mar.",
+      "fecha": "12/08/2024",
+      "hora": "14:23",
+      "comentarios": [
+          {
+              "correo": "ml@example.com",
+              "comentario": "¡Qué envidia! Me encantaría estar en la playa ahora mismo.",
+              "fecha": "13/08/2024",
+              "hora": "09:30"
+          }
+      ]
+  },
+  {
+      "correo": "ml@example.com",
+      "contenido": "Hoy aprendí algo nuevo, siempre es bueno salir de la zona de confort.",
+      "fecha": "11/08/2024",
+      "hora": "09:45",
+      "comentarios": []
+  },
+  {
+      "correo": "jm@example.com",
+      "contenido": "El café de la mañana nunca decepciona, ¡energía pura para el día!",
+      "fecha": "10/08/2024",
+      "hora": "07:30",
+      "comentarios": []
+  },
+  {
+      "correo": "ah@example.com",
+      "contenido": "Los atardeceres en la ciudad son simplemente mágicos, me encanta.",
+      "fecha": "13/08/2024",
+      "hora": "18:12",
+      "comentarios": [
+          {
+              "correo": "jm@example.com",
+              "comentario": "Totalmente de acuerdo, los atardeceres son la mejor parte del día.",
+              "fecha": "14/08/2024",
+              "hora": "08:00"
+          }
+      ]
+  },
+  {
+      "correo": "lp@example.com",
+      "contenido": "Día perfecto para una caminata por el parque, disfrutando de la naturaleza.",
+      "fecha": "15/08/2024",
+      "hora": "10:57",
+      "comentarios": [
+          {
+              "correo": "lr@example.com",
+              "comentario": "¡Qué bien! La naturaleza siempre es revitalizante.",
+              "fecha": "16/08/2024",
+              "hora": "11:30"
+          }
+      ]
+  },
+  {
+      "correo": "lr@example.com",
+      "contenido": "La lectura de un buen libro puede cambiar tu perspectiva del mundo.",
+      "fecha": "20/08/2024",
+      "hora": "16:45",
+      "comentarios": []
+  },
+  {
+      "correo": "jg@example.com",
+      "contenido": "Esos pequeños momentos de felicidad son los que más cuentan.",
+      "fecha": "14/08/2024",
+      "hora": "13:20",
+      "comentarios": []
+  },
+  {
+      "correo": "et@example.com",
+      "contenido": "Cocinando mi plato favorito, nada como la comida casera.",
+      "fecha": "21/08/2024",
+      "hora": "11:40",
+      "comentarios": []
+  },
+  {
+      "correo": "mr@example.com",
+      "contenido": "Una nueva aventura comienza, emocionado por lo que viene.",
+      "fecha": "19/08/2024",
+      "hora": "08:50",
+      "comentarios": [
+          {
+              "correo": "sg@example.com",
+              "comentario": "¡Suerte en tu aventura! Espero que sea increíble.",
+              "fecha": "20/08/2024",
+              "hora": "09:15"
+          },
+          {
+            "correo": "mr@example.com",
+            "comentario": "¡Gracias!",
+            "fecha": "20/08/2024",
+            "hora": "09:20"
+        }
+      ]
+  },
+  {
+      "correo": "sg@example.com",
+      "contenido": "La música siempre encuentra la manera de alegrar mi día.",
+      "fecha": "18/08/2024",
+      "hora": "17:15",
+      "comentarios": []
+  }
 ]

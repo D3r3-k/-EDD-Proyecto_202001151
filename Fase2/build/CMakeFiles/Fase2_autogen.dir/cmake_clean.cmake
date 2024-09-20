@@ -2,6 +2,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Fase2_autogen"
   "Fase2_autogen/include/ui_dialogmodificar.h"
   "Fase2_autogen/include/ui_dialognuevopost.h"
+  "Fase2_autogen/include/ui_dialogpost.h"
+  "Fase2_autogen/include/ui_widgetcomment.h"
   "Fase2_autogen/include/ui_widgetpost.h"
   "Fase2_autogen/include/ui_windowadmin.h"
   "Fase2_autogen/include/ui_windowmain.h"

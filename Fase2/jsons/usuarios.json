@@ -1,142 +1,72 @@
 [
-    {
-        "nombres": "Juan",
-        "apellidos": "Pérez Gómez",
-        "fecha_de_nacimiento": "1990-05-15",
-        "correo": "juan.perez@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "María",
-        "apellidos": "Rodríguez López",
-        "fecha_de_nacimiento": "1985-03-22",
-        "correo": "maria.rodriguez@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Carlos",
-        "apellidos": "Sánchez Fernández",
-        "fecha_de_nacimiento": "1992-11-08",
-        "correo": "carlos.sanchez@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Ana",
-        "apellidos": "Martínez Jiménez",
-        "fecha_de_nacimiento": "1987-07-14",
-        "correo": "ana.martinez@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Luis",
-        "apellidos": "Gómez Hernández",
-        "fecha_de_nacimiento": "1995-01-05",
-        "correo": "luis.gomez@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Laura",
-        "apellidos": "Ruiz García",
-        "fecha_de_nacimiento": "1993-06-18",
-        "correo": "laura.ruiz@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Javier",
-        "apellidos": "Hernández Torres",
-        "fecha_de_nacimiento": "1991-09-30",
-        "correo": "javier.hernandez@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Isabel",
-        "apellidos": "Ramírez Sánchez",
-        "fecha_de_nacimiento": "1988-02-11",
-        "correo": "isabel.ramirez@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Miguel",
-        "apellidos": "García González",
-        "fecha_de_nacimiento": "1994-12-25",
-        "correo": "miguel.garcia@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Sofía",
-        "apellidos": "Fernández Pérez",
-        "fecha_de_nacimiento": "1996-04-07",
-        "correo": "sofia.fernandez@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "David",
-        "apellidos": "López Sánchez",
-        "fecha_de_nacimiento": "1990-08-19",
-        "correo": "david.lopez@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Lucía",
-        "apellidos": "Martín Ruiz",
-        "fecha_de_nacimiento": "1989-12-03",
-        "correo": "lucia.martin@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Andrés",
-        "apellidos": "González Ramírez",
-        "fecha_de_nacimiento": "1997-05-10",
-        "correo": "andres.gonzalez@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Elena",
-        "apellidos": "Díaz García",
-        "fecha_de_nacimiento": "1991-11-23",
-        "correo": "elena.diaz@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Raúl",
-        "apellidos": "Molina Sánchez",
-        "fecha_de_nacimiento": "1986-03-15",
-        "correo": "raul.molina@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Patricia",
-        "apellidos": "Castro López",
-        "fecha_de_nacimiento": "1992-07-29",
-        "correo": "patricia.castro@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Alberto",
-        "apellidos": "Morales Gómez",
-        "fecha_de_nacimiento": "1993-02-14",
-        "correo": "alberto.morales@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Verónica",
-        "apellidos": "Santos Fernández",
-        "fecha_de_nacimiento": "1995-06-20",
-        "correo": "veronica.santos@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Francisco",
-        "apellidos": "Ramos Pérez",
-        "fecha_de_nacimiento": "1987-10-13",
-        "correo": "francisco.ramos@example.com",
-        "contraseña": "123"
-    },
-    {
-        "nombres": "Marta",
-        "apellidos": "Ortiz López",
-        "fecha_de_nacimiento": "1990-09-01",
-        "correo": "marta.ortiz@example.com",
-        "contraseña": "123"
-    }
+  {
+      "nombres": "Carlos",
+      "apellidos": "Gomez",
+      "fecha_de_nacimiento": "1990/05/12",
+      "correo": "cg@example.com",
+      "contraseña": "123"
+  },
+  {
+      "nombres": "Maria",
+      "apellidos": "Lopez",
+      "fecha_de_nacimiento": "1985/08/23",
+      "correo": "ml@example.com",
+      "contraseña": "123"
+  },
+  {
+      "nombres": "Juan",
+      "apellidos": "Martinez",
+      "fecha_de_nacimiento": "1992/02/17",
+      "correo": "jm@example.com",
+      "contraseña": "123"
+  },
+  {
+      "nombres": "Ana",
+      "apellidos": "Hernandez",
+      "fecha_de_nacimiento": "1995/11/30",
+      "correo": "ah@example.com",
+      "contraseña": "123"
+  },
+  {
+      "nombres": "Luis",
+      "apellidos": "Perez",
+      "fecha_de_nacimiento": "1988/04/09",
+      "correo": "lp@example.com",
+      "contraseña": "123"
+  },
+  {
+      "nombres": "Laura",
+      "apellidos": "Ramirez",
+      "fecha_de_nacimiento": "1993/09/05",
+      "correo": "lr@example.com",
+      "contraseña": "123"
+  },
+  {
+      "nombres": "Jose",
+      "apellidos": "Garcia",
+      "fecha_de_nacimiento": "1991/07/14",
+      "correo": "jg@example.com",
+      "contraseña": "123"
+  },
+  {
+      "nombres": "Elena",
+      "apellidos": "Torres",
+      "fecha_de_nacimiento": "1987/12/22",
+      "correo": "et@example.com",
+      "contraseña": "123"
+  },
+  {
+      "nombres": "Miguel",
+      "apellidos": "Rodriguez",
+      "fecha_de_nacimiento": "1989/03/11",
+      "correo": "mr@example.com",
+      "contraseña": "123"
+  },
+  {
+      "nombres": "Sofia",
+      "apellidos": "Gonzalez",
+      "fecha_de_nacimiento": "1994/06/28",
+      "correo": "sg@example.com",
+      "contraseña": "123"
+  }
 ]

@@ -6,589 +6,478 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1000</width>
-    <height>500</height>
+    <width>1187</width>
+    <height>739</height>
    </rect>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>1000</width>
-    <height>500</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
+  <property name="windowIcon">
+   <iconset theme="QIcon::ThemeIcon::Computer"/>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>1000</width>
-      <height>481</height>
-     </rect>
-    </property>
-    <property name="currentIndex">
-     <number>2</number>
-    </property>
-    <widget class="QWidget" name="tab_buscar">
-     <attribute name="title">
-      <string>Buscar</string>
-     </attribute>
-     <widget class="QWidget" name="horizontalLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>-1</x>
-        <y>-1</y>
-        <width>1001</width>
-        <height>91</height>
-       </rect>
+   <layout class="QVBoxLayout" name="verticalLayout_7">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>2</number>
       </property>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <property name="leftMargin">
-        <number>50</number>
-       </property>
-       <property name="topMargin">
-        <number>10</number>
-       </property>
-       <property name="rightMargin">
-        <number>50</number>
-       </property>
-       <property name="bottomMargin">
-        <number>10</number>
-       </property>
-       <item>
-        <widget class="QGroupBox" name="groupBox_buscar">
-         <property name="title">
-          <string>Buscar</string>
-         </property>
-         <widget class="QWidget" name="horizontalLayoutWidget_2">
-          <property name="geometry">
-           <rect>
-            <x>-1</x>
-            <y>19</y>
-            <width>451</width>
-            <height>51</height>
-           </rect>
+      <widget class="QWidget" name="tab_buscar">
+       <attribute name="title">
+        <string>Buscar</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <widget class="QWidget" name="buscar_horizontal_groups" native="true">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>50</height>
+           </size>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <property name="leftMargin">
-            <number>10</number>
-           </property>
-           <property name="rightMargin">
-            <number>10</number>
-           </property>
+          <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <widget class="QLineEdit" name="inputBuscar">
-             <property name="placeholderText">
-              <string>correo@gmail.com</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="btnBuscar">
-             <property name="text">
+            <widget class="QGroupBox" name="groupBox_buscar_buscar">
+             <property name="title">
               <string>Buscar</string>
              </property>
+             <layout class="QVBoxLayout" name="verticalLayout_9">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_buscar_buscar">
+                <property name="leftMargin">
+                 <number>10</number>
+                </property>
+                <property name="rightMargin">
+                 <number>10</number>
+                </property>
+                <item>
+                 <widget class="QLineEdit" name="lineEdit_buscar_buscar">
+                  <property name="placeholderText">
+                   <string>correo@gmail.com</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_buscar_buscar">
+                  <property name="text">
+                   <string>Buscar</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </item>
+           <item>
+            <widget class="QGroupBox" name="groupBox_buscar_ordenar">
+             <property name="title">
+              <string>Ordenar</string>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayout_10">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_buscar_ordenar">
+                <property name="leftMargin">
+                 <number>10</number>
+                </property>
+                <property name="rightMargin">
+                 <number>10</number>
+                </property>
+                <item>
+                 <widget class="QComboBox" name="comboBox_buscar_ordenar">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>InOrden</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>PreOrden</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>PostOrden</string>
+                   </property>
+                  </item>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_buscar_aplicar">
+                  <property name="text">
+                   <string>Aplicar</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
             </widget>
            </item>
           </layout>
          </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox_ordenar">
-         <property name="title">
-          <string>Ordenar</string>
-         </property>
-         <widget class="QWidget" name="horizontalLayoutWidget_3">
-          <property name="geometry">
-           <rect>
-            <x>-1</x>
-            <y>19</y>
-            <width>451</width>
-            <height>51</height>
-           </rect>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableUsuarios">
+          <property name="editTriggers">
+           <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
           </property>
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <property name="leftMargin">
-            <number>10</number>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Nombres</string>
            </property>
-           <property name="rightMargin">
-            <number>10</number>
+          </column>
+          <column>
+           <property name="text">
+            <string>Apellidos</string>
            </property>
-           <item>
-            <widget class="QComboBox" name="comboBoxOrdenar">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <item>
-              <property name="text">
-               <string>InOrden</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>PreOrden</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>PostOrden</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="btnOrdenar">
-             <property name="text">
-              <string>Aplicar</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          </column>
+          <column>
+           <property name="text">
+            <string>Correo</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Fecha de Nacimiento</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string/>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string/>
+           </property>
+          </column>
          </widget>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="gridLayoutWidget">
-      <property name="geometry">
-       <rect>
-        <x>-1</x>
-        <y>89</y>
-        <width>1001</width>
-        <height>351</height>
-       </rect>
-      </property>
-      <layout class="QGridLayout" name="gridLayout">
-       <property name="leftMargin">
-        <number>10</number>
-       </property>
-       <property name="topMargin">
-        <number>10</number>
-       </property>
-       <property name="rightMargin">
-        <number>10</number>
-       </property>
-       <property name="bottomMargin">
-        <number>10</number>
-       </property>
-       <item row="0" column="0">
-        <widget class="QTableWidget" name="tableUsuarios">
-         <property name="editTriggers">
-          <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
-         </property>
-         <attribute name="horizontalHeaderDefaultSectionSize">
-          <number>163</number>
-         </attribute>
-         <column>
-          <property name="text">
-           <string>Nombres</string>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_cargas">
+       <attribute name="title">
+        <string>Cargas Masivas</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_11">
+        <item>
+         <layout class="QHBoxLayout" name="cargas_horizontal_groups">
+          <property name="spacing">
+           <number>30</number>
           </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Apellidos</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Correo</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>Fecha de Nacimiento</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string/>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string/>
-          </property>
-         </column>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_cargas">
-     <attribute name="title">
-      <string>Cargas Masivas</string>
-     </attribute>
-     <widget class="QWidget" name="horizontalLayoutWidget_4">
-      <property name="geometry">
-       <rect>
-        <x>-1</x>
-        <y>-1</y>
-        <width>1001</width>
-        <height>451</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout_4">
-       <property name="spacing">
-        <number>30</number>
-       </property>
-       <property name="leftMargin">
-        <number>20</number>
-       </property>
-       <property name="topMargin">
-        <number>20</number>
-       </property>
-       <property name="rightMargin">
-        <number>20</number>
-       </property>
-       <property name="bottomMargin">
-        <number>20</number>
-       </property>
-       <item>
-        <widget class="QGroupBox" name="groupBox_2">
-         <property name="title">
-          <string>Usuarios</string>
-         </property>
-         <widget class="QWidget" name="verticalLayoutWidget">
-          <property name="geometry">
-           <rect>
-            <x>-1</x>
-            <y>19</y>
-            <width>301</width>
-            <height>391</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout">
-           <property name="leftMargin">
-            <number>20</number>
-           </property>
-           <property name="rightMargin">
-            <number>20</number>
-           </property>
-           <item>
-            <widget class="QPushButton" name="btnSubirUsuarios">
-             <property name="layoutDirection">
-              <enum>Qt::LayoutDirection::RightToLeft</enum>
-             </property>
-             <property name="text">
-              <string>Cargar Usuarios </string>
-             </property>
-             <property name="icon">
-              <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox">
-         <property name="title">
-          <string>Solicitudes</string>
-         </property>
-         <widget class="QWidget" name="verticalLayoutWidget_2">
-          <property name="geometry">
-           <rect>
-            <x>-1</x>
-            <y>19</y>
-            <width>301</width>
-            <height>391</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_2">
-           <property name="spacing">
-            <number>30</number>
-           </property>
-           <property name="leftMargin">
-            <number>20</number>
-           </property>
-           <property name="rightMargin">
-            <number>20</number>
-           </property>
-           <item>
-            <widget class="QPushButton" name="btnSubirSolicitudes">
-             <property name="layoutDirection">
-              <enum>Qt::LayoutDirection::RightToLeft</enum>
-             </property>
-             <property name="text">
-              <string>Cargar Solicitudes</string>
-             </property>
-             <property name="icon">
-              <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="groupBox_3">
-         <property name="title">
-          <string>Publicaciones</string>
-         </property>
-         <widget class="QWidget" name="verticalLayoutWidget_3">
-          <property name="geometry">
-           <rect>
-            <x>-1</x>
-            <y>19</y>
-            <width>301</width>
-            <height>391</height>
-           </rect>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_3">
-           <property name="spacing">
-            <number>30</number>
-           </property>
-           <property name="leftMargin">
-            <number>20</number>
-           </property>
-           <property name="rightMargin">
-            <number>20</number>
-           </property>
-           <item>
-            <widget class="QPushButton" name="btnSubirPublicaciones">
-             <property name="layoutDirection">
-              <enum>Qt::LayoutDirection::RightToLeft</enum>
-             </property>
-             <property name="text">
-              <string>Cargar Publicaciones</string>
-             </property>
-             <property name="icon">
-              <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </widget>
-       </item>
-      </layout>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_reportes">
-     <attribute name="title">
-      <string>Reportes</string>
-     </attribute>
-     <widget class="QWidget" name="gridWidget_2" native="true">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>1000</width>
-        <height>450</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout_4">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5">
-         <property name="spacing">
-          <number>30</number>
-         </property>
-         <property name="leftMargin">
-          <number>20</number>
-         </property>
-         <property name="topMargin">
-          <number>20</number>
-         </property>
-         <property name="rightMargin">
-          <number>20</number>
-         </property>
-         <property name="bottomMargin">
-          <number>20</number>
-         </property>
-         <item>
-          <widget class="QGroupBox" name="groupBox_4">
-           <property name="title">
-            <string>Arbol de Usuarios</string>
-           </property>
-           <widget class="QWidget" name="verticalWidget_4" native="true">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>20</y>
-              <width>465</width>
-              <height>340</height>
-             </rect>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_5">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <property name="leftMargin">
-              <number>10</number>
-             </property>
-             <property name="topMargin">
-              <number>10</number>
-             </property>
-             <property name="rightMargin">
-              <number>10</number>
-             </property>
-             <property name="bottomMargin">
-              <number>10</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="img_usuarios">
-               <property name="text">
-                <string>IMAGEN</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="btn_abrir_imgUsuarios">
-               <property name="text">
-                <string>Abrir Imagen</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </widget>
-         </item>
-         <item>
-          <widget class="QGroupBox" name="groupBox_5">
-           <property name="title">
-            <string>Lista de Publicaciones</string>
-           </property>
-           <widget class="QWidget" name="verticalWidget_5" native="true">
-            <property name="geometry">
-             <rect>
-              <x>0</x>
-              <y>20</y>
-              <width>465</width>
-              <height>340</height>
-             </rect>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_6">
-             <property name="spacing">
-              <number>0</number>
-             </property>
-             <property name="leftMargin">
-              <number>10</number>
-             </property>
-             <property name="topMargin">
-              <number>10</number>
-             </property>
-             <property name="rightMargin">
-              <number>10</number>
-             </property>
-             <property name="bottomMargin">
-              <number>10</number>
-             </property>
-             <item>
-              <widget class="QLabel" name="img_publicaciones">
-               <property name="text">
-                <string>IMAGEN</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignmentFlag::AlignCenter</set>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="btn_abrir_imgPosts">
-               <property name="text">
-                <string>Abrir Imagen</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QWidget" name="gridWidget_2" native="true">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>50</height>
-          </size>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_2">
           <property name="leftMargin">
-           <number>0</number>
+           <number>20</number>
           </property>
           <property name="topMargin">
-           <number>0</number>
+           <number>20</number>
           </property>
           <property name="rightMargin">
-           <number>0</number>
+           <number>20</number>
           </property>
           <property name="bottomMargin">
            <number>20</number>
           </property>
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QPushButton" name="btnGenerarReportes">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+          <item>
+           <widget class="QGroupBox" name="groupBox_usuarios">
+            <property name="title">
+             <string>Usuarios</string>
             </property>
-            <property name="minimumSize">
-             <size>
-              <width>150</width>
-              <height>0</height>
-             </size>
+            <layout class="QVBoxLayout" name="verticalLayout_12">
+             <item>
+              <widget class="QPushButton" name="pushButton_cargar_usuarios">
+               <property name="layoutDirection">
+                <enum>Qt::LayoutDirection::RightToLeft</enum>
+               </property>
+               <property name="text">
+                <string>Cargar Usuarios </string>
+               </property>
+               <property name="icon">
+                <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_solicitudes">
+            <property name="title">
+             <string>Solicitudes</string>
             </property>
-            <property name="layoutDirection">
-             <enum>Qt::LayoutDirection::LeftToRight</enum>
+            <layout class="QVBoxLayout" name="verticalLayout_13">
+             <item>
+              <widget class="QPushButton" name="pushButton_cargar_solicitudes">
+               <property name="layoutDirection">
+                <enum>Qt::LayoutDirection::RightToLeft</enum>
+               </property>
+               <property name="text">
+                <string>Cargar Solicitudes</string>
+               </property>
+               <property name="icon">
+                <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_publicaciones">
+            <property name="title">
+             <string>Publicaciones</string>
             </property>
-            <property name="text">
-             <string>Generar Reporte</string>
-            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_14">
+             <item>
+              <widget class="QPushButton" name="pushButton_cargar_publicaciones">
+               <property name="layoutDirection">
+                <enum>Qt::LayoutDirection::RightToLeft</enum>
+               </property>
+               <property name="text">
+                <string>Cargar Publicaciones</string>
+               </property>
+               <property name="icon">
+                <iconset theme="QIcon::ThemeIcon::DocumentOpen"/>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </widget>
           </item>
          </layout>
-        </widget>
-       </item>
-      </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_reportes">
+       <attribute name="title">
+        <string>Reportes</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QScrollArea" name="scrollArea_reportes">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>-910</y>
+             <width>1131</width>
+             <height>1530</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_22">
+            <item>
+             <widget class="QGroupBox" name="groupBox_reporte_usuarios">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>500</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Arbol de Usuarios</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <item>
+                <widget class="QWidget" name="verticalWidget_reporte_users" native="true">
+                 <layout class="QVBoxLayout" name="verticalLayout_5">
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                  <property name="leftMargin">
+                   <number>10</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>10</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>10</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>10</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="img_usuarios">
+                    <property name="text">
+                     <string>IMAGEN</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignmentFlag::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pushButton_reporte_users">
+                    <property name="text">
+                     <string>Abrir Imagen</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_reporte_publicaciones">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>500</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Lista de Publicaciones</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_2">
+               <item>
+                <widget class="QWidget" name="vertical_reporte_posts" native="true">
+                 <layout class="QVBoxLayout" name="verticalLayout_6">
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                  <property name="leftMargin">
+                   <number>10</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>10</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>10</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>10</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="img_publicaciones">
+                    <property name="text">
+                     <string>IMAGEN</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignmentFlag::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pushButton_reporte_posts">
+                    <property name="text">
+                     <string>Abrir Imagen</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_reporte_amistades">
+              <property name="minimumSize">
+               <size>
+                <width>0</width>
+                <height>500</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Relaciones de amistad</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <widget class="QWidget" name="verticalWidget_reporte_users_2" native="true">
+                 <layout class="QVBoxLayout" name="verticalLayout_15">
+                  <property name="spacing">
+                   <number>0</number>
+                  </property>
+                  <property name="leftMargin">
+                   <number>10</number>
+                  </property>
+                  <property name="topMargin">
+                   <number>10</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>10</number>
+                  </property>
+                  <property name="bottomMargin">
+                   <number>10</number>
+                  </property>
+                  <item>
+                   <widget class="QLabel" name="img_amistades">
+                    <property name="text">
+                     <string>IMAGEN</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignmentFlag::AlignCenter</set>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="pushButton_reporte_amistades">
+                    <property name="text">
+                     <string>Abrir Imagen</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_reportes_generar">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>150</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="layoutDirection">
+           <enum>Qt::LayoutDirection::LeftToRight</enum>
+          </property>
+          <property name="text">
+           <string>Generar Reporte</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
-    </widget>
-   </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1000</width>
+     <width>1187</width>
      <height>21</height>
     </rect>
    </property>
@@ -619,9 +508,6 @@
    </property>
   </action>
  </widget>
- <tabstops>
-  <tabstop>tabWidget</tabstop>
- </tabstops>
  <resources/>
  <connections/>
 </ui>

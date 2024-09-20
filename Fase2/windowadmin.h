@@ -16,26 +16,27 @@ public:
     ~AdminWindow();
 
 private slots:
+    // Menu
     void on_actionCerrar_Sesion_triggered();
-
-    void on_btnGenerarReportes_clicked();
-
-    void on_btnSubirUsuarios_clicked();
-
-    void on_btnOrdenar_clicked();
-
-    void on_btn_abrir_imgUsuarios_clicked();
-
-    void on_inputBuscar_returnPressed();
-
-    void on_btnBuscar_clicked();
-
-
     void on_actionVista_Usuario_triggered();
 
-    void on_btnSubirSolicitudes_clicked();
+    // Buscar
+    void on_pushButton_buscar_buscar_clicked();
+    void on_pushButton_buscar_aplicar_clicked();
+    void on_lineEdit_buscar_buscar_returnPressed();
 
-    void on_btnSubirPublicaciones_clicked();
+    // Carga masiva
+    void on_pushButton_cargar_usuarios_clicked();
+    void on_pushButton_cargar_solicitudes_clicked();
+    void on_pushButton_cargar_publicaciones_clicked();
+
+    // Reportes
+    void on_pushButton_reportes_generar_clicked();
+    void on_pushButton_reporte_users_clicked();
+    void on_pushButton_reporte_posts_clicked();
+
+
+    void on_pushButton_reporte_amistades_clicked();
 
 private:
     Ui::AdminWindow *ui;

@@ -5,6 +5,7 @@
 
 #include <QTime>
 #include <QDate>
+#include <QFileDialog>
 
 DialogNuevoPost::DialogNuevoPost(QWidget *parent)
     : QDialog(parent)
@@ -22,6 +23,8 @@ DialogNuevoPost::DialogNuevoPost(QWidget *parent)
     QTime tiempoActual = QTime::currentTime();
     ui->horaTimeEdit->setTime(tiempoActual);
     ui->horaTimeEdit->setDisplayFormat("hh:mm");
+
+    ui->label_path->setText("...");
 }
 
 DialogNuevoPost::DialogNuevoPost(const int id, QWidget *parent)
@@ -38,7 +41,6 @@ DialogNuevoPost::~DialogNuevoPost()
 }
 
 void DialogNuevoPost::llenarDatos(const int id){
-    qInfo() << &"Llenando datos del id "[id];
     Structs::Publicacion *post = Func::buscarPost(id);
     if (post) {
         ui->correoLineEdit->setText(QString::fromStdString(post->correo_autor));
@@ -50,6 +52,7 @@ void DialogNuevoPost::llenarDatos(const int id){
         ui->horaTimeEdit->setTime(qHora);
         ui->contenidoLineEdit->setPlainText(QString::fromStdString(post->contenido));
         setPathImg(post->imagen);
+        ui->label_path->setText(QString::fromStdString(getPathImg()));
     }
 }
 
@@ -61,11 +64,11 @@ void DialogNuevoPost::on_buttonBox_accepted()
         string contenido = ui->contenidoLineEdit->toPlainText().toStdString();
         string hora = ui->horaTimeEdit->text().toStdString();
         string fecha = ui->fechaDateEdit->text().toStdString();
-        Structs::Publicacion nuevo(id,usuario_logeado->correo,contenido,fecha,hora);
+        Structs::Publicacion nuevo(id,usuario_logeado->correo,contenido,fecha,hora,getPathImg());
         lista_publicaciones.insertar(nuevo);
-        qInfo() << "Se agrega id:" << QString::number(id);
     }else{
-        qInfo() << "Se modifica";
+        string contenido = ui->contenidoLineEdit->toPlainText().toStdString();
+        Func::modificarPublicacion(getID(),contenido, getPathImg());
     }
 }
 
@@ -86,3 +89,14 @@ std::string DialogNuevoPost::getPathImg()
 {
     return pathImg;
 }
+
+void DialogNuevoPost::on_imagenButton_clicked()
+{
+    QString imagePath = QFileDialog::getOpenFileName(this,tr("Seleccionar imagen"),"",tr("Imágenes (*.png *.jpg *.jpeg *.gif)"));
+    if (!imagePath.isEmpty()) {
+        ui->label_path->setText(imagePath);
+        setPathImg(imagePath.toStdString());
+    }
+
+}
+

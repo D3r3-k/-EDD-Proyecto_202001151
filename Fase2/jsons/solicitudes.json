@@ -1,52 +1,42 @@
 [
-    {
-        "emisor": "admin@gmail.com",
-        "receptor": "maria.rodriguez@example.com",
-        "estado": "aceptada"
-    },
-    {
-        "emisor": "admin@gmail.com",
-        "receptor": "ana.martinez@example.com",
-        "estado": "aceptada"
-    },
-    {
-        "emisor": "admin@gmail.com",
-        "receptor": "laura.ruiz@example.com",
-        "estado": "aceptada"
-    },
-    {
-        "emisor": "javier.hernandez@example.com",
-        "receptor": "isabel.ramirez@example.com",
-        "estado": "pendiente"
-    },
-    {
-        "emisor": "javier.hernandez@example.com",
-        "receptor": "sofia.fernandez@example.com",
-        "estado": "pendiente"
-    },
-    {
-        "emisor": "david.lopez@example.com",
-        "receptor": "lucia.martin@example.com",
-        "estado": "pendiente"
-    },
-    {
-        "emisor": "andres.gonzalez@example.com",
-        "receptor": "elena.diaz@example.com",
-        "estado": "pendiente"
-    },
-    {
-        "emisor": "raul.molina@example.com",
-        "receptor": "patricia.castro@example.com",
-        "estado": "aceptada"
-    },
-    {
-        "emisor": "alberto.morales@example.com",
-        "receptor": "veronica.santos@example.com",
-        "estado": "aceptada"
-    },
-    {
-        "emisor": "francisco.ramos@example.com",
-        "receptor": "marta.ortiz@example.com",
-        "estado": "aceptada"
-    }
+  {
+      "emisor": "cg@example.com",
+      "receptor": "ml@example.com",
+      "estado": "ACEPTADA"
+  },
+  {
+      "emisor": "jm@example.com",
+      "receptor": "ah@example.com",
+      "estado": "PENDIENTE"
+  },
+  {
+      "emisor": "lp@example.com",
+      "receptor": "lr@example.com",
+      "estado": "ACEPTADA"
+  },
+  {
+      "emisor": "jg@example.com",
+      "receptor": "et@example.com",
+      "estado": "PENDIENTE"
+  },
+  {
+      "emisor": "mr@example.com",
+      "receptor": "sg@example.com",
+      "estado": "ACEPTADA"
+  },
+  {
+      "emisor": "ml@example.com",
+      "receptor": "cg@example.com",
+      "estado": "PENDIENTE"
+  },
+  {
+      "emisor": "ah@example.com",
+      "receptor": "jm@example.com",
+      "estado": "ACEPTADA"
+  },
+  {
+      "emisor": "et@example.com",
+      "receptor": "lp@example.com",
+      "estado": "PENDIENTE"
+  }
 ]

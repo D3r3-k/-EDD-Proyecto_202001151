@@ -324,7 +324,7 @@ bool MatrizRelacion::verificarRelacion(string correo1, string correo2)
     return false;
 }
 
-void MatrizRelacion::graficar()
+std::string MatrizRelacion::graficar()
 {
     // Ver si la matriz tiene elementos
     if (!cabeza)
@@ -491,6 +491,7 @@ void MatrizRelacion::graficar()
     // Generar la imagen con el comando dot
     std::string cmd = "dot -Tpng " + dotPath + " -o " + imagePath;
     system(cmd.c_str());
+    return imagePath;
 }
 
 

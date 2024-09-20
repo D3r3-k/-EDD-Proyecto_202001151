@@ -23,10 +23,12 @@ public:
 private slots:
     void on_buttonBox_accepted();
 
+    void on_imagenButton_clicked();
+
 private:
     Ui::DialogNuevoPost *ui;
     int postID = -1;
-    std::string pathImg;
+    std::string pathImg = "default.jpg";
     void llenarDatos(const int id);
 };
 

@@ -248,7 +248,8 @@
 		"C:/Qt/6.7.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginTargets.cmake",
 		"C:/Qt/6.7.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginTargets-relwithdebinfo.cmake",
 		"C:/Qt/6.7.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginAdditionalTargetInfo.cmake",
-		"C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/GNUInstallDirs.cmake"
+		"C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/GNUInstallDirs.cmake",
+		"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/resource.qrc"
 	],
 	"CMAKE_SOURCE_DIR" : "C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2",
 	"CROSS_CONFIG" : false,
@@ -275,6 +276,12 @@
 			null
 		],
 		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/StructsComment.h",
+			"MU",
+			"EWIEGA46WW/moc_StructsComment.cpp",
+			null
+		],
+		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/arbolabb.h",
 			"MU",
 			"EWIEGA46WW/moc_arbolabb.cpp",
@@ -287,6 +294,12 @@
 			null
 		],
 		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/arbolb5.h",
+			"MU",
+			"EWIEGA46WW/moc_arbolb5.cpp",
+			null
+		],
+		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/dialogmodificar.h",
 			"MU",
 			"EWIEGA46WW/moc_dialogmodificar.cpp",
@@ -296,6 +309,12 @@
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/dialognuevopost.h",
 			"MU",
 			"EWIEGA46WW/moc_dialognuevopost.cpp",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/dialogpost.h",
+			"MU",
+			"EWIEGA46WW/moc_dialogpost.cpp",
 			null
 		],
 		[
@@ -314,6 +333,12 @@
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/matrizrelacion.h",
 			"MU",
 			"EWIEGA46WW/moc_matrizrelacion.cpp",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/widgetcomment.h",
+			"MU",
+			"EWIEGA46WW/moc_widgetcomment.cpp",
 			null
 		],
 		[
@@ -429,12 +454,22 @@
 			null
 		],
 		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/arbolb5.cpp",
+			"MU",
+			null
+		],
+		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/dialogmodificar.cpp",
 			"MU",
 			null
 		],
 		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/dialognuevopost.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/dialogpost.cpp",
 			"MU",
 			null
 		],
@@ -455,6 +490,11 @@
 		],
 		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/matrizrelacion.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/widgetcomment.cpp",
 			"MU",
 			null
 		],

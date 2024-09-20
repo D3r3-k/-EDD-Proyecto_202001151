@@ -10,6 +10,9 @@ int main(int argc, char *argv[])
 {
     Structs::Usuario admin(0, "Administrador", "Lab EDD", "2001-09-15", "admin@gmail.com", "123", "admin");
     lista_usuarios.insertar(admin);
+    Structs::Usuario user(1, "Usuario", "Lab EDD", "2001-09-15", "user@gmail.com", "123", "user");
+    lista_usuarios.insertar(user);
+
 
     QApplication a(argc, argv);
     MainWindow w;

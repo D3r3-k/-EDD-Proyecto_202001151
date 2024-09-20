@@ -39,6 +39,14 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ListaDoble.h
         widgetpost.h widgetpost.cpp widgetpost.ui
         arbolabb.h arbolabb.cpp
+        resource.qrc
+
+        widgetcomment.h widgetcomment.cpp widgetcomment.ui
+        arbolb5.h arbolb5.cpp
+        StructsComment.h
+
+        dialogpost.h dialogpost.cpp dialogpost.ui
+
 
 
 

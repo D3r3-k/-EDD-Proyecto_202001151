@@ -32,11 +32,13 @@ UserWindow::UserWindow(QWidget *parent)
     QString user = QString::fromStdString(usuario_logeado->nombres);
     ui->menuBienvenido->setTitle("Bienvenido: "+user);
     // Tab Publicaciones
+    qInfo() << "ACTUALIZANDO FEED";
     Func::ActualizarFeed();
     // Tab Solicitudes
     ui->tableUsuarios->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableSolicitudesRec->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableSolicitudesEnv->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    qInfo() << "ACTUALIZAR TABLA SOLICITUDES";
     Func::ActualizarTablas();
     // Tab Perfil
     ui->nombresLogLineEdit->setText(QString::fromStdString(usuario_logeado->nombres));

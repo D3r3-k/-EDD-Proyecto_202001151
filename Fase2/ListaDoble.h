@@ -208,6 +208,9 @@ namespace ListaDoble
         {
             return cabeza == nullptr;
         }
+
+        // imprimir la lista
+        
         
     };
 }

@@ -2,7 +2,7 @@
 #include "arbolavl.h"
 #include "globales.h"
 #include <fstream>
-#include <cstdlib> // Para system()
+#include <cstdlib>
 #include <QMessageBox>
 
 // Constructor
