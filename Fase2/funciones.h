@@ -2,6 +2,7 @@
 #define FUNCIONES_H
 
 #include "Structs.h"
+#include "arbolabb.h"
 #include <QTableWidget>
 #include <QScrollArea>
 #include <string>
@@ -53,6 +54,10 @@ void ActualizarTablas();
 
 // TODO: Metodos usuario / reportes
 ListaEnlazada::ListaEnlazada<Structs::ReportePosts> obtenerReporteFechasPost();
+ListaEnlazada::ListaEnlazada<Structs::ReportePosts> obtenerReporteFechasPostFriends();
+ListaEnlazada::ListaEnlazada<Structs::Publicacion> obtenerMisPosts();
+void bubbleSort(ListaEnlazada::ListaEnlazada<Structs::ReportePosts> &lista);
+void bubbleSort(ListaEnlazada::ListaEnlazada<Structs::Publicacion> &lista);
 
 // TODO: metodos Usuario / Perfil
 void EliminarMiCuenta();

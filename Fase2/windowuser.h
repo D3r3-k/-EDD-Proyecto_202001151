@@ -38,6 +38,7 @@ private slots:
 
     void on_contrasenaLogLineEdit_returnPressed();
 
+    // METODOS PARA LOS REPORTES
     void on_pushButton_generar_reportes_clicked();
 
     void on_pushButton_reporte_generar_bst_clicked();
@@ -50,6 +51,8 @@ private slots:
 
     void on_btn_post_filtrar_clicked();
 
+
+    void on_tabWidget_currentChanged(int index);
 
 private:
     Ui::UserWindow *ui;

@@ -325,6 +325,102 @@ void MatrizRelacion::eliminarRelacionesUsuario(string correo_usuario)
     }
 }
 
+void MatrizRelacion::eliminarRelacionEntreUsuarios(string correo_usuario1, string correo_usuario2)
+{
+    if (!cabeza)
+    {
+        return;
+    }
+
+    // Buscar en las filas (usuario1 como correo_usuario1)
+    Nodo *fila = cabeza->abajo;
+    while (fila)
+    {
+        if (fila->usuario1->correo == correo_usuario1)
+        {
+            Nodo *current = fila->siguiente;
+            while (current)
+            {
+                if (current->usuario2->correo == correo_usuario2)
+                {
+                    // Borrando el nodo actual (relación)
+                    Nodo *toDelete = current;
+
+                    // Actualizando conexiones en las filas
+                    if (toDelete->anterior)
+                    {
+                        toDelete->anterior->siguiente = toDelete->siguiente;
+                    }
+                    if (toDelete->siguiente)
+                    {
+                        toDelete->siguiente->anterior = toDelete->anterior;
+                    }
+
+                    // Actualizando conexiones en las columnas
+                    if (toDelete->arriba)
+                    {
+                        toDelete->arriba->abajo = toDelete->abajo;
+                    }
+                    if (toDelete->abajo)
+                    {
+                        toDelete->abajo->arriba = toDelete->arriba;
+                    }
+
+                    delete toDelete;
+                    break;
+                }
+                current = current->siguiente;
+            }
+        }
+        fila = fila->abajo;
+    }
+
+    // Buscar en las columnas (usuario2 como correo_usuario1)
+    Nodo *columna = cabeza->siguiente;
+    while (columna)
+    {
+        if (columna->usuario2->correo == correo_usuario1)
+        {
+            Nodo *current = columna->abajo;
+            while (current)
+            {
+                if (current->usuario1->correo == correo_usuario2)
+                {
+                    // Borrando el nodo actual (relación)
+                    Nodo *toDelete = current;
+
+                    // Actualizando conexiones en las columnas
+                    if (toDelete->arriba)
+                    {
+                        toDelete->arriba->abajo = toDelete->abajo;
+                    }
+                    if (toDelete->abajo)
+                    {
+                        toDelete->abajo->arriba = toDelete->arriba;
+                    }
+
+                    // Actualizando conexiones en las filas
+                    if (toDelete->anterior)
+                    {
+                        toDelete->anterior->siguiente = toDelete->siguiente;
+                    }
+                    if (toDelete->siguiente)
+                    {
+                        toDelete->siguiente->anterior = toDelete->anterior;
+                    }
+
+                    delete toDelete;
+                    break;
+                }
+                current = current->abajo;
+            }
+        }
+        columna = columna->siguiente;
+    }
+}
+
+
+
 
 bool MatrizRelacion::verificarRelacion(string correo1, string correo2)
 {

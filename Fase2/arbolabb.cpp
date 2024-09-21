@@ -146,6 +146,67 @@ void ArbolABB::postOrdenRecursivo(Nodo* nodo, ListaEnlazada::ListaEnlazada<Struc
         }
     }
 }
+// Función recursiva para recorrer el árbol in-order solo para la fecha especificada
+void ArbolABB::inOrdenRecursivo(Nodo* nodo, const std::tm& fecha, ListaEnlazada::ListaEnlazada<Structs::Publicacion>& lista) {
+    if (nodo != nullptr) {
+        // Recorrer la rama izquierda
+        inOrdenRecursivo(nodo->izq, fecha, lista);
+
+        // Verificar si el nodo tiene la fecha especificada
+        if (mktime(const_cast<std::tm*>(&nodo->fecha)) == mktime(const_cast<std::tm*>(&fecha))) {
+            for (int i = 0; i < nodo->publicaciones.size(); ++i) {
+                Structs::Publicacion *p = nodo->publicaciones.obtener(i);
+                if (p) {
+                    lista.insertar(*p);
+                }
+            }
+        }
+
+        // Recorrer la rama derecha
+        inOrdenRecursivo(nodo->der, fecha, lista);
+    }
+}
+
+// Función recursiva para recorrer el árbol pre-order solo para la fecha especificada
+void ArbolABB::preOrdenRecursivo(Nodo* nodo, const std::tm& fecha, ListaEnlazada::ListaEnlazada<Structs::Publicacion>& lista) {
+    if (nodo != nullptr) {
+        // Verificar si el nodo tiene la fecha especificada
+        if (mktime(const_cast<std::tm*>(&nodo->fecha)) == mktime(const_cast<std::tm*>(&fecha))) {
+            for (int i = 0; i < nodo->publicaciones.size(); ++i) {
+                Structs::Publicacion *p = nodo->publicaciones.obtener(i);
+                if (p) {
+                    lista.insertar(*p);
+                }
+            }
+        }
+
+        // Recorrer la rama izquierda
+        preOrdenRecursivo(nodo->izq, fecha, lista);
+        // Recorrer la rama derecha
+        preOrdenRecursivo(nodo->der, fecha, lista);
+    }
+}
+
+// Función recursiva para recorrer el árbol post-order solo para la fecha especificada
+void ArbolABB::postOrdenRecursivo(Nodo* nodo, const std::tm& fecha, ListaEnlazada::ListaEnlazada<Structs::Publicacion>& lista) {
+    if (nodo != nullptr) {
+        // Recorrer la rama izquierda
+        postOrdenRecursivo(nodo->izq, fecha, lista);
+        // Recorrer la rama derecha
+        postOrdenRecursivo(nodo->der, fecha, lista);
+
+        // Verificar si el nodo tiene la fecha especificada
+        if (mktime(const_cast<std::tm*>(&nodo->fecha)) == mktime(const_cast<std::tm*>(&fecha))) {
+            for (int i = 0; i < nodo->publicaciones.size(); ++i) {
+                Structs::Publicacion *p = nodo->publicaciones.obtener(i);
+                if (p) {
+                    lista.insertar(*p);
+                }
+            }
+        }
+    }
+}
+
 
 
 // TODO: Metodos publicos
@@ -237,26 +298,26 @@ ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::postorder(const int
 
 // Método para obtener la lista de publicaciones de un nodo según la fecha, orden y cantidad
 ListaEnlazada::ListaEnlazada<Structs::Publicacion> ArbolABB::obtenerPublicaciones(const std::tm &fecha, const int orden, int cantidad) {
-    ListaEnlazada::ListaEnlazada<Structs::Publicacion> lista;
-    if (orden == 0)
-    {
-        inOrdenRecursivo(raiz, lista);
-    }
-    else if (orden == 1)
-    {
-        preOrdenRecursivo(raiz, lista);
-    }
-    else if (orden == 2)
-    {
-        postOrdenRecursivo(raiz, lista);
-    }
-
-    // dejar solo la cantidad de publicaciones en la lista
-    for (int i = lista.size(); i > cantidad; --i) {
-        lista.eliminarFinal();
+    // Lista para almacenar las publicaciones ordenadas
+    ListaEnlazada::ListaEnlazada<Structs::Publicacion> listaOrdenada;
+    // Seleccionar el tipo de recorrido
+    if (orden == 0) {
+        // Ordenar in-order
+        inOrdenRecursivo(raiz, fecha, listaOrdenada);
+    } else if (orden == 1) {
+        // Ordenar pre-order
+        preOrdenRecursivo(raiz, fecha, listaOrdenada);
+    } else if (orden == 2) {
+        // Ordenar post-order
+        postOrdenRecursivo(raiz, fecha, listaOrdenada);
     }
 
+    // Recortar la lista a la cantidad especificada
+    for (int i = listaOrdenada.size(); i > cantidad; --i) {
+        listaOrdenada.eliminarFinal();
+    }
 
-    return lista;
+    return listaOrdenada;
 }
+
 

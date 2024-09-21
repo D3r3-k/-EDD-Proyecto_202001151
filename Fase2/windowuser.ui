@@ -534,7 +534,7 @@
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>160</height>
+            <height>180</height>
            </size>
           </property>
           <layout class="QHBoxLayout" name="horizontalLayout_solicitudes_2">
@@ -549,40 +549,13 @@
              <layout class="QVBoxLayout" name="verticalLayout_17">
               <item>
                <widget class="QTableWidget" name="tableRepoPublicaciones">
-                <property name="maximumSize">
-                 <size>
-                  <width>981</width>
-                  <height>341</height>
-                 </size>
-                </property>
                 <property name="editTriggers">
                  <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
-                </property>
-                <property name="sortingEnabled">
-                 <bool>true</bool>
                 </property>
                 <property name="columnCount">
                  <number>2</number>
                 </property>
-                <attribute name="horizontalHeaderCascadingSectionResizes">
-                 <bool>true</bool>
-                </attribute>
-                <attribute name="horizontalHeaderMinimumSectionSize">
-                 <number>100</number>
-                </attribute>
-                <attribute name="horizontalHeaderDefaultSectionSize">
-                 <number>143</number>
-                </attribute>
                 <attribute name="horizontalHeaderStretchLastSection">
-                 <bool>true</bool>
-                </attribute>
-                <attribute name="verticalHeaderCascadingSectionResizes">
-                 <bool>true</bool>
-                </attribute>
-                <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-                 <bool>true</bool>
-                </attribute>
-                <attribute name="verticalHeaderStretchLastSection">
                  <bool>true</bool>
                 </attribute>
                 <column>
@@ -608,40 +581,13 @@
              <layout class="QVBoxLayout" name="verticalLayout_16">
               <item>
                <widget class="QTableWidget" name="tableRepoComentarios">
-                <property name="maximumSize">
-                 <size>
-                  <width>981</width>
-                  <height>200</height>
-                 </size>
-                </property>
                 <property name="editTriggers">
                  <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
-                </property>
-                <property name="sortingEnabled">
-                 <bool>true</bool>
                 </property>
                 <property name="columnCount">
                  <number>3</number>
                 </property>
-                <attribute name="horizontalHeaderCascadingSectionResizes">
-                 <bool>true</bool>
-                </attribute>
-                <attribute name="horizontalHeaderMinimumSectionSize">
-                 <number>100</number>
-                </attribute>
-                <attribute name="horizontalHeaderDefaultSectionSize">
-                 <number>143</number>
-                </attribute>
                 <attribute name="horizontalHeaderStretchLastSection">
-                 <bool>true</bool>
-                </attribute>
-                <attribute name="verticalHeaderCascadingSectionResizes">
-                 <bool>true</bool>
-                </attribute>
-                <attribute name="verticalHeaderShowSortIndicator" stdset="0">
-                 <bool>true</bool>
-                </attribute>
-                <attribute name="verticalHeaderStretchLastSection">
                  <bool>true</bool>
                 </attribute>
                 <column>
@@ -917,11 +863,17 @@
           <layout class="QVBoxLayout" name="verticalLayout_18">
            <item>
             <widget class="QScrollArea" name="scrollArea_amigos">
+             <property name="horizontalScrollBarPolicy">
+              <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+             </property>
              <property name="sizeAdjustPolicy">
-              <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustIgnored</enum>
+              <enum>QAbstractScrollArea::SizeAdjustPolicy::AdjustToContents</enum>
              </property>
              <property name="widgetResizable">
               <bool>true</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
              </property>
              <widget class="QWidget" name="scrollAreaWidgetContents_2">
               <property name="geometry">

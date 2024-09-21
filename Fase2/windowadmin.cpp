@@ -57,7 +57,7 @@ void AdminWindow::on_actionVista_Usuario_triggered()
 
 void AdminWindow::on_actionCerrar_Sesion_triggered()
 {
-    usuario_logeado = nullptr;
+    Func::CerrarSesion();
     MainWindow *login = new MainWindow;
     login->show();
     this->close();

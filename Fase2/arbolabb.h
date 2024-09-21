@@ -32,8 +32,11 @@ private:
 
     // Métodos auxiliares para retornar una lista de publicaciones (inorder, preorder, postorder)
     void inOrdenRecursivo(Nodo *nodo, ListaEnlazada::ListaEnlazada<Structs::Publicacion> &lista);
+    void inOrdenRecursivo(Nodo* nodo, const std::tm& fecha, ListaEnlazada::ListaEnlazada<Structs::Publicacion>& lista);
     void preOrdenRecursivo(Nodo *nodo, ListaEnlazada::ListaEnlazada<Structs::Publicacion> &lista);
+    void preOrdenRecursivo(Nodo* nodo, const std::tm& fecha, ListaEnlazada::ListaEnlazada<Structs::Publicacion>& lista);
     void postOrdenRecursivo(Nodo *nodo, ListaEnlazada::ListaEnlazada<Structs::Publicacion> &lista);
+    void postOrdenRecursivo(Nodo* nodo, const std::tm& fecha, ListaEnlazada::ListaEnlazada<Structs::Publicacion>& lista);
 
     // Método auxiliar para obtener las fechas de los nodos
     ListaEnlazada::ListaEnlazada<std::tm> obtenerFechas(Nodo *nodo) const;

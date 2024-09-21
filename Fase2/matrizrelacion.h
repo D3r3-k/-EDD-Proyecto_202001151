@@ -38,6 +38,7 @@ public:
     // Métodos
     void agregarRelacion(Structs::Usuario *user1, Structs::Usuario *user2);
     void eliminarRelacionesUsuario(string correo_usuario);
+    void eliminarRelacionEntreUsuarios(string correo1, string correo2);
     bool verificarRelacion(string correo1, string correo2);
     std::string graficar();
     ListaEnlazada::ListaEnlazada<Structs::Usuario> obtenerAmigos(string correo);

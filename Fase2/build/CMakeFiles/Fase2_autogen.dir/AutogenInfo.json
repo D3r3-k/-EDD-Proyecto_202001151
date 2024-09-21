@@ -299,6 +299,12 @@
 			null
 		],
 		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/arbolbst.h",
+			"MU",
+			"EWIEGA46WW/moc_arbolbst.cpp",
+			null
+		],
+		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/dialogmodificar.h",
 			"MU",
 			"EWIEGA46WW/moc_dialogmodificar.cpp",
@@ -338,6 +344,12 @@
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/widgetcomment.h",
 			"MU",
 			"EWIEGA46WW/moc_widgetcomment.cpp",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/widgetfriend.h",
+			"MU",
+			"EWIEGA46WW/moc_widgetfriend.cpp",
 			null
 		],
 		[
@@ -458,6 +470,11 @@
 			null
 		],
 		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/arbolbst.cpp",
+			"MU",
+			null
+		],
+		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/dialogmodificar.cpp",
 			"MU",
 			null
@@ -494,6 +511,11 @@
 		],
 		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/widgetcomment.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/widgetfriend.cpp",
 			"MU",
 			null
 		],

@@ -136,6 +136,36 @@ namespace Structs
                 }
             }
         }
+
+        bool verificarSolicitudRecibida(const string correo){
+            for (int i = 0; i < this->solicitudesRecibidas.size(); ++i)
+            {
+                Usuario *temp = this->solicitudesRecibidas.obtener(i);
+                if (temp)
+                {
+                    if (temp->correo == correo)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        bool verificarSolicitudEnviada(const string correo){
+            for (int i = 0; i < this->solicitudesEnviadas.size(); ++i)
+            {
+                Usuario *temp = this->solicitudesEnviadas.obtener(i);
+                if (temp)
+                {
+                    if (temp->correo == correo)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     };
 
     struct Publicacion

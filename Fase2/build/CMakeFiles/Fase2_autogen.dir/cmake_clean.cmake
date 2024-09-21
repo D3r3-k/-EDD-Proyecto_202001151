@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "Fase2_autogen/include/ui_dialognuevopost.h"
   "Fase2_autogen/include/ui_dialogpost.h"
   "Fase2_autogen/include/ui_widgetcomment.h"
+  "Fase2_autogen/include/ui_widgetfriend.h"
   "Fase2_autogen/include/ui_widgetpost.h"
   "Fase2_autogen/include/ui_windowadmin.h"
   "Fase2_autogen/include/ui_windowmain.h"

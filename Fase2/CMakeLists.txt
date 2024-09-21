@@ -47,6 +47,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 
         dialogpost.h dialogpost.cpp dialogpost.ui
         widgetfriend.h widgetfriend.cpp widgetfriend.ui
+        arbolbst.h arbolbst.cpp
 
 
 

@@ -103,6 +103,18 @@
 },
 {
   "directory": "C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/Fase2.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\Fase2.dir\\widgetfriend.cpp.obj -c \"C:\\Users\\D3r3k\\OneDrive\\Uni - Virtual\\Estructuras de Datos\\-EDD-Proyecto_202001151\\Fase2\\widgetfriend.cpp\"",
+  "file": "C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/widgetfriend.cpp",
+  "output": "CMakeFiles/Fase2.dir/widgetfriend.cpp.obj"
+},
+{
+  "directory": "C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/Fase2.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\Fase2.dir\\arbolbst.cpp.obj -c \"C:\\Users\\D3r3k\\OneDrive\\Uni - Virtual\\Estructuras de Datos\\-EDD-Proyecto_202001151\\Fase2\\arbolbst.cpp\"",
+  "file": "C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/arbolbst.cpp",
+  "output": "CMakeFiles/Fase2.dir/arbolbst.cpp.obj"
+},
+{
+  "directory": "C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/build",
   "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64 @CMakeFiles/Fase2.dir/includes_CXX.rsp -g -std=gnu++17 -o CMakeFiles\\Fase2.dir\\Fase2_autogen\\EWIEGA46WW\\qrc_resource.cpp.obj -c \"C:\\Users\\D3r3k\\OneDrive\\Uni - Virtual\\Estructuras de Datos\\-EDD-Proyecto_202001151\\Fase2\\build\\Fase2_autogen\\EWIEGA46WW\\qrc_resource.cpp\"",
   "file": "C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/build/Fase2_autogen/EWIEGA46WW/qrc_resource.cpp",
   "output": "CMakeFiles/Fase2.dir/Fase2_autogen/EWIEGA46WW/qrc_resource.cpp.obj"

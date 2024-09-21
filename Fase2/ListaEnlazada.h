@@ -221,6 +221,33 @@ namespace ListaEnlazada
             temp->next = clonar(otra.cabeza);
         }
 
+        // Método para intercambiar dos nodos
+        void intercambiar(int pos1, int pos2)
+        {
+            if (pos1 < 0 || pos1 >= size() || pos2 < 0 || pos2 >= size())
+            {
+                throw std::out_of_range("Posición fuera de rango.");
+            }
+
+            if (pos1 == pos2)
+                return;
+
+            Nodo *temp1 = cabeza;
+            Nodo *temp2 = cabeza;
+            for (int i = 0; i < pos1 && temp1; i++)
+            {
+                temp1 = temp1->next;
+            }
+            for (int i = 0; i < pos2 && temp2; i++)
+            {
+                temp2 = temp2->next;
+            }
+
+            T temp = temp1->data;
+            temp1->data = temp2->data;
+            temp2->data = temp;
+        }
+
         // TODO: MÉTODOS DE PILA
         // Insertar un nuevo nodo al inicio de la lista (PUSH)
         void push(const T &data)

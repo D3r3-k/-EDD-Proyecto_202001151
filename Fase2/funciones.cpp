@@ -14,7 +14,7 @@
 #include <QScrollArea>
 
 #include <fstream>
-#include <cstdlib> // Para system()
+#include <cstdlib>
 
 namespace Func
 {
@@ -46,6 +46,25 @@ namespace Func
         {
             QMessageBox::information(nullptr, "Iniciar Sesión", "Credenciales no válidas.");
         }
+    }
+    void CerrarSesion(){
+        try {
+            adminTablaUsuarios = nullptr;
+            userTablaUsuarios = nullptr;
+            userTablaEnviadas = nullptr;
+            userTablaRecibidas = nullptr;
+            userPostFeed = nullptr;
+            userFriends = nullptr;
+            selectedDate = nullptr;
+            selectedOrder = nullptr;
+            countPost = nullptr;
+            // Para las publicaciones
+            posts.limpiar();
+            usuario_logeado = nullptr;
+        } catch (const std::exception& e) {
+            std::cerr << e.what() << '\n';
+        }
+
     }
 
     // TODO: Metodos Admin
@@ -200,24 +219,18 @@ namespace Func
     {
         try
         {
-            // Abrir el archivo JSON
             ifstream archivo(directorio);
             if (!archivo.is_open())
             {
                 throw runtime_error("No se pudo abrir el archivo para leer.");
             }
-
-            // Parsear el archivo JSON
             int contador = 0;
             int conerror = 0;
             int noexisten = 0;
             nlohmann::json post;
             archivo >> post;
-
-            // Recorrer el JSON
             for (const auto &p : post)
             {
-                // Verificar si las claves existen
                 if (p.contains("emisor") && p.contains("receptor") && p.contains("estado"))
                 {
                     string emisor = p["emisor"].get<string>();
@@ -228,27 +241,42 @@ namespace Func
                     Structs::Usuario *usuario_emisor = lista_usuarios.buscar(emisor);
                     Structs::Usuario *usuario_receptor = lista_usuarios.buscar(receptor);
 
-                    // Verificar si los usuarios existen y especificar cuál es el emisor y cuál es el receptor
+
+
                     if (usuario_emisor == nullptr)
                     {
                         noexisten++;
                         continue;
+                    }else{
+                        if (usuario_emisor->verificarSolicitudEnviada(receptor)) {
+                            conerror++;
+                            continue;
+                        }
+
                     }
                     if (usuario_receptor == nullptr)
                     {
                         noexisten++;
                         continue;
+                    }else{
+                        if (usuario_receptor->verificarSolicitudEnviada(emisor)) {
+                            conerror++;
+                            continue;
+                        }
+
                     }
 
-                    // Si el estado convertido en minúsculas es pendiente
+                    if (relaciones_amistad.verificarRelacion(emisor, receptor)) {
+                        conerror++;
+                        continue;
+                    }
+
                     if (estado == "pendiente")
                     {
-                        // Al usuario emisor, en la lista de solicitudes se agregará el correo del usuario receptor
                         lista_usuarios.enviarSolicitud(emisor, receptor);
                     }
                     else if (estado == "aceptada" || estado == "aceptado")
                     {
-                        // Se crea la relación de amistad entre los dos usuarios en la matriz dispersa
                         relaciones_amistad.agregarRelacion(usuario_emisor, usuario_receptor);
                     }
 
@@ -416,11 +444,11 @@ namespace Func
     {
         // Eliminar las publicaciones del usuario
         eliminarPublicacionUsuario(correo);
-        // Eliminar todas las relaciones de amistad del usuario
+        // Eliminar todas las relaciones de amistad del usuario logueado
         relaciones_amistad.eliminarRelacionesUsuario(correo);
-        // Eliminar las solicitudes enviadas y recibidas del usuario
+        // Eliminar las solicitudes enviadas y recibidas del usuario logueado
         lista_usuarios.eliminarSolicitudes(correo);
-        // Eliminar al usuario de la lista de usuarios
+        // Eliminar al usuario logueado de la lista de usuarios
         lista_usuarios.eliminar(correo);
     }
     void ActualizarTablaAdmin(int opcion)
@@ -490,8 +518,8 @@ namespace Func
     // TODO: Metodos usuario / Publicaciones
     void ActualizarFeed()
     {
-        actualizarListaFechas();
         actualizarArbolPost();
+        actualizarListaFechas();
 
         QWidget *contentWidget = userPostFeed->widget();
         QVBoxLayout *layout = qobject_cast<QVBoxLayout *>(contentWidget->layout());
@@ -875,7 +903,92 @@ namespace Func
             reportes.insertar(reporte);
         }
         return reportes;
+    }
 
+    ListaEnlazada::ListaEnlazada<Structs::ReportePosts> obtenerReporteFechasPostFriends(){
+        ArbolABB misPost;
+        ListaEnlazada::ListaEnlazada<Structs::Usuario> amigos = relaciones_amistad.obtenerAmigos(usuario_logeado->correo);
+        for (int i = 0; i < lista_publicaciones.size(); i++)
+        {
+            Structs::Publicacion *publicacion = lista_publicaciones.obtener(i);
+            std::tm _fecha = convertirFechaTm(publicacion->fecha);
+            if (amigos.size() == 0)
+            {
+                if (usuario_logeado->correo == publicacion->correo_autor)
+                {
+                    misPost.insertar(_fecha, *publicacion);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < amigos.size(); i++)
+                {
+                    Structs::Usuario *amigo = amigos.obtener(i);
+                    if (amigo == nullptr)
+                    {
+                        continue;
+                    }
+                    if (usuario_logeado->correo == publicacion->correo_autor || amigo->correo == publicacion->correo_autor)
+                    {
+                        misPost.insertar(_fecha, *publicacion);
+                        break;
+                    }
+                }
+            }
+        }
+        ListaEnlazada::ListaEnlazada<std::tm> fechas = misPost.obtenerFechas();
+        ListaEnlazada::ListaEnlazada<Structs::ReportePosts> reportes;
+        for (int i = 0; i < fechas.size(); ++i) {
+            std::string _fecha = convertirFecha(*fechas.obtener(i));
+            ListaEnlazada::ListaEnlazada<Structs::Publicacion> posts = misPost.obtenerPublicaciones(*fechas.obtener(i));
+            Structs::ReportePosts reporte(_fecha,posts);
+            reportes.insertar(reporte);
+        }
+        return reportes;
+
+    }
+
+    ListaEnlazada::ListaEnlazada<Structs::Publicacion> obtenerMisPosts(){
+        ListaEnlazada::ListaEnlazada<Structs::Publicacion> reportes;
+        for (int i = 0; i < lista_publicaciones.size(); i++)
+        {
+            Structs::Publicacion *publicacion = lista_publicaciones.obtener(i);
+            if (publicacion && publicacion->correo_autor == usuario_logeado->correo) {
+                reportes.insertar(*publicacion);
+            }
+        }
+        return reportes;
+    }
+
+    void bubbleSort(ListaEnlazada::ListaEnlazada<Structs::ReportePosts> &lista)
+    {
+        for (int i = 0; i < lista.size(); i++)
+        {
+            for (int j = 0; j < lista.size() - 1; j++)
+            {
+                Structs::ReportePosts *r1 = lista.obtener(j);
+                Structs::ReportePosts *r2 = lista.obtener(j + 1);
+                if (r1->publicaciones.size() < r2->publicaciones.size())
+                {
+                    lista.intercambiar(j, j + 1);
+                }
+            }
+        }
+    }
+    void bubbleSort(ListaEnlazada::ListaEnlazada<Structs::Publicacion> &lista)
+    {
+        for (int i = 0; i < lista.size(); i++)
+        {
+            for (int j = 0; j < lista.size() - 1; j++)
+            {
+                Structs::Publicacion *p1 = lista.obtener(j);
+                Structs::Publicacion *p2 = lista.obtener(j + 1);
+                if (p1->comentarios->size() < p2->comentarios->size())
+                {
+                    lista.intercambiar(j, j + 1);
+                }
+            }
+        }
     }
 
     // TODO: Metodos usuario / perfil

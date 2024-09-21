@@ -3,62 +3,134 @@ node [shape=box];
 rankdir=TB;
 label="Matriz de Relaciones de Usuarios" fontsize=20 fontname="Arial";
 // Definir encabezados de filas
+fila0 [label="Administrador", group=1];
 fila2 [label="Carlos", group=1];
-fila3 [label="Maria", group=1];
+fila3 [label="María", group=1];
+fila4 [label="Luis", group=1];
 fila5 [label="Ana", group=1];
-fila6 [label="Luis", group=1];
-fila7 [label="Laura", group=1];
-fila10 [label="Miguel", group=1];
-fila11 [label="Sofia", group=1];
+fila6 [label="Pedro", group=1];
+fila7 [label="Sofía", group=1];
+fila8 [label="Jorge", group=1];
+fila9 [label="Elena", group=1];
+fila10 [label="Andrés", group=1];
+fila11 [label="Laura", group=1];
 // Definir encabezados de columnas
+col0 [label="Administrador", group=1];
 col2 [label="Carlos", group=3];
-col3 [label="Maria", group=4];
+col3 [label="María", group=4];
+col4 [label="Luis", group=5];
 col5 [label="Ana", group=6];
-col6 [label="Luis", group=7];
-col7 [label="Laura", group=8];
-col10 [label="Miguel", group=11];
-col11 [label="Sofia", group=12];
-{ rank=same; col2; col3; col5; col6; col7; col10; col11; }
+col6 [label="Pedro", group=7];
+col7 [label="Sofía", group=8];
+col8 [label="Jorge", group=9];
+col9 [label="Elena", group=10];
+col10 [label="Andrés", group=11];
+col11 [label="Laura", group=12];
+{ rank=same; col0; col2; col3; col4; col5; col6; col7; col8; col9; col10; col11; }
 // Definir nodos en las coordenadas especificadas
-nodo2_3 [label="", color=green, style=filled, group=4];
-nodo3_2 [label="", color=green, style=filled, group=3];
-nodo6_7 [label="", color=green, style=filled, group=8];
-nodo7_6 [label="", color=green, style=filled, group=7];
-nodo10_11 [label="", color=green, style=filled, group=12];
-nodo11_10 [label="", color=green, style=filled, group=11];
+nodo0_2 [label="", color=green, style=filled, group=3];
+nodo0_3 [label="", color=green, style=filled, group=4];
+nodo0_4 [label="", color=green, style=filled, group=5];
+nodo0_5 [label="", color=green, style=filled, group=6];
+nodo0_6 [label="", color=green, style=filled, group=7];
+nodo0_7 [label="", color=green, style=filled, group=8];
+nodo0_8 [label="", color=green, style=filled, group=9];
+nodo0_9 [label="", color=green, style=filled, group=10];
+nodo0_10 [label="", color=green, style=filled, group=11];
+nodo0_11 [label="", color=green, style=filled, group=12];
+nodo2_0 [label="", color=green, style=filled, group=1];
+nodo3_0 [label="", color=green, style=filled, group=1];
+nodo4_0 [label="", color=green, style=filled, group=1];
+nodo5_0 [label="", color=green, style=filled, group=1];
+nodo6_0 [label="", color=green, style=filled, group=1];
+nodo7_0 [label="", color=green, style=filled, group=1];
+nodo8_0 [label="", color=green, style=filled, group=1];
+nodo9_0 [label="", color=green, style=filled, group=1];
+nodo10_0 [label="", color=green, style=filled, group=1];
+nodo11_0 [label="", color=green, style=filled, group=1];
 // Conectar encabezados de filas con nodos y los nodos entre ellos horizontalmente
-fila2 -> nodo2_3 [dir=both, minlen=2];
-fila3 -> nodo3_2 [dir=both, minlen=2];
-fila6 -> nodo6_7 [dir=both, minlen=2];
-fila7 -> nodo7_6 [dir=both, minlen=2];
-fila10 -> nodo10_11 [dir=both, minlen=2];
-fila11 -> nodo11_10 [dir=both, minlen=2];
+fila0 -> nodo0_2 [dir=both, minlen=2];
+nodo0_2 -> nodo0_3 [dir=both, minlen=2];
+nodo0_3 -> nodo0_4 [dir=both, minlen=2];
+nodo0_4 -> nodo0_5 [dir=both, minlen=2];
+nodo0_5 -> nodo0_6 [dir=both, minlen=2];
+nodo0_6 -> nodo0_7 [dir=both, minlen=2];
+nodo0_7 -> nodo0_8 [dir=both, minlen=2];
+nodo0_8 -> nodo0_9 [dir=both, minlen=2];
+nodo0_9 -> nodo0_10 [dir=both, minlen=2];
+nodo0_10 -> nodo0_11 [dir=both, minlen=2];
+fila2 -> nodo2_0 [dir=both, minlen=2];
+fila3 -> nodo3_0 [dir=both, minlen=2];
+fila4 -> nodo4_0 [dir=both, minlen=2];
+fila5 -> nodo5_0 [dir=both, minlen=2];
+fila6 -> nodo6_0 [dir=both, minlen=2];
+fila7 -> nodo7_0 [dir=both, minlen=2];
+fila8 -> nodo8_0 [dir=both, minlen=2];
+fila9 -> nodo9_0 [dir=both, minlen=2];
+fila10 -> nodo10_0 [dir=both, minlen=2];
+fila11 -> nodo11_0 [dir=both, minlen=2];
 // Conectar encabezados de columnas con nodos y los nodos entre ellos verticalmente
-col2 -> nodo3_2 [dir=both, minlen=2];
-col3 -> nodo2_3 [dir=both, minlen=2];
-col6 -> nodo7_6 [dir=both, minlen=2];
-col7 -> nodo6_7 [dir=both, minlen=2];
-col10 -> nodo11_10 [dir=both, minlen=2];
-col11 -> nodo10_11 [dir=both, minlen=2];
+col0 -> nodo2_0 [dir=both, minlen=2];
+nodo2_0 -> nodo3_0 [dir=both, minlen=2];
+nodo3_0 -> nodo4_0 [dir=both, minlen=2];
+nodo4_0 -> nodo5_0 [dir=both, minlen=2];
+nodo5_0 -> nodo6_0 [dir=both, minlen=2];
+nodo6_0 -> nodo7_0 [dir=both, minlen=2];
+nodo7_0 -> nodo8_0 [dir=both, minlen=2];
+nodo8_0 -> nodo9_0 [dir=both, minlen=2];
+nodo9_0 -> nodo10_0 [dir=both, minlen=2];
+nodo10_0 -> nodo11_0 [dir=both, minlen=2];
+col2 -> nodo0_2 [dir=both, minlen=2];
+col3 -> nodo0_3 [dir=both, minlen=2];
+col4 -> nodo0_4 [dir=both, minlen=2];
+col5 -> nodo0_5 [dir=both, minlen=2];
+col6 -> nodo0_6 [dir=both, minlen=2];
+col7 -> nodo0_7 [dir=both, minlen=2];
+col8 -> nodo0_8 [dir=both, minlen=2];
+col9 -> nodo0_9 [dir=both, minlen=2];
+col10 -> nodo0_10 [dir=both, minlen=2];
+col11 -> nodo0_11 [dir=both, minlen=2];
 // Mantener los encabezados de filas alineados verticalmente
+fila0 -> fila2 [style=invis];
 fila2 -> fila3 [style=invis];
-fila3 -> fila5 [style=invis];
+fila3 -> fila4 [style=invis];
+fila4 -> fila5 [style=invis];
 fila5 -> fila6 [style=invis];
 fila6 -> fila7 [style=invis];
-fila7 -> fila10 [style=invis];
+fila7 -> fila8 [style=invis];
+fila8 -> fila9 [style=invis];
+fila9 -> fila10 [style=invis];
 fila10 -> fila11 [style=invis];
 // Mantener los nodos de la misma fila en el mismo rango horizontal
-{ rank=same; fila2; nodo2_3 }
-{ rank=same; fila3; nodo3_2 }
-{ rank=same; fila6; nodo6_7 }
-{ rank=same; fila7; nodo7_6 }
-{ rank=same; fila10; nodo10_11 }
-{ rank=same; fila11; nodo11_10 }
+{ rank=same; fila0; nodo0_2 }
+{ rank=same; fila0; nodo0_3 }
+{ rank=same; fila0; nodo0_4 }
+{ rank=same; fila0; nodo0_5 }
+{ rank=same; fila0; nodo0_6 }
+{ rank=same; fila0; nodo0_7 }
+{ rank=same; fila0; nodo0_8 }
+{ rank=same; fila0; nodo0_9 }
+{ rank=same; fila0; nodo0_10 }
+{ rank=same; fila0; nodo0_11 }
+{ rank=same; fila2; nodo2_0 }
+{ rank=same; fila3; nodo3_0 }
+{ rank=same; fila4; nodo4_0 }
+{ rank=same; fila5; nodo5_0 }
+{ rank=same; fila6; nodo6_0 }
+{ rank=same; fila7; nodo7_0 }
+{ rank=same; fila8; nodo8_0 }
+{ rank=same; fila9; nodo9_0 }
+{ rank=same; fila10; nodo10_0 }
+{ rank=same; fila11; nodo11_0 }
 // Conectar las columnas entre sí de forma invisible para mantener el orden
+col0 -> col2 [style=invis];
 col2 -> col3 [style=invis];
-col3 -> col5 [style=invis];
+col3 -> col4 [style=invis];
+col4 -> col5 [style=invis];
 col5 -> col6 [style=invis];
 col6 -> col7 [style=invis];
-col7 -> col10 [style=invis];
+col7 -> col8 [style=invis];
+col8 -> col9 [style=invis];
+col9 -> col10 [style=invis];
 col10 -> col11 [style=invis];
 }

@@ -1,5 +1,6 @@
 #include "widgetfriend.h"
 #include "funciones.h"
+#include "globales.h"
 #include "ui_widgetfriend.h"
 
 #include <QMessageBox>
@@ -39,7 +40,7 @@ void WidgetFriend::on_pushButton_eliminar_clicked()
 {
     Structs::Usuario u = getUser();
     if (QMessageBox::question(nullptr, "Confirmación","¿Quieres eliminar a: "+QString::fromStdString(u.correo)+"?",QMessageBox::Yes|QMessageBox::No) == QMessageBox::Yes) {
-        Func::EliminarCuenta(u.correo);
+        relaciones_amistad.eliminarRelacionEntreUsuarios(usuario_logeado->correo,u.correo);
         Func::ActualizarListaAmigos();
     }
 }

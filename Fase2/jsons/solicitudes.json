@@ -1,42 +1,103 @@
 [
-  {
-      "emisor": "cg@example.com",
-      "receptor": "ml@example.com",
+    {
+      "emisor": "admin@gmail.com",
+      "receptor": "user1@example.com",
       "estado": "ACEPTADA"
-  },
-  {
-      "emisor": "jm@example.com",
-      "receptor": "ah@example.com",
-      "estado": "PENDIENTE"
-  },
-  {
-      "emisor": "lp@example.com",
-      "receptor": "lr@example.com",
+    },
+    {
+      "emisor": "user2@example.com",
+      "receptor": "admin@gmail.com",
       "estado": "ACEPTADA"
-  },
-  {
-      "emisor": "jg@example.com",
-      "receptor": "et@example.com",
-      "estado": "PENDIENTE"
-  },
-  {
-      "emisor": "mr@example.com",
-      "receptor": "sg@example.com",
+    },
+    {
+      "emisor": "admin@gmail.com",
+      "receptor": "user3@example.com",
       "estado": "ACEPTADA"
-  },
-  {
-      "emisor": "ml@example.com",
-      "receptor": "cg@example.com",
-      "estado": "PENDIENTE"
-  },
-  {
-      "emisor": "ah@example.com",
-      "receptor": "jm@example.com",
+    },
+    {
+      "emisor": "user4@example.com",
+      "receptor": "admin@gmail.com",
       "estado": "ACEPTADA"
-  },
-  {
-      "emisor": "et@example.com",
-      "receptor": "lp@example.com",
+    },
+    {
+      "emisor": "admin@gmail.com",
+      "receptor": "user5@example.com",
+      "estado": "ACEPTADA"
+    },
+    {
+      "emisor": "user6@example.com",
+      "receptor": "admin@gmail.com",
+      "estado": "ACEPTADA"
+    },
+    {
+      "emisor": "admin@gmail.com",
+      "receptor": "user7@example.com",
+      "estado": "ACEPTADA"
+    },
+    {
+      "emisor": "user8@example.com",
+      "receptor": "admin@gmail.com",
+      "estado": "ACEPTADA"
+    },
+    {
+      "emisor": "admin@gmail.com",
+      "receptor": "user9@example.com",
+      "estado": "ACEPTADA"
+    },
+    {
+      "emisor": "user10@example.com",
+      "receptor": "admin@gmail.com",
+      "estado": "ACEPTADA"
+    },
+    {
+      "emisor": "admin@gmail.com",
+      "receptor": "user11@example.com",
       "estado": "PENDIENTE"
-  }
-]
+    },
+    {
+      "emisor": "admin@gmail.com",
+      "receptor": "user12@example.com",
+      "estado": "PENDIENTE"
+    },
+    {
+      "emisor": "admin@gmail.com",
+      "receptor": "user13@example.com",
+      "estado": "PENDIENTE"
+    },
+    {
+      "emisor": "admin@gmail.com",
+      "receptor": "user14@example.com",
+      "estado": "PENDIENTE"
+    },
+    {
+      "emisor": "admin@gmail.com",
+      "receptor": "user15@example.com",
+      "estado": "PENDIENTE"
+    },
+    {
+      "emisor": "user16@example.com",
+      "receptor": "admin@gmail.com",
+      "estado": "PENDIENTE"
+    },
+    {
+      "emisor": "user15@example.com",
+      "receptor": "admin@gmail.com",
+      "estado": "PENDIENTE"
+    },
+    {
+      "emisor": "user14@example.com",
+      "receptor": "admin@gmail.com",
+      "estado": "PENDIENTE"
+    },
+    {
+      "emisor": "user13@example.com",
+      "receptor": "admin@gmail.com",
+      "estado": "PENDIENTE"
+    },
+    {
+      "emisor": "user12@example.com",
+      "receptor": "admin@gmail.com",
+      "estado": "PENDIENTE"
+    }
+  ]
+  
