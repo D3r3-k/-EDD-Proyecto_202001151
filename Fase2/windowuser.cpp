@@ -130,7 +130,7 @@ void UserWindow::on_pushButton_generar_reportes_clicked()
         ui->tableRepoPublicaciones->clearContents();
         ui->tableRepoPublicaciones->setRowCount(3);
         int row = 0;
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < post_date.size(); ++i)
         {
             Structs::ReportePosts *temp = post_date.obtener(i);
             if (temp)
@@ -141,12 +141,15 @@ void UserWindow::on_pushButton_generar_reportes_clicked()
                 ui->tableRepoPublicaciones->setItem(row, 1, cantidad);
                 row++;
             }
+            if (i == 3) {
+                break;
+            }
         }
         // publicaciones con mas comentarios
         ui->tableRepoComentarios->clearContents();
         ui->tableRepoComentarios->setRowCount(3);
         int row2 = 0;
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < misPosts.size(); ++i)
         {
             Structs::Publicacion *temp = misPosts.obtener(i);
             if (temp)
@@ -158,6 +161,9 @@ void UserWindow::on_pushButton_generar_reportes_clicked()
                 ui->tableRepoComentarios->setItem(row2, 1, usuario);
                 ui->tableRepoComentarios->setItem(row2, 2, cantidad);
                 row2++;
+            }
+            if (i == 3) {
+                break;
             }
         }
         // actualizar fechas
