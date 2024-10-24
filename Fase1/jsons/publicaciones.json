@@ -2,7 +2,7 @@
     {
         "correo": "juan.perez@example.com",
         "contenido": "¡Hola a todos! Estoy emocionado por comenzar este nuevo proyecto.",
-        "fecha": "2024-08-10",
+        "fecha": "2024-08-9",
         "hora": "09:00:15"
     },
     {
@@ -20,19 +20,19 @@
     {
         "correo": "ana.martinez@example.com",
         "contenido": "¿Alguien tiene recomendaciones para mejorar mis habilidades en diseño de UI?",
-        "fecha": "2024-08-13",
+        "fecha": "2024-08-3",
         "hora": "11:00:15"
     },
     {
         "correo": "luis.gomez@example.com",
         "contenido": "Estoy organizando un hackathon el próximo mes. ¡Espero verlos allí!",
-        "fecha": "2024-08-14",
+        "fecha": "2024-08-4",
         "hora": "15:20:37"
     },
     {
         "correo": "laura.ruiz@example.com",
         "contenido": "He encontrado una herramienta genial para gestión de proyectos. La recomiendo.",
-        "fecha": "2024-08-15",
+        "fecha": "2024-08-5",
         "hora": "16:10:30"
     },
     {
@@ -50,13 +50,13 @@
     {
         "correo": "miguel.garcia@example.com",
         "contenido": "¡Mis habilidades en Python están mejorando! Acabo de completar un proyecto.",
-        "fecha": "2024-08-18",
+        "fecha": "2024-08-1",
         "hora": "13:50:16"
     },
     {
         "correo": "sofia.fernandez@example.com",
         "contenido": "Me estoy preparando para una presentación importante la próxima semana. Nerviosa pero emocionada.",
-        "fecha": "2024-08-19",
+        "fecha": "2024-07-8",
         "hora": "08:45:16"
     }
 ]

@@ -1,0 +1,250 @@
+[
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Disfrutando del paisaje.",
+        "fecha": "12/08/2024",
+        "hora": "12:45",
+        "comentarios": [
+            {
+                "correo": "user1@example.com",
+                "comentario": "¡Qué bonito!",
+                "fecha": "13/08/2024",
+                "hora": "09:15"
+            }
+        ]
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Paseo en el parque.",
+        "fecha": "16/09/2024",
+        "hora": "15:20",
+        "comentarios": [
+            {
+                "correo": "user2@example.com",
+                "comentario": "Me encanta ese parque.",
+                "fecha": "16/09/2024",
+                "hora": "10:00"
+            },
+            {
+                "correo": "user3@example.com",
+                "comentario": "¿Fuiste solo?",
+                "fecha": "16/09/2024",
+                "hora": "10:45"
+            }
+        ]
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Tarde lluviosa.",
+        "fecha": "11/05/2023",
+        "hora": "18:05",
+        "comentarios": [
+            {
+                "correo": "user4@example.com",
+                "comentario": "Me encanta la lluvia.",
+                "fecha": "12/05/2023",
+                "hora": "11:15"
+            }
+        ]
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Amanecer increíble.",
+        "fecha": "12/12/2022",
+        "hora": "06:30",
+        "comentarios": []
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Un día productivo.",
+        "fecha": "12/08/2024",
+        "hora": "14:00",
+        "comentarios": []
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Caminando por la ciudad.",
+        "fecha": "16/09/2024",
+        "hora": "12:15",
+        "comentarios": [
+            {
+                "correo": "user5@example.com",
+                "comentario": "Qué envidia, yo estoy en la oficina.",
+                "fecha": "16/09/2024",
+                "hora": "12:45"
+            }
+        ]
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Cena deliciosa.",
+        "fecha": "12/12/2022",
+        "hora": "20:30",
+        "comentarios": [
+            {
+                "correo": "user6@example.com",
+                "comentario": "¿Dónde cenaste?",
+                "fecha": "13/12/2022",
+                "hora": "09:00"
+            },
+            {
+                "correo": "user7@example.com",
+                "comentario": "Tengo hambre ahora.",
+                "fecha": "13/12/2022",
+                "hora": "09:15"
+            }
+        ]
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Un día más.",
+        "fecha": "11/05/2023",
+        "hora": "16:45",
+        "comentarios": []
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Trabajo duro hoy.",
+        "fecha": "12/12/2022",
+        "hora": "08:30",
+        "comentarios": [
+            {
+                "correo": "user8@example.com",
+                "comentario": "Lo entiendo, yo también.",
+                "fecha": "12/12/2022",
+                "hora": "09:00"
+            },
+            {
+                "correo": "user9@example.com",
+                "comentario": "Ánimo, ya falta poco.",
+                "fecha": "12/12/2022",
+                "hora": "09:30"
+            }
+        ]
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Lectura tranquila.",
+        "fecha": "12/08/2024",
+        "hora": "19:00",
+        "comentarios": [
+            {
+                "correo": "user10@example.com",
+                "comentario": "¿Qué estás leyendo?",
+                "fecha": "13/08/2024",
+                "hora": "08:00"
+            }
+        ]
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Café en la mañana.",
+        "fecha": "16/09/2024",
+        "hora": "09:00",
+        "comentarios": [
+            {
+                "correo": "user11@example.com",
+                "comentario": "Amo el café.",
+                "fecha": "16/09/2024",
+                "hora": "09:30"
+            },
+            {
+                "correo": "user12@example.com",
+                "comentario": "El mejor inicio de día.",
+                "fecha": "16/09/2024",
+                "hora": "10:00"
+            }
+        ]
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Preparando un proyecto.",
+        "fecha": "11/05/2023",
+        "hora": "22:10",
+        "comentarios": []
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Explorando la ciudad.",
+        "fecha": "16/09/2024",
+        "hora": "13:30",
+        "comentarios": [
+            {
+                "correo": "user13@example.com",
+                "comentario": "¡Qué emocionante!",
+                "fecha": "16/09/2024",
+                "hora": "14:00"
+            }
+        ]
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Desayuno ligero.",
+        "fecha": "12/12/2022",
+        "hora": "08:00",
+        "comentarios": []
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Noche de películas.",
+        "fecha": "16/09/2024",
+        "hora": "21:45",
+        "comentarios": [
+            {
+                "correo": "user14@example.com",
+                "comentario": "¿Qué película viste?",
+                "fecha": "17/09/2024",
+                "hora": "10:00"
+            }
+        ]
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Fin de semana relajante.",
+        "fecha": "12/12/2022",
+        "hora": "11:45",
+        "comentarios": []
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Tarde con amigos.",
+        "fecha": "16/09/2024",
+        "hora": "17:00",
+        "comentarios": []
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Jornada larga de trabajo.",
+        "fecha": "12/08/2024",
+        "hora": "23:15",
+        "comentarios": [
+            {
+                "correo": "user15@example.com",
+                "comentario": "Descansa un poco.",
+                "fecha": "13/08/2024",
+                "hora": "08:15"
+            }
+        ]
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Fin de la jornada.",
+        "fecha": "11/05/2023",
+        "hora": "19:00",
+        "comentarios": []
+    },
+    {
+        "correo": "admin@gmail.com",
+        "contenido": "Explorando museos.",
+        "fecha": "16/09/2024",
+        "hora": "15:00",
+        "comentarios": [
+            {
+                "correo": "user16@example.com",
+                "comentario": "Me encantaría ir contigo.",
+                "fecha": "16/09/2024",
+                "hora": "15:30"
+            }
+        ]
+    }
+]

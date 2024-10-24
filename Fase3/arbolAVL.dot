@@ -1,0 +1,37 @@
+digraph ArbolAVL {
+"user3@example.com" [label="user3@example.com"];
+"user3@example.com" -> "user14@example.com";
+"user14@example.com" [label="user14@example.com"];
+"user14@example.com" -> "user11@example.com";
+"user11@example.com" [label="user11@example.com"];
+"user11@example.com" -> "user10@example.com";
+"user10@example.com" [label="user10@example.com"];
+"user10@example.com" -> "admin@gmail.com";
+"admin@gmail.com" [label="admin@gmail.com"];
+"user11@example.com" -> "user13@example.com";
+"user13@example.com" [label="user13@example.com"];
+"user13@example.com" -> "user12@example.com";
+"user12@example.com" [label="user12@example.com"];
+"user14@example.com" -> "user1@example.com";
+"user1@example.com" [label="user1@example.com"];
+"user1@example.com" -> "user15@example.com";
+"user15@example.com" [label="user15@example.com"];
+"user15@example.com" -> "user16@example.com";
+"user16@example.com" [label="user16@example.com"];
+"user1@example.com" -> "user2@example.com";
+"user2@example.com" [label="user2@example.com"];
+"user3@example.com" -> "user7@example.com";
+"user7@example.com" [label="user7@example.com"];
+"user7@example.com" -> "user5@example.com";
+"user5@example.com" [label="user5@example.com"];
+"user5@example.com" -> "user4@example.com";
+"user4@example.com" [label="user4@example.com"];
+"user5@example.com" -> "user6@example.com";
+"user6@example.com" [label="user6@example.com"];
+"user7@example.com" -> "user9@example.com";
+"user9@example.com" [label="user9@example.com"];
+"user9@example.com" -> "user8@example.com";
+"user8@example.com" [label="user8@example.com"];
+"user9@example.com" -> "user@gmail.com";
+"user@gmail.com" [label="user@gmail.com"];
+}

@@ -1,0 +1,35 @@
+digraph G {
+    graph [rankdir=LR ]
+    node [shape=circle]
+    edge [dir=none]
+    // nodos
+    oscar
+    mario
+    maria
+    kevin
+    melisa
+    jose
+    javier
+    pedro
+    adriana
+    pablo
+    cristian
+
+    mario -> oscar
+    mario -> maria
+    maria -> jose
+    maria -> melisa
+    maria -> kevin
+    jose -> javier
+    jose -> pedro
+    jose -> adriana
+    melisa -> adriana
+    melisa -> pablo
+    adriana -> pedro 
+    adriana -> cristian
+    pedro -> cristian
+    javier -> cristian
+
+
+
+}

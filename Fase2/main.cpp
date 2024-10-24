@@ -8,7 +8,7 @@
 
 int main(int argc, char *argv[])
 {
-    Structs::Usuario admin(0, "Administrador", "Lab EDD", "2001-09-15", "admin@gmail.com", "123", "EDD2S2024");
+    Structs::Usuario admin(0, "Administrador", "Lab EDD", "2001-09-15", "admin@gmail.com", "EDD2S2024", "admin");
     lista_usuarios.insertar(admin);
 
 

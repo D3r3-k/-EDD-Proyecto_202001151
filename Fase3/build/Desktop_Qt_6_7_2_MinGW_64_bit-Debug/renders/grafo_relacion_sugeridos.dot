@@ -1,0 +1,35 @@
+digraph G {
+node [shape=circle];
+rankdir=LR;
+edge [dir=none];
+label="Grafo Relacion de Sugeridos" fontsize = 20 fontname = "Arial";
+"user1@example.com" [label="Carlos"; fillcolor="#f4d03f"; style="filled"];
+"admin@gmail.com" [label="Administrador"; fillcolor="#41c1da"; style="filled"];
+"user2@example.com" [label="María"; fillcolor="#7DDA58"; style="filled"];
+"user3@example.com" [label="Luis"; fillcolor="#7DDA58"; style="filled"];
+"user4@example.com" [label="Ana"; fillcolor="#7DDA58"; style="filled"];
+"user5@example.com" [label="Pedro"; fillcolor="#f4d03f"; style="filled"];
+"user6@example.com" [label="Sofía"; fillcolor="#7DDA58"; style="filled"];
+"user7@example.com" [label="Jorge"];
+"user15@example.com" [label="Raúl"];
+"user8@example.com" [label="Elena"];
+"user9@example.com" [label="Andrés"; fillcolor="#f4d03f"; style="filled"];
+"user10@example.com" [label="Laura"; fillcolor="#f4d03f"; style="filled"];
+"user11@example.com" [label="Daniel"];
+"user12@example.com" [label="Isabel"; fillcolor="#7DDA58"; style="filled"];
+"user1@example.com" -> "admin@gmail.com";
+"user1@example.com" -> "user2@example.com";
+"user1@example.com" -> "user3@example.com";
+"user1@example.com" -> "user4@example.com";
+"user1@example.com" -> "user12@example.com";
+"admin@gmail.com" -> "user5@example.com";
+"admin@gmail.com" -> "user9@example.com";
+"admin@gmail.com" -> "user10@example.com";
+"user2@example.com" -> "user4@example.com";
+"user2@example.com" -> "user3@example.com";
+"user3@example.com" -> "user4@example.com";
+"user5@example.com" -> "user6@example.com";
+"user7@example.com" -> "user15@example.com";
+"user7@example.com" -> "user8@example.com";
+"user15@example.com" -> "user11@example.com";
+}

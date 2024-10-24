@@ -35,7 +35,7 @@ std::string ArbolB5::graficar()
         file << dot;
         file.close();
         system("dot -Tpng arbolb5.dot -o arbolb5.png");
-        return path;
+        return "arbolb5.png";
     }
     catch (const std::exception &e)
     {

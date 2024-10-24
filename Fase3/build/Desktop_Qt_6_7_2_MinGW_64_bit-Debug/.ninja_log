@@ -1,0 +1,28 @@
+# ninja log v6
+29	4682	7486055477016584	Fase2_autogen/timestamp	dcc025e1d8345398
+29	4682	7486055477016584	Fase2_autogen/mocs_compilation.cpp	dcc025e1d8345398
+29	4682	7486055477016584	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase2_autogen/timestamp	dcc025e1d8345398
+29	4682	7486055477016584	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase2_autogen/mocs_compilation.cpp	dcc025e1d8345398
+4690	4789	7486055479430377	Fase2_autogen/EWIEGA46WW/qrc_resource.cpp	c5fd8b9036519296
+4690	4789	7486055479430377	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase2/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase2_autogen/EWIEGA46WW/qrc_resource.cpp	c5fd8b9036519296
+4878	6398	7486055480432797	CMakeFiles/Fase2.dir/globales.cpp.obj	ac3ea97a8d6ed33a
+4794	10707	7486055479599923	CMakeFiles/Fase2.dir/main.cpp.obj	8aa68a15b74e2dd3
+4798	10811	7486055479639817	CMakeFiles/Fase2.dir/windowmain.cpp.obj	33f73ce2d728ee66
+4881	11762	7486055480472686	CMakeFiles/Fase2.dir/arbolavl.cpp.obj	d5d10c43fad9cbcc
+4805	11894	7486055479709653	CMakeFiles/Fase2.dir/windowadmin.cpp.obj	fe19146a6176e8f4
+4790	12216	7486055479550059	CMakeFiles/Fase2.dir/Fase2_autogen/mocs_compilation.cpp.obj	2a55bdafc17d4c9c
+6398	13617	7486055495639140	CMakeFiles/Fase2.dir/windowregister.cpp.obj	53f0ab5d5fbaf04a
+4825	14444	7486055479904206	CMakeFiles/Fase2.dir/windowuser.cpp.obj	ca9dae38cb8eb68e
+12216	15108	7486055553815378	CMakeFiles/Fase2.dir/arbolabb.cpp.obj	dd73bd9378823092
+10707	15749	7486055538728187	CMakeFiles/Fase2.dir/matrizrelacion.cpp.obj	3974444591a63f2
+10811	16820	7486055539770576	CMakeFiles/Fase2.dir/dialogmodificar.cpp.obj	1a3ad4dd2504f0de
+14445	16881	7486055576104060	CMakeFiles/Fase2.dir/arbolb5.cpp.obj	46d3da63b9806e0a
+16882	18274	7486055600477553	CMakeFiles/Fase2.dir/Fase2_autogen/EWIEGA46WW/qrc_resource.cpp.obj	12e7e86eda4bbe26
+4874	18620	7486055480392911	CMakeFiles/Fase2.dir/funciones.cpp.obj	6a203431880f1c71
+11895	19001	7486055550608412	CMakeFiles/Fase2.dir/widgetpost.cpp.obj	22a092e3a23df1de
+11832	19083	7486055549974970	CMakeFiles/Fase2.dir/dialognuevopost.cpp.obj	7f9806a00c748bd6
+13617	19989	7486055567834305	CMakeFiles/Fase2.dir/widgetcomment.cpp.obj	213874cd48842d20
+16820	21846	7486055599857973	CMakeFiles/Fase2.dir/arbolbst.cpp.obj	b0e9159fbc60cf6c
+15749	22156	7486055589147612	CMakeFiles/Fase2.dir/widgetfriend.cpp.obj	46fed611d8f9571e
+15109	22533	7486055582738631	CMakeFiles/Fase2.dir/dialogpost.cpp.obj	88b9c82d3849fb95
+22533	25974	7486055656987942	Fase2.exe	f80b368aa017575f

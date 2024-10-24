@@ -1,0 +1,4 @@
+digraph G {
+rankdir = TB;
+node [shape=record];
+label="Lista de publicaciones" fontsize = 20 fontname = "Arial";}

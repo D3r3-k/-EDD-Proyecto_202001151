@@ -1,0 +1,62 @@
+[
+  {
+    "emisor": "cg@example.com",
+    "receptor": "f2@gmail.com",
+    "estado": "PENDIENTE"
+  },
+  {
+    "emisor": "f2@gmail.com",
+    "receptor": "ml@example.com",
+    "estado": "PENDIENTE"
+  },
+  {
+    "emisor": "jm@example.com",
+    "receptor": "f2@gmail.com",
+    "estado": "ACEPTADA"
+  },
+  {
+    "emisor": "f2@gmail.com",
+    "receptor": "ah@example.com",
+    "estado": "PENDIENTE"
+  },
+  {
+    "emisor": "lp@example.com",
+    "receptor": "f2@gmail.com",
+    "estado": "PENDIENTE"
+  },
+  {
+    "emisor": "f2@gmail.com",
+    "receptor": "jg@example.com",
+    "estado": "ACEPTADA"
+  },
+  {
+    "emisor": "mr@example.com",
+    "receptor": "f2@gmail.com",
+    "estado": "ACEPTADA"
+  },
+  {
+    "emisor": "f2@gmail.com",
+    "receptor": "et@example.com",
+    "estado": "PENDIENTE"
+  },
+  {
+    "emisor": "sg@example.com",
+    "receptor": "f2@gmail.com",
+    "estado": "ACEPTADA"
+  },
+  {
+    "emisor": "f2@gmail.com",
+    "receptor": "mr@example.com",
+    "estado": "ACEPTADA"
+  },
+  {
+    "emisor": "f2@gmail.com",
+    "receptor": "sg@example.com",
+    "estado": "PENDIENTE"
+  },
+  {
+    "emisor": "ml@example.com",
+    "receptor": "f2@gmail.com",
+    "estado": "PENDIENTE"
+  }
+]

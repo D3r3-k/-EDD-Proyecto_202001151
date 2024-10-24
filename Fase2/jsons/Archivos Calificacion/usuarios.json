@@ -1,0 +1,80 @@
+[
+    {
+        "nombres": "Carlos",
+        "apellidos": "Gomez",
+        "fecha_de_nacimiento": "1990/05/12",
+        "correo": "cg@example.com",
+        "contraseña": "carlospass"
+    },
+    {
+        "nombres": "Maria",
+        "apellidos": "Lopez",
+        "fecha_de_nacimiento": "1985/08/23",
+        "correo": "ml@example.com",
+        "contraseña": "mariapass"
+    },
+    {
+        "nombres": "Juan",
+        "apellidos": "Martinez",
+        "fecha_de_nacimiento": "1992/02/17",
+        "correo": "jm@example.com",
+        "contraseña": "juanpass"
+    },
+    {
+        "nombres": "Ana",
+        "apellidos": "Hernandez",
+        "fecha_de_nacimiento": "1995/11/30",
+        "correo": "ah@example.com",
+        "contraseña": "anapass"
+    },
+    {
+        "nombres": "Luis",
+        "apellidos": "Perez",
+        "fecha_de_nacimiento": "1988/04/09",
+        "correo": "lp@example.com",
+        "contraseña": "luispass"
+    },
+    {
+        "nombres": "Laura",
+        "apellidos": "Ramirez",
+        "fecha_de_nacimiento": "1993/09/05",
+        "correo": "lr@example.com",
+        "contraseña": "laurapass"
+    },
+    {
+        "nombres": "Jose",
+        "apellidos": "Garcia",
+        "fecha_de_nacimiento": "1991/07/14",
+        "correo": "jg@example.com",
+        "contraseña": "josepass"
+    },
+    {
+        "nombres": "Elena",
+        "apellidos": "Torres",
+        "fecha_de_nacimiento": "1987/12/22",
+        "correo": "et@example.com",
+        "contraseña": "elenapass"
+    },
+    {
+        "nombres": "Miguel",
+        "apellidos": "Rodriguez",
+        "fecha_de_nacimiento": "1989/03/11",
+        "correo": "mr@example.com",
+        "contraseña": "miguelpass"
+    },
+    {
+        "nombres": "Sofia",
+        "apellidos": "Gonzalez",
+        "fecha_de_nacimiento": "1994/06/28",
+        "correo": "sg@example.com",
+        "contraseña": "sofiapass"
+    },
+    {
+        "nombres": "Fase2",
+        "apellidos": "Calificacion",
+        "fecha_de_nacimiento": "2000/01/01",
+        "correo": "f2@gmail.com",
+        "contraseña": "123"
+    }
+  ]
+  
