@@ -1,4 +1,5 @@
 #include "windowadmin.h"
+#include "Trees/huffman.h"
 #include "funciones.h"
 #include "globales.h"
 #include "windowlogin.h"
@@ -233,5 +234,18 @@ void AdminWindow::on_pushButton_reporte_amistades_ady_clicked()
     if (!QDesktopServices::openUrl(QUrl::fromLocalFile(rutaImagen))) {
         QMessageBox::warning(this, "Error", "No se pudo abrir la imagen.");
     }
+}
+
+
+void AdminWindow::on_pushButton_clicked()
+{
+    std::string texto = "Hola mundo";
+    Huffman::Huffman huff;
+    cout << "Texto original: " << texto << endl;
+    std::string comprimido = huff.compress(texto);
+    cout << "Texto comprimido: " << comprimido << endl;
+    std::string descomprimido = huff.decompress(comprimido);
+    cout << "Texto descomprimido: " << descomprimido << endl;
+
 }
 

@@ -267,6 +267,13 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
+         <widget class="QPushButton" name="pushButton">
+          <property name="text">
+           <string>comprimir</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QPushButton" name="pushButton_reportes_generar">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -297,7 +304,7 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-457</y>
+             <y>0</y>
              <width>1131</width>
              <height>1077</height>
             </rect>

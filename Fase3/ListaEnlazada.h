@@ -22,12 +22,21 @@ namespace ListaEnlazada
         {
             if (!otraCabeza)
                 return nullptr;
-            Nodo *nuevaCabeza = new Nodo(otraCabeza->data);
+
+            Nodo *nuevaCabeza = new Nodo(otraCabeza->data);  // Aquí copias el dato
+            if constexpr (std::is_pointer<T>::value)
+            {
+                nuevaCabeza->data = new typename std::remove_pointer<T>::type(*otraCabeza->data);  // Clonación profunda
+            }
             Nodo *actual = nuevaCabeza;
             Nodo *temp = otraCabeza->next;
             while (temp)
             {
                 actual->next = new Nodo(temp->data);
+                if constexpr (std::is_pointer<T>::value)
+                {
+                    actual->next->data = new typename std::remove_pointer<T>::type(*temp->data);  // Clonación profunda
+                }
                 actual = actual->next;
                 temp = temp->next;
             }

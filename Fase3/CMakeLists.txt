@@ -50,6 +50,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         arbolbst.h arbolbst.cpp
         hash_functions.h
         graforelacion.h graforelacion.cpp
+        Trees/huffman.h Trees/huffman.cpp
+
+
+
 
 
 

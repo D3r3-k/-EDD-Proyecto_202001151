@@ -202,19 +202,25 @@ namespace Structs
 
     struct AmigoSugerido
     {
-        Usuario *usuario;
+        Structs::Usuario usuario;
         int enComun;
 
-        AmigoSugerido(Usuario *usuario, int enComun = 0) : usuario(usuario), enComun(enComun) {}
+        AmigoSugerido(Usuario usuario, int enComun = 0) : usuario(usuario), enComun(enComun) {}
 
         ~AmigoSugerido() {}
 
         void mostrar()
         {
-            cout << "Nombre: " << usuario->nombres << " " << usuario->apellidos << endl;
-            cout << "Correo: " << usuario->correo << endl;
+            cout << "Nombre: " << usuario.nombres << " " << usuario.apellidos << endl;
+            cout << "Correo: " << usuario.correo << endl;
             cout << "Amigos en común: " << enComun << endl;
         }
+
+        Structs::Usuario getUsuario()
+        {
+            return this->usuario;
+        }
+
 
         // agregar amigos en común
         void agregarEnComun()

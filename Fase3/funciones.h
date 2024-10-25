@@ -17,6 +17,7 @@ extern QTableWidget* adminTablaUsuarios;
 extern QTableWidget* userTablaUsuarios;
 extern QTableWidget* userTablaEnviadas;
 extern QTableWidget* userTablaRecibidas;
+extern QTableWidget* userTablaSugerencias;
 // GLOBAL PARA PUBLICACIONES - USER
 extern QScrollArea* userPostFeed;
 extern QScrollArea* userFriends;
@@ -49,6 +50,7 @@ void ActualizarFeed();
 
 // TODO: Metodos Usuario / Solicitudes
 void ActualizarTablaUsuarios(QTableWidget* table);
+void ActualizarTablaSugeridos(QTableWidget* table);
 void ActualizarTablaRecibidos(QTableWidget* table);
 void ActualizarTablaEnviados(QTableWidget* table);
 void ActualizarTablas();

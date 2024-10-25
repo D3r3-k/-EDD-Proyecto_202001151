@@ -155,6 +155,7 @@ namespace Func
     QTableWidget *userTablaUsuarios = nullptr;
     QTableWidget *userTablaEnviadas = nullptr;
     QTableWidget *userTablaRecibidas = nullptr;
+    QTableWidget *userTablaSugerencias = nullptr;
     QScrollArea *userPostFeed = nullptr;
     QScrollArea *userFriends = nullptr;
     QComboBox *selectedDate = nullptr;
@@ -913,6 +914,101 @@ namespace Func
             }
         }
     }
+    void ActualizarTablaSugeridos(QTableWidget *table)
+    {
+        // Limpiar la tabla antes de agregar nuevos elementos
+        table->clearContents();
+
+        // Obtener las listas de sugerencias y solicitudes enviadas/recibidas
+        ListaEnlazada::ListaEnlazada<Structs::AmigoSugerido> listaSugeridos = relaciones_amistad.sugerirAmigos(usuario_logeado->correo);
+        ListaEnlazada::ListaEnlazada<Structs::Usuario> enviadas = usuario_logeado->solicitudesEnviadas;
+        ListaEnlazada::ListaEnlazada<Structs::Usuario> recibidas = usuario_logeado->solicitudesRecibidas;
+
+        // Crear una nueva lista para los usuarios filtrados
+        ListaEnlazada::ListaEnlazada<Structs::AmigoSugerido> listaFiltrada;
+
+        // Filtrar los sugeridos eliminando aquellos que ya han sido enviados o recibidos
+        for (int i = 0; i < listaSugeridos.size(); i++)
+        {
+            Structs::AmigoSugerido sugerido = *listaSugeridos.obtener(i);
+
+            bool yaEnviado = false;
+            bool yaRecibido = false;
+
+            // Verificar si el usuario sugerido está en la lista de solicitudes enviadas
+            for (int j = 0; j < enviadas.size(); j++)
+            {
+                if (enviadas.obtener(j)->correo == sugerido.usuario.correo)
+                {
+                    yaEnviado = true;
+                    break;
+                }
+            }
+
+            // Verificar si el usuario sugerido está en la lista de solicitudes recibidas
+            for (int k = 0; k < recibidas.size(); k++)
+            {
+                if (recibidas.obtener(k)->correo == sugerido.usuario.correo)
+                {
+                    yaRecibido = true;
+                    break;
+                }
+            }
+
+            // Si no ha sido enviado ni recibido, agregarlo a la lista filtrada
+            if (!yaEnviado && !yaRecibido)
+            {
+                listaFiltrada.insertar(sugerido);
+            }
+        }
+        
+
+
+        table->setRowCount(listaFiltrada.size()); // Ajustar el número de filas según el tamaño de la lista
+
+        int row = 0;
+        // Recorremos la lista para agregar los elementos a la tabla
+        for (int i = 0; i < listaFiltrada.size(); ++i)
+        {
+            if (listaFiltrada.obtener(i))
+            {
+                QString correo_sugerido = QString::fromStdString(listaFiltrada.obtener(i)->usuario.correo);
+                QString encomun = QString::number(listaFiltrada.obtener(i)->enComun);
+
+                QTableWidgetItem *emailItem = new QTableWidgetItem(correo_sugerido);
+                QTableWidgetItem *countItem = new QTableWidgetItem(encomun);
+
+                // Agregamos los datos a la tabla
+                table->setItem(row, 0, emailItem);
+                table->setItem(row, 1, countItem);
+
+                // Capturar el id por valor en las lambdas
+                string correo = listaFiltrada.obtener(i)->usuario.correo;
+
+                // Crear botones de modificar y eliminar
+                QPushButton *enviarButton = new QPushButton("Enviar Solicitud");
+
+                // Conectar los botones a sus slots
+                QObject::connect(enviarButton, &QPushButton::clicked, [correo, row, table]()
+                                 {
+                                     lista_usuarios.enviarSolicitud(usuario_logeado->correo,correo);
+                                     Func::ActualizarTablas(); });
+
+                // Crear contenedores de botones separados para cada columna
+                QWidget *sendButtonContainer = new QWidget();
+                QHBoxLayout *modifyButtonLayout = new QHBoxLayout();
+                modifyButtonLayout->addWidget(enviarButton);
+                modifyButtonLayout->setAlignment(Qt::AlignCenter);
+                modifyButtonLayout->setContentsMargins(0, 0, 0, 0);
+                sendButtonContainer->setLayout(modifyButtonLayout);
+                sendButtonContainer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+
+                table->setCellWidget(row, 2, sendButtonContainer); // Botón en columna 2
+
+                row++;
+            }
+        }
+    }
     void ActualizarTablaRecibidos(QTableWidget *table)
     {
         // Limpiar la tabla antes de agregar nuevos elementos
@@ -1034,6 +1130,7 @@ namespace Func
     void ActualizarTablas()
     {
         Func::ActualizarTablaUsuarios(userTablaUsuarios);
+        Func::ActualizarTablaSugeridos(userTablaSugerencias);
         Func::ActualizarTablaEnviados(userTablaEnviadas);
         Func::ActualizarTablaRecibidos(userTablaRecibidas);
     }
@@ -1396,8 +1493,6 @@ namespace Func
         // Devolver la cadena formateada
         return oss.str();
     }
-
-
 
 
 }

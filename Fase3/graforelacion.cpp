@@ -202,7 +202,7 @@ ListaEnlazada::ListaEnlazada<Structs::AmigoSugerido> GrafoRelacion::sugerirAmigo
             for (int j = 0; j < amigos_sugeridos.size(); j++)
             {
                 Structs::AmigoSugerido *sugerido = amigos_sugeridos.obtener(j);
-                if (sugerido->usuario->correo == amigo_amigo->correo)
+                if (sugerido->usuario.correo == amigo_amigo->correo)
                 {
                     sugerido->agregarEnComun();
                     existe = true;
@@ -211,7 +211,8 @@ ListaEnlazada::ListaEnlazada<Structs::AmigoSugerido> GrafoRelacion::sugerirAmigo
             }
             if (!existe)
             {
-                Structs::AmigoSugerido nuevo(amigo_amigo, 1);
+                Structs::Usuario nuevoUser(amigo_amigo->id, amigo_amigo->nombres, amigo_amigo->apellidos, amigo_amigo->fechaNacimiento, amigo_amigo->correo, amigo_amigo->contrasena);
+                Structs::AmigoSugerido nuevo(nuevoUser, 1);
                 amigos_sugeridos.insertar(nuevo);
             }
         }
@@ -456,7 +457,7 @@ std::string GrafoRelacion::graficarGrafoSugeridos(const std::string &correo)
             for (int i = 0; i < amigos_sugeridos.size(); i++)
             {
                 Structs::AmigoSugerido *amigo_sugerido = amigos_sugeridos.obtener(i);
-                if (amigo_sugerido->usuario->correo == amigo->usuario->correo)
+                if (amigo_sugerido->usuario.correo == amigo->usuario->correo)
                 {
                     esSugerido = true;
                     break;

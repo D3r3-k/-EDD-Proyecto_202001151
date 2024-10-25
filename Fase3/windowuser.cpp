@@ -20,6 +20,8 @@ UserWindow::UserWindow(QWidget *parent)
         Func::userTablaUsuarios = ui->tableUsuarios;
         Func::userTablaEnviadas = ui->tableSolicitudesEnv;
         Func::userTablaRecibidas = ui->tableSolicitudesRec;
+        Func::userTablaSugerencias = ui->tableSugeridos;
+
         Func::userPostFeed = ui->scrollAreaPost;
         Func::userFriends = ui->scrollArea_amigos;
         Func::selectedDate = ui->comboBox_post_fecha;
@@ -316,6 +318,9 @@ void UserWindow::on_tabWidget_currentChanged(int index)
         ui->tableUsuarios->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         ui->tableSolicitudesRec->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         ui->tableSolicitudesEnv->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+        ui->tableSugeridos->setColumnWidth(1,30);
+        ui->tableSugeridos->horizontalHeader()->setSectionResizeMode(0, QHeaderView::Stretch);
+        ui->tableSugeridos->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
         Func::ActualizarTablas();
     }else if (index == 3) {
         // Tab Reportes
