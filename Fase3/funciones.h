@@ -11,6 +11,9 @@
 using namespace std;
 
 namespace Func {
+// METODOS DE CARGA
+std::string leerArchivo(const std::string& path);
+void cargarEstructuras(const std::string& data);
 // GLOBAL PARA ADMIN
 extern QTableWidget* adminTablaUsuarios;
 // GLOBAL PARA SOLICITUDES - USER
@@ -29,6 +32,7 @@ extern QSpinBox* countPost;
 void IniciarSesion(string email, string password);
 bool RegistrarUsuario(QString nombres, QString apellidos, QString fechaNacimiento, QString correo, QString contrasena);
 bool ModificarUsuario(QString nombres, QString apellidos, QString fechaNacimiento, QString correo, std::string contrasena, std::string rol);
+void backupSerializacion();
 void CerrarSesion();
 // TODO: Metodos Admin
 void ActualizarTablaUsuariosAdmin(QTableWidget* table,ListaEnlazada::ListaEnlazada<Structs::Usuario> &lista);

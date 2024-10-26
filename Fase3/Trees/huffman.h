@@ -1,6 +1,7 @@
 #ifndef HUFFMAN_H
 #define HUFFMAN_H
 
+#include <nlohmann/json.hpp>
 #include <string>
 #include <fstream>
 
@@ -31,6 +32,8 @@ public:
     std::string decompress(const std::string& compressedText);
     void createGraph(Node* root);
     Node* getRoot();
+    void exportTree(const std::string& filename);
+    void importTree(const std::string& filename);
 
 private:
     void insert(PriorityQueue*& head, Node* newNode);
@@ -39,6 +42,8 @@ private:
     std::string compress(const std::string& text, std::string codes[256]);
     void generateDotFile(Node* root, std::ofstream& dotFile, int& nullCount);
     Node* root;
+    void serialize(Node* node, nlohmann::json& jsonNode);
+    Node* deserialize(const nlohmann::json& jsonNode);
 };
 
 }

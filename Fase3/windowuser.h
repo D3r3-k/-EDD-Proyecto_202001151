@@ -54,7 +54,6 @@ private slots:
 
     void on_tabWidget_currentChanged(int index);
 
-    void on_pushButton_clicked();
 
     void on_pushButton_reporte_grafo_amistades_clicked();
 

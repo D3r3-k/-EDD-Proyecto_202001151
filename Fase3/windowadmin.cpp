@@ -9,6 +9,9 @@
 #include <QPixmap>
 #include <QFileDialog>
 #include <QDesktopServices>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 string img_usuarios = "";
 string img_publicaciones = "";
@@ -221,8 +224,6 @@ void AdminWindow::on_pushButton_reportes_generar_clicked()
 }
 
 
-
-
 void AdminWindow::on_pushButton_reporte_amistades_ady_clicked()
 {
     // Verificar que la ruta de la imagen no esté vacía
@@ -235,17 +236,3 @@ void AdminWindow::on_pushButton_reporte_amistades_ady_clicked()
         QMessageBox::warning(this, "Error", "No se pudo abrir la imagen.");
     }
 }
-
-
-void AdminWindow::on_pushButton_clicked()
-{
-    std::string texto = "Hola mundo";
-    Huffman::Huffman huff;
-    cout << "Texto original: " << texto << endl;
-    std::string comprimido = huff.compress(texto);
-    cout << "Texto comprimido: " << comprimido << endl;
-    std::string descomprimido = huff.decompress(comprimido);
-    cout << "Texto descomprimido: " << descomprimido << endl;
-
-}
-

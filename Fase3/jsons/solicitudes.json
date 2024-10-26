@@ -2,76 +2,76 @@
   {
     "emisor": "user1@example.com",
     "receptor": "admin@gmail.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user1@example.com",
     "receptor": "user2@example.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user1@example.com",
     "receptor": "user3@example.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user1@example.com",
     "receptor": "user4@example.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user2@example.com",
     "receptor": "user4@example.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user3@example.com",
     "receptor": "user2@example.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user4@example.com",
     "receptor": "user3@example.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user5@example.com",
     "receptor": "admin@gmail.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user6@example.com",
     "receptor": "user5@example.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user7@example.com",
     "receptor": "user15@example.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user8@example.com",
     "receptor": "user7@example.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user9@example.com",
     "receptor": "admin@gmail.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user10@example.com",
     "receptor": "admin@gmail.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user11@example.com",
     "receptor": "user15@example.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   },
   {
     "emisor": "user12@example.com",
     "receptor": "user1@example.com",
-    "estado": "ACEPTADA"
+    "estado": "PENDIENTE"
   }
 ]

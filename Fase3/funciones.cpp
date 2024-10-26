@@ -1,4 +1,5 @@
 #include "funciones.h"
+#include "Trees/huffman.h"
 #include "arbolabb.h"
 #include "globales.h"
 #include "Structs.h"
@@ -19,6 +20,10 @@
 #include <cstring>
 #include <fstream>
 #include <iostream>
+#include <qdir.h>
+#include <qjsonarray.h>
+#include <qjsondocument.h>
+#include <qjsonobject.h>
 
 #include "hash_functions.h"
 
@@ -36,25 +41,31 @@ const unsigned int hash_functions::hash_keys[64] = {
     0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2};
 
 void hash_functions::compress(const unsigned char *message,
-                              unsigned int block_nb) {
+                              unsigned int block_nb)
+{
     register_32 w[64];
     register_32 buffer[8];
     register_32 t1, t2;
     const unsigned char *sub_block;
     int m;
     int n;
-    for (m = 0; m < (int)block_nb; m++) {
+    for (m = 0; m < (int)block_nb; m++)
+    {
         sub_block = message + (m << 6);
-        for (n = 0; n < 16; n++) {
+        for (n = 0; n < 16; n++)
+        {
             SHAF_PACK32(&sub_block[n << 2], &w[n]);
         }
-        for (n = 16; n < 64; n++) {
+        for (n = 16; n < 64; n++)
+        {
             w[n] = SHAF_4(w[n - 2]) + w[n - 7] + SHAF_3(w[n - 15]) + w[n - 16];
         }
-        for (n = 0; n < 8; n++) {
+        for (n = 0; n < 8; n++)
+        {
             buffer[n] = s_r[n];
         }
-        for (n = 0; n < 64; n++) {
+        for (n = 0; n < 64; n++)
+        {
             t1 = buffer[7] + SHAF_2(buffer[4]) +
                  CHOICE_OF(buffer[4], buffer[5], buffer[6]) + hash_keys[n] + w[n];
             t2 = SHAF_1(buffer[0]) + MAJORITY_OF(buffer[0], buffer[1], buffer[2]);
@@ -67,13 +78,15 @@ void hash_functions::compress(const unsigned char *message,
             buffer[1] = buffer[0];
             buffer[0] = t1 + t2;
         }
-        for (n = 0; n < 8; n++) {
+        for (n = 0; n < 8; n++)
+        {
             s_r[n] += buffer[n];
         }
     }
 }
 
-void hash_functions::stateregister() {
+void hash_functions::stateregister()
+{
     s_r[0] = 0x6a09e667;
     s_r[1] = 0xbb67ae85;
     s_r[2] = 0x3c6ef372;
@@ -87,14 +100,16 @@ void hash_functions::stateregister() {
 }
 
 void hash_functions::adjust_digest(const unsigned char *text,
-                                   unsigned int text_len) {
+                                   unsigned int text_len)
+{
     unsigned int block_nb;
     unsigned int new_len, rem_len, tmp_len;
     const unsigned char *shifted_message;
     tmp_len = BLOCK_SIZE_of_256 - s_r_len;
     rem_len = text_len < tmp_len ? text_len : tmp_len;
     memcpy(&s_r_block[s_r_len], text, rem_len);
-    if (s_r_len + text_len < BLOCK_SIZE_of_256) {
+    if (s_r_len + text_len < BLOCK_SIZE_of_256)
+    {
         s_r_len += text_len;
         return;
     }
@@ -109,7 +124,8 @@ void hash_functions::adjust_digest(const unsigned char *text,
     s_r_totlen += (block_nb + 1) << 6;
 }
 
-void hash_functions::digest_final(unsigned char *digest) {
+void hash_functions::digest_final(unsigned char *digest)
+{
     unsigned int block_nb;
     unsigned int pm_len;
     unsigned int len_b;
@@ -121,12 +137,14 @@ void hash_functions::digest_final(unsigned char *digest) {
     s_r_block[s_r_len] = 0x80;
     SHAF_UNPACK32(len_b, s_r_block + pm_len - 4);
     compress(s_r_block, block_nb);
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < 8; i++)
+    {
         SHAF_UNPACK32(s_r[i], &digest[i << 2]);
     }
 }
 
-std::string sha256(std::string input) {
+std::string sha256(std::string input)
+{
     unsigned char digest[hash_functions::PADD_SIZE];
     memset(digest, 0, hash_functions::PADD_SIZE);
 
@@ -141,12 +159,6 @@ std::string sha256(std::string input) {
         sprintf(buf + i * 2, "%02x", digest[i]);
     return std::string(buf);
 }
-
-
-
-
-
-
 
 namespace Func
 {
@@ -165,9 +177,112 @@ namespace Func
     ArbolABB posts;
     tm fecha;
 
-    std::string generarHash(const std::string contrasena){
+    // TODO: METODOS GENERALES
+
+    std::string generarHash(const std::string contrasena)
+    {
         std::string final = sha256(contrasena);
         return final;
+    }
+
+    std::string leerArchivo(const std::string &path)
+    {
+        std::ifstream archivo(path);
+        if (!archivo.is_open())
+        {
+            std::cerr << "Error: No se pudo abrir el archivo: " << path << std::endl;
+            return "";
+        }
+        std::string contenido((std::istreambuf_iterator<char>(archivo)), std::istreambuf_iterator<char>());
+        archivo.close();
+        return contenido;
+    }
+
+    void cargarEstructuras(const std::string &data)
+    {
+        try
+        {
+            nlohmann::json j = nlohmann::json::parse(data);
+            // Cargar usuarios
+            if (j.contains("usuarios") && j["usuarios"].is_array())
+            {
+                for (const auto &usuario : j["usuarios"])
+                {
+                    if (usuario.contains("nombres") && usuario.contains("apellidos") &&
+                        usuario.contains("fecha_de_nacimiento") && usuario.contains("correo") &&
+                        usuario.contains("contrasena") && usuario.contains("rol"))
+                    {
+                        int id = usuario["id"];
+                        std::string nombres = usuario["nombres"];
+                        std::string apellidos = usuario["apellidos"];
+                        std::string fechaNacimiento = usuario["fecha_de_nacimiento"];
+                        std::string correo = usuario["correo"];
+                        std::string contrasena = usuario["contrasena"];
+                        std::string rol = usuario["rol"];
+
+                        Structs::Usuario nuevo(id, nombres, apellidos, fechaNacimiento, correo, contrasena, rol);
+                        lista_usuarios.insertar(nuevo);
+                    }
+                    else
+                    {
+                        std::cerr << "Error: Usuario incompleto en el JSON.\n";
+                    }
+                }
+            }
+
+            // Cargar solicitudes
+            if (j.contains("solicitudes") && j["solicitudes"].is_array())
+            {
+                for (const auto &solicitud : j["solicitudes"])
+                {
+                    if (solicitud.contains("emisor") && solicitud.contains("receptor"))
+                    {
+                        std::string emisor = solicitud["emisor"];
+                        std::string receptor = solicitud["receptor"];
+                        lista_usuarios.enviarSolicitud(emisor, receptor);
+                    }
+                    else
+                    {
+                        std::cerr << "Error: Solicitud incompleta en el JSON.\n";
+                    }
+                }
+            }
+
+            // Cargar amigos
+            if (j.contains("amigos") && j["amigos"].is_array())
+            {
+                for (const auto &amistad : j["amigos"])
+                {
+                    if (amistad.contains("emisor") && amistad.contains("receptor"))
+                    {
+                        Structs::Usuario *usuario1 = lista_usuarios.buscar(amistad["emisor"]);
+                        Structs::Usuario *usuario2 = lista_usuarios.buscar(amistad["receptor"]);
+                        if (usuario1 && usuario2)
+                        {
+                            if (!relaciones_amistad.verificarRelacion(usuario1->correo, usuario2->correo))
+                            {
+                                relaciones_amistad.agregarRelacion(*usuario1, *usuario2);
+                            }
+                            
+                        }
+                        else
+                        {
+                            std::cerr << "Error: No se encontraron usuarios para la amistad.\n";
+                        }
+                    }
+                    else
+                    {
+                        std::cerr << "Error: Amistad incompleta en el JSON.\n";
+                    }
+                }
+            }
+
+            std::cout << "Estructuras cargadas correctamente.\n";
+        }
+        catch (const nlohmann::json::exception &e)
+        {
+            std::cerr << "Error al cargar las estructuras: " << e.what() << "\n";
+        }
     }
 
     // TODO: Metodos Login
@@ -181,29 +296,122 @@ namespace Func
         }
     }
 
-    bool RegistrarUsuario(QString nombres, QString apellidos, QString fechaNacimiento, QString correo, QString contrasena){
-        int id = lista_usuarios.obtenerId()+1;
+    bool RegistrarUsuario(QString nombres, QString apellidos, QString fechaNacimiento, QString correo, QString contrasena)
+    {
+        int id = lista_usuarios.obtenerId() + 1;
         std::string passHash = Func::generarHash(contrasena.toStdString());
-        Structs::Usuario nuevo(id,nombres.toStdString(),apellidos.toStdString(),fechaNacimiento.toStdString(),correo.toStdString(),passHash);
+        Structs::Usuario nuevo(id, nombres.toStdString(), apellidos.toStdString(), fechaNacimiento.toStdString(), correo.toStdString(), passHash);
         return lista_usuarios.insertar(nuevo);
     }
 
-    bool ModificarUsuario(QString nombres, QString apellidos, QString fechaNacimiento, QString correo, std::string contrasena, std::string rol){
+    bool ModificarUsuario(QString nombres, QString apellidos, QString fechaNacimiento, QString correo, std::string contrasena, std::string rol)
+    {
         Structs::Usuario *user = lista_usuarios.buscar(correo.toStdString());
-        if (user) {
-            if (user->contrasena == contrasena) {
-                return lista_usuarios.modificar(correo.toStdString(),nombres.toStdString(),apellidos.toStdString(),fechaNacimiento.toStdString(),contrasena,rol);
-            }else{
-                std::string hashpashh = generarHash(contrasena);
-                return lista_usuarios.modificar(correo.toStdString(),nombres.toStdString(),apellidos.toStdString(),fechaNacimiento.toStdString(),hashpashh,rol);
+        if (user)
+        {
+            if (user->contrasena == contrasena)
+            {
+                return lista_usuarios.modificar(correo.toStdString(), nombres.toStdString(), apellidos.toStdString(), fechaNacimiento.toStdString(), contrasena, rol);
             }
-        }else{
+            else
+            {
+                std::string hashpashh = generarHash(contrasena);
+                return lista_usuarios.modificar(correo.toStdString(), nombres.toStdString(), apellidos.toStdString(), fechaNacimiento.toStdString(), hashpashh, rol);
+            }
+        }
+        else
+        {
             return false;
         }
     }
 
-    void CerrarSesion(){
-        try {
+    void backupSerializacion()
+    {
+        Huffman::Huffman huff;
+        QJsonObject objs;
+        QJsonArray arr_users, arr_solicitudes, arr_amigos, arr_freqs;
+        // Serializar Usuarios
+        ListaEnlazada::ListaEnlazada<Structs::Usuario> usuarios = lista_usuarios.InOrder();
+        for (int i = 0; i < usuarios.size(); ++i)
+        {
+            Structs::Usuario *user = usuarios.obtener(i);
+            if (user)
+            {
+                QJsonObject userObj;
+                userObj["id"] = user->id;
+                userObj["nombres"] = QString::fromStdString(user->nombres);
+                userObj["apellidos"] = QString::fromStdString(user->apellidos);
+                userObj["fecha_de_nacimiento"] = QString::fromStdString(user->fechaNacimiento);
+                userObj["correo"] = QString::fromStdString(user->correo);
+                userObj["contrasena"] = QString::fromStdString(user->contrasena);
+                userObj["rol"] = QString::fromStdString(user->rol);
+                arr_users.append(userObj);
+            }
+        }
+        // Serializar Solicitudes enviadas y recibidas
+        for (int i = 0; i < usuarios.size(); i++)
+        {
+            Structs::Usuario *user = usuarios.obtener(i);
+            if (user)
+            {
+                for (int j = 0; j < user->solicitudesEnviadas.size(); j++)
+                {
+                    Structs::Usuario *receptor = user->solicitudesEnviadas.obtener(j);
+                    if (receptor)
+                    {
+                        QJsonObject solicitud;
+                        solicitud["emisor"] = QString::fromStdString(user->correo);
+                        solicitud["receptor"] = QString::fromStdString(receptor->correo);
+                        solicitud["estado"] = "PENDIENTE";
+                        arr_solicitudes.append(solicitud);
+                    }
+                }
+                
+            }
+        }
+        // Serializar Amigos
+        for (int i = 0; i < usuarios.size(); ++i) {
+            Structs::Usuario *user = usuarios.obtener(i);
+            if (user) {
+                ListaEnlazada::ListaEnlazada<Structs::Usuario> amigos = relaciones_amistad.obtenerAmigos(user->correo);
+                for (int j = 0; j < amigos.size(); ++j) {
+                    Structs::Usuario *amigo = amigos.obtener(j);
+                    if (amigo) {
+                        QJsonObject amistad;
+                        amistad["emisor"] = QString::fromStdString(user->correo);
+                        amistad["receptor"] = QString::fromStdString(amigo->correo);
+                        amistad["estado"] = "ACEPTADA";
+                        arr_amigos.append(amistad);
+                    }
+                }
+            }
+        }
+
+
+        objs["usuarios"] = arr_users;
+        objs["solicitudes"] = arr_solicitudes;
+        objs["amigos"] = arr_amigos;
+        QJsonDocument jsonDoc(objs);
+        QString jsonString = jsonDoc.toJson(QJsonDocument::Indented);
+        std::string json_str = jsonString.toStdString();
+
+        std::string comprimido = huff.compress(json_str);
+        huff.exportTree(".backups/_frecuencias.json");
+        // Comprimir datos en backup.edd
+        QFile file2(".backups/_backup.edd");
+        if (file2.open(QIODevice::WriteOnly) | QIODevice::Text)
+        {
+            QTextStream out(&file2);
+            out << QString::fromStdString(comprimido);
+            file2.close();
+        }
+    }
+
+    void CerrarSesion()
+    {
+        try
+        {
+            //backupSerializacion();
             adminTablaUsuarios = nullptr;
             userTablaUsuarios = nullptr;
             userTablaEnviadas = nullptr;
@@ -216,10 +424,11 @@ namespace Func
             // Para las publicaciones
             posts.limpiar();
             usuario_logeado = nullptr;
-        } catch (const std::exception& e) {
+        }
+        catch (const std::exception &e)
+        {
             std::cerr << e.what() << '\n';
         }
-
     }
 
     // TODO: Metodos Admin
@@ -397,32 +606,35 @@ namespace Func
                     Structs::Usuario *usuario_emisor = lista_usuarios.buscar(emisor);
                     Structs::Usuario *usuario_receptor = lista_usuarios.buscar(receptor);
 
-
-
                     if (usuario_emisor == nullptr)
                     {
                         noexisten++;
                         continue;
-                    }else{
-                        if (usuario_emisor->verificarSolicitudEnviada(receptor)) {
+                    }
+                    else
+                    {
+                        if (usuario_emisor->verificarSolicitudEnviada(receptor))
+                        {
                             conerror++;
                             continue;
                         }
-
                     }
                     if (usuario_receptor == nullptr)
                     {
                         noexisten++;
                         continue;
-                    }else{
-                        if (usuario_receptor->verificarSolicitudEnviada(emisor)) {
+                    }
+                    else
+                    {
+                        if (usuario_receptor->verificarSolicitudEnviada(emisor))
+                        {
                             conerror++;
                             continue;
                         }
-
                     }
 
-                    if (relaciones_amistad.verificarRelacion(emisor, receptor)) {
+                    if (relaciones_amistad.verificarRelacion(emisor, receptor))
+                    {
                         conerror++;
                         continue;
                     }
@@ -562,8 +774,6 @@ namespace Func
                         conerror++; // Maneja el caso en que no hay comentarios o no es un array
                     }
 
-
-
                     lista_publicaciones.insertar(nuevaPublicacion);
                     contador++;
                 }
@@ -656,7 +866,7 @@ namespace Func
                     if (i + 1 < lista_publicaciones.size())
                     {
                         file << "node" << i << " -> node" << i + 1 << ";\n";
-                        file << "node" << i +1 << " -> node" << i << ";\n";
+                        file << "node" << i + 1 << " -> node" << i << ";\n";
                     }
                 }
             }
@@ -669,7 +879,6 @@ namespace Func
         }
         return imgPath;
     }
-
 
     // TODO: Metodos usuario / Publicaciones
     void ActualizarFeed()
@@ -716,7 +925,7 @@ namespace Func
         }
         else
         {
-            posts_feed = posts.obtenerPublicaciones(fecha,orden,cantidad);
+            posts_feed = posts.obtenerPublicaciones(fecha, orden, cantidad);
         }
 
         for (int i = 0; i < posts_feed.size(); ++i)
@@ -730,7 +939,8 @@ namespace Func
             }
         }
     }
-    void actualizarListaFechas(){
+    void actualizarListaFechas()
+    {
         // ACTUALIZAR EL FEED CON LA LISTA DE PUBLICACIONES
         if (selectedDate->currentText().contains("Todos"))
         {
@@ -759,7 +969,8 @@ namespace Func
         }
         selectedDate->setCurrentIndex(index + 1);
     }
-    void actualizarArbolPost(){
+    void actualizarArbolPost()
+    {
         posts.limpiar();
         ListaEnlazada::ListaEnlazada<Structs::Usuario> amigos = relaciones_amistad.obtenerAmigos(usuario_logeado->correo);
         for (int i = 0; i < lista_publicaciones.size(); i++)
@@ -848,11 +1059,15 @@ namespace Func
             }
         }
     }
-    void ComentarPublicacion(int id, StructsComment::Comentario comentario){
-        for (int i = 0; i < lista_publicaciones.size(); ++i) {
+    void ComentarPublicacion(int id, StructsComment::Comentario comentario)
+    {
+        for (int i = 0; i < lista_publicaciones.size(); ++i)
+        {
             Structs::Publicacion *p = lista_publicaciones.obtener(i);
-            if (p) {
-                if (p->id == id) {
+            if (p)
+            {
+                if (p->id == id)
+                {
                     p->comentarios->insertar(comentario);
                     break;
                 }
@@ -961,8 +1176,6 @@ namespace Func
                 listaFiltrada.insertar(sugerido);
             }
         }
-        
-
 
         table->setRowCount(listaFiltrada.size()); // Ajustar el número de filas según el tamaño de la lista
 
@@ -1136,28 +1349,32 @@ namespace Func
     }
 
     // TODO: Metodos usuario / reportes
-    ListaEnlazada::ListaEnlazada<Structs::ReportePosts> obtenerReporteFechasPost(){
+    ListaEnlazada::ListaEnlazada<Structs::ReportePosts> obtenerReporteFechasPost()
+    {
         ArbolABB misPost;
         for (int i = 0; i < lista_publicaciones.size(); i++)
         {
             Structs::Publicacion *publicacion = lista_publicaciones.obtener(i);
             std::tm _fecha = convertirFechaTm(publicacion->fecha);
-            if (publicacion && publicacion->correo_autor == usuario_logeado->correo) {
-                misPost.insertar(_fecha,*publicacion);
+            if (publicacion && publicacion->correo_autor == usuario_logeado->correo)
+            {
+                misPost.insertar(_fecha, *publicacion);
             }
         }
         ListaEnlazada::ListaEnlazada<std::tm> fechas = misPost.obtenerFechas();
         ListaEnlazada::ListaEnlazada<Structs::ReportePosts> reportes;
-        for (int i = 0; i < fechas.size(); ++i) {
+        for (int i = 0; i < fechas.size(); ++i)
+        {
             std::string _fecha = convertirFecha(*fechas.obtener(i));
             ListaEnlazada::ListaEnlazada<Structs::Publicacion> posts = misPost.obtenerPublicaciones(*fechas.obtener(i));
-            Structs::ReportePosts reporte(_fecha,posts);
+            Structs::ReportePosts reporte(_fecha, posts);
             reportes.insertar(reporte);
         }
         return reportes;
     }
 
-    ListaEnlazada::ListaEnlazada<Structs::ReportePosts> obtenerReporteFechasPostFriends(){
+    ListaEnlazada::ListaEnlazada<Structs::ReportePosts> obtenerReporteFechasPostFriends()
+    {
         ArbolABB misPost;
         ListaEnlazada::ListaEnlazada<Structs::Usuario> amigos = relaciones_amistad.obtenerAmigos(usuario_logeado->correo);
         for (int i = 0; i < lista_publicaciones.size(); i++)
@@ -1190,22 +1407,24 @@ namespace Func
         }
         ListaEnlazada::ListaEnlazada<std::tm> fechas = misPost.obtenerFechas();
         ListaEnlazada::ListaEnlazada<Structs::ReportePosts> reportes;
-        for (int i = 0; i < fechas.size(); ++i) {
+        for (int i = 0; i < fechas.size(); ++i)
+        {
             std::string _fecha = convertirFecha(*fechas.obtener(i));
             ListaEnlazada::ListaEnlazada<Structs::Publicacion> posts = misPost.obtenerPublicaciones(*fechas.obtener(i));
-            Structs::ReportePosts reporte(_fecha,posts);
+            Structs::ReportePosts reporte(_fecha, posts);
             reportes.insertar(reporte);
         }
         return reportes;
-
     }
 
-    ListaEnlazada::ListaEnlazada<Structs::Publicacion> obtenerMisPosts(){
+    ListaEnlazada::ListaEnlazada<Structs::Publicacion> obtenerMisPosts()
+    {
         ListaEnlazada::ListaEnlazada<Structs::Publicacion> reportes;
         for (int i = 0; i < lista_publicaciones.size(); i++)
         {
             Structs::Publicacion *publicacion = lista_publicaciones.obtener(i);
-            if (publicacion && publicacion->correo_autor == usuario_logeado->correo) {
+            if (publicacion && publicacion->correo_autor == usuario_logeado->correo)
+            {
                 reportes.insertar(*publicacion);
             }
         }
@@ -1278,7 +1497,8 @@ namespace Func
         for (int i = 0; i < amigos.size(); ++i)
         {
             Structs::Usuario *u = amigos.obtener(i);
-            if (u) {
+            if (u)
+            {
                 WidgetFriend *newWidget = new WidgetFriend(*u);
                 layout->addWidget(newWidget);
             }
@@ -1362,11 +1582,15 @@ namespace Func
 
         return lista;
     }
-    void eliminarPublicacionUsuario(string correo){
-        for (int i = 0; i < lista_publicaciones.size(); ++i) {
+    void eliminarPublicacionUsuario(string correo)
+    {
+        for (int i = 0; i < lista_publicaciones.size(); ++i)
+        {
             Structs::Publicacion *p = lista_publicaciones.obtener(i);
-            if (p) {
-                if (p->correo_autor == correo) {
+            if (p)
+            {
+                if (p->correo_autor == correo)
+                {
                     lista_publicaciones.eliminarPosicion(i);
                 }
             }
@@ -1433,7 +1657,7 @@ namespace Func
         throw std::runtime_error("Error al parsear la fecha.");
     }
 
-    string convertirFechayHora(const std::string& fechaOriginal)
+    string convertirFechayHora(const std::string &fechaOriginal)
     {
         std::tm fecha = {};
         std::vector<std::string> formatos = {
@@ -1493,6 +1717,5 @@ namespace Func
         // Devolver la cadena formateada
         return oss.str();
     }
-
 
 }

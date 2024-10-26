@@ -3,6 +3,7 @@
 #include <string>
 #include <fstream>
 #include <cstdlib>
+#include "nlohmann/json.hpp"
 
 namespace Huffman {
 
@@ -60,7 +61,7 @@ std::string Huffman::compress(const std::string& text) {
         Node* right = extractMin(pq);
 
         int sumFreq = left->freq + right->freq;
-        root = new Node('\0', sumFreq); // Establecer la raíz
+        root = new Node('\0', sumFreq);
         root->left = left;
         root->right = right;
 
@@ -75,17 +76,21 @@ std::string Huffman::compress(const std::string& text) {
         compressedText += codes[(unsigned char)ch];
     }
 
-    return compressedText; // Retornamos el texto comprimido
+    return compressedText;
 }
 
 std::string Huffman::decompress(const std::string& compressedText) {
     std::string decompressedText = "";
     Node* currentNode = root;
+
     for (char bit : compressedText) {
         if (bit == '0') {
             currentNode = currentNode->left;
-        } else {
+        } else if (bit == '1') {
             currentNode = currentNode->right;
+        } else {
+            std::cerr << "Error: Caracter no válido en el texto comprimido." << std::endl;
+            return "";
         }
 
         if (!currentNode->left && !currentNode->right) {
@@ -123,7 +128,7 @@ void Huffman::generateDotFile(Node* root, std::ofstream& dotFile, int& nullCount
 }
 
 void Huffman::createGraph(Node* root) {
-    std::ofstream dotFile("huffman_tree.dot");
+    std::ofstream dotFile("renders/huffman_tree.dot");
     dotFile << "digraph G {\n";
     dotFile << "    node [fontname=\"Arial\"];\n";
 
@@ -132,14 +137,68 @@ void Huffman::createGraph(Node* root) {
 
     dotFile << "}\n";
     dotFile.close();
-    std::cout << "Archivo 'huffman_tree.dot' generado correctamente.\n";
+    std::cout << "Archivo 'renders/huffman_tree.dot' generado correctamente.\n";
 
-    system("dot -Tpng huffman_tree.dot -o huffman_tree.png");
-    std::cout << "Imagen PNG generada: huffman_tree.png\n";
+    system("dot -Tpng renders/huffman_tree.dot -o renders/huffman_tree.png");
+    std::cout << "Imagen PNG generada: renders/huffman_tree.png\n";
 }
 
 Node* Huffman::getRoot() {
-    return root; // Retorna la raíz del árbol
+    return root;
 }
+
+void Huffman::exportTree(const std::string& filename) {
+    nlohmann::json jsonTree;
+    serialize(root, jsonTree);
+    std::ofstream file(filename, std::ios::out | std::ios::binary);
+    if (file.is_open()) {
+        file << '\xEF' << '\xBB' << '\xBF';
+        file << jsonTree.dump(4);
+        file.close();
+        std::cout << "Arbol de Huffman exportado a \"" << filename << "\"" <<std::endl;
+    } else {
+        std::cerr << "Error al abrir el archivo para exportar." << std::endl;
+    }
+}
+
+    void Huffman::serialize(Node* node, nlohmann::json& jsonNode) {
+        if (!node) {
+            jsonNode = nullptr;
+            return;
+        }
+
+        jsonNode["ch"] = node->ch;
+        jsonNode["freq"] = node->freq;
+
+        nlohmann::json leftNode, rightNode;
+        serialize(node->left, leftNode);
+        serialize(node->right, rightNode);
+
+        jsonNode["left"] = leftNode;
+        jsonNode["right"] = rightNode;
+    }
+
+    void Huffman::importTree(const std::string& filename) {
+        std::ifstream file(filename);
+        if (file.is_open()) {
+            nlohmann::json jsonTree;
+            file >> jsonTree;
+            file.close();
+            root = deserialize(jsonTree);
+            std::cout << "Arbol de Huffman importado desde \"" << filename << "\"" << std::endl;
+        } else {
+            std::cerr << "Error al abrir el archivo para importar." << std::endl;
+        }
+    }
+
+    Node* Huffman::deserialize(const nlohmann::json& jsonNode) {
+        if (jsonNode.is_null()) return nullptr;
+        Node* node = new Node(jsonNode["ch"].get<char>(), jsonNode["freq"].get<int>());
+        node->left = deserialize(jsonNode["left"]);
+        node->right = deserialize(jsonNode["right"]);
+
+        return node;
+    }
+
 
 } // namespace Huffman

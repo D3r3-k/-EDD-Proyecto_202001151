@@ -26,7 +26,6 @@ private slots:
 
     void on_RegisterButton_clicked();
 
-    void on_pushButton_clicked();
 
 private:
     Ui::MainWindow *ui;
