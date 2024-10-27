@@ -33,6 +33,7 @@ AdminWindow::AdminWindow(QWidget *parent)
     ui->menuBienvenido->setTitle("Bienvenido: "+user);
     // TabMenu
     ui->tabWidget->setCurrentIndex(0);
+    ui->tabWidget_blockchain->setCurrentIndex(0);
     // Tab Buscar
     // Ajustar el tamaño de las columnas para que se distribuyan proporcionalmente
     ui->tableUsuarios->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
@@ -279,17 +280,17 @@ void AdminWindow::on_pushButton_gen_merkle_clicked()
 {
     ListaEnlazada::ListaEnlazada<Structs::Block> bloques = seguridad_blockchain.getChain();
     Structs::Block *ultimo = bloques.obtener(bloques.size()-1);
-    if (!ultimo) return;
+    if (!ultimo){
+        QMessageBox::warning(this, "Error", "No hay bloques.");
+        return;
+    }
     Merkle::Merkle raiz(ultimo->data);
-    raiz.graphMerkleTree();
-    /*
-    std::string path_graph = seguridad_blockchain.graficar();
+    std::string path_graph = raiz.graficar();
     QString ruta_imagen = QString::fromStdString(path_graph);
     QPixmap imagen(ruta_imagen);
-    QPixmap imagenEscalada = imagen.scaled(ui->img_blockchain->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    ui->img_amistades_ady->setPixmap(imagenEscalada);
-    img_tabla_ady = path_graph;
-*/
+    QPixmap imagenEscalada = imagen.scaled(ui->img_merkle->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    ui->img_merkle->setPixmap(imagenEscalada);
+    img_merkle = path_graph;
 }
 
 

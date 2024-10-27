@@ -404,7 +404,7 @@ std::string Blockchain::Blockchain::graficar(){
         std::string conn = "";
         for (int i = 0; i < chain.size(); ++i) {
             if(i==0) continue;
-            conn += "root"+std::to_string(i)+" -> prev"+std::to_string(i+1)+"[constraint=false;];\n";
+            conn += "hash"+std::to_string(i)+" -> prev"+std::to_string(i+1)+"[constraint=false;];\n";
         }
         archivoDot << conn<< std::endl;
         // cierro el graph

@@ -7,6 +7,7 @@ class Merkle
 {
 private:
     struct Nodo {
+        int indice;
         std::string hash;
         Nodo *left, *right;
         Nodo(const std::string data) : hash(data), left(nullptr), right(nullptr) {}
@@ -16,12 +17,14 @@ private:
     Nodo* combineNodes(Nodo* left, Nodo *right);
     Nodo* buildMerkleTree(Nodo** leaves,int start, int end);
     void generateDotFile(Nodo* node, ofstream &outFile,int& nodeCounter) const ;
+    void generateDatablockConnections(Nodo* node, ofstream &outFile, int& nodeCounter);
+    ListaEnlazada::ListaEnlazada<Structs::Publicacion> data_temp;
 public:
     Merkle();
     Merkle(ListaEnlazada::ListaEnlazada<Structs::Publicacion> &data);
     ~Merkle();
     string getRootHash() const;
-    void graphMerkleTree() const;
+    std::string graficar();
 };
 }
 
