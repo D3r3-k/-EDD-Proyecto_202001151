@@ -258,6 +258,12 @@
 	"HEADERS" : 
 	[
 		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/Classes/blockchain.h",
+			"MU",
+			"EODS2FLWKW/moc_blockchain.cpp",
+			null
+		],
+		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/ListaDoble.h",
 			"MU",
 			"EWIEGA46WW/moc_ListaDoble.cpp",
@@ -282,9 +288,21 @@
 			null
 		],
 		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/Tree/merkle.h",
+			"MU",
+			"F3EW6QPJW4/moc_merkle.cpp",
+			null
+		],
+		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/Trees/huffman.h",
 			"MU",
 			"2ZBYOC42L5/moc_huffman.cpp",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/Trees/merkle.h",
+			"MU",
+			"2ZBYOC42L5/moc_merkle.cpp",
 			null
 		],
 		[
@@ -474,7 +492,22 @@
 	"SOURCES" : 
 	[
 		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/Classes/blockchain.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/Tree/merkle.cpp",
+			"MU",
+			null
+		],
+		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/Trees/huffman.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/Trees/merkle.cpp",
 			"MU",
 			null
 		],

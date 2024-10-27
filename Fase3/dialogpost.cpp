@@ -126,15 +126,26 @@ void DialogPost::on_pushButton_arbol_comentarios_clicked()
 
 void DialogPost::on_pushButton_comentar_clicked()
 {
-    int id = getID();
-    QString comentario = ui->plainTextEdit_comentario->toPlainText();
-    QDate date = QDate::currentDate();
-    QTime time = QTime::currentTime();
-    QString fecha_hora = date.toString("dd-MM-yyyy") + " " + time.toString("hh:mm:ss");
-    StructsComment::Comentario nuevo(fecha_hora.toStdString(), usuario_logeado->correo, comentario.toStdString());
-    Func::ComentarPublicacion(id, nuevo);
-    ui->plainTextEdit_comentario->clear();
-    actualizarComentarios();
+    try {
+        if (ui->plainTextEdit_comentario->toPlainText().isEmpty()) {
+            QMessageBox::warning(nullptr, "Comentar", "Escribe un comentario antes.");
+        }else{
+            int id = getID();
+            cout << id;
+            int idCo = Func::obtenerCommentID(id)+1;
+            cout << idCo;
+            QString comentario = ui->plainTextEdit_comentario->toPlainText();
+            QDate date = QDate::currentDate();
+            QTime time = QTime::currentTime();
+            QString fecha_hora = date.toString("dd-MM-yyyy") + " " + time.toString("hh:mm:ss");
+            StructsComment::Comentario nuevo(idCo, fecha_hora.toStdString(), usuario_logeado->correo, comentario.toStdString());
+            Func::ComentarPublicacion(id, nuevo);
+            ui->plainTextEdit_comentario->clear();
+            actualizarComentarios();
+        }
+    }catch (const std::exception &e) {
+        std::cerr << e.what() << '\n';
+    }
 }
 
 

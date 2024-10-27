@@ -51,6 +51,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         hash_functions.h
         graforelacion.h graforelacion.cpp
         Trees/huffman.h Trees/huffman.cpp
+        Trees/merkle.h Trees/merkle.cpp
+        Classes/blockchain.h Classes/blockchain.cpp
+        Tree/merkle.h Tree/merkle.cpp
 
 
 

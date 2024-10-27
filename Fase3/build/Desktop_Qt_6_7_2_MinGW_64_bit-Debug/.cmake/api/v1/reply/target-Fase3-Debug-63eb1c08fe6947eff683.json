@@ -75,13 +75,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 106,
+				"line" : 109,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 89,
+				"line" : 92,
 				"parent" : 0
 			},
 			{
@@ -383,7 +383,10 @@
 				50,
 				53,
 				55,
-				67
+				57,
+				59,
+				61,
+				73
 			]
 		}
 	],
@@ -525,7 +528,10 @@
 				50,
 				53,
 				55,
-				67
+				57,
+				59,
+				61,
+				73
 			]
 		},
 		{
@@ -557,15 +563,18 @@
 				52,
 				54,
 				56,
-				57,
 				58,
-				59,
 				60,
-				61,
 				62,
 				63,
 				64,
-				65
+				65,
+				66,
+				67,
+				68,
+				69,
+				70,
+				71
 			]
 		},
 		{
@@ -583,15 +592,15 @@
 				39,
 				45,
 				48,
-				66
+				72
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				68,
-				69
+				74,
+				75
 			]
 		}
 	],
@@ -897,6 +906,39 @@
 			"backtrace" : 4,
 			"compileGroupIndex" : 0,
 			"path" : "Trees/huffman.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "Trees/merkle.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "Trees/merkle.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "Classes/blockchain.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "Classes/blockchain.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "Tree/merkle.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "Tree/merkle.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

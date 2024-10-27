@@ -1,4 +1,5 @@
 #include "funciones.h"
+#include "Tree/merkle.h"
 #include "Trees/huffman.h"
 #include "arbolabb.h"
 #include "globales.h"
@@ -179,9 +180,9 @@ namespace Func
 
     // TODO: METODOS GENERALES
 
-    std::string generarHash(const std::string contrasena)
+    std::string generarHash(const std::string data)
     {
-        std::string final = sha256(contrasena);
+        std::string final = sha256(data);
         return final;
     }
 
@@ -743,6 +744,7 @@ namespace Func
                             if (comentario.contains("correo") && comentario.contains("comentario") &&
                                 comentario.contains("fecha") && comentario.contains("hora"))
                             {
+                                int idComentario = Func::obtenerCommentID(newid)+1;
                                 string correoComentario = comentario["correo"].get<string>();
                                 string contenidoComentario = comentario["comentario"].get<string>();
                                 string fechaComentario = comentario["fecha"].get<string>();
@@ -760,7 +762,7 @@ namespace Func
                                     continue;
                                 }
 
-                                StructsComment::Comentario nuevoComentario(fechaConvertidaComentario, correoComentario, contenidoComentario);
+                                StructsComment::Comentario nuevoComentario(idComentario,fechaConvertidaComentario, correoComentario, contenidoComentario);
                                 nuevaPublicacion.comentarios->insertar(nuevoComentario);
                             }
                             else
@@ -788,6 +790,7 @@ namespace Func
             QString stderrores = QString::number(conerror);
             QString stdnoexisten = QString::number(noexisten);
             QMessageBox::information(nullptr, "Información", "Publicaciones agregadas: " + stdagregados + "\nErrores: " + stderrores + "\nNo Existen autores: " + stdnoexisten);
+            Func::agregarSeguridad();
         }
         catch (const ifstream::failure &e)
         {
@@ -1013,6 +1016,25 @@ namespace Func
         }
         return id;
     }
+    int obtenerCommentID(int postid)
+    {
+        try {
+            int id = -1;
+            Structs::Publicacion *p = lista_publicaciones.obtener(postid);
+            if (p)
+            {
+                ListaEnlazada::ListaEnlazada<StructsComment::Comentario> comentarios = p->comentarios->obtenerComentarios();
+                int ultimoId = comentarios.size() - 1;
+                StructsComment::Comentario *ultimo = comentarios.obtener(ultimoId);
+                if (ultimo) {
+                    id = ultimo->id;
+                }
+            }
+            return id;
+        } catch (const std::exception &e) {
+            return -1;
+        }
+    }
     void eliminarPublicacion(int id)
     {
         for (int i = 0; i < lista_publicaciones.size(); ++i)
@@ -1043,6 +1065,7 @@ namespace Func
         }
         return nullptr;
     }
+
     void modificarPublicacion(int id, std::string contenido, std::string pathImg)
     {
         for (int i = 0; i < lista_publicaciones.size(); ++i)
@@ -1058,6 +1081,7 @@ namespace Func
                 }
             }
         }
+        Func::agregarSeguridad();
     }
     void ComentarPublicacion(int id, StructsComment::Comentario comentario)
     {
@@ -1073,7 +1097,51 @@ namespace Func
                 }
             }
         }
+        Func::agregarSeguridad();
     }
+    bool existeComentario(int postid, int cid){
+        Structs::Publicacion *p = buscarPost(postid);
+        if (p) {
+            ListaEnlazada::ListaEnlazada<StructsComment::Comentario> comentarios = p->comentarios->obtenerComentarios();
+            for (int i = 0; i < comentarios.size(); ++i) {
+                StructsComment::Comentario *c = comentarios.obtener(i);
+                if (c) {
+                    if (c->id==cid) {
+                        return true;
+                    }else{
+                        return false;
+                    }
+                }
+            }
+        }
+    }
+    void agregarSeguridad()
+    {
+        ListaEnlazada::ListaEnlazada<Structs::Publicacion> posts;
+
+        for (int i = 0; i < lista_publicaciones.size(); ++i) {
+            Structs::Publicacion &p = *lista_publicaciones.obtener(i);
+            Structs::Publicacion newPost(p.id, p.correo_autor,p.contenido, p.fecha, p.hora, p.imagen);
+            ListaEnlazada::ListaEnlazada<StructsComment::Comentario> c = p.comentarios->obtenerComentarios();
+            for (int j = 0; j < c.size(); ++j) {
+                StructsComment::Comentario &cm =*c.obtener(j);
+                StructsComment::Comentario newCm(cm.id, cm.fecha_hora,cm.usuario,cm.texto);
+                newPost.comentarios->insertar(newCm);
+            }
+            posts.insertar(newPost);
+        }
+        if (posts.size() == 0) {
+            cout << "no hay data";
+            return;
+        }
+        Structs::Block nuevo;
+        Merkle::Merkle root(posts);
+        nuevo.data = posts;
+        nuevo.rootHash = root.getRootHash();
+        seguridad_blockchain.addBlock(nuevo);
+        seguridad_blockchain.validateBlocks();
+    }
+
 
     // TODO: Metodos Usuario / Solicitudes
     void ActualizarTablaUsuarios(QTableWidget *table)
@@ -1718,4 +1786,12 @@ namespace Func
         return oss.str();
     }
 
+    std::string generateTimestamp() {
+        auto now = std::chrono::system_clock::now();
+        std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+        std::tm* localTime = std::localtime(&now_c);
+        std::ostringstream oss;
+        oss << std::put_time(localTime, "%d-%m-%y-::%H:%M:%S");
+        return oss.str();
+    }
 }

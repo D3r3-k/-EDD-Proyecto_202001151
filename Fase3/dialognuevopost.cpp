@@ -66,6 +66,7 @@ void DialogNuevoPost::on_buttonBox_accepted()
         string fecha = ui->fechaDateEdit->text().toStdString();
         Structs::Publicacion nuevo(id,usuario_logeado->correo,contenido,fecha,hora,getPathImg());
         lista_publicaciones.insertar(nuevo);
+        Func::agregarSeguridad();
     }else{
         string contenido = ui->contenidoLineEdit->toPlainText().toStdString();
         Func::modificarPublicacion(getID(),contenido, getPathImg());

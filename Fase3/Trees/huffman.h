@@ -33,7 +33,7 @@ public:
     void createGraph(Node* root);
     Node* getRoot();
     void exportTree(const std::string& filename);
-    void importTree(const std::string& filename);
+    bool importTree(const std::string& filename);
 
 private:
     void insert(PriorityQueue*& head, Node* newNode);

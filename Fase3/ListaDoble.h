@@ -25,7 +25,7 @@ namespace ListaDoble
             Nodo *temp = otra.cabeza;
             while (temp)
             {
-                agregar(temp->dato);
+                insertar(temp->dato);
                 temp = temp->siguiente;
             }
         }
@@ -208,9 +208,6 @@ namespace ListaDoble
         {
             return cabeza == nullptr;
         }
-
-        // imprimir la lista
-        
         
     };
 }

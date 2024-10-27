@@ -1,5 +1,6 @@
 #include "arbolb5.h"
 #include <iostream>
+#include <nlohmann/json.hpp>
 #include <string>
 #include <fstream>
 #include <cstdlib>
@@ -250,6 +251,24 @@ void ArbolB5::obtenerComentariosNodo(Nodo *nodo, ListaEnlazada::ListaEnlazada<St
         }
     }
 }
+
+std::string ArbolB5::toJSON()  {
+    using json = nlohmann::json;
+    json j;
+    ListaEnlazada::ListaEnlazada<StructsComment::Comentario> comentarios = obtenerComentarios();
+    for (int i = 0; i < comentarios.size(); ++i) {
+        StructsComment::Comentario *c = comentarios.obtener(i);
+        if (c) {
+            json obj;
+            obj["usuario"] = c->usuario;
+            obj["fecha_hora"] = c->fecha_hora;
+            obj["texto"] = c->texto;
+            j.push_back(obj);
+        }
+    }
+    return j.dump();
+}
+
 
 ArbolB5::~ArbolB5()
 {

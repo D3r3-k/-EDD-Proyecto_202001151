@@ -11,11 +11,13 @@
 int main(int argc, char *argv[])
 {
     Huffman::Huffman huff;
-    huff.importTree(".backups/_frecuencias.json");
-    std::string compress = Func::leerArchivo(".backups/_backup.edd");
-    std::string descompress = huff.decompress(compress);
-    //cout << descompress << endl;
-    Func::cargarEstructuras(descompress);
+    bool impTree = huff.importTree(".backups/_frecuencias.json");
+    if (impTree) {
+        std::string compressStr = Func::leerArchivo(".backups/_backup.edd");
+        std::string descompress = huff.decompress(compressStr);
+        //cout << descompress << endl;
+        Func::cargarEstructuras(descompress);
+    }
     Structs::Usuario *admin = lista_usuarios.buscar("admin@gmail.com");
     if (!admin) {
         std::string pass = "123";
@@ -27,6 +29,7 @@ int main(int argc, char *argv[])
         cout << "No se creo el usuario admin "<< endl;
     }
 
+    seguridad_blockchain.importBlocks();
 
     QApplication a(argc, argv);
     MainWindow w;

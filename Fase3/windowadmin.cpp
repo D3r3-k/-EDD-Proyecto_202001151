@@ -1,4 +1,5 @@
 #include "windowadmin.h"
+#include "Tree/merkle.h"
 #include "Trees/huffman.h"
 #include "funciones.h"
 #include "globales.h"
@@ -236,3 +237,9 @@ void AdminWindow::on_pushButton_reporte_amistades_ady_clicked()
         QMessageBox::warning(this, "Error", "No se pudo abrir la imagen.");
     }
 }
+
+void AdminWindow::on_pushButton_clicked()
+{
+    seguridad_blockchain.graficar();
+}
+

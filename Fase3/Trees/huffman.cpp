@@ -178,7 +178,7 @@ void Huffman::exportTree(const std::string& filename) {
         jsonNode["right"] = rightNode;
     }
 
-    void Huffman::importTree(const std::string& filename) {
+    bool Huffman::importTree(const std::string& filename) {
         std::ifstream file(filename);
         if (file.is_open()) {
             nlohmann::json jsonTree;
@@ -186,8 +186,10 @@ void Huffman::exportTree(const std::string& filename) {
             file.close();
             root = deserialize(jsonTree);
             std::cout << "Arbol de Huffman importado desde \"" << filename << "\"" << std::endl;
+            return true;
         } else {
             std::cerr << "Error al abrir el archivo para importar." << std::endl;
+            return false;
         }
     }
 

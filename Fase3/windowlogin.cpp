@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     Func::backupSerializacion();
+    seguridad_blockchain.exportBlocks();
     delete ui;
 }
 

@@ -51,6 +51,9 @@ void ComentarPublicacion(int id, StructsComment::Comentario comentario);
 void actualizarListaFechas();
 void actualizarArbolPost();
 void ActualizarFeed();
+void agregarSeguridad();
+int obtenerCommentID(int postid);
+bool existeComentario(int postid, int cid);
 
 // TODO: Metodos Usuario / Solicitudes
 void ActualizarTablaUsuarios(QTableWidget* table);
@@ -80,6 +83,7 @@ string convertirFechayHora(const std::string& fechaOriginal);
 string convertirFechayHora(const std::tm &fecha);
 tm convertirFechayHoraTm(const std::string& fechaOriginal);
 string generarHash(std::string contrasena);
+std::string generateTimestamp();
 }
 
 

@@ -2,12 +2,11 @@
 #define STRUCTS_H
 
 #include <iostream>
+#include <nlohmann/json.hpp>
 #include <string>
 
-#include "ListaEnlazada.h"
 #include "arbolb5.h"
-
-// #include "../models/ArbolB5.h"
+#include "hash_functions.h"
 
 using namespace std;
 
@@ -186,6 +185,37 @@ namespace Structs
 
         // Destructor
         ~Publicacion() {}
+
+        std::string toJSON() const {
+            using json = nlohmann::json;
+            json j;
+            j["id"] = id;
+            j["correo_autor"] = correo_autor;
+            j["contenido"] = contenido;
+            j["fecha"] = fecha;
+            j["hora"] = hora;
+            j["imagen"] = imagen;
+
+            // Crear un array JSON para los comentarios
+            json comentariosArray = json::array();
+            ListaEnlazada::ListaEnlazada<StructsComment::Comentario> arr_comentarios = comentarios->obtenerComentarios();
+            for (int i = 0; i < arr_comentarios.size(); ++i) {
+                StructsComment::Comentario* c = arr_comentarios.obtener(i);
+                if (c) {
+                    json comentarioObj;
+                    comentarioObj["usuario"] = c->usuario;
+                    comentarioObj["fecha_hora"] = c->fecha_hora;
+                    comentarioObj["texto"] = c->texto;
+                    comentariosArray.push_back(comentarioObj);
+                }
+            }
+
+            // Asignar el array de comentarios al JSON principal
+            j["comentarios"] = comentariosArray;
+
+            return j.dump();
+        }
+
     };
 
     struct ReportePosts
@@ -228,5 +258,44 @@ namespace Structs
             this->enComun += 1;
         }
     };
-}
+
+    struct Block {
+        int index;
+        string timestamp;
+        ListaEnlazada::ListaEnlazada<Publicacion> data;
+        string rootHash;
+        string prevHash = "0000";
+        bool validate;
+        int nonce = 0;
+        string hashBlock;
+
+        Block(){}
+
+        void calculateNonceAndHash() {
+            do {
+                nonce++;
+                hashBlock = sha256(std::to_string(index) + timestamp + std::to_string(nonce) + rootHash + prevHash);
+            } while (hashBlock.compare(0, 4, "0000") != 0);
+        }
+
+        void validateBlock(bool val){
+            validate = val;
+        }
+
+
+        void showBlock() const {
+            cout << "| ==================================================================================== |"<< endl;
+            cout << "| INDEX:           " << std::to_string(index) << endl;
+            cout << "| TIMESTAMP:       " << timestamp << endl;
+            cout << "| NONCE:           " << std::to_string(nonce)<< endl;
+            cout << "| ROOT HASH:       " << rootHash << endl;
+            cout << "| PREV HASH:       " << prevHash<< endl;
+            cout << "| HASH:            " << hashBlock << endl;
+            cout << "| VALIDATE:        " << validate << endl;
+            cout << "| DATA:            " << data.size() << endl;
+        }
+    };
+
+
+    }
 #endif // STRUCTS_H

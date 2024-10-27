@@ -59,6 +59,7 @@ public:
     void transversal(Nodo *nodo);
     int size();
     ListaEnlazada::ListaEnlazada<StructsComment::Comentario> obtenerComentarios();
+    std::string toJSON();
 };
 
 #endif // ARBOLB5_H
