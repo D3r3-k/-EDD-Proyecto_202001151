@@ -1,21 +1,16 @@
 digraph G {   
     subgraph cluster_block1 {
         label="Bloque #1"
-        fontname="Arial";
         style=rounded;
         color=black;
         edge [style=invis];
-        // espacio entre conexiones
-        ranksep=1.0;
 
         timestamp1 [label="Timestamp: \n26-10-2024 13:24"; shape=box; style=rounded];
         nonce1 [label="Nonce: \n0"; shape=box; style=rounded];
         timestamp1 -> nonce1 -> root1
         subgraph cluster_header1 {
             label="Header"
-            fontname="Arial";
             style=rounded;
-            color=green;
 
             root1 [label="RootHash: \n000080be5977c9cf9074d5cef9edb07b1b0cd02a6b4e467ceb3aa2e106da4011"; shape=box; style=rounded];
             proof1 [label="Hash: \n000080be5977c9cf9074d5cef9edb07b1b0cd02a6b4e467ceb3aa2e106da4011"; shape=box; style=rounded];
@@ -24,32 +19,24 @@ digraph G {
             root1 -> proof1
             proof1 -> hash1
         }
-        trans4 [label="{{correo@gmail.com|fecha y hora}|{comentarios | 4}|contenido}"; shape=record; style=rounded];
-        trans5 [label="{{correo@gmail.com|fecha y hora}|{comentarios | 1}|contenido}"; shape=record; style=rounded];
-        trans6 [label="{{correo@gmail.com|fecha y hora}|{comentarios | 3}|contenido}"; shape=record; style=rounded];
-        trans7 [label="{{correo@gmail.com|fecha y hora}|{comentarios | 0}|contenido}"; shape=record; style=rounded];
+        trans4 [label="contenido del archivo json \ndsadasdsadsa"; shape=box; style=rounded];
 
         // el subgrafo cluster_header1 se conecta con las transacciones
-        hash1 -> trans4 -> trans5 -> trans6 -> trans7
+        hash1 -> trans4
     }
 
     subgraph cluster_block2 {
         label="Bloque #2"
-        fontname="Arial";
         style=rounded;
         color=black;
         edge [style=invis];
-        // espacio entre conexiones
-        ranksep=1.0;
         
         timestamp2 [label="Timestamp: \n26-10-2024 13:24"; shape=box; style=rounded];
         nonce2 [label="Nonce: \n0"; shape=box; style=rounded];
         timestamp2 -> nonce2 -> root2
         subgraph cluster_header2 {
             label="Header"
-            fontname="Arial";
             style=rounded;
-            color=lightgreen;
 
             root2 [label="RootHash: \n000024935166fe887b339e0f6f8bab5b7562da10718bb075cc0f04765b1ec750"; shape=box; style=rounded];
             proof2 [label="Hash: \n000024935166fe887b339e0f6f8bab5b7562da10718bb075cc0f04765b1ec750"; shape=box; style=rounded];
@@ -61,11 +48,6 @@ digraph G {
 
         // Transacciones dentro del bloque 3
         trans9 [label="{{correo@gmail.com|fecha y hora}|{comentarios | 5}|contenido}"; shape=record; style=rounded];
-        trans10 [label="{{correo@gmail.com|fecha y hora}|{comentarios | 2}|contenido}"; shape=record; style=rounded];
-        trans11 [label="{{correo@gmail.com|fecha y hora}|{comentarios | 4}|contenido}"; shape=record; style=rounded];
-        trans12 [label="{{correo@gmail.com|fecha y hora}|{comentarios | 1}|contenido}"; shape=record; style=rounded];
-
-        trans9 -> trans10 -> trans11 -> trans12
 
         hash2 -> trans9
     }

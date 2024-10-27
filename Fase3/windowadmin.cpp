@@ -1,6 +1,4 @@
 #include "windowadmin.h"
-#include "Tree/merkle.h"
-#include "Trees/huffman.h"
 #include "funciones.h"
 #include "globales.h"
 #include "windowlogin.h"

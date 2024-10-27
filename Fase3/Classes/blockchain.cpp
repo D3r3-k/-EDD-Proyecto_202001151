@@ -4,7 +4,7 @@
 #include <fstream>
 #include <cstdlib>
 #include "nlohmann/json.hpp"
-#include "../Tree/merkle.h"
+#include "../Trees/merkle.h"
 #include "../globales.h"
 #include "../funciones.h"
 #include <QMessageBox>

@@ -1,6 +1,6 @@
 #include "funciones.h"
-#include "Tree/merkle.h"
 #include "Trees/huffman.h"
+#include "Trees/merkle.h"
 #include "arbolabb.h"
 #include "globales.h"
 #include "Structs.h"
