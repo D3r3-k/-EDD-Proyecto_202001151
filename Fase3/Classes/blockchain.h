@@ -3,16 +3,12 @@
 
 #include "../ListaEnlazada.h"
 #include "../Structs.h"
-#include "nlohmann/json.hpp"
 
 namespace Blockchain {
 class Blockchain
 {
 private:
     ListaEnlazada::ListaEnlazada<Structs::Block> chain;
-
-    void parseBlockToJSON(Structs::Block block);
-    void parseJSONToBlock(const nlohmann::json& jsonNode);
     // Extras
     std::string generateTimestamp();
 public:

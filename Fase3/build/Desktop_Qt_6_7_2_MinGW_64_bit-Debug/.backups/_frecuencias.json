@@ -1,295 +1,335 @@
 ﻿{
     "ch": 0,
-    "freq": 407,
+    "freq": 8283,
     "left": {
         "ch": 0,
-        "freq": 155,
+        "freq": 3112,
         "left": {
             "ch": 0,
-            "freq": 69,
+            "freq": 1388,
             "left": {
-                "ch": 0,
-                "freq": 33,
-                "left": {
-                    "ch": 0,
-                    "freq": 16,
-                    "left": {
-                        "ch": 0,
-                        "freq": 8,
-                        "left": {
-                            "ch": 56,
-                            "freq": 4,
-                            "left": null,
-                            "right": null
-                        },
-                        "right": {
-                            "ch": 116,
-                            "freq": 4,
-                            "left": null,
-                            "right": null
-                        }
-                    },
-                    "right": {
-                        "ch": 0,
-                        "freq": 8,
-                        "left": {
-                            "ch": 0,
-                            "freq": 4,
-                            "left": {
-                                "ch": 51,
-                                "freq": 2,
-                                "left": null,
-                                "right": null
-                            },
-                            "right": {
-                                "ch": 68,
-                                "freq": 2,
-                                "left": null,
-                                "right": null
-                            }
-                        },
-                        "right": {
-                            "ch": 0,
-                            "freq": 4,
-                            "left": {
-                                "ch": 95,
-                                "freq": 2,
-                                "left": null,
-                                "right": null
-                            },
-                            "right": {
-                                "ch": 103,
-                                "freq": 2,
-                                "left": null,
-                                "right": null
-                            }
-                        }
-                    }
-                },
-                "right": {
-                    "ch": 10,
-                    "freq": 17,
-                    "left": null,
-                    "right": null
-                }
+                "ch": 34,
+                "freq": 676,
+                "left": null,
+                "right": null
             },
             "right": {
                 "ch": 0,
-                "freq": 36,
+                "freq": 712,
                 "left": {
                     "ch": 0,
-                    "freq": 17,
+                    "freq": 353,
                     "left": {
-                        "ch": 0,
-                        "freq": 8,
-                        "left": {
-                            "ch": 0,
-                            "freq": 4,
-                            "left": {
-                                "ch": 123,
-                                "freq": 2,
-                                "left": null,
-                                "right": null
-                            },
-                            "right": {
-                                "ch": 125,
-                                "freq": 2,
-                                "left": null,
-                                "right": null
-                            }
-                        },
-                        "right": {
-                            "ch": 0,
-                            "freq": 4,
-                            "left": {
-                                "ch": 0,
-                                "freq": 2,
-                                "left": {
-                                    "ch": 46,
-                                    "freq": 1,
-                                    "left": null,
-                                    "right": null
-                                },
-                                "right": {
-                                    "ch": 64,
-                                    "freq": 1,
-                                    "left": null,
-                                    "right": null
-                                }
-                            },
-                            "right": {
-                                "ch": 0,
-                                "freq": 2,
-                                "left": {
-                                    "ch": 65,
-                                    "freq": 1,
-                                    "left": null,
-                                    "right": null
-                                },
-                                "right": {
-                                    "ch": 69,
-                                    "freq": 1,
-                                    "left": null,
-                                    "right": null
-                                }
-                            }
-                        }
+                        "ch": 44,
+                        "freq": 175,
+                        "left": null,
+                        "right": null
                     },
                     "right": {
-                        "ch": 115,
-                        "freq": 9,
+                        "ch": 109,
+                        "freq": 178,
                         "left": null,
                         "right": null
                     }
                 },
                 "right": {
-                    "ch": 97,
-                    "freq": 19,
-                    "left": null,
-                    "right": null
+                    "ch": 0,
+                    "freq": 359,
+                    "left": {
+                        "ch": 58,
+                        "freq": 179,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": {
+                        "ch": 0,
+                        "freq": 180,
+                        "left": {
+                            "ch": 50,
+                            "freq": 90,
+                            "left": null,
+                            "right": null
+                        },
+                        "right": {
+                            "ch": 0,
+                            "freq": 90,
+                            "left": {
+                                "ch": 0,
+                                "freq": 44,
+                                "left": {
+                                    "ch": 80,
+                                    "freq": 22,
+                                    "left": null,
+                                    "right": null
+                                },
+                                "right": {
+                                    "ch": 0,
+                                    "freq": 22,
+                                    "left": {
+                                        "ch": 0,
+                                        "freq": 10,
+                                        "left": {
+                                            "ch": 76,
+                                            "freq": 5,
+                                            "left": null,
+                                            "right": null
+                                        },
+                                        "right": {
+                                            "ch": 0,
+                                            "freq": 5,
+                                            "left": {
+                                                "ch": 0,
+                                                "freq": 2,
+                                                "left": {
+                                                    "ch": 86,
+                                                    "freq": 1,
+                                                    "left": null,
+                                                    "right": null
+                                                },
+                                                "right": {
+                                                    "ch": -77,
+                                                    "freq": 1,
+                                                    "left": null,
+                                                    "right": null
+                                                }
+                                            },
+                                            "right": {
+                                                "ch": 91,
+                                                "freq": 3,
+                                                "left": null,
+                                                "right": null
+                                            }
+                                        }
+                                    },
+                                    "right": {
+                                        "ch": 73,
+                                        "freq": 12,
+                                        "left": null,
+                                        "right": null
+                                    }
+                                }
+                            },
+                            "right": {
+                                "ch": 120,
+                                "freq": 46,
+                                "left": null,
+                                "right": null
+                            }
+                        }
+                    }
                 }
             }
         },
         "right": {
             "ch": 0,
-            "freq": 86,
+            "freq": 1724,
             "left": {
                 "ch": 0,
-                "freq": 40,
+                "freq": 819,
                 "left": {
                     "ch": 0,
-                    "freq": 20,
+                    "freq": 381,
                     "left": {
-                        "ch": 58,
-                        "freq": 10,
+                        "ch": 102,
+                        "freq": 182,
                         "left": null,
                         "right": null
                     },
                     "right": {
-                        "ch": 100,
-                        "freq": 10,
-                        "left": null,
-                        "right": null
+                        "ch": 0,
+                        "freq": 199,
+                        "left": {
+                            "ch": 0,
+                            "freq": 99,
+                            "left": {
+                                "ch": 51,
+                                "freq": 48,
+                                "left": null,
+                                "right": null
+                            },
+                            "right": {
+                                "ch": 0,
+                                "freq": 51,
+                                "left": {
+                                    "ch": 0,
+                                    "freq": 24,
+                                    "left": {
+                                        "ch": 103,
+                                        "freq": 12,
+                                        "left": null,
+                                        "right": null
+                                    },
+                                    "right": {
+                                        "ch": 0,
+                                        "freq": 12,
+                                        "left": {
+                                            "ch": 0,
+                                            "freq": 6,
+                                            "left": {
+                                                "ch": 93,
+                                                "freq": 3,
+                                                "left": null,
+                                                "right": null
+                                            },
+                                            "right": {
+                                                "ch": -95,
+                                                "freq": 3,
+                                                "left": null,
+                                                "right": null
+                                            }
+                                        },
+                                        "right": {
+                                            "ch": 0,
+                                            "freq": 6,
+                                            "left": {
+                                                "ch": -87,
+                                                "freq": 3,
+                                                "left": null,
+                                                "right": null
+                                            },
+                                            "right": {
+                                                "ch": 0,
+                                                "freq": 3,
+                                                "left": {
+                                                    "ch": -70,
+                                                    "freq": 1,
+                                                    "left": null,
+                                                    "right": null
+                                                },
+                                                "right": {
+                                                    "ch": 45,
+                                                    "freq": 2,
+                                                    "left": null,
+                                                    "right": null
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "right": {
+                                    "ch": 65,
+                                    "freq": 27,
+                                    "left": null,
+                                    "right": null
+                                }
+                            }
+                        },
+                        "right": {
+                            "ch": 57,
+                            "freq": 100,
+                            "left": null,
+                            "right": null
+                        }
                     }
                 },
                 "right": {
                     "ch": 0,
-                    "freq": 20,
+                    "freq": 438,
                     "left": {
                         "ch": 0,
-                        "freq": 10,
+                        "freq": 217,
                         "left": {
-                            "ch": 49,
-                            "freq": 5,
+                            "ch": 110,
+                            "freq": 108,
                             "left": null,
                             "right": null
                         },
                         "right": {
-                            "ch": 50,
-                            "freq": 5,
+                            "ch": 55,
+                            "freq": 109,
                             "left": null,
                             "right": null
                         }
                     },
                     "right": {
                         "ch": 0,
-                        "freq": 10,
-                        "left": {
-                            "ch": 57,
-                            "freq": 5,
-                            "left": null,
-                            "right": null
-                        },
-                        "right": {
-                            "ch": 108,
-                            "freq": 5,
-                            "left": null,
-                            "right": null
-                        }
-                    }
-                }
-            },
-            "right": {
-                "ch": 0,
-                "freq": 46,
-                "left": {
-                    "ch": 0,
-                    "freq": 22,
-                    "left": {
-                        "ch": 102,
-                        "freq": 11,
-                        "left": null,
-                        "right": null
-                    },
-                    "right": {
-                        "ch": 0,
-                        "freq": 11,
+                        "freq": 221,
                         "left": {
                             "ch": 0,
-                            "freq": 5,
+                            "freq": 110,
                             "left": {
-                                "ch": 0,
-                                "freq": 2,
-                                "left": {
-                                    "ch": 76,
-                                    "freq": 1,
-                                    "left": null,
-                                    "right": null
-                                },
-                                "right": {
-                                    "ch": 104,
-                                    "freq": 1,
-                                    "left": null,
-                                    "right": null
-                                }
+                                "ch": 46,
+                                "freq": 55,
+                                "left": null,
+                                "right": null
                             },
                             "right": {
                                 "ch": 53,
-                                "freq": 3,
+                                "freq": 55,
                                 "left": null,
                                 "right": null
                             }
                         },
                         "right": {
                             "ch": 52,
-                            "freq": 6,
+                            "freq": 111,
                             "left": null,
                             "right": null
                         }
                     }
+                }
+            },
+            "right": {
+                "ch": 0,
+                "freq": 905,
+                "left": {
+                    "ch": 101,
+                    "freq": 451,
+                    "left": null,
+                    "right": null
                 },
                 "right": {
                     "ch": 0,
-                    "freq": 24,
+                    "freq": 454,
                     "left": {
-                        "ch": 111,
-                        "freq": 12,
+                        "ch": 114,
+                        "freq": 226,
                         "left": null,
                         "right": null
                     },
                     "right": {
                         "ch": 0,
-                        "freq": 12,
+                        "freq": 228,
                         "left": {
-                            "ch": 55,
-                            "freq": 6,
+                            "ch": 108,
+                            "freq": 113,
                             "left": null,
                             "right": null
                         },
                         "right": {
                             "ch": 0,
-                            "freq": 6,
+                            "freq": 115,
                             "left": {
-                                "ch": 91,
-                                "freq": 3,
+                                "ch": 64,
+                                "freq": 55,
                                 "left": null,
                                 "right": null
                             },
                             "right": {
-                                "ch": 93,
-                                "freq": 3,
-                                "left": null,
-                                "right": null
+                                "ch": 0,
+                                "freq": 60,
+                                "left": {
+                                    "ch": 0,
+                                    "freq": 28,
+                                    "left": {
+                                        "ch": 122,
+                                        "freq": 13,
+                                        "left": null,
+                                        "right": null
+                                    },
+                                    "right": {
+                                        "ch": -61,
+                                        "freq": 15,
+                                        "left": null,
+                                        "right": null
+                                    }
+                                },
+                                "right": {
+                                    "ch": 47,
+                                    "freq": 32,
+                                    "left": null,
+                                    "right": null
+                                }
                             }
                         }
                     }
@@ -299,89 +339,109 @@
     },
     "right": {
         "ch": 0,
-        "freq": 252,
+        "freq": 5171,
         "left": {
             "ch": 0,
-            "freq": 117,
+            "freq": 2279,
             "left": {
                 "ch": 0,
-                "freq": 53,
+                "freq": 1002,
                 "left": {
                     "ch": 0,
-                    "freq": 26,
+                    "freq": 485,
                     "left": {
-                        "ch": 101,
-                        "freq": 13,
-                        "left": null,
-                        "right": null
+                        "ch": 0,
+                        "freq": 239,
+                        "left": {
+                            "ch": 105,
+                            "freq": 119,
+                            "left": null,
+                            "right": null
+                        },
+                        "right": {
+                            "ch": 49,
+                            "freq": 120,
+                            "left": null,
+                            "right": null
+                        }
                     },
                     "right": {
-                        "ch": 105,
-                        "freq": 13,
+                        "ch": 111,
+                        "freq": 246,
                         "left": null,
                         "right": null
                     }
                 },
                 "right": {
                     "ch": 0,
-                    "freq": 27,
+                    "freq": 517,
                     "left": {
-                        "ch": 0,
-                        "freq": 13,
-                        "left": {
-                            "ch": 0,
-                            "freq": 6,
-                            "left": {
-                                "ch": 98,
-                                "freq": 3,
-                                "left": null,
-                                "right": null
-                            },
-                            "right": {
-                                "ch": 117,
-                                "freq": 3,
-                                "left": null,
-                                "right": null
-                            }
-                        },
-                        "right": {
-                            "ch": 48,
-                            "freq": 7,
-                            "left": null,
-                            "right": null
-                        }
+                        "ch": 10,
+                        "freq": 256,
+                        "left": null,
+                        "right": null
                     },
                     "right": {
                         "ch": 0,
-                        "freq": 14,
+                        "freq": 261,
                         "left": {
-                            "ch": 99,
-                            "freq": 7,
+                            "ch": 100,
+                            "freq": 124,
                             "left": null,
                             "right": null
                         },
                         "right": {
                             "ch": 0,
-                            "freq": 7,
+                            "freq": 137,
                             "left": {
                                 "ch": 0,
-                                "freq": 3,
+                                "freq": 67,
                                 "left": {
-                                    "ch": 112,
-                                    "freq": 1,
-                                    "left": null,
-                                    "right": null
+                                    "ch": 0,
+                                    "freq": 33,
+                                    "left": {
+                                        "ch": 0,
+                                        "freq": 15,
+                                        "left": {
+                                            "ch": -83,
+                                            "freq": 7,
+                                            "left": null,
+                                            "right": null
+                                        },
+                                        "right": {
+                                            "ch": 0,
+                                            "freq": 8,
+                                            "left": {
+                                                "ch": 77,
+                                                "freq": 4,
+                                                "left": null,
+                                                "right": null
+                                            },
+                                            "right": {
+                                                "ch": 82,
+                                                "freq": 4,
+                                                "left": null,
+                                                "right": null
+                                            }
+                                        }
+                                    },
+                                    "right": {
+                                        "ch": 104,
+                                        "freq": 18,
+                                        "left": null,
+                                        "right": null
+                                    }
                                 },
                                 "right": {
-                                    "ch": 45,
-                                    "freq": 2,
+                                    "ch": 95,
+                                    "freq": 34,
                                     "left": null,
                                     "right": null
                                 }
                             },
                             "right": {
-                                "ch": 54,
-                                "freq": 4,
+                                "ch": 117,
+                                "freq": 70,
                                 "left": null,
                                 "right": null
                             }
@@ -391,46 +451,216 @@
             },
             "right": {
                 "ch": 0,
-                "freq": 64,
+                "freq": 1277,
                 "left": {
-                    "ch": 34,
-                    "freq": 32,
-                    "left": null,
-                    "right": null
+                    "ch": 0,
+                    "freq": 614,
+                    "left": {
+                        "ch": 0,
+                        "freq": 304,
+                        "left": {
+                            "ch": 0,
+                            "freq": 149,
+                            "left": {
+                                "ch": 0,
+                                "freq": 74,
+                                "left": {
+                                    "ch": 98,
+                                    "freq": 37,
+                                    "left": null,
+                                    "right": null
+                                },
+                                "right": {
+                                    "ch": 123,
+                                    "freq": 37,
+                                    "left": null,
+                                    "right": null
+                                }
+                            },
+                            "right": {
+                                "ch": 0,
+                                "freq": 75,
+                                "left": {
+                                    "ch": 125,
+                                    "freq": 37,
+                                    "left": null,
+                                    "right": null
+                                },
+                                "right": {
+                                    "ch": 0,
+                                    "freq": 38,
+                                    "left": {
+                                        "ch": 0,
+                                        "freq": 18,
+                                        "left": {
+                                            "ch": 0,
+                                            "freq": 8,
+                                            "left": {
+                                                "ch": 0,
+                                                "freq": 4,
+                                                "left": {
+                                                    "ch": 74,
+                                                    "freq": 2,
+                                                    "left": null,
+                                                    "right": null
+                                                },
+                                                "right": {
+                                                    "ch": 83,
+                                                    "freq": 2,
+                                                    "left": null,
+                                                    "right": null
+                                                }
+                                            },
+                                            "right": {
+                                                "ch": 0,
+                                                "freq": 4,
+                                                "left": {
+                                                    "ch": 0,
+                                                    "freq": 2,
+                                                    "left": {
+                                                        "ch": 70,
+                                                        "freq": 1,
+                                                        "left": null,
+                                                        "right": null
+                                                    },
+                                                    "right": {
+                                                        "ch": 71,
+                                                        "freq": 1,
+                                                        "left": null,
+                                                        "right": null
+                                                    }
+                                                },
+                                                "right": {
+                                                    "ch": 0,
+                                                    "freq": 2,
+                                                    "left": {
+                                                        "ch": 72,
+                                                        "freq": 1,
+                                                        "left": null,
+                                                        "right": null
+                                                    },
+                                                    "right": {
+                                                        "ch": 79,
+                                                        "freq": 1,
+                                                        "left": null,
+                                                        "right": null
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "right": {
+                                            "ch": 67,
+                                            "freq": 10,
+                                            "left": null,
+                                            "right": null
+                                        }
+                                    },
+                                    "right": {
+                                        "ch": 84,
+                                        "freq": 20,
+                                        "left": null,
+                                        "right": null
+                                    }
+                                }
+                            }
+                        },
+                        "right": {
+                            "ch": 0,
+                            "freq": 155,
+                            "left": {
+                                "ch": 54,
+                                "freq": 76,
+                                "left": null,
+                                "right": null
+                            },
+                            "right": {
+                                "ch": 116,
+                                "freq": 79,
+                                "left": null,
+                                "right": null
+                            }
+                        }
+                    },
+                    "right": {
+                        "ch": 97,
+                        "freq": 310,
+                        "left": null,
+                        "right": null
+                    }
                 },
                 "right": {
                     "ch": 0,
-                    "freq": 32,
+                    "freq": 663,
                     "left": {
                         "ch": 0,
-                        "freq": 16,
+                        "freq": 325,
                         "left": {
-                            "ch": 44,
-                            "freq": 8,
-                            "left": null,
-                            "right": null
+                            "ch": 0,
+                            "freq": 161,
+                            "left": {
+                                "ch": 48,
+                                "freq": 80,
+                                "left": null,
+                                "right": null
+                            },
+                            "right": {
+                                "ch": 56,
+                                "freq": 81,
+                                "left": null,
+                                "right": null
+                            }
                         },
                         "right": {
-                            "ch": 109,
-                            "freq": 8,
+                            "ch": 115,
+                            "freq": 164,
                             "left": null,
                             "right": null
                         }
                     },
                     "right": {
                         "ch": 0,
-                        "freq": 16,
+                        "freq": 338,
                         "left": {
-                            "ch": 110,
-                            "freq": 8,
+                            "ch": 99,
+                            "freq": 168,
                             "left": null,
                             "right": null
                         },
                         "right": {
-                            "ch": 114,
-                            "freq": 8,
-                            "left": null,
-                            "right": null
+                            "ch": 0,
+                            "freq": 170,
+                            "left": {
+                                "ch": 112,
+                                "freq": 83,
+                                "left": null,
+                                "right": null
+                            },
+                            "right": {
+                                "ch": 0,
+                                "freq": 87,
+                                "left": {
+                                    "ch": 69,
+                                    "freq": 43,
+                                    "left": null,
+                                    "right": null
+                                },
+                                "right": {
+                                    "ch": 0,
+                                    "freq": 44,
+                                    "left": {
+                                        "ch": 68,
+                                        "freq": 22,
+                                        "left": null,
+                                        "right": null
+                                    },
+                                    "right": {
+                                        "ch": 78,
+                                        "freq": 22,
+                                        "left": null,
+                                        "right": null
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -438,7 +668,7 @@
         },
         "right": {
             "ch": 32,
-            "freq": 135,
+            "freq": 2892,
             "left": null,
             "right": null
         }

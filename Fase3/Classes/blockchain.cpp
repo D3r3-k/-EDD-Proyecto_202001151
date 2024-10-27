@@ -14,14 +14,6 @@ Blockchain::Blockchain::Blockchain()
     chain = ListaEnlazada::ListaEnlazada<Structs::Block>();
 }
 
-// TODO: metodos privados
-void Blockchain::Blockchain::parseBlockToJSON(Structs::Block block)
-{
-}
-
-void Blockchain::Blockchain::parseJSONToBlock(const nlohmann::json &jsonNode)
-{
-}
 std::string Blockchain::Blockchain::generateTimestamp()
 {
     auto now = std::chrono::system_clock::now();
@@ -210,6 +202,16 @@ void Blockchain::Blockchain::importBlocks()
                 Structs::Publicacion *existingPost = Func::buscarPost(post.id);
                 if (existingPost == nullptr) {
                     // Si no existe, se inserta tanto en la lista global como en el bloque
+                    nlohmann::json jsonComments = jsonData[i]["comentarios"];
+                    for (int j = 0; j < jsonComments.size(); ++j) {
+                        StructsComment::Comentario comment2(
+                            jsonComments[j]["id"],
+                            jsonComments[j]["fechaHora"],
+                            jsonComments[j]["correo"],
+                            jsonComments[j]["comentario"]
+                            );
+                        postBlock.comentarios->insertar(comment2);
+                    }
                     lista_publicaciones.insertar(post);
                     bloque.data.insertar(postBlock);
                 } else {

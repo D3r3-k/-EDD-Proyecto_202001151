@@ -45,7 +45,6 @@ public:
     std::string graficarGrafo(const std::string &correo);
     std::string graficarGrafoSugeridos(const std::string &correo);
     std::string tablaAdyacencia();
-    void mostrarRelaciones(const std::string &correo);
 };
 
 #endif // GRAFORELACION_H

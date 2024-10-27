@@ -20,9 +20,9 @@ int main(int argc, char *argv[])
     }
     Structs::Usuario *admin = lista_usuarios.buscar("admin@gmail.com");
     if (!admin) {
-        std::string pass = "123";
+        std::string pass = "EDD2S2024";
         std::string hashpass = Func::generarHash(pass);
-        Structs::Usuario admin(0, "Administrador", "Lab EDD", "2001-09-15", "admin@gmail.com", hashpass,"admin");
+        Structs::Usuario admin(0, "Administrador", "Lab EDD", "2000-09-16", "admin@gmail.com", hashpass,"admin");
         lista_usuarios.insertar(admin);
         cout << "Si se creo el usuario admin "<< endl;
     }else{

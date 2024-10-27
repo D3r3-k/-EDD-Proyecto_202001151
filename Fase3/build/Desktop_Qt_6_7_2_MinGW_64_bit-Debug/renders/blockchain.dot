@@ -7,9 +7,9 @@ color=black;
 bgcolor=lightgray;
 edge [style=invis];
 timestamp1[label="Timestamp: 
-27-10-24-::03:02:26";fontname="Arial"; shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
+27-10-24-::16:12:27";fontname="Arial"; shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
 nonce1[label="Nonce: 
-97313";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
+1204";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
 timestamp1 -> nonce1 -> root1
 subgraph cluster_header1 {
 label="Header";
@@ -17,224 +17,34 @@ fontname="Arial";fontsize=20;style=rounded;
 color=green;
 bgcolor=lightgreen;
 root1[label="RootHash: 
-73dc122a3b4df9c37acc6f5789cf53be8dd451a5e3940cb3998ed5de8ef6a6a4";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
+998612937096788618b4c31a20800dcac32afad3f72d87e6ed29838cbd1e9fdf";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
 hash1[label="Hash: 
-00000db8e7ddfc04222b26f554f86eedcf75886694eb25e2468418c45772c5b5";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
+0000c3170c99fcce6dab614471dbf74382fd802289af4b4d0f5f0d6c41aa1c7d";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
 prev1[label="Prev Hash: 
 0000";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
 root1 -> hash1 -> prev1
 }
-transac1_0[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 0}|a}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-prev1-> transac1_0
+transac1_0[label="{{admin@gmail.com|08-12-2024 12:45}|{comentarios | 1}|Disfrutando del paisaje.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_1[label="{{admin@gmail.com|16-09-2024 15:20}|{comentarios | 2}|Paseo en el parque.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_2[label="{{admin@gmail.com|05-11-2023 18:05}|{comentarios | 1}|Tarde lluviosa.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_3[label="{{admin@gmail.com|12-12-2022 06:30}|{comentarios | 0}|Amanecer increíble.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_4[label="{{admin@gmail.com|08-12-2024 14:00}|{comentarios | 0}|Un día productivo.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_5[label="{{admin@gmail.com|16-09-2024 12:15}|{comentarios | 1}|Caminando por la ciudad.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_6[label="{{admin@gmail.com|12-12-2022 20:30}|{comentarios | 2}|Cena deliciosa.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_7[label="{{admin@gmail.com|05-11-2023 16:45}|{comentarios | 0}|Un día más.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_8[label="{{admin@gmail.com|12-12-2022 08:30}|{comentarios | 2}|Trabajo duro hoy.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_9[label="{{admin@gmail.com|08-12-2024 19:00}|{comentarios | 1}|Lectura tranquila.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_10[label="{{admin@gmail.com|16-09-2024 09:00}|{comentarios | 2}|Café en la mañana.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_11[label="{{admin@gmail.com|05-11-2023 22:10}|{comentarios | 0}|Preparando un proyecto.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_12[label="{{admin@gmail.com|16-09-2024 13:30}|{comentarios | 1}|Explorando la ciudad.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_13[label="{{admin@gmail.com|12-12-2022 08:00}|{comentarios | 0}|Desayuno ligero.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_14[label="{{admin@gmail.com|16-09-2024 21:45}|{comentarios | 1}|Noche de películas.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_15[label="{{admin@gmail.com|12-12-2022 11:45}|{comentarios | 0}|Fin de semana relajante.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_16[label="{{admin@gmail.com|16-09-2024 17:00}|{comentarios | 0}|Tarde con amigos.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_17[label="{{admin@gmail.com|08-12-2024 23:15}|{comentarios | 1}|Jornada larga de trabajo.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_18[label="{{admin@gmail.com|05-11-2023 19:00}|{comentarios | 0}|Fin de la jornada.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+transac1_19[label="{{admin@gmail.com|16-09-2024 15:00}|{comentarios | 1}|Explorando museos.}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
+prev1-> transac1_0-> transac1_1-> transac1_2-> transac1_3-> transac1_4-> transac1_5-> transac1_6-> transac1_7-> transac1_8-> transac1_9-> transac1_10-> transac1_11-> transac1_12-> transac1_13-> transac1_14-> transac1_15-> transac1_16-> transac1_17-> transac1_18-> transac1_19
 }
-subgraph cluster_block2 {
-label="Bloque #2";
-fontname="Arial";fontsize=20;style=rounded;
-color=black;
-bgcolor=lightgray;
-edge [style=invis];
-timestamp2[label="Timestamp: 
-27-10-24-::03:02:27";fontname="Arial"; shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-nonce2[label="Nonce: 
-11280";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-timestamp2 -> nonce2 -> root2
-subgraph cluster_header2 {
-label="Header";
-fontname="Arial";fontsize=20;style=rounded;
-color=green;
-bgcolor=lightgreen;
-root2[label="RootHash: 
-f23bb759505f056ee82023ad705528c3cf09f4f637fde500a1f1966c2d3c698a";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-hash2[label="Hash: 
-0000cb4cac64b3a421d08c4f9fe4ccc46b6df88905b2243f0f7d26c725298623";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-prev2[label="Prev Hash: 
-00000db8e7ddfc04222b26f554f86eedcf75886694eb25e2468418c45772c5b5";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-root2 -> hash2 -> prev2
-}
-transac2_0[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 0}|a}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-transac2_1[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 0}|b}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-prev2-> transac2_0-> transac2_1
-}
-subgraph cluster_block3 {
-label="Bloque #3";
-fontname="Arial";fontsize=20;style=rounded;
-color=black;
-bgcolor=lightgray;
-edge [style=invis];
-timestamp3[label="Timestamp: 
-27-10-24-::03:02:30";fontname="Arial"; shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-nonce3[label="Nonce: 
-167175";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-timestamp3 -> nonce3 -> root3
-subgraph cluster_header3 {
-label="Header";
-fontname="Arial";fontsize=20;style=rounded;
-color=green;
-bgcolor=lightgreen;
-root3[label="RootHash: 
-9acf7d0703454fe564082769eca86492841b4102a46046aad0b140954a14b6fc";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-hash3[label="Hash: 
-0000efc8d760776d36d541ea21995f93821c8905449133476cf66101561fda6f";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-prev3[label="Prev Hash: 
-0000cb4cac64b3a421d08c4f9fe4ccc46b6df88905b2243f0f7d26c725298623";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-root3 -> hash3 -> prev3
-}
-transac3_0[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 1}|a}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-transac3_1[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 0}|b}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-prev3-> transac3_0-> transac3_1
-}
-subgraph cluster_block4 {
-label="Bloque #4";
-fontname="Arial";fontsize=20;style=rounded;
-color=black;
-bgcolor=lightgray;
-edge [style=invis];
-timestamp4[label="Timestamp: 
-27-10-24-::03:02:42";fontname="Arial"; shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-nonce4[label="Nonce: 
-24430";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-timestamp4 -> nonce4 -> root4
-subgraph cluster_header4 {
-label="Header";
-fontname="Arial";fontsize=20;style=rounded;
-color=green;
-bgcolor=lightgreen;
-root4[label="RootHash: 
-baa748adbe3ac348382d3d90d7e76e08d9403cf17f2611ac54deefa890c20ca6";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-hash4[label="Hash: 
-0000c237ac9be6a945540bb3cb811d684241d3f684076f2695eb95e772044c5a";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-prev4[label="Prev Hash: 
-0000efc8d760776d36d541ea21995f93821c8905449133476cf66101561fda6f";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-root4 -> hash4 -> prev4
-}
-transac4_0[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 1}|a}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-transac4_1[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 0}|b nuevo}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-prev4-> transac4_0-> transac4_1
-}
-subgraph cluster_block5 {
-label="Bloque #5";
-fontname="Arial";fontsize=20;style=rounded;
-color=black;
-bgcolor=lightgray;
-edge [style=invis];
-timestamp5[label="Timestamp: 
-27-10-24-::03:06:59";fontname="Arial"; shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-nonce5[label="Nonce: 
-24269";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-timestamp5 -> nonce5 -> root5
-subgraph cluster_header5 {
-label="Header";
-fontname="Arial";fontsize=20;style=rounded;
-color=green;
-bgcolor=lightgreen;
-root5[label="RootHash: 
-57d526d2e7b97712c15d348c741cddfdb3e774621a95806a737b807a82b4cd37";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-hash5[label="Hash: 
-0000f743bcd4b4d9c3805ac8f8f02c4ae7d23ce8f636597548057b2a59a3f65d";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-prev5[label="Prev Hash: 
-0000c237ac9be6a945540bb3cb811d684241d3f684076f2695eb95e772044c5a";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-root5 -> hash5 -> prev5
-}
-transac5_0[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 1}|a}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-transac5_1[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 1}|b nuevo}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-prev5-> transac5_0-> transac5_1
-}
-subgraph cluster_block6 {
-label="Bloque #6";
-fontname="Arial";fontsize=20;style=rounded;
-color=black;
-bgcolor=lightgray;
-edge [style=invis];
-timestamp6[label="Timestamp: 
-27-10-24-::14:34:11";fontname="Arial"; shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-nonce6[label="Nonce: 
-63389";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-timestamp6 -> nonce6 -> root6
-subgraph cluster_header6 {
-label="Header";
-fontname="Arial";fontsize=20;style=rounded;
-color=green;
-bgcolor=lightgreen;
-root6[label="RootHash: 
-31c551835e47dca5f0434f3c4a0e9d8276aa331c7d5ed11a014e59e1a23c6ead";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-hash6[label="Hash: 
-0000f6d14efe4ce964f51ebe6d8b9a493c6e816f007113ced15eac979fc16f79";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-prev6[label="Prev Hash: 
-0000f743bcd4b4d9c3805ac8f8f02c4ae7d23ce8f636597548057b2a59a3f65d";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-root6 -> hash6 -> prev6
-}
-transac6_0[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 1}|a}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-transac6_1[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 1}|b nuevo}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-transac6_2[label="{{admin@gmail.com|27-10-2024 14:34}|{comentarios | 0}|a}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-prev6-> transac6_0-> transac6_1-> transac6_2
-}
-subgraph cluster_block7 {
-label="Bloque #7";
-fontname="Arial";fontsize=20;style=rounded;
-color=black;
-bgcolor=lightgray;
-edge [style=invis];
-timestamp7[label="Timestamp: 
-27-10-24-::14:43:05";fontname="Arial"; shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-nonce7[label="Nonce: 
-26150";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-timestamp7 -> nonce7 -> root7
-subgraph cluster_header7 {
-label="Header";
-fontname="Arial";fontsize=20;style=rounded;
-color=green;
-bgcolor=lightgreen;
-root7[label="RootHash: 
-ef7fd5d156d62284ded89cc012c58bea8024284ea557b4c7df2f4f0016879521";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-hash7[label="Hash: 
-00008a9bfe372f8dadb3620ffc31dcc1b2f1f1bc770780754d3d01d0667d3ae6";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-prev7[label="Prev Hash: 
-0000f6d14efe4ce964f51ebe6d8b9a493c6e816f007113ced15eac979fc16f79";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-root7 -> hash7 -> prev7
-}
-transac7_0[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 1}|a}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-transac7_1[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 1}|b nuevo}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-transac7_2[label="{{admin@gmail.com|27-10-2024 14:34}|{comentarios | 0}|a}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-transac7_3[label="{{admin@gmail.com|27-10-2024 14:43}|{comentarios | 0}|a}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-prev7-> transac7_0-> transac7_1-> transac7_2-> transac7_3
-}
-subgraph cluster_block8 {
-label="Bloque #8";
-fontname="Arial";fontsize=20;style=rounded;
-color=black;
-bgcolor=lightgray;
-edge [style=invis];
-timestamp8[label="Timestamp: 
-27-10-24-::15:44:35";fontname="Arial"; shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-nonce8[label="Nonce: 
-10306";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=5;]
-timestamp8 -> nonce8 -> root8
-subgraph cluster_header8 {
-label="Header";
-fontname="Arial";fontsize=20;style=rounded;
-color=green;
-bgcolor=lightgreen;
-root8[label="RootHash: 
-cf74b2b83f7bb91c098ed9b8cd6e05d20064bbcd9d98b28ce70532808deb41d2";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-hash8[label="Hash: 
-00001e551bd87fc52a578b4b3178b38d6104dad4c205361a1cbc2b52bb3904c5";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-prev8[label="Prev Hash: 
-00008a9bfe372f8dadb3620ffc31dcc1b2f1f1bc770780754d3d01d0667d3ae6";fontname="Arial";shape=box;style="rounded, filled";fillcolor=lightblue;width=7;]
-root8 -> hash8 -> prev8
-}
-transac8_0[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 1}|a}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-transac8_1[label="{{admin@gmail.com|27-10-2024 03:02}|{comentarios | 1}|b nuevo}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-transac8_2[label="{{admin@gmail.com|27-10-2024 14:34}|{comentarios | 0}|a}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-transac8_3[label="{{admin@gmail.com|27-10-2024 14:43}|{comentarios | 0}|a}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-transac8_4[label="{{admin@gmail.com|27-10-2024 15:44}|{comentarios | 0}|s}";shape=record;fontname="Arial";style="rounded, filled";fillcolor=white;]
-prev8-> transac8_0-> transac8_1-> transac8_2-> transac8_3-> transac8_4
-}
-hash1 -> prev2[constraint=false;];
-hash2 -> prev3[constraint=false;];
-hash3 -> prev4[constraint=false;];
-hash4 -> prev5[constraint=false;];
-hash5 -> prev6[constraint=false;];
-hash6 -> prev7[constraint=false;];
-hash7 -> prev8[constraint=false;];
 
 }
