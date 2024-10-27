@@ -282,6 +282,53 @@ namespace Structs
             validate = val;
         }
 
+        std::string getJsonData(){
+            nlohmann::json jsonData;
+            for (int j = 0; j < data.size(); j++)
+            {
+                Structs::Publicacion *currentData = data.obtener(j);
+                if (currentData == nullptr) {
+                    std::cerr << "Error: Publicación nula " << j << std::endl;
+                    continue;
+                }
+
+                nlohmann::json jsonCurrentData;
+                jsonCurrentData["id"] = currentData->id;
+                jsonCurrentData["correo"] = currentData->correo_autor;
+                jsonCurrentData["contenido"] = currentData->contenido;
+                jsonCurrentData["fecha"] = currentData->fecha;
+                jsonCurrentData["hora"] = currentData->hora;
+                jsonCurrentData["imagen"] = currentData->imagen;
+
+                // Manejo de comentarios
+                nlohmann::json jsonCurrentComments, jsonComment;
+                ListaEnlazada::ListaEnlazada<StructsComment::Comentario> comments = currentData->comentarios->obtenerComentarios();
+                if (comments.size() == 0) {
+                    jsonCurrentComments = nlohmann::json::array();
+                }else{
+                    for (int k = 0; k < comments.size(); ++k) {
+                        StructsComment::Comentario *comment = comments.obtener(k);
+                        if (comment == nullptr) {
+                            std::cerr << "Error: Comentario nulo en la publicación " << currentData->id << ", posición " << k << std::endl;
+                            continue;
+                        }
+
+                        nlohmann::json jsonComment;
+                        jsonComment["id"] = comment->id;
+                        jsonComment["correo"] = comment->usuario;
+                        jsonComment["comentario"] = comment->texto;
+                        jsonComment["fechaHora"] = comment->fecha_hora;
+                        jsonCurrentComments.push_back(jsonComment);
+                    }
+                }
+
+                // Añadir comentarios a la publicación
+                jsonCurrentData["comentarios"] = jsonCurrentComments;
+                jsonData.push_back(jsonCurrentData);
+            }
+            return jsonData.dump(4);
+        }
+
 
         void showBlock() const {
             cout << "| ==================================================================================== |"<< endl;

@@ -53,6 +53,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Trees/huffman.h Trees/huffman.cpp
         Trees/merkle.h Trees/merkle.cpp
         Classes/blockchain.h Classes/blockchain.cpp
+        Widgets/widgetblock.h Widgets/widgetblock.cpp Widgets/widgetblock.ui
 
 
 

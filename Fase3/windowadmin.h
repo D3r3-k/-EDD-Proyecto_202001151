@@ -40,7 +40,15 @@ private slots:
 
     void on_pushButton_reporte_amistades_ady_clicked();
 
-    void on_pushButton_clicked();
+    void on_tabWidget_currentChanged(int index);
+
+    void on_pushButton_gen_blockchain_clicked();
+
+    void on_pushButton_open_blockchain_clicked();
+
+    void on_pushButton_gen_merkle_clicked();
+
+    void on_pushButton_open_merkle_clicked();
 
 private:
     Ui::AdminWindow *ui;

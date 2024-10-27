@@ -10,6 +10,7 @@ class Blockchain
 {
 private:
     ListaEnlazada::ListaEnlazada<Structs::Block> chain;
+
     void parseBlockToJSON(Structs::Block block);
     void parseJSONToBlock(const nlohmann::json& jsonNode);
     // Extras
@@ -22,6 +23,7 @@ public:
     void validateBlock(int index);
     void validateBlocks();
     string graficar();
+    ListaEnlazada::ListaEnlazada<Structs::Block> getChain();
 };
 
 }

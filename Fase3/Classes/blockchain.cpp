@@ -33,6 +33,9 @@ std::string Blockchain::Blockchain::generateTimestamp()
 }
 
 // TODO: metodos publicos
+ListaEnlazada::ListaEnlazada<Structs::Block> Blockchain::Blockchain::getChain(){
+    return chain;
+}
 void Blockchain::Blockchain::addBlock(Structs::Block newBlock)
 {
     newBlock.index = chain.size();
@@ -147,7 +150,6 @@ void Blockchain::Blockchain::exportBlocks()
     }
 }
 
-
 void Blockchain::Blockchain::importBlocks()
 {
     try {
@@ -195,13 +197,21 @@ void Blockchain::Blockchain::importBlocks()
                     jsonData[i]["hora"],
                     jsonData[i]["imagen"]
                     );
+                Structs::Publicacion postBlock(
+                    jsonData[i]["id"],
+                    jsonData[i]["correo"],
+                    jsonData[i]["contenido"],
+                    jsonData[i]["fecha"],
+                    jsonData[i]["hora"],
+                    jsonData[i]["imagen"]
+                    );
 
                 // Verificar si la publicación ya existe en la lista de publicaciones
                 Structs::Publicacion *existingPost = Func::buscarPost(post.id);
                 if (existingPost == nullptr) {
                     // Si no existe, se inserta tanto en la lista global como en el bloque
                     lista_publicaciones.insertar(post);
-                    bloque.data.insertar(post);
+                    bloque.data.insertar(postBlock);
                 } else {
                     // actualizar contenido
                     existingPost->contenido = jsonData[i]["contenido"];
@@ -216,15 +226,15 @@ void Blockchain::Blockchain::importBlocks()
                             jsonComments[j]["correo"],
                             jsonComments[j]["comentario"]
                             );
-
                         // Verificar si el comentario ya existe
                         if (!Func::existeComentario(existingPost->id, comment.id)) {
                             // Si no existe, agregar el comentario
                             existingPost->comentarios->insertar(comment);
                         }
+                        postBlock.comentarios->insertar(comment);
                     }
                     // Actualizar la publicación en el bloque
-                    bloque.data.insertar(*existingPost);
+                    bloque.data.insertar(postBlock);
                 }
             }
 
@@ -232,6 +242,7 @@ void Blockchain::Blockchain::importBlocks()
             chain.insertar(bloque);
             file.close();
         }
+        validateBlocks();
     } catch (const std::exception &e) {
         std::cerr << e.what() << '\n';
     }
@@ -255,6 +266,15 @@ void Blockchain::Blockchain::validateBlocks()
     for (int i = 0; i < chain.size(); i++)
     {
         Structs::Block *currentBlock = chain.obtener(i);
+        // validar el root hash
+        Merkle::Merkle raiz(currentBlock->data);
+        if (currentBlock->rootHash == raiz.getRootHash()) {
+            currentBlock->validateBlock(true);
+        }else{
+            currentBlock->validateBlock(false);
+            continue;
+        }
+        // Validar los hashes
         if (i > 0)
         {
             Structs::Block *prevBlock = chain.obtener(i - 1);
@@ -262,6 +282,7 @@ void Blockchain::Blockchain::validateBlocks()
             {
                 std::cout << "Error: El Bloque" << i << " es invalido" << std::endl;
                 currentBlock->validateBlock(false);
+                continue;
             }
             else
             {
@@ -274,6 +295,7 @@ void Blockchain::Blockchain::validateBlocks()
             {
                 std::cout << "Error: El Bloque" << i << " es invalido" << std::endl;
                 currentBlock->validateBlock(false);
+                continue;
             }
             else
             {

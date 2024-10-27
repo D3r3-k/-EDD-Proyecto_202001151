@@ -1,61 +1,68 @@
 # ninja log v6
-398	8127	7517135013303667	CMakeFiles/Fase3.dir/widgetpost.cpp.obj	58e0ca73b4cb4d7d
-27	365	7517135009602265	Fase3_autogen/timestamp	6e647de87e079bbe
-1087	6408	7517116598500279	CMakeFiles/Fase3.dir/globales.cpp.obj	4d7dbee1fdcdc4c0
-27	365	7517135009602265	Fase3_autogen/mocs_compilation.cpp	6e647de87e079bbe
-27	365	7517135009602265	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase3_autogen/timestamp	6e647de87e079bbe
-11690	12584	7516325408806205	CMakeFiles/Fase3.dir/Trees/merkle.cpp.obj	9eacf2c986bed8ce
-27	365	7517135009602265	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase3_autogen/mocs_compilation.cpp	6e647de87e079bbe
+405	8222	7517230851662331	CMakeFiles/Fase3.dir/widgetpost.cpp.obj	58e0ca73b4cb4d7d
+24	373	7517230847847227	Fase3_autogen/timestamp	6e647de87e079bbe
+1128	4235	7517184402946422	CMakeFiles/Fase3.dir/globales.cpp.obj	4d7dbee1fdcdc4c0
+24	373	7517230847847227	Fase3_autogen/mocs_compilation.cpp	6e647de87e079bbe
+24	373	7517230847847227	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase3_autogen/timestamp	6e647de87e079bbe
+12386	19024	7517185117263549	CMakeFiles/Fase3.dir/Trees/merkle.cpp.obj	9eacf2c986bed8ce
+24	373	7517230847847227	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase3_autogen/mocs_compilation.cpp	6e647de87e079bbe
 1665	1746	7515364182705285	Fase3_autogen/EWIEGA46WW/qrc_resource.cpp	793ecdef44077b7d
-393	6916	7517135013253796	CMakeFiles/Fase3.dir/dialognuevopost.cpp.obj	dadc85e3fe76bfde
+399	8830	7517230851597323	CMakeFiles/Fase3.dir/dialognuevopost.cpp.obj	dadc85e3fe76bfde
 1665	1746	7515364182705285	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase3_autogen/EWIEGA46WW/qrc_resource.cpp	793ecdef44077b7d
-1057	7661	7517116598191120	CMakeFiles/Fase3.dir/Fase3_autogen/mocs_compilation.cpp.obj	18cc8cf0176a6c77
-1061	9383	7517116598240971	CMakeFiles/Fase3.dir/main.cpp.obj	92342b4e00d32d66
+2043	9748	7517191762478502	CMakeFiles/Fase3.dir/Fase3_autogen/mocs_compilation.cpp.obj	18cc8cf0176a6c77
+350	7514	7517184996918243	CMakeFiles/Fase3.dir/main.cpp.obj	92342b4e00d32d66
 10663	11163	7515364271976213	CMakeFiles/Fase3.dir/Fase3_autogen/EWIEGA46WW/qrc_resource.cpp.obj	41956bed6698017b
-367	6063	7517135012999313	CMakeFiles/Fase3.dir/windowlogin.cpp.obj	ace6df2a0dad76a0
-1092	9292	7517116598540172	CMakeFiles/Fase3.dir/arbolavl.cpp.obj	a788664865b04a99
-381	8301	7517135013144100	CMakeFiles/Fase3.dir/windowregister.cpp.obj	93c67fa5daced146
-372	9251	7517135013039205	CMakeFiles/Fase3.dir/windowadmin.cpp.obj	844645274f2faccb
-376	8128	7517135013089081	CMakeFiles/Fase3.dir/windowuser.cpp.obj	51e7d43987fde914
-6142	9787	7517040895614064	CMakeFiles/Fase3.dir/arbolabb.cpp.obj	baf4a5e97d64daf0
+376	8014	7517230851367495	CMakeFiles/Fase3.dir/windowlogin.cpp.obj	ace6df2a0dad76a0
+1132	8090	7517184402986452	CMakeFiles/Fase3.dir/arbolavl.cpp.obj	a788664865b04a99
+389	9073	7517230851502283	CMakeFiles/Fase3.dir/windowregister.cpp.obj	93c67fa5daced146
+380	9404	7517230851407393	CMakeFiles/Fase3.dir/windowadmin.cpp.obj	844645274f2faccb
+385	7922	7517230851452434	CMakeFiles/Fase3.dir/windowuser.cpp.obj	51e7d43987fde914
+6950	11772	7517185062910854	CMakeFiles/Fase3.dir/arbolabb.cpp.obj	baf4a5e97d64daf0
 7292	11849	7517040907096410	CMakeFiles/Fase3.dir/arbolb5.cpp.obj	27ec7fc34f7ed38b
-6063	12121	7517135069962076	CMakeFiles/Fase3.dir/dialogpost.cpp.obj	34047b111b08d295
-8469	12598	7517039765246644	CMakeFiles/Fase3.dir/matrizrelacion.cpp.obj	3a4bc2ebcd3c5af2
-387	6854	7517135013193954	CMakeFiles/Fase3.dir/dialogmodificar.cpp.obj	7fe5f8897757a60e
-6854	11967	7517135077868970	CMakeFiles/Fase3.dir/widgetfriend.cpp.obj	1e31d1dacf7b54ab
-402	7806	7517135013343556	CMakeFiles/Fase3.dir/widgetcomment.cpp.obj	f97b2453a7da9f34
+6215	12453	7517230909760236	CMakeFiles/Fase3.dir/dialogpost.cpp.obj	34047b111b08d295
+415	7176	7517184997552137	CMakeFiles/Fase3.dir/matrizrelacion.cpp.obj	3a4bc2ebcd3c5af2
+394	6215	7517230851547460	CMakeFiles/Fase3.dir/dialogmodificar.cpp.obj	7fe5f8897757a60e
+6223	11839	7517230909845266	CMakeFiles/Fase3.dir/widgetfriend.cpp.obj	1e31d1dacf7b54ab
+409	6223	7517230851702215	CMakeFiles/Fase3.dir/widgetcomment.cpp.obj	f97b2453a7da9f34
 11849	17405	7517040952677460	CMakeFiles/Fase3.dir/Tree/merkle.cpp.obj	a9957f5a21bdd83e
-1080	18742	7517116598430466	CMakeFiles/Fase3.dir/funciones.cpp.obj	295f0ef03cfe23f6
-8289	13362	7517040917077720	CMakeFiles/Fase3.dir/arbolbst.cpp.obj	8c28e43db8a84ad0
-8921	14063	7517040923400691	CMakeFiles/Fase3.dir/graforelacion.cpp.obj	67087c8f213961f6
-14225	20564	7517135151580021	Fase3.exe	f86300dfd015bf0a
+340	11944	7517200198397263	CMakeFiles/Fase3.dir/funciones.cpp.obj	295f0ef03cfe23f6
+9012	15670	7517185083534483	CMakeFiles/Fase3.dir/arbolbst.cpp.obj	8c28e43db8a84ad0
+11772	16783	7517185111133920	CMakeFiles/Fase3.dir/graforelacion.cpp.obj	67087c8f213961f6
+15488	22505	7517231002486480	Fase3.exe	292387d1acd24406
 9006	15126	7517060678097240	CMakeFiles/Fase3.dir/Trees/huffman.cpp.obj	9deedb937b58ce0c
-6916	14225	7517135078492460	CMakeFiles/Fase3.dir/Classes/blockchain.cpp.obj	54f4865de936da1f
-20	317	7517142141393745	Fase3_autogen/timestamp	6e647de87e079bbe
-20	317	7517142141393745	Fase3_autogen/mocs_compilation.cpp	6e647de87e079bbe
-20	317	7517142141393745	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase3_autogen/timestamp	6e647de87e079bbe
-20	317	7517142141393745	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase3_autogen/mocs_compilation.cpp	6e647de87e079bbe
-380	6577	7517142144988899	CMakeFiles/Fase3.dir/widgetpost.cpp.obj	58e0ca73b4cb4d7d
-355	6670	7517142144748830	CMakeFiles/Fase3.dir/dialogmodificar.cpp.obj	7fe5f8897757a60e
-375	6773	7517142144953908	CMakeFiles/Fase3.dir/dialognuevopost.cpp.obj	dadc85e3fe76bfde
-319	7114	7517142144383840	CMakeFiles/Fase3.dir/windowlogin.cpp.obj	ace6df2a0dad76a0
-336	7215	7517142144558538	CMakeFiles/Fase3.dir/windowregister.cpp.obj	93c67fa5daced146
-327	7578	7517142144473631	CMakeFiles/Fase3.dir/windowuser.cpp.obj	51e7d43987fde914
-332	8683	7517142144518641	CMakeFiles/Fase3.dir/funciones.cpp.obj	295f0ef03cfe23f6
-22	400	7517142313247760	Fase3_autogen/timestamp	6e647de87e079bbe
-22	400	7517142313247760	Fase3_autogen/mocs_compilation.cpp	6e647de87e079bbe
-22	400	7517142313247760	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase3_autogen/timestamp	6e647de87e079bbe
-22	400	7517142313247760	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase3_autogen/mocs_compilation.cpp	6e647de87e079bbe
-430	6196	7517142317325217	CMakeFiles/Fase3.dir/widgetpost.cpp.obj	58e0ca73b4cb4d7d
-415	6276	7517142317174925	CMakeFiles/Fase3.dir/windowregister.cpp.obj	93c67fa5daced146
-419	6427	7517142317220035	CMakeFiles/Fase3.dir/dialogmodificar.cpp.obj	7fe5f8897757a60e
-446	7915	7517142317485139	CMakeFiles/Fase3.dir/widgetcomment.cpp.obj	f97b2453a7da9f34
-402	8205	7517142317045032	CMakeFiles/Fase3.dir/windowlogin.cpp.obj	ace6df2a0dad76a0
-425	8767	7517142317275154	CMakeFiles/Fase3.dir/dialognuevopost.cpp.obj	dadc85e3fe76bfde
-407	9261	7517142317090001	CMakeFiles/Fase3.dir/windowadmin.cpp.obj	844645274f2faccb
-411	9391	7517142317139903	CMakeFiles/Fase3.dir/windowuser.cpp.obj	51e7d43987fde914
-6276	12021	7517142375787163	CMakeFiles/Fase3.dir/widgetfriend.cpp.obj	1e31d1dacf7b54ab
-6428	12598	7517142377302021	CMakeFiles/Fase3.dir/Trees/merkle.cpp.obj	9eacf2c986bed8ce
-6198	12658	7517142375013562	CMakeFiles/Fase3.dir/dialogpost.cpp.obj	34047b111b08d295
-7915	15196	7517142392180325	CMakeFiles/Fase3.dir/Classes/blockchain.cpp.obj	54f4865de936da1f
-15196	21520	7517142464981553	Fase3.exe	931f7907caed553b
+7922	15488	7517230926832831	CMakeFiles/Fase3.dir/Classes/blockchain.cpp.obj	54f4865de936da1f
+8014	13994	7517230927748032	CMakeFiles/Fase3.dir/Widgets/widgetblock.cpp.obj	24bfc65fc7c8069c
+25	334	7517231625616023	Fase3_autogen/timestamp	6e647de87e079bbe
+25	334	7517231625616023	Fase3_autogen/mocs_compilation.cpp	6e647de87e079bbe
+25	334	7517231625616023	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase3_autogen/timestamp	6e647de87e079bbe
+25	334	7517231625616023	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase3_autogen/mocs_compilation.cpp	6e647de87e079bbe
+372	6371	7517231629089892	CMakeFiles/Fase3.dir/widgetpost.cpp.obj	58e0ca73b4cb4d7d
+336	6907	7517231628729174	CMakeFiles/Fase3.dir/windowlogin.cpp.obj	ace6df2a0dad76a0
+358	6915	7517231628949817	CMakeFiles/Fase3.dir/dialogmodificar.cpp.obj	7fe5f8897757a60e
+365	8006	7517231629014939	CMakeFiles/Fase3.dir/dialognuevopost.cpp.obj	dadc85e3fe76bfde
+351	8584	7517231628874903	CMakeFiles/Fase3.dir/windowregister.cpp.obj	93c67fa5daced146
+340	8658	7517231628769883	CMakeFiles/Fase3.dir/windowadmin.cpp.obj	844645274f2faccb
+379	8661	7517231629155034	CMakeFiles/Fase3.dir/widgetcomment.cpp.obj	f97b2453a7da9f34
+344	9148	7517231628809772	CMakeFiles/Fase3.dir/windowuser.cpp.obj	51e7d43987fde914
+6371	12218	7517231689082586	CMakeFiles/Fase3.dir/dialogpost.cpp.obj	34047b111b08d295
+6907	12219	7517231694438634	CMakeFiles/Fase3.dir/widgetfriend.cpp.obj	1e31d1dacf7b54ab
+8006	13521	7517231705426133	CMakeFiles/Fase3.dir/Widgets/widgetblock.cpp.obj	24bfc65fc7c8069c
+6915	14466	7517231694518453	CMakeFiles/Fase3.dir/Classes/blockchain.cpp.obj	54f4865de936da1f
+14466	21554	7517231770032655	Fase3.exe	292387d1acd24406
+23	893	7517237402986663	Fase3_autogen/timestamp	6e647de87e079bbe
+23	893	7517237402986663	Fase3_autogen/mocs_compilation.cpp	6e647de87e079bbe
+23	893	7517237402986663	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase3_autogen/timestamp	6e647de87e079bbe
+23	893	7517237402986663	C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/Fase3_autogen/mocs_compilation.cpp	6e647de87e079bbe
+896	8319	7517237404028551	CMakeFiles/Fase3.dir/Fase3_autogen/mocs_compilation.cpp.obj	18cc8cf0176a6c77
+901	8482	7517237404078467	CMakeFiles/Fase3.dir/windowlogin.cpp.obj	ace6df2a0dad76a0
+905	8670	7517237404123400	CMakeFiles/Fase3.dir/windowadmin.cpp.obj	844645274f2faccb
+910	8985	7517237404163356	CMakeFiles/Fase3.dir/windowuser.cpp.obj	51e7d43987fde914
+1059	10778	7517237405662675	CMakeFiles/Fase3.dir/widgetpost.cpp.obj	58e0ca73b4cb4d7d
+920	11216	7517237404268360	CMakeFiles/Fase3.dir/windowregister.cpp.obj	93c67fa5daced146
+995	11250	7517237405022930	CMakeFiles/Fase3.dir/dialognuevopost.cpp.obj	dadc85e3fe76bfde
+945	11671	7517237404523306	CMakeFiles/Fase3.dir/dialogmodificar.cpp.obj	7fe5f8897757a60e
+8320	14279	7517237478269426	CMakeFiles/Fase3.dir/widgetcomment.cpp.obj	f97b2453a7da9f34
+8670	14541	7517237481773492	CMakeFiles/Fase3.dir/widgetfriend.cpp.obj	1e31d1dacf7b54ab
+8482	14878	7517237479888898	CMakeFiles/Fase3.dir/dialogpost.cpp.obj	34047b111b08d295
+8986	15402	7517237484927639	CMakeFiles/Fase3.dir/Widgets/widgetblock.cpp.obj	24bfc65fc7c8069c
+15402	22559	7517237549085909	Fase3.exe	292387d1acd24406

@@ -6,7 +6,9 @@
 #include <QMessageBox>
 
 WidgetFriend::WidgetFriend(const Structs::Usuario &user, QWidget *parent)
-    : QWidget(parent), user(user), ui(new Ui::WidgetFriend)
+    : QWidget(parent),
+    user(user),
+    ui(new Ui::WidgetFriend)
 {
     ui->setupUi(this);
     setUser(user);

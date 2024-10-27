@@ -1,4 +1,5 @@
 #include "windowadmin.h"
+#include "Trees/merkle.h"
 #include "funciones.h"
 #include "globales.h"
 #include "windowlogin.h"
@@ -16,6 +17,8 @@ string img_usuarios = "";
 string img_publicaciones = "";
 string img_amistades = "";
 string img_tabla_ady = "";
+string img_blockchain = "";
+string img_merkle = "";
 
 AdminWindow::AdminWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -23,6 +26,7 @@ AdminWindow::AdminWindow(QWidget *parent)
 {
     ui->setupUi(this);
     Func::adminTablaUsuarios = ui->tableUsuarios;
+    Func::adminBlockchain = ui->scrollArea_chains;
 
     // MenuBar
     QString user = QString::fromStdString(usuario_logeado->nombres);
@@ -45,6 +49,13 @@ AdminWindow::AdminWindow(QWidget *parent)
 AdminWindow::~AdminWindow()
 {
     delete ui;
+}
+
+void AdminWindow::on_tabWidget_currentChanged(int index)
+{
+    if (index == 3) {
+        Func::ActualizarBlockchains();
+    }
 }
 
 /*
@@ -236,8 +247,62 @@ void AdminWindow::on_pushButton_reporte_amistades_ady_clicked()
     }
 }
 
-void AdminWindow::on_pushButton_clicked()
+
+
+
+void AdminWindow::on_pushButton_gen_blockchain_clicked()
 {
-    seguridad_blockchain.graficar();
+    std::string path_graph = seguridad_blockchain.graficar();
+    QString ruta_imagen = QString::fromStdString(path_graph);
+    QPixmap imagen(ruta_imagen);
+    QPixmap imagenEscalada = imagen.scaled(ui->img_blockchain->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    ui->img_blockchain->setPixmap(imagenEscalada);
+    img_blockchain = path_graph;
+}
+
+
+void AdminWindow::on_pushButton_open_blockchain_clicked()
+{
+    // Verificar que la ruta de la imagen no esté vacía
+    if (img_blockchain.empty()) {
+        QMessageBox::warning(this, "Error", "No se ha generado ninguna imagen.");
+        return;
+    }
+    QString rutaImagen = QString::fromStdString(img_blockchain);
+    if (!QDesktopServices::openUrl(QUrl::fromLocalFile(rutaImagen))) {
+        QMessageBox::warning(this, "Error", "No se pudo abrir la imagen.");
+    }
+}
+
+
+void AdminWindow::on_pushButton_gen_merkle_clicked()
+{
+    ListaEnlazada::ListaEnlazada<Structs::Block> bloques = seguridad_blockchain.getChain();
+    Structs::Block *ultimo = bloques.obtener(bloques.size()-1);
+    if (!ultimo) return;
+    Merkle::Merkle raiz(ultimo->data);
+    raiz.graphMerkleTree();
+    /*
+    std::string path_graph = seguridad_blockchain.graficar();
+    QString ruta_imagen = QString::fromStdString(path_graph);
+    QPixmap imagen(ruta_imagen);
+    QPixmap imagenEscalada = imagen.scaled(ui->img_blockchain->size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    ui->img_amistades_ady->setPixmap(imagenEscalada);
+    img_tabla_ady = path_graph;
+*/
+}
+
+
+void AdminWindow::on_pushButton_open_merkle_clicked()
+{
+    // Verificar que la ruta de la imagen no esté vacía
+    if (img_merkle.empty()) {
+        QMessageBox::warning(this, "Error", "No se ha generado ninguna imagen.");
+        return;
+    }
+    QString rutaImagen = QString::fromStdString(img_merkle);
+    if (!QDesktopServices::openUrl(QUrl::fromLocalFile(rutaImagen))) {
+        QMessageBox::warning(this, "Error", "No se pudo abrir la imagen.");
+    }
 }
 

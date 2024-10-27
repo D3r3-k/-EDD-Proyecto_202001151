@@ -300,6 +300,12 @@
 			null
 		],
 		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/Widgets/widgetblock.h",
+			"MU",
+			"WHF3XMZT5M/moc_widgetblock.cpp",
+			null
+		],
+		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/arbolabb.h",
 			"MU",
 			"EWIEGA46WW/moc_arbolabb.cpp",
@@ -497,6 +503,11 @@
 		],
 		[
 			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/Trees/merkle.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/D3r3k/OneDrive/Uni - Virtual/Estructuras de Datos/-EDD-Proyecto_202001151/Fase3/Widgets/widgetblock.cpp",
 			"MU",
 			null
 		],

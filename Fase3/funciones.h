@@ -16,6 +16,7 @@ std::string leerArchivo(const std::string& path);
 void cargarEstructuras(const std::string& data);
 // GLOBAL PARA ADMIN
 extern QTableWidget* adminTablaUsuarios;
+extern QScrollArea* adminBlockchain;
 // GLOBAL PARA SOLICITUDES - USER
 extern QTableWidget* userTablaUsuarios;
 extern QTableWidget* userTablaEnviadas;
@@ -72,6 +73,9 @@ void bubbleSort(ListaEnlazada::ListaEnlazada<Structs::Publicacion> &lista);
 // TODO: metodos Usuario / Perfil
 void EliminarMiCuenta();
 void ActualizarListaAmigos();
+
+// TODO: metodos Blockchain
+void ActualizarBlockchains();
 
 // TODO: Metodos extras
 ListaEnlazada::ListaEnlazada<Structs::Usuario> obtenerListaUsuariosLogeado();

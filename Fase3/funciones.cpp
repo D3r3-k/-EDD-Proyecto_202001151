@@ -1,6 +1,7 @@
 #include "funciones.h"
 #include "Trees/huffman.h"
 #include "Trees/merkle.h"
+#include "Widgets/widgetblock.h"
 #include "arbolabb.h"
 #include "globales.h"
 #include "Structs.h"
@@ -171,6 +172,7 @@ namespace Func
     QTableWidget *userTablaSugerencias = nullptr;
     QScrollArea *userPostFeed = nullptr;
     QScrollArea *userFriends = nullptr;
+    QScrollArea *adminBlockchain = nullptr;
     QComboBox *selectedDate = nullptr;
     QComboBox *selectedOrder = nullptr;
     QSpinBox *countPost = nullptr;
@@ -1572,6 +1574,47 @@ namespace Func
             }
         }
     }
+
+    void ActualizarBlockchains() {
+        // Obtener el widget de contenido dentro del adminBlockchain
+        QWidget *contentWidget = adminBlockchain->widget();
+
+        // Crear o reutilizar un layout horizontal
+        QHBoxLayout *layout = qobject_cast<QHBoxLayout *>(contentWidget->layout());
+        if (!layout) {
+            layout = new QHBoxLayout(contentWidget);  // Crear un nuevo QHBoxLayout si no existe
+            contentWidget->setLayout(layout);
+        }
+
+        // Limpiar los elementos existentes del layout
+        while (QLayoutItem *item = layout->takeAt(0)) {
+            if (item->widget()) {
+                item->widget()->deleteLater();  // Eliminar el widget si existe
+            }
+            delete item;  // Eliminar el QLayoutItem
+        }
+
+        // Obtener la cadena de bloques de seguridad
+        ListaEnlazada::ListaEnlazada<Structs::Block> chain = seguridad_blockchain.getChain();
+
+        // Crear un nuevo widget para cada bloque en la cadena
+        for (int i = 0; i < chain.size(); ++i) {
+            Structs::Block *b = chain.obtener(i);
+            if (b) {
+                WidgetBlock *newWidget = new WidgetBlock(*b);
+                layout->addWidget(newWidget);  // Añadir al layout horizontal
+            }
+        }
+
+        // Asegurarse de que el scroll horizontal esté activado
+        QScrollArea *scrollArea = qobject_cast<QScrollArea *>(adminBlockchain);
+        if (scrollArea) {
+            scrollArea->setWidgetResizable(true);  // Asegurarse de que el widget sea redimensionable
+            scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOn);  // Activar el scroll horizontal
+            scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);  // Desactivar el scroll vertical
+        }
+    }
+
 
     // TODO: Metodos Extras
     ListaEnlazada::ListaEnlazada<Structs::Usuario> obtenerListaUsuariosLogeado()

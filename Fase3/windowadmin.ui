@@ -17,7 +17,7 @@
    <iconset theme="QIcon::ThemeIcon::Computer"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_7">
+   <layout class="QHBoxLayout" name="horizontalLayout_6">
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
@@ -455,14 +455,14 @@
                       </property>
                      </widget>
                     </item>
-                    <item>
-                     <widget class="QPushButton" name="pushButton_reporte_amistades">
-                      <property name="text">
-                       <string>Abrir Imagen</string>
-                      </property>
-                     </widget>
-                    </item>
                    </layout>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_reporte_amistades">
+                   <property name="text">
+                    <string>Abrir Imagen</string>
+                   </property>
                   </widget>
                  </item>
                 </layout>
@@ -506,19 +506,125 @@
        <attribute name="title">
         <string>Blockchain</string>
        </attribute>
-       <widget class="QPushButton" name="pushButton">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>40</y>
-          <width>80</width>
-          <height>24</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>graficar chain</string>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_19">
+        <item>
+         <widget class="QTabWidget" name="tabWidget_blockchain">
+          <property name="currentIndex">
+           <number>1</number>
+          </property>
+          <widget class="QWidget" name="tab_2">
+           <attribute name="title">
+            <string>Bloques</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_21">
+            <item>
+             <widget class="QScrollArea" name="scrollArea_chains">
+              <property name="horizontalScrollBarPolicy">
+               <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
+              </property>
+              <property name="widgetResizable">
+               <bool>true</bool>
+              </property>
+              <widget class="QWidget" name="scrollAreaWidgetContents_2">
+               <property name="geometry">
+                <rect>
+                 <x>0</x>
+                 <y>0</y>
+                 <width>1123</width>
+                 <height>588</height>
+                </rect>
+               </property>
+              </widget>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_3">
+           <attribute name="title">
+            <string>Graficas</string>
+           </attribute>
+           <layout class="QVBoxLayout" name="verticalLayout_20">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <widget class="QGroupBox" name="groupBox_2">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>500</height>
+                 </size>
+                </property>
+                <property name="title">
+                 <string>Blockchain</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_17">
+                 <item>
+                  <widget class="QLabel" name="img_blockchain">
+                   <property name="text">
+                    <string>IMAGEN</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignmentFlag::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_gen_blockchain">
+                   <property name="text">
+                    <string>Generar Grafica</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_open_blockchain">
+                   <property name="text">
+                    <string>Abrir Imagen</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
+               <widget class="QGroupBox" name="groupBox_3">
+                <property name="title">
+                 <string>Merkle del ultimo bloque</string>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout_18">
+                 <item>
+                  <widget class="QLabel" name="img_merkle">
+                   <property name="text">
+                    <string>IMAGEN</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignmentFlag::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_gen_merkle">
+                   <property name="text">
+                    <string>Generar Grafica</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_open_merkle">
+                   <property name="text">
+                    <string>Abrir Imagen</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </widget>
     </item>
