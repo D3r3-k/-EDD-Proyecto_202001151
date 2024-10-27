@@ -249,7 +249,11 @@ void AdminWindow::on_pushButton_reporte_amistades_ady_clicked()
 }
 
 
-
+/*
+======================================================
+                    TAB BLOCKCHAIN
+======================================================
+*/
 
 void AdminWindow::on_pushButton_gen_blockchain_clicked()
 {
@@ -279,11 +283,11 @@ void AdminWindow::on_pushButton_open_blockchain_clicked()
 void AdminWindow::on_pushButton_gen_merkle_clicked()
 {
     ListaEnlazada::ListaEnlazada<Structs::Block> bloques = seguridad_blockchain.getChain();
-    Structs::Block *ultimo = bloques.obtener(bloques.size()-1);
-    if (!ultimo){
-        QMessageBox::warning(this, "Error", "No hay bloques.");
+    if (!(bloques.size()>0)) {
+        QMessageBox::warning(this, "Error", "No hay bloques en la cadena.");
         return;
     }
+    Structs::Block *ultimo = bloques.obtener(bloques.size()-1);
     Merkle::Merkle raiz(ultimo->data);
     std::string path_graph = raiz.graficar();
     QString ruta_imagen = QString::fromStdString(path_graph);
